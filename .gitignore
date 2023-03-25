@@ -1,5 +1,8 @@
-TP_1/backend/bin/
-TP_1/backend/include/
-TP_1/backend/lib/
-TP_1/backend/lib64
-TP_1/backend/pyvenv.cfg
+bin/
+include/
+lib/
+lib64
+pyvenv.cfg
+share/
+__pycache__/
+.env
