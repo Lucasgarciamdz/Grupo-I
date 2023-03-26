@@ -6,3 +6,10 @@ pyvenv.cfg
 share/
 __pycache__/
 .env
+/include
+/lib
+/lib64
+/share
+**_/pycache
+pyvenv.cfg
+.env

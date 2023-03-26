@@ -1,11 +1,16 @@
 from flask import Flask
-import os
 from dotenv import load_dotenv
 
-def create_app():
 
+# Vamos a crear un metodo que inicializara la app y todos los modulos
+def create_app():
+    # inicio Flask
     app = Flask(__name__)
 
+    # variables de entono
     load_dotenv()
 
+    # Aca iniciaremos los demas modulos de la app
+
+    # Por ultimo retornamos la aplicacion iniializada
     return app
