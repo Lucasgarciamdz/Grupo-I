@@ -1,5 +1,6 @@
 from flask import Flask
 from dotenv import load_dotenv
+from flask_restful import Api
 
 
 # Vamos a crear un metodo que inicializara la app y todos los modulos
