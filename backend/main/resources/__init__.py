@@ -1,2 +1,15 @@
-from .gym import Usuario, Usuarios, UsuarioProfesor, UsuarioAlumno, UsuariosAlumnos
-
+from .usuario import Usuarios as UsuariosResource
+from .usuario import Usuario as UsuarioResource
+from .alumno import UsuariosAlumnos as AlumnosResource
+from .alumno import UsuarioAlumno as AlumnoResource
+from .profesor import UsuariosProfesores as ProfesoresResource
+from .profesor import UsuarioProfesor as ProfesorResource
+from .clases import ProfesorClases as ProfesorClasesResource
+from .clases import ProfesoresClases as ProfesoresClasesResource
+from .pagos import Pagos as PagosResource
+from .pagos import Pago as PagoResource
+from .planificaciones import PlanificacionesAlumnos as PlanificacionesAlumnosResource
+from .planificaciones import PlanificacionAlumno as PlanificacionAlumnoResource
+from .planificaciones import PlanificacionesProfesores as PlanificacionesProfesoresResource
+from .planificaciones import PlanificacionProfesor as PlanificacionProfesorResource
+from .login import Login as LoginResource
