@@ -2,12 +2,13 @@ from flask_restful import Resource
 from flask import request
 
 USUARIOS = {
-    1: {'nombre': 'Franco', 'apellido': 'Bertoldi','rol': 'alumno'},
+    1: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'alumno'},
     2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'alumno'},
     3: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'profesor'},
     4: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'profesor'}
 
 }
+
 
 class Usuarios(Resource):
     def get(self):
@@ -18,6 +19,7 @@ class Usuarios(Resource):
         id = int(max(USUARIOS.keys()))+1
         USUARIOS[id] = usuarios
         return USUARIOS[id], 201
+
 
 class Usuario(Resource):
     def get(self, id):
