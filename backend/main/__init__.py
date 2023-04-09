@@ -15,7 +15,6 @@ def create_app():
 
     # Aca iniciaremos los demas modulos de la app
     api.add_resource(resources.UsuariosResource, '/usuarios')
-
     api.add_resource(resources.UsuarioResource, '/usuario/<id>')
     api.add_resource(resources.AlumnosResource, '/alumnos')
     api.add_resource(resources.AlumnoResource, '/alumno/<id>')
@@ -34,5 +33,5 @@ def create_app():
 
 
     api.init_app(app)
-    # Por ultimo retornamos la aplicacion iniializada
+    # Por ultimo retornamos la aplicacion inicializada
     return app

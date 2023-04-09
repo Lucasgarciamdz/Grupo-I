@@ -6,6 +6,7 @@ USUARIOS_PROFESORES = {
     2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'profesor'}
 }
 
+
 class UsuarioProfesor(Resource):
     def get(self, id):
         if int(id) in USUARIOS_PROFESORES:
@@ -18,12 +19,13 @@ class UsuarioProfesor(Resource):
             data = request.get_json()
             usuario_profesor.update(data)
             return '', 201
-        return '', 404  
+        return '', 404
+
 
 class UsuariosProfesores(Resource):
     def get(self):
         return USUARIOS_PROFESORES
-    
+
     def post(self):
         usuarios_profesores = request.get_json()
         id = int(max(USUARIOS_PROFESORES.keys()))+1

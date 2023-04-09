@@ -2,14 +2,15 @@ from flask_restful import Resource
 from flask import request
 
 USUARIOS_ALUMNOS = {
-    1: {'nombre': 'Franco', 'apellido': 'Bertoldi','rol': 'alumno'},
-    2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia','rol': 'alumno'}
+    1: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'alumno'},
+    2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'alumno'}
 }
+
 
 class UsuariosAlumnos(Resource):
     def get(self):
         return USUARIOS_ALUMNOS
-    
+
     def post(self):
         usuarios_alumnos = request.get_json()
         id = int(max(USUARIOS_ALUMNOS.keys()))+1
