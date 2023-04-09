@@ -5,6 +5,8 @@ from flask_restful import Api
 import main.resources as resources
 
 api = Api()
+
+
 # Vamos a crear un metodo que inicializara la app y todos los modulos
 def create_app():
     # inicio Flask
@@ -29,9 +31,6 @@ def create_app():
     api.add_resource(resources.PlanificacionesProfesoresResource, '/planificaciones_profesores')
     api.add_resource(resources.PlanificacionProfesorResource, '/planificacion_profesor/<id>')
     api.add_resource(resources.LoginResource, '/login')
-    
-
-
     api.init_app(app)
     # Por ultimo retornamos la aplicacion inicializada
     return app

@@ -1,5 +1,4 @@
 from flask_restful import Resource
-from flask import request
 from .usuario import USUARIOS
 
 
@@ -14,6 +13,7 @@ class Pago(Resource):
         if int(id) in USUARIOS:
             return PAGOS[int(id)]
         return '', 404
+
 
 class Pagos(Resource):
     def get(self):

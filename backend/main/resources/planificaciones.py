@@ -25,7 +25,7 @@ def crear_planificacion(data):
 def obtener_planificacion(id):
     if int(id) in PLANIFICACIONES:
         return PLANIFICACIONES[int(id)]
-    return "", 404  
+    return "", 404
 
 
 class PlanificacionAlumno(Resource):
