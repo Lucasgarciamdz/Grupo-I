@@ -11,3 +11,4 @@ class Login(Resource):
         id = int(max(LOGIN.keys()))+1
         LOGIN[id] = nuevo_usuarios
         return LOGIN[id], 201
+    
