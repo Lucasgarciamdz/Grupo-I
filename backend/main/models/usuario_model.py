@@ -3,7 +3,7 @@ from .. import db
 
 class Usuario(db.Model):
 
-    __tablename__ = "Usuario"
+    __tablename__ = "usuario"
 
     id_usuario = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45), nullable=False)
@@ -14,39 +14,24 @@ class Usuario(db.Model):
     dni = db.Column(db.Integer(8), nullable=False)
     rol = db.Column(db.String(45), nullable=False)
     sexo = db.Column(db.String(2), nullable=False)
-    id_login = db.Column(db.Integer, db.ForeignKey('Login.id_login'))
+    #id_login = db.Column(db.Integer, db.ForeignKey('Login.id_login'))
 
     def __repr__(self):
-        return '<Usuario: %r >' % (self.id_usuario)
+        return '<usuario: %r >' % (self.id_usuario)
 
     def to_json(self):
         usuario_json = {
-            'id': self.id_usuario,
-            'nombre': self.nombre,
-            'apellido': self.apellido,
-            'edad': self.edad,
-            'dni': self.dni,
-            'rol': self.rol,
-            'sexo': self.sexo,
-            'id_login': self.id_login
+            'id_usuario': str(self.id_usuario),
+            'nombre': str(self.nombre),
+            'apellido': str(self.apellido),
+            'edad': str(self.edad),
+            'dni': str(self.dni),
+            'rol': str(self.rol),
+            'sexo': str(self.sexo),
+            # 'id_login': self.id_login
 
         }
         return usuario_json
-    
-# que carajo hace esto
-    def to_json_short(self):
-        animal_json = {
-            'id': self.id_usuario,
-            'nombre': self.nombre,
-            'apellido': self.apellido,
-            'edad': self.edad,
-            'dni': self.dni,
-            'rol': self.rol,
-            'sexo': self.sexo,
-            'id_login': self.id_login
-
-        }
-        return animal_json
 
     @staticmethod
     def from_json(usuario_json):
@@ -59,9 +44,9 @@ class Usuario(db.Model):
         dni = usuario_json.get('dni')
         rol = usuario_json.get('rol')
         sexo = usuario_json.get('sexo')
-        id_login = usuario_json.get('id_login')
+        # id_login = usuario_json.get('id_login')
 
-        return Usuario(id=id_usuario,
+        return Usuario(id_usuario=id_usuario,
                         nombre=nombre,
                         apellido=apellido,
                         direccion=direccion,
@@ -70,5 +55,5 @@ class Usuario(db.Model):
                         dni=dni,
                         rol=rol,
                         sexo=sexo,
-                        id_login=id_login
+                        # id_login=id_login
                         )

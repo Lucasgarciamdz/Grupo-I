@@ -1,40 +1,39 @@
 from flask_restful import Resource
-from flask import request
-
-USUARIOS_ALUMNOS = {
-    1: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'alumno'},
-    2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'alumno'}
-}
+from flask import request, jsonify
+from .. import db
+from .. import Alumno
 
 
-class UsuariosAlumnos(Resource):
+class Alumnos(Resource):
+
     def get(self):
-        return USUARIOS_ALUMNOS
+        alumnos = db.session.query(Alumno).all()
+        return jsonify(alumno.to_json() for alumno in alumnos)
 
     def post(self):
-        usuarios_alumnos = request.get_json()
-        id = int(max(USUARIOS_ALUMNOS.keys()))+1
-        USUARIOS_ALUMNOS[id] = usuarios_alumnos
-        return USUARIOS_ALUMNOS[id], 201
+        alumno = Alumno.from_json(request.get_json())
+        db.session.add(alumno)
+        db.session.commit()
+        return alumno.to_json(), 201
 
 
-class UsuarioAlumno(Resource):
+class Alumno(Resource):
+
     def get(self, id):
-        if int(id) in USUARIOS_ALUMNOS:
-            return USUARIOS_ALUMNOS[int(id)]
-        return '', 404
+        alumno = db.session.query(Alumno).get_or_404(id)
+        return alumno.to_json()
 
     def put(self, id):
-        # Validar que el usuario tenga rol de admin o profesor
-        if int(id) in USUARIOS_ALUMNOS:
-            usuario_alumno = USUARIOS_ALUMNOS[int(id)]
-            data = request.get_json()
-            usuario_alumno.update(data)
-            return '', 201
-        return '', 404
+        alumno = db.session.query(alumno).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(alumno, key, value)
+        db.session.add(alumno)
+        db.session.commit()
+        return alumno.to_json(), 201
 
     def delete(self, id):
-        if int(id) in USUARIOS_ALUMNOS:
-            del USUARIOS_ALUMNOS[int(id)]
-            return '', 204
-        return '', 404
+        alumno = db.session.query(alumno).get_or_404(id)
+        db.session.delete(alumno)
+        db.session.commit()
+        return '', 204

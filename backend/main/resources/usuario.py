@@ -1,42 +1,36 @@
 from flask_restful import Resource
-from flask import request
-
-USUARIOS = {
-    1: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'alumno'},
-    2: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'alumno'},
-    3: {'nombre': 'Franco', 'apellido': 'Bertoldi', 'rol': 'profesor'},
-    4: {'nombre': 'Francisco', 'apellido': 'Lopez Garcia', 'rol': 'profesor'}
-
-}
+from flask import request, jsonify
+from .. import db, Usuario
 
 
 class Usuarios(Resource):
     def get(self):
-        return USUARIOS
+        usuarios = db.session.query(Usuario).all()
+        return jsonify(usuario.to_json() for usuario in usuarios)
 
     def post(self):
-        usuarios = request.get_json()
-        id = int(max(USUARIOS.keys()))+1
-        USUARIOS[id] = usuarios
-        return USUARIOS[id], 201
+        usuario = Usuario.from_json(request.get_json())
+        db.session.add(usuario)
+        db.session.commit()
+        return usuario.to_json(), 201
 
 
 class Usuario(Resource):
     def get(self, id):
-        if int(id) in USUARIOS:
-            return USUARIOS[int(id)]
-        return '', 404
-
-    def delete(self, id):
-        if int(id) in USUARIOS:
-            del USUARIOS[int(id)]
-            return '', 204
-        return '', 404
+        usuario = db.session.query(Usuario).get_or_404(id)
+        return usuario.to_json()
 
     def put(self, id):
-        if int(id) in USUARIOS:
-            usuario = USUARIOS[int(id)]
-            data = request.get_json()
-            usuario.update(data)
-            return '', 201
-        return '', 404
+        usuario = db.session.query(Usuario).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(usuario, key, value)
+        db.session.add(usuario)
+        db.session.commit()
+        return usuario.to_json(), 201
+
+    def delete(self, id):
+        usuario = db.session.query(Usuario).get_or_404(id)
+        db.session.delete(usuario)
+        db.session.commit()
+        return '', 204

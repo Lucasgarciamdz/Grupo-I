@@ -1,14 +1,17 @@
 from flask_restful import Resource
 from flask import request
+from .. import db, Login
 
-LOGIN = {
-    1: {'nombre': 'Franco', 'apellido': 'Bertoldi','rol': 'admin'}, 
-}
 
 class Login(Resource):
     def post(self):
-        nuevo_usuarios = request.get_json()
-        id = int(max(LOGIN.keys()))+1
-        LOGIN[id] = nuevo_usuarios
-        return LOGIN[id], 201
-    
+        login = Login.from_json(request.get_json())
+        db.session.add(login)
+        db.session.commit()
+        return login.to_json(), 201
+
+    def delete():
+        login = db.session.query(login).get_or_404(id)
+        db.session.delete(login)
+        db.session.commit()
+        return '', 204
