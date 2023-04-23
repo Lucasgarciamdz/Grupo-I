@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from .. import db, Planificacion
+from .. import db
 
 # def obtener_planificaciones_por_id(id):
 #     planificaciones = []

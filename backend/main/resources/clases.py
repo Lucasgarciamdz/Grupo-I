@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from .. import db, Clase
+from .. import db
 from flask import request, jsonify
 
 

@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from .. import db, Login
+from .. import db
 
 
 class Login(Resource):

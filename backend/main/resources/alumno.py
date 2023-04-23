@@ -1,7 +1,6 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from .. import Alumno
 
 
 class Alumnos(Resource):
