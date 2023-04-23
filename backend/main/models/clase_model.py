@@ -4,7 +4,7 @@ from .. import db
 class Clase(db.Model):
 
     __tablename__ = "clase"
-    
+
     id_clase = db.Column(db.Integer, primary_key=True)
     tipo = db.Column(db.String(45), nullable=False)
 
@@ -24,5 +24,5 @@ class Clase(db.Model):
         id_clase = clase_json.get('id_clase')
         tipo = clase_json.get('tipo')
         return Clase(id_clase=id_clase,
-                        tipo=tipo
-                        )
+                     tipo=tipo
+                     )

@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
+from main.models import PlanificacionModel
 
 # def obtener_planificaciones_por_id(id):
 #     planificaciones = []
@@ -24,23 +25,24 @@ from .. import db
 
 # class PlanificacionAlumno(Resource):
 #     def get(self, id):
-#         planificacion = db.session.query(Planificacion).get_or_404(id)
+#         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
 #         return planificacion.to_json()
 
 
 # class PlanificacionesAlumnos(Resource):
 #     def get(self):
-#         planificaciones = db.session.query(Planificacion).all()
+#         planificaciones = db.session.query(PlanificacionModel).all()
 #         return jsonify(planificacion.to_json() for planificacion in planificaciones)
 
 
 class Planificaciones(Resource):
     def get(self):
-        planificaciones = db.session.query(Planificaciones).all()
-        return jsonify(planificacion.to_json() for planificacion in planificaciones)
+        planificaciones = db.session.query(PlanificacionModel).all()
+        planificacion_json = [planificacion.to_json() for planificacion in planificaciones]
+        return jsonify(planificacion_json)
 
     def post(self):
-        planificacion = Planificacion.from_json(request.get_json())
+        planificacion = PlanificacionModel.from_json(request.get_json())
         db.session.add(planificacion)
         db.session.commit()
         return planificacion.to_json(), 201
@@ -48,11 +50,11 @@ class Planificaciones(Resource):
 
 class Planificacion(Resource):
     def get(self, id):
-        planificacion = db.session.query(Planificacion).get_or_404(id)
+        planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         return planificacion.to_json()
 
     def put(self, id):
-        planificacion = db.session.query(Planificacion).get_or_404(id)
+        planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         data = request.get_json().items()
         for key, value in data:
             setattr(planificacion, key, value)
@@ -61,7 +63,7 @@ class Planificacion(Resource):
         return planificacion.to_json(), 201
 
     def delete(self, id):
-        planificacion = db.session.query(Planificacion).get_or_404(id)
+        planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         db.session.delete(planificacion)
         db.session.commit()
         return '', 204

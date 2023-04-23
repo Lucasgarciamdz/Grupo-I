@@ -42,6 +42,8 @@ def create_app():
     # api.add_resource(resources.PlanificacionAlumnoResource, '/planificacion_alumno/<id>')
     # api.add_resource(resources.PlanificacionesProfesoresResource, '/planificaciones_profesores')
     # api.add_resource(resources.PlanificacionProfesorResource, '/planificacion_profesor/<id>')
+    with app.app_context():
+        db.create_all()
     api.init_app(app)
     # Por ultimo retornamos la aplicacion inicializada
     return app
