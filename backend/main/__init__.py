@@ -11,7 +11,7 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    load_dotenv(".env-example")
+    load_dotenv()
 
     database_path = os.getenv('DATABASE_PATH')
     database_name = os.getenv('DATABASE_NAME')
