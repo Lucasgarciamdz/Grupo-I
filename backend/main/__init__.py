@@ -11,10 +11,17 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    load_dotenv()
+    load_dotenv(".env-example")
 
-    if not os.path.exists(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')):
-        os.mknod(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME'))
+    database_path = os.getenv('DATABASE_PATH')
+    database_name = os.getenv('DATABASE_NAME')
+    full_path = os.path.join(database_path, database_name)
+
+    if not os.path.exists(database_path):
+        os.makedirs(database_path)
+
+    if not os.path.exists(full_path):
+        os.mknod(full_path)
 
     # with open(os.path.join(os.getenv('DATABASE_PATH'), os.getenv('DATABASE_NAME')), 'w'):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

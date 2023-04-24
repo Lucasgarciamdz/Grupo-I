@@ -3,7 +3,8 @@
 		"_postman_id": "23bace7a-032b-4a1c-a09a-5f289a3adc39",
 		"name": "Proyecto_flask_gimnasion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26654719"
+		"_exporter_id": "26654719",
+		"_collection_link": "https://lively-comet-721567.postman.co/workspace/Team-Workspace~c424b782-1b84-4838-8c38-4720e2050ec7/collection/26654719-23bace7a-032b-4a1c-a09a-5f289a3adc39?action=share&creator=26654719&source=collection_link"
 	},
 	"item": [
 		{
@@ -38,38 +39,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\":\"Franco\",\n    \"apellido\": \"Bertoldi\",\n    \"rol\": \"alumno\"\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:5000/alumnos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"alumnos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Alumnos nuevo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nombre\":\"Francisco\",\n    \"apellido\": \"Lopez Garcia\",\n    \"rol\": \"alumno\"\n    }",
+							"raw": "{\n    \"estado\": \"activo\",\n    \"planilla_medica\": true,\n    \"id_usuario\": 1\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,7 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Franco\", \n    \"apellido\": \"Bertoldi\", \n    \"rol\": \"alumno\"\n    }",
+							"raw": "  {\n    \"estado\": \"inactivo\",\n    \"planilla_medica\": false,\n    \"id_usuario\": 2\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,6 +302,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_login\": 1,\n    \"email\": \"john.doe@example.com\",\n    \"contrasena\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/login",
 							"protocol": "http",
@@ -406,7 +385,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Lucas\",\n    \"apellido\": \"Garcia\",\n    \"rol\": \"alumno\"\n}",
+							"raw": "    {\n      \"nombre\": \"María\",\n      \"apellido\": \"González\",\n      \"direccion\": \"Calle Falsa 123\",\n      \"edad\": 25,\n      \"telefono\": 987654321,\n      \"dni\": 87654321,\n      \"rol\": \"Usuario\",\n      \"sexo\": \"F\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -460,7 +439,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Lucas\",\n    \"apellido\": \"Garcia\",\n    \"rol\": \"alumno\"\n}",
+							"raw": "{\n    \"nombre\": \"John\",\n    \"apellido\": \"Doe\",\n    \"direccion\": \"123 Main St\",\n    \"edad\": 30,\n    \"telefono\": 1234567890,\n    \"dni\": 12345678,\n    \"rol\": \"estudiante\",\n    \"id_login\": 1,\n    \"sexo\": \"M\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -574,7 +553,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Rodrigo\",\n    \"apellido\": \"Bartolomé\",\n    \"rol\": \"profesor\"\n}",
+							"raw": "{\n    \"certificacion\": \"Certified Teacher\",\n    \"fecha_inicio_actividad\": \"2020-01-01\",\n    \"sueldo\": 50000.00,\n    \"estado\": \"activo\",\n    \"id_usuario\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -677,7 +656,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Planificación 4\",\n    \"descripcion\": \"Descripción 4\",\n    \"profesor\": \"1\",\n    \"estado\": \"Activa\"\n}",
+							"raw": "\n    {\n        \"id_planificacion\": 1,\n        \"horas_semanales\": 5,\n        \"objetivo\": \"crossfit\",\n        \"id_clase\": 1\n    }\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -754,7 +733,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Planificación 2\", \n    \"descripcion\": \"Descripción 2\", \n    \"alumno\": \"2\", \n    \"profesor\": \"3\", \n    \"estado\": \"Activa\"\n    }",
+							"raw": "{\n    \"nombre\": \"Planificación nueva\", \n    \"descripcion\": \"tests\", \n    \"alumno\": \"3\", \n    \"profesor\": \"2\", \n    \"estado\": \"Activa\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -762,7 +741,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/planificacion_profesor/2",
+							"raw": "http://127.0.0.1:5000/planificacion_profesor/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -773,7 +752,7 @@
 							"port": "5000",
 							"path": [
 								"planificacion_profesor",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -790,7 +769,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://127.0.0.1:5000/pagos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"pagos"
+							]
 						}
 					},
 					"response": []
