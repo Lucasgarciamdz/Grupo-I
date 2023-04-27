@@ -7,6 +7,7 @@ class Clase(db.Model):
 
     id_clase = db.Column(db.Integer, primary_key=True)
     tipo = db.Column(db.String(45), nullable=False)
+    clase_profesor = db.relationship('ProfesorClase', back_populates='clase', cascade='all, delete orphan')
 
     def __repr__(self):
         return '<clase: %r >' % (self.id_clase)

@@ -15,6 +15,9 @@ class Usuario(db.Model):
     rol = db.Column(db.String(45), nullable=False)
     sexo = db.Column(db.String(2), nullable=False)
     #id_login = db.Column(db.Integer, db.ForeignKey('Login.id_login'))
+    profesor = db.relationship('Profesor', back_populates='usuario', use_list=False, cascade="all, delete-orphan", single_parent=True)
+    alumno = db.relationship('Alumno', back_populates='usuario', use_list=False, cascade="all, delete-orphan", single_parent=True)
+
 
     def __repr__(self):
         return '<usuario: %r >' % (self.id_usuario)

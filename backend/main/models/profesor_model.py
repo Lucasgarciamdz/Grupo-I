@@ -10,7 +10,9 @@ class Profesor(db.Model):
     fecha_inicio_actividad = db.Column(db.String(45), nullable=False)
     sueldo = db.Column(db.Float, nullable=False)
     estado = db.Column(db.String(45), nullable=False)
-    # id_usuario = db.Column(db.Integer, db.ForeignKey('Usuario.id_usuario'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
+    usuario = db.relationship('Usuario', back_populates='profesor', use_list=False, cascade="all, delete-orphan", single_parent=True)
+    profesor_clase = db.relationship('ProfesorClase', back_populates='profesor', cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
