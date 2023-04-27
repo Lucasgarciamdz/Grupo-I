@@ -11,7 +11,7 @@ class Alumno(db.Model):
     estado = db.Column(db.String(45), nullable=False)
     planilla_medica = db.Column(db.Boolean, nullable=False)
 
-    usuario = db.relationship('Usuario', back_populates='alumno', use_list=False, cascade="all, delete-orphan", single_parent=True)
+    usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
     alumno_planificacion = db.relationship('AlumnoPlanificacion', back_populates='alumno', cascade="all, delete-orphan")
 
     def __repr__(self):

@@ -13,7 +13,7 @@ class Profesor(db.Model):
     sueldo = db.Column(db.Float, nullable=False)
     estado = db.Column(db.String(45), nullable=False)
 
-    usuario = db.relationship('Usuario', back_populates='profesor', use_list=False, cascade="all, delete-orphan", single_parent=True)
+    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
     profesor_clase = db.relationship('ProfesorClase', back_populates='profesor', cascade="all, delete-orphan")
 
     def __repr__(self):

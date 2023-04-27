@@ -4,3 +4,5 @@ from .profesor_model import Profesor as ProfesorModel
 from .clase_model import Clase as ClasesModel
 from .planificacion_model import Planificacion as PlanificacionModel
 from .login_model import Login as LoginModel
+from .profesor_clase_model import ProfesorClase as ProfesorClaseModel
+from .alumno_planificacion_model import AlumnoPlanificacion as AlumnoPlanificacionModel

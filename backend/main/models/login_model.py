@@ -9,7 +9,7 @@ class Login(db.Model):
     email = db.Column(db.String(45), nullable=False)
     contrasena = db.Column(db.String(45), nullable=False)
     
-    usuario = db.relationship('Usuario', uselist=False, back_populate='login', cascade="all, delete-orphan", single_parent=True)
+    usuario = db.relationship('Usuario', uselist=False, back_populates='login', cascade="all, delete-orphan", single_parent=True)
     
     def __repr__(self):
         return '<login: %r >' % (self.id_login)

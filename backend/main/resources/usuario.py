@@ -22,10 +22,10 @@ class Usuarios(Resource):
             return "pasame bien las cositas amiguito"
         usuarios_json = [usuario.to_json() for usuario in usuarios]
         return jsonify({"usuario": usuarios_json,
-                       "page": page,
-                       "pages": usuarios.pages,
-                       "total": usuarios.total
-                       })
+                        "page": page,
+                        "pages": usuarios.pages,
+                        "total": usuarios.total
+                        })
 
     def post(self):
         usuario = UsuarioModel.from_json(request.get_json())

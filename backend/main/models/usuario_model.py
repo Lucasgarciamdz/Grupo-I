@@ -16,10 +16,10 @@ class Usuario(db.Model):
     dni = db.Column(db.Integer, nullable=False)
     rol = db.Column(db.String(45), nullable=False)
     sexo = db.Column(db.String(2), nullable=False)
-    
-    login = db.relationship('Login', back_populate='usuario', cascade="all, delete-orphan", use_list=False, single_parent=True)
-    profesor = db.relationship('Profesor', back_populates='usuario', use_list=False, cascade="all, delete-orphan", single_parent=True)
-    alumno = db.relationship('Alumno', back_populates='usuario', use_list=False, cascade="all, delete-orphan", single_parent=True)
+
+    login = db.relationship('Login', back_populates='usuario', cascade="all, delete-orphan", uselist=False, single_parent=True)
+    profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
+    alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
     def __repr__(self):
         return '<usuario: %r >' % (self.id_usuario)

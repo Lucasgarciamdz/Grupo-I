@@ -9,8 +9,8 @@ class ProfesorClase(db.Model):
     id_clase = db.Column(db.Integer, db.ForeignKey('clase.id_clase'))
     id_profesor = db.Column(db.Integer, db.ForeignKey('profesor.id_profesor'))
 
-    profesor = db.relationship('Profesor', uselist=False, back_populate='profesor_clase')
-    clase = db.relationship('Clase', uselist=False, back_populate='clase_profesor')
+    profesor = db.relationship('Profesor', uselist=False, back_populates='profesor_clase')
+    clase = db.relationship('Clase', uselist=False, back_populates='clase_profesor')
 
     def __repr__(self):
         return '<ProfesorClase: %r >' % (self.id_profesor_clase)

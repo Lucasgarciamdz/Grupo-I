@@ -7,13 +7,12 @@ class Planificacion(db.Model):
 
     id_planificacion = db.Column(db.Integer, primary_key=True)
     id_clase = db.Column(db.Integer, db.ForeignKey('clase.id_clase'))
-    
+
     horas_semanales = db.Column(db.Integer)
     objetivo = db.Column(db.String(45))
 
     planificacion_alumno = db.relationship('AlumnoPlanificacion', back_populates='planificacion', cascade="all, delete-orphan")
-    clase = db.relationship('Clase', back_populates='planificacion', cascade="all, delete-orphan")
-    clase_profesor = db.relationship('ProfesorClase', back_populates='planificacion', cascade="all, delete-orphan")
+    clase = db.relationship('Clase', back_populates='planificacion', single_parent=True)
 
     def __repr__(self):
         return '<planificacion: %r >' % (self.id_planificacion)

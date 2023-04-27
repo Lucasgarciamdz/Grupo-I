@@ -10,7 +10,7 @@ class Clase(db.Model):
     tipo = db.Column(db.String(45), nullable=False)
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
-    clase_profesor = db.relationship('ProfesorClase', back_populates='clase', cascade='all, delete orphan')
+    clase_profesor = db.relationship('ProfesorClase', back_populates='clase', cascade='all, delete-orphan')
 
     def __repr__(self):
         return '<clase: %r >' % (self.id_clase)
