@@ -7,9 +7,26 @@ from main.models import AlumnoModel
 class Alumnos(Resource):
 
     def get(self):
-        alumnos = db.session.query(AlumnoModel).all()
-        alumno_json = [alumno.to_json() for alumno in alumnos]
-        return jsonify(alumno_json)
+        alumnos = db.session.query(AlumnoModel)
+
+        page = 1
+
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+        try:
+            alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+            return jsonify({"error":"pasame bien las cositas amiguito"})
+        
+        return jsonify({"profesor": [alumno.to_json() for alumno in alumnos],
+                        "page": page,
+                        "pages": alumnos.pages,
+                        "total": alumnos.total
+                        })
 
     def post(self):
         alumno = AlumnoModel.from_json(request.get_json())

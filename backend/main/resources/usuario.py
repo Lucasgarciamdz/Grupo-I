@@ -15,13 +15,13 @@ class Usuarios(Resource):
         if request.args.get('page'):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
-            page = int(request.args.get('per_page'))
+            per_page = int(request.args.get('per_page'))
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return "pasame bien las cositas amiguito"
-        usuarios_json = [usuario.to_json() for usuario in usuarios]
-        return jsonify({"usuario": usuarios_json,
+            return jsonify({"error":"pasame bien las cositas amiguito"})
+        
+        return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,
                         "pages": usuarios.pages,
                         "total": usuarios.total

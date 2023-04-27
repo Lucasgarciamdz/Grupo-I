@@ -37,9 +37,26 @@ from main.models import PlanificacionModel
 
 class Planificaciones(Resource):
     def get(self):
-        planificaciones = db.session.query(PlanificacionModel).all()
-        planificacion_json = [planificacion.to_json() for planificacion in planificaciones]
-        return jsonify(planificacion_json)
+        planificaciones = db.session.query(PlanificacionModel)
+
+        page = 1
+
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+        try:
+            planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+            return jsonify({"error":"pasame bien las cositas amiguito"})
+        
+        return jsonify({"planificacion": [planificacion.to_json() for planificacion in planificaciones],
+                        "page": page,
+                        "pages": planificaciones.pages,
+                        "total": planificaciones.total
+                        })
 
     def post(self):
         planificacion = PlanificacionModel.from_json(request.get_json())

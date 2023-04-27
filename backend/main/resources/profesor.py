@@ -7,9 +7,27 @@ from main.models import ProfesorModel
 class Profesores(Resource):
 
     def get(self):
-        profesores = db.session.query(ProfesorModel).all()
-        profesor_json = [profesor.to_json() for profesor in profesores]
-        return jsonify(profesor_json)
+        
+        profesores = db.session.query(ProfesorModel)
+
+        page = 1
+
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+        try:
+            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+            return jsonify({"error":"pasame bien las cositas amiguito"})
+        
+        return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
+                        "page": page,
+                        "pages": profesores.pages,
+                        "total": profesores.total
+                        })
 
     def post(self):
         profesor = ProfesorModel.from_json(request.get_json())

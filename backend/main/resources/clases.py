@@ -6,9 +6,26 @@ from main.models import ClasesModel
 
 class Clases(Resource):
     def get():
-        clases = db.session.query(ClasesModel).all()
-        clase_json = [clase.to_json() for clase in clases]
-        return jsonify(clase_json)
+        clases = db.session.query(ClasesModel)
+
+        page = 1
+
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+        try:
+            clases = clases.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+            return jsonify({"error":"pasame bien las cositas amiguito"})
+        
+        return jsonify({"clase": [clase.to_json() for clase in clases],
+                        "page": page,
+                        "pages": clases.pages,
+                        "total": clases.total
+                        })
 
     def post(self):
         clase = ClasesModel.from_json(request.get_json())
