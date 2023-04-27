@@ -6,9 +6,26 @@ from main.models import UsuarioModel
 
 class Usuarios(Resource):
     def get(self):
-        usuarios = db.session.query(UsuarioModel).all()
+        usuarios = db.session.query(UsuarioModel)
+
+        page = 1
+
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            page = int(request.args.get('per_page'))
+        try:
+            usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+            return "pasame bien las cositas amiguito"
         usuarios_json = [usuario.to_json() for usuario in usuarios]
-        return jsonify(usuarios_json)
+        return jsonify({"usuario": usuarios_json,
+                       "page": page,
+                       "pages": usuarios.pages,
+                       "total": usuarios.total
+                       })
 
     def post(self):
         usuario = UsuarioModel.from_json(request.get_json())

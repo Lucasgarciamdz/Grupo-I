@@ -6,11 +6,11 @@ class AlumnoPlanificacion(db.Model):
     __tablename__ = "alumno_planificacion"
 
     id_alumno_planificacion = db.Column(db.Integer, primary_key=True)
-    id_alumno = db.Column(db.Integer, db.ForeignKey('Alumno.id_alumno'))
-    id_planificacion = db.Column(db.Integer, db.ForeignKey('Planificacion.id_planificacion'))
-    alumno = db.relationship('Alumno', uselist=True, back_populates='usuario', cascade="all, delete-orphan", single_parent=True)
-    planificacion = db.relationship('Planificacion', uselist=True, back_populates='planificacion', cascade="all, delete-orphan", single_parent=True)
+    id_alumno = db.Column(db.Integer, db.ForeignKey('alumno.id_alumno'))
+    id_planificacion = db.Column(db.Integer, db.ForeignKey('planificacion.id_planificacion'))
 
+    alumno = db.relationship('Alumno', uselist=False, back_populates='alumno_planificacion')
+    planificacion = db.relationship('Planificacion', uselist=False, back_populates='planificacion_alumno')
 
     def __repr__(self):
         return '<Alumno: %r >' % (self.id_alumno)
@@ -31,5 +31,5 @@ class AlumnoPlanificacion(db.Model):
         id_planificacion = alumno_planificacion_json.get('id_planificacion')
         return AlumnoPlanificacion(id=id_alumno_planificacion,
                         id_alumno=id_alumno,
-                        id_planificacion=id_planificacion
+                        id_planificacion=id_planificacion,
                         )
