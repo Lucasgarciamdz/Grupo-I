@@ -1,4 +1,5 @@
 from .. import db
+from .alumno_model import alumnos_planificaciones
 
 
 class Planificacion(db.Model):
@@ -11,7 +12,7 @@ class Planificacion(db.Model):
     horas_semanales = db.Column(db.Integer)
     objetivo = db.Column(db.String(45))
 
-    planificacion_alumno = db.relationship('AlumnoPlanificacion', back_populates='planificacion', cascade="all, delete-orphan")
+    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, back_populates='planificaciones')
     clase = db.relationship('Clase', back_populates='planificacion', single_parent=True)
 
     def __repr__(self):
