@@ -1,5 +1,9 @@
 from .. import db
 
+profesores_clases = db.Table("profesores_clases",
+                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase"), primary_key=True),
+                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor"), primary_key=True))
+
 
 class Profesor(db.Model):
 
@@ -14,7 +18,7 @@ class Profesor(db.Model):
     estado = db.Column(db.String(45), nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    profesor_clase = db.relationship('ProfesorClase', back_populates='profesor', cascade="all, delete-orphan")
+    clases = db.relationship('Clase', secondary=profesores_clases, back_populates='profesores')
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
