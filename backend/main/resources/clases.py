@@ -2,6 +2,7 @@ from flask_restful import Resource
 from .. import db
 from flask import request, jsonify
 from main.models import ClasesModel
+from sqlalchemy import desc, func
 
 
 class Clases(Resource):
@@ -16,6 +17,14 @@ class Clases(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+
+        # devuelve todas las planificaciones que tienen una determinada clase
+        if request.args.get('clase'):
+            clases = clases.join(ClasesModel.planificacion).filter_by(clases.tipo.like(request.args.get('clase')))
+            
+
+        if request.args.get('sortby_planificaciones'):
+            clases = clases.join(ClasesModel.planificacion).group_by(ClasesModel.tipo).order_by(desc(func.count(ClasesModel.id_alumno)))
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True, )
         except:

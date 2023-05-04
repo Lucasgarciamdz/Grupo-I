@@ -8,7 +8,6 @@ from .clases import Clase as ClaseResource
 from .clases import Clases as ClasesResource
 from .planificaciones import Planificaciones as PlanificacionesResource
 from .planificaciones import Planificacion as PlanificacionResource
-from .login import Login as LoginResource
 # from .pagos import Pagos as PagosResource
 # from .pagos import Pago as PagoResource
 # from .planificaciones import PlanificacionesAlumnos as PlanificacionesAlumnosResource

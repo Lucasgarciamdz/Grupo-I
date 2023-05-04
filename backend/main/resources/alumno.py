@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import AlumnoModel
+from sqlalchemy import func, desc
 
 
 class Alumnos(Resource):
@@ -17,12 +18,25 @@ class Alumnos(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+
+        # devuelve la cantidad de alumnos por cada estado posible (chequear)
+        # if request.args.get('estado'):
+        #     alumnos = alumnos.\
+        #              with_entities(AlumnoModel.estado, func.count(AlumnoModel.id_alumno)).\
+        #              group_by(AlumnoModel.estado).\
+        #              order_by(func.count(AlumnoModel.id_alumno))
+
+
+        # devuleve todos los alumnos que tienen la planilla medica vencida
+        if request.args.get('planilla_medica_falso'):
+            alumnos=alumnos.filter(AlumnoModel.planilla_medica == False)
+        
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
         except:
             return jsonify({"error":"pasame bien las cositas amiguito"})
         
-        return jsonify({"profesor": [alumno.to_json() for alumno in alumnos],
+        return jsonify({"alumnos": [alumno.to_json() for alumno in alumnos],
                         "page": page,
                         "pages": alumnos.pages,
                         "total": alumnos.total

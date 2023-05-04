@@ -3,11 +3,13 @@ from dotenv import load_dotenv
 from flask_restful import Api
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 api = Api()
 
 db = SQLAlchemy()
 
+migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
@@ -27,6 +29,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
     db.init_app(app)
+    migrate.init_app(app,db)
 
     import main.resources as resources
 
@@ -40,7 +43,6 @@ def create_app():
     api.add_resource(resources.ClaseResource, '/profesor/<id>')
     api.add_resource(resources.PlanificacionesResource, '/profesor/<id>')
     api.add_resource(resources.PlanificacionResource, '/profesor/<id>')
-    api.add_resource(resources.LoginResource, '/login')
     # api.add_resource(resources.ProfesorClasesResource, '/profesor_clases/<id>')
     # api.add_resource(resources.ProfesoresClasesResource, '/profesores_clases')
     # api.add_resource(resources.PagosResource, '/pagos')
