@@ -26,13 +26,13 @@ class Usuarios(Resource):
         if request.args.get('rol'):
             usuarios = usuarios.filter(UsuarioModel.rol.like(request.args.get('rol')))
 
-        # devuelve el usuario dado un determinado dn
+        # devuelve el usuario dado un determinado dni
         if request.args.get('dni'):
             usuarios = usuarios.filter(UsuarioModel.dni.like(request.args.get('dni')))
 
-        # devuelve una lista ordenada de los usuarios por edad
-        if request.args.get('sortby_edad'):
-            usuarios = usuarios.order_by(desc(UsuarioModel.edad))
+        # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
+        if request.args.get('sort_by_edad'):
+            usuarios = usuarios.order_by(UsuarioModel.edad.desc()).all()
 
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
@@ -44,7 +44,6 @@ class Usuarios(Resource):
                         "pages": usuarios.pages,
                         "total": usuarios.total
                         })
-
 
     def post(self):
         usuario = UsuarioModel.from_json(request.get_json())

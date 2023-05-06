@@ -27,10 +27,10 @@ class Alumnos(Resource):
         #              order_by(func.count(AlumnoModel.id_alumno))
 
 
-        # devuleve todos los alumnos que tienen la planilla medica vencida
+        # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos=alumnos.filter(AlumnoModel.planilla_medica == False)
-        
+            alumnos = alumnos.filter(AlumnoModel.planilla_medica == False)
+
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
         except:

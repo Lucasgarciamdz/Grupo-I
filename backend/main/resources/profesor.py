@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import ProfesorModel, ClasesModel
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, asc
 
 
 class Profesores(Resource):
@@ -20,19 +20,24 @@ class Profesores(Resource):
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
         
-        # devuelve los profesores ordenados por sueldo de mayor a menor
-        if request.args.get('sortby_sueldo'):
-            profesores = profesores.order_by(desc(ProfesorModel.sueldo))
+        # devuelve los profesores ordenados por sueldo de mayor a menor (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
+        if request.args.get('sort_by_sueldo'):
+            profesores = profesores.order_by(ProfesorModel.sueldo.desc()).all()
 
-        # devuelve los profesores filtrados por estado (chequear)
+        # devuelve los profesores filtrados por estado
         if request.args.get('estado'):
             profesores = profesores.filter(ProfesorModel.estado.like(request.args.get('estado')))
 
         # devuelve los profesores con sus clases (chequear)
+        # if request.args.get('clases'):
+        #     profesores = profesores.join(ProfesorModel.clases)\
+        #                         .group_by(ProfesorModel.id)\
+        #                         .order_by(func.count(ProfesorModel.clases).desc())
+
+        # devuelve los profesores con sus clases (chequear)
         if request.args.get('clases'):
-            profesores = profesores.join(ProfesorModel.clases)\
-                                .group_by(ProfesorModel.id)\
-                                .order_by(func.count(ProfesorModel.clases).desc())
+            profesores = profesores.join(ClasesModel)
+            profesores = [profesores.id, profesores.tipo]
 
         # devuelve los profesores con sus alumnos (chequear)
         if request.args.get('alumnos'):

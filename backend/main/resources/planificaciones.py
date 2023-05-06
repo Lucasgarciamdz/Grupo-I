@@ -37,16 +37,14 @@ from sqlalchemy import func, desc, text
 
 
 class Planificaciones(Resource):
-    def get(self):
+
+    def get(self):  
+
         planificaciones = db.session.query(PlanificacionModel)
 
         page = 1
 
         per_page = 10
-
-        # query = text("SELECT * FROM planificacion")
-
-        # planificaciones = db.session.execute(query)
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
@@ -61,20 +59,17 @@ class Planificaciones(Resource):
         # if request.args.get('sortby_planificacion'):
         #     planificaciones = planificaciones.order_by(desc(PlanificacionModel.id_planificacion))
 
-        if request.args.get('sortby_planificacion'):
-            planificaciones = PlanificacionModel.query.order_by(desc(PlanificacionModel.id_planificacion))
-            alumnos = AlumnoModel.query.join(AlumnoModel.planificaciones).filter(PlanificacionModel.in_(planificaciones))
+        # if request.args.get('sortby_planificacion'):
+        #     planificaciones = PlanificacionModel.query.order_by(desc(PlanificacionModel.id_planificacion))
+        #     alumnos = AlumnoModel.query.join(AlumnoModel.planificaciones).filter(PlanificacionModel.in_(planificaciones))
 
-        if request.args.get('sortby_planificacion'):
-            planificaciones = planificaciones.innerjoin(PlanificacionModel.alumnos).order_by(desc(PlanificacionModel.id_planificacion))
-
+        # if request.args.get('sortby_planificacion'):
+        #     planificaciones = planificaciones.innerjoin(PlanificacionModel.alumnos).order_by(desc(PlanificacionModel.id_planificacion))
         
         try:
             planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True, )
         except:
             return jsonify({"error":"pasame bien las cositas amiguito"})
-        finally:
-            db.session.close()
         
         return jsonify({"planificacion": [planificacion.to_json() for planificacion in planificaciones],
                         "page": page,

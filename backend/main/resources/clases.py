@@ -6,7 +6,7 @@ from sqlalchemy import desc, func
 
 
 class Clases(Resource):
-    def get():
+    def get(self):
         clases = db.session.query(ClasesModel)
 
         page = 1
@@ -22,8 +22,8 @@ class Clases(Resource):
         if request.args.get('clase'):
             clases = clases.join(ClasesModel.planificacion).filter_by(clases.tipo.like(request.args.get('clase')))
             
-
-        if request.args.get('sortby_planificaciones'):
+        # d
+        if request.args.get('sort_by_planificaciones'):
             clases = clases.join(ClasesModel.planificacion).group_by(ClasesModel.tipo).order_by(desc(func.count(ClasesModel.id_alumno)))
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True, )
