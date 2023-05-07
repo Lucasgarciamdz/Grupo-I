@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel
+from main.models import ProfesorModel, ClasesModel, UsuarioModel
 from sqlalchemy import desc, func, asc
 
 
@@ -22,35 +22,28 @@ class Profesores(Resource):
         
         # devuelve los profesores ordenados por sueldo de mayor a menor (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_sueldo'):
-            profesores = profesores.order_by(ProfesorModel.sueldo.desc()).all()
+            profesores = profesores\
+                        .order_by(desc(ProfesorModel.sueldo))
 
         # devuelve los profesores filtrados por estado
         if request.args.get('estado'):
-            profesores = profesores.filter(ProfesorModel.estado.like(request.args.get('estado')))
+            profesores = profesores\
+                        .filter(ProfesorModel.estado.like(request.args.get('estado')))
 
-        # devuelve los profesores con sus clases (chequear)
-        # if request.args.get('clases'):
-        #     profesores = profesores.join(ProfesorModel.clases)\
-        #                         .group_by(ProfesorModel.id)\
-        #                         .order_by(func.count(ProfesorModel.clases).desc())
-
-        # devuelve los profesores con sus clases (chequear)
+        # devuelve los profesores con la cantidad de clases (chequear)
         if request.args.get('clases'):
-            profesores = profesores.join(ClasesModel)
-            profesores = [profesores.id, profesores.tipo]
+            profesores = db.session.query(ProfesorModel.id_profesor, func.count(ClasesModel.id_clase))\
+                        .join(ProfesorModel)\
+                        .join(ClasesModel)\
+                        .group_by(ProfesorModel.id_profesor)\
+                        .order_by(ProfesorModel.id_profesor)
 
         # devuelve los profesores con sus alumnos (chequear)
         if request.args.get('alumnos'):
             profesores = profesores.join(ProfesorModel.clases)\
-                                .join(ClasesModel.alumnos)\
-                                .group_by(ProfesorModel.id)\
-                                .order_by(func.count(ClasesModel.alumnos).desc())
-
-        # if request.args.get('alumnos'):
-        #     profesor_id = request.args.get('profesor_id')
-        #     profesores = AlumnoModel.query.join(AlumnoModel.clases)\
-        #                             .join(ClaseModel.profesor)\
-        #                             .filter(ProfesorModel.id == profesor_id)\
+                        .join(ClasesModel.alumnos)\
+                        .group_by(ProfesorModel.id)\
+                        .order_by(func.count(ClasesModel.alumnos).desc())
 
         try:
             profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )

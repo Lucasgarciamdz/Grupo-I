@@ -43,14 +43,7 @@ def create_app():
     api.add_resource(resources.ClaseResource, '/clase/<id>')
     api.add_resource(resources.PlanificacionesResource, '/planificaciones')
     api.add_resource(resources.PlanificacionResource, '/planificacion/<id>')
-    # api.add_resource(resources.ProfesorClasesResource, '/profesor_clases/<id>')
-    # api.add_resource(resources.ProfesoresClasesResource, '/profesores_clases')
-    # api.add_resource(resources.PagosResource, '/pagos')
-    # api.add_resource(resources.PagoResource, '/pago/<id>')
-    # api.add_resource(resources.PlanificacionesAlumnosResource, '/planificaciones_alumnos')
-    # api.add_resource(resources.PlanificacionAlumnoResource, '/planificacion_alumno/<id>')
-    # api.add_resource(resources.PlanificacionesProfesoresResource, '/planificaciones_profesores')
-    # api.add_resource(resources.PlanificacionProfesorResource, '/planificacion_profesor/<id>')
+    
     with app.app_context():
         db.create_all()
     api.init_app(app)

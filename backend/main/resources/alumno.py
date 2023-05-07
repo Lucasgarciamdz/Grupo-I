@@ -20,16 +20,14 @@ class Alumnos(Resource):
             per_page = int(request.args.get('per_page'))
 
         # devuelve la cantidad de alumnos por cada estado posible (chequear)
-        # if request.args.get('estado'):
-        #     alumnos = alumnos.\
-        #              with_entities(AlumnoModel.estado, func.count(AlumnoModel.id_alumno)).\
-        #              group_by(AlumnoModel.estado).\
-        #              order_by(func.count(AlumnoModel.id_alumno))
-
+        if request.args.get('estado'):
+            alumnos = db.session.query(AlumnoModel.estado, func.count(AlumnoModel.id_alumno))\
+                        .group_by(AlumnoModel.estado)
 
         # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos = alumnos.filter(AlumnoModel.planilla_medica == False)
+            alumnos = alumnos\
+                        .filter(AlumnoModel.planilla_medica == False)
 
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
