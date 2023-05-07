@@ -146,7 +146,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/alumnos?planilla_medica_falso",
+							"raw": "http://127.0.0.1:5000/alumnos?planilla_medica_falso=''",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -161,10 +161,18 @@
 							"query": [
 								{
 									"key": "planilla_medica_falso",
-									"value": null
+									"value": "''"
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alumnos_estado",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -391,7 +399,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuarios?nombre=Juan",
+							"raw": "http://127.0.0.1:5000/usuarios?nombre=Franco",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -406,7 +414,7 @@
 							"query": [
 								{
 									"key": "nombre",
-									"value": "Juan"
+									"value": "Franco"
 								}
 							]
 						}
@@ -475,7 +483,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuarios?sort_by_edad",
+							"raw": "http://127.0.0.1:5000/usuarios?sort_by_edad=''",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -490,7 +498,7 @@
 							"query": [
 								{
 									"key": "sort_by_edad",
-									"value": null
+									"value": "''"
 								}
 							]
 						}
@@ -622,7 +630,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/profesores?sort_by_sueldo",
+							"raw": "http://127.0.0.1:5000/profesores?sort_by_sueldo=''",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -637,7 +645,7 @@
 							"query": [
 								{
 									"key": "sort_by_sueldo",
-									"value": null
+									"value": "''"
 								}
 							]
 						}
@@ -678,7 +686,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/profesores?clases",
+							"raw": "http://127.0.0.1:5000/profesores?clases=''",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -693,7 +701,7 @@
 							"query": [
 								{
 									"key": "clases",
-									"value": null
+									"value": "''"
 								}
 							]
 						}
