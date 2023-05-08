@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel, profesores_clases
+from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel
 from sqlalchemy import desc, func
 
 
@@ -10,7 +10,6 @@ class Profesores(Resource):
     def get(self):
 
         profesores = db.session.query(ProfesorModel)
-
         page = 1
 
         per_page = 10
@@ -32,28 +31,25 @@ class Profesores(Resource):
 
         # devuelve los profesores con la cantidad de clases (chequear)
         if request.args.get('clases'):
-            profesores = (
-                    db.session.query(ProfesorModel.id_profesor, func.count(ClasesModel.id_clase))
-                    .select_from(ProfesorModel)
-                    .join(profesores_clases)
-                    .join(ClasesModel)
-                    .group_by(ProfesorModel.id_profesor)
-                    .order_by(ProfesorModel.id_profesor)
-                    .all()
-                )
+            profes_id = db.session.query(ProfesorModel.id_profesor, ClasesModel.id_clase)
+            primer_join = profes_id.join(profesores_clases, profesores_clases.id_profesor == ProfesorModel.id_profesor)
+            segundo_join = primer_join.join(ClasesModel, ClasesModel.id_clase == profesores_clases.id_clase)
+            profesores = segundo_join.order_by(ProfesorModel.id_profesor)
 
         # devuelve los profesores con sus alumnos (chequear)
         if request.args.get('alumnos'):
-            profesores = profesores.join(ProfesorModel.clases)\
-                        .join(ClasesModel.alumnos)\
-                        .group_by(ProfesorModel.id)\
-                        .order_by(func.count(ClasesModel.alumnos).desc())
+            query = db.session.query(ProfesorModel.id_profesor, AlumnoModel.id_alumno)\
+                .join(Profesor.clases)\
+                .join(ClasesModel.planificacion)\
+                .join(PlanificacionModel.alumnos)\
+                .join(AlumnoModel)\
+                .all()
 
-        try:
-            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
+            result = [{'id_profesor': row[0], 'id_alumno': row[1]} for row in query]
 
-        except Exception:
-            return jsonify({"error": "pasame bien las cositas amiguito"})
+            return jsonify(result)
+
+        profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
 
         return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
                         "page": page,
