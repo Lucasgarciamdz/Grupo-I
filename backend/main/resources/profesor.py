@@ -1,14 +1,14 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel, UsuarioModel
-from sqlalchemy import desc, func, asc
+from main.models import ProfesorModel, ClasesModel, profesores_clases
+from sqlalchemy import desc, func
 
 
 class Profesores(Resource):
 
     def get(self):
-        
+
         profesores = db.session.query(ProfesorModel)
 
         page = 1
@@ -19,7 +19,7 @@ class Profesores(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
-        
+
         # devuelve los profesores ordenados por sueldo de mayor a menor (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_sueldo'):
             profesores = profesores\
@@ -32,11 +32,15 @@ class Profesores(Resource):
 
         # devuelve los profesores con la cantidad de clases (chequear)
         if request.args.get('clases'):
-            profesores = db.session.query(ProfesorModel.id_profesor, func.count(ClasesModel.id_clase))\
-                        .join(ProfesorModel)\
-                        .join(ClasesModel)\
-                        .group_by(ProfesorModel.id_profesor)\
-                        .order_by(ProfesorModel.id_profesor)
+            profesores = (
+                    db.session.query(ProfesorModel.id_profesor, func.count(ClasesModel.id_clase))
+                    .select_from(ProfesorModel)
+                    .join(profesores_clases)
+                    .join(ClasesModel)
+                    .group_by(ProfesorModel.id_profesor)
+                    .order_by(ProfesorModel.id_profesor)
+                    .all()
+                )
 
         # devuelve los profesores con sus alumnos (chequear)
         if request.args.get('alumnos'):
@@ -47,15 +51,15 @@ class Profesores(Resource):
 
         try:
             profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
-        except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
-        
+
+        except Exception:
+            return jsonify({"error": "pasame bien las cositas amiguito"})
+
         return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
                         "page": page,
                         "pages": profesores.pages,
                         "total": profesores.total
                         })
-
 
     def post(self):
         profesor = ProfesorModel.from_json(request.get_json())
