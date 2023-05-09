@@ -64,7 +64,10 @@ class Profesores(Resource):
 
             return jsonify(result)
 
-        profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
+        try:
+            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
+        except:
+             return jsonify({"error":"Error inesperado"})
 
         return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
                         "page": page,
