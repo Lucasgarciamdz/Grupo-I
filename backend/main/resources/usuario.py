@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from main import db
 from main.models import UsuarioModel
+from sqlalchemy import func, desc, asc
 
 
 class Usuarios(Resource):
@@ -16,10 +17,31 @@ class Usuarios(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+
+        # devuelve los usuarios dado un determinado nombre
+        if request.args.get('nombre'):
+            usuarios = usuarios\
+                        .filter(UsuarioModel.nombre.like('%' + request.args.get('nombre') + '%'))
+
+        # devuelve todos los usuarios dado un determinado rol
+        if request.args.get('rol'):
+            usuarios = usuarios\
+                        .filter(UsuarioModel.rol.like(request.args.get('rol')))
+
+        # devuelve el usuario dado un determinado dni
+        if request.args.get('dni'):
+            usuarios = usuarios\
+                        .filter(UsuarioModel.dni.like(request.args.get('dni')))
+
+        # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
+        if request.args.get('sort_by_edad'):
+            usuarios = usuarios\
+                        .order_by(desc(UsuarioModel.edad))
+
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,

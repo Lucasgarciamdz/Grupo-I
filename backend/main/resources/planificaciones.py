@@ -1,7 +1,8 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import PlanificacionModel
+from main.models import PlanificacionModel, AlumnoModel
+from sqlalchemy import func, desc, text
 
 # def obtener_planificaciones_por_id(id):
 #     planificaciones = []
@@ -36,7 +37,9 @@ from main.models import PlanificacionModel
 
 
 class Planificaciones(Resource):
-    def get(self):
+
+    def get(self):  
+
         planificaciones = db.session.query(PlanificacionModel)
 
         page = 1
@@ -47,10 +50,26 @@ class Planificaciones(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+        
+        #devuelve las planificaciones con determinado objetivo
+        if request.args.get('objetivo'):
+            planificaciones = planificaciones.filter(PlanificacionModel.objetivo.like(request.args.get('objetivo')))
+        
+        # #devuelve una lista ordenada de los alumnos que estan en esa planificacion
+        # if request.args.get('sortby_planificacion'):
+        #     planificaciones = planificaciones.order_by(desc(PlanificacionModel.id_planificacion))
+
+        # if request.args.get('sortby_planificacion'):
+        #     planificaciones = PlanificacionModel.query.order_by(desc(PlanificacionModel.id_planificacion))
+        #     alumnos = AlumnoModel.query.join(AlumnoModel.planificaciones).filter(PlanificacionModel.in_(planificaciones))
+
+        # if request.args.get('sortby_planificacion'):
+        #     planificaciones = planificaciones.innerjoin(PlanificacionModel.alumnos).order_by(desc(PlanificacionModel.id_planificacion))
+        
         try:
             planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"planificacion": [planificacion.to_json() for planificacion in planificaciones],
                         "page": page,
