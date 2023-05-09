@@ -69,7 +69,7 @@ class Planificaciones(Resource):
         try:
             planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"planificacion": [planificacion.to_json() for planificacion in planificaciones],
                         "page": page,

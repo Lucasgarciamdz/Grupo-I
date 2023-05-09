@@ -32,7 +32,7 @@ class Alumnos(Resource):
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"alumnos": [alumno.to_json() for alumno in alumnos],
                         "page": page,
