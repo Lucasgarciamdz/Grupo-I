@@ -50,7 +50,10 @@ class Usuarios(Resource):
                         })
 
     def post(self):
-        usuario = UsuarioModel.from_json(request.get_json())
+        try:
+            usuario = UsuarioModel.from_json(request.get_json())
+        except:
+            return "Error al pasara JSON"
         db.session.add(usuario)
         db.session.commit()
         return usuario.to_json(), 201
