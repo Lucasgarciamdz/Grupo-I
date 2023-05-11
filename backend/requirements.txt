@@ -2,9 +2,5 @@ flask
 python-dotenv
 flask-restful
 flask-sqlalchemy
-<<<<<<< HEAD
-flask-migrate
-=======
 flask-migrate
 flask-jwt-extended
->>>>>>> develop
