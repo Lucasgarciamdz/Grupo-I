@@ -41,7 +41,7 @@ class Usuarios(Resource):
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,
