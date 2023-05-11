@@ -28,7 +28,7 @@ class Clases(Resource):
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"pasame bien las cositas amiguito"})
+            return jsonify({"error":"Error inesperado"})
         
         return jsonify({"clase": [clase.to_json() for clase in clases],
                         "page": page,

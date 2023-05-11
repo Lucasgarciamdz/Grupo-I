@@ -18,7 +18,7 @@ class Profesor(db.Model):
     estado = db.Column(db.String(45), nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, back_populates='profesores')
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_c', lazy='dynamic'))
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)

@@ -16,7 +16,7 @@ class Alumno(db.Model):
     planilla_medica = db.Column(db.Boolean, nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, back_populates='alumnos')
+    planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref=db.backref('alumnos_p', lazy='dynamic'))
 
     def __repr__(self):
         return '<alumno: %r >' % (self.id_alumno)
