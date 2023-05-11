@@ -78,7 +78,10 @@ class Planificaciones(Resource):
                         })
 
     def post(self):
-        planificacion = PlanificacionModel.from_json(request.get_json())
+        try:
+            planificacion = PlanificacionModel.from_json(request.get_json())
+        except:
+            return "Error al pasar a JSON"
         db.session.add(planificacion)
         db.session.commit()
         return planificacion.to_json(), 201

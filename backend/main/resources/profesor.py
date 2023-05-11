@@ -30,39 +30,37 @@ class Profesores(Resource):
                         .filter(ProfesorModel.estado.like(request.args.get('estado')))
 
         # devuelve los profesores con la cantidad de clases (chequear)
+        # if request.args.get('clases'):
+        #     profes_id = db.session.query(ProfesorModel.id_profesor, ClasesModel.id_clase)
+        #     primer_join = profes_id.join(profesores_clases, profesores_clases.id_profesor == ProfesorModel.id_profesor)
+        #     segundo_join = primer_join.join(ClasesModel, ClasesModel.id_clase == profesores_clases.id_clase)
+        #     profesores = segundo_join.order_by(ProfesorModel.id_profesor)
+
         if request.args.get('clases'):
-            profes_id = db.session.query(ProfesorModel.id_profesor, ClasesModel.id_clase)
-            primer_join = profes_id.join(profesores_clases, profesores_clases.id_profesor == ProfesorModel.id_profesor)
-            segundo_join = primer_join.join(ClasesModel, ClasesModel.id_clase == profesores_clases.id_clase)
-            profesores = segundo_join.order_by(ProfesorModel.id_profesor)
-
-            """SELECT p.id_profesor, c.id_clase 
-            FROM profesor p JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor 
-            JOIN clase c ON c.id_clase = pc.id_clase 
-            ORDER BY p.id_profesor """
-
-        # devuelve los profesores con sus alumnos (chequear)
-        if request.args.get('alumnos'):
-            query = db.session.query(ProfesorModel.id_profesor, AlumnoModel.id_alumno)\
-                .join(Profesor.clases)\
-                .join(ClasesModel.planificacion)\
-                .join(PlanificacionModel.alumnos)\
-                .join(AlumnoModel)\
-                .all()
+            db.execsql("""SELECT p.id_profesor, c.id_clase 
+                        FROM profesor p JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor 
+                        JOIN clase c ON c.id_clase = pc.id_clase 
+                        ORDER BY p.id_profesor """)
             
-            """SELECT u.nombre, u.apellido, COUNT(a.id_alumno) AS cantidad_alumnos
-            FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario 
-            JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor
-            JOIN clase c ON c.id_clase = pc.id_clase
-            JOIN planificacion pl ON pl.id_clase  = c.id_clase 
-            JOIN alumnos_planificaciones ap ON pl.id_planificacion = ap.id_planificacion 
-            JOIN alumno a ON a.id_alumno = ap.id_alumno 
-            GROUP BY u.nombre 
-            ORDER BY u.nombre DESC"""
+        # devuelve los profesores con sus alumnos (chequear)
+        # if request.args.get('alumnos'):
+        #     query = db.session.query(ProfesorModel.id_profesor, AlumnoModel.id_alumno)\
+        #         .join(Profesor.clases)\
+        #         .join(ClasesModel.planificacion)\
+        #         .join(PlanificacionModel.alumnos)\
+        #         .join(AlumnoModel)\
+        #         .all()
 
-            result = [{'id_profesor': row[0], 'id_alumno': row[1]} for row in query]
-
-            return jsonify(result)
+        if request.args.get('alumnos'):
+            db.execsql("""SELECT u.nombre, u.apellido, COUNT(a.id_alumno) AS cantidad_alumnos
+                        FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario 
+                        JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor
+                        JOIN clase c ON c.id_clase = pc.id_clase
+                        JOIN planificacion pl ON pl.id_clase  = c.id_clase 
+                        JOIN alumnos_planificaciones ap ON pl.id_planificacion = ap.id_planificacion 
+                        JOIN alumno a ON a.id_alumno = ap.id_alumno 
+                        GROUP BY u.nombre 
+                        ORDER BY u.nombre DESC""")
 
         try:
             profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
@@ -76,7 +74,10 @@ class Profesores(Resource):
                         })
 
     def post(self):
-        profesor = ProfesorModel.from_json(request.get_json())
+        try:
+            profesor = ProfesorModel.from_json(request.get_json())
+        except:
+            return "Error al pasar a JSON"
         db.session.add(profesor)
         db.session.commit()
         return profesor.to_json(), 201

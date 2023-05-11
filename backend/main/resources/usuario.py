@@ -53,7 +53,7 @@ class Usuarios(Resource):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
         except:
-            return "Error al pasara JSON"
+            return "Error al pasar a JSON"
         db.session.add(usuario)
         db.session.commit()
         return usuario.to_json(), 201

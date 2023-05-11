@@ -23,7 +23,8 @@ class Clases(Resource):
             clases = clases.join(ClasesModel.planificacion).filter_by(clases.tipo.like(request.args.get('clase')))
             
         # if request.args.get('sort_by_planificaciones'):
-        #     clases = clases.join(ClasesModel.planificacion).group_by(ClasesModel.tipo).order_by(desc(func.count(ClasesModel.id_alumno)))
+        #     clases = clases.join(ClasesModel.planificacion).group_by(ClasesModel.tipo)\
+        #               .order_by(desc(func.count(ClasesModel.id_alumno)))
         
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True, )
@@ -37,7 +38,10 @@ class Clases(Resource):
                         })
 
     def post(self):
-        clase = ClasesModel.from_json(request.get_json())
+        try:
+            clase = ClasesModel.from_json(request.get_json())
+        except:
+            return "Error al pasar a JSON"
         db.session.add(clase)
         db.session.commit()
         return clase.to_json(), 201

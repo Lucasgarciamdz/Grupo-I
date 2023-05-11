@@ -41,7 +41,10 @@ class Alumnos(Resource):
                         })
 
     def post(self):
-        alumno = AlumnoModel.from_json(request.get_json())
+        try:
+            alumno = AlumnoModel.from_json(request.get_json())
+        except:
+            return "Error al pasar a JSON"
         db.session.add(alumno)
         db.session.commit()
         return alumno.to_json(), 201
