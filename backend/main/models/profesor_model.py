@@ -31,6 +31,7 @@ class Profesor(db.Model):
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
+            "clases": [clase.to_json() for clase in self.clases]
         }
         return profesor_json
 

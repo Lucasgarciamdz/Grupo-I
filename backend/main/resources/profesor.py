@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, text
 
 
 class Profesores(Resource):
@@ -12,7 +12,7 @@ class Profesores(Resource):
         profesores = db.session.query(ProfesorModel)
         page = 1
 
-        per_page = 10
+        per_page = 1
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
@@ -37,11 +37,11 @@ class Profesores(Resource):
         #     profesores = segundo_join.order_by(ProfesorModel.id_profesor)
 
         if request.args.get('clases'):
-            db.execsql("""SELECT p.id_profesor, c.id_clase 
-                        FROM profesor p JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor 
-                        JOIN clase c ON c.id_clase = pc.id_clase 
-                        ORDER BY p.id_profesor """)
-            
+            db.session.execute(text("""SELECT p.id_profesor, c.id_clase\
+                        FROM profesor p JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor\
+                        JOIN clase c ON c.id_clase = pc.id_clase\
+                        ORDER BY p.id_profesor """))
+
         # devuelve los profesores con sus alumnos (chequear)
         # if request.args.get('alumnos'):
         #     query = db.session.query(ProfesorModel.id_profesor, AlumnoModel.id_alumno)\
@@ -65,7 +65,7 @@ class Profesores(Resource):
         try:
             profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-             return jsonify({"error":"Error inesperado"})
+             return jsonify({"error": "Error inesperado"})
 
         return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
                         "page": page,

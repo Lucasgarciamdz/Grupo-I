@@ -11,6 +11,7 @@ db = SQLAlchemy()
 
 migrate = Migrate()
 
+
 def create_app():
     app = Flask(__name__)
     load_dotenv()
@@ -29,7 +30,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
     db.init_app(app)
-    migrate.init_app(app,db)
+    migrate.init_app(app, db)
 
     import main.resources as resources
 
@@ -43,7 +44,7 @@ def create_app():
     api.add_resource(resources.ClaseResource, '/clase/<id>')
     api.add_resource(resources.PlanificacionesResource, '/planificaciones')
     api.add_resource(resources.PlanificacionResource, '/planificacion/<id>')
-    
+
     with app.app_context():
         db.create_all()
     api.init_app(app)
