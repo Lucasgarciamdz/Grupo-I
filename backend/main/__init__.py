@@ -10,10 +10,6 @@ api = Api()
 db = SQLAlchemy()
 
 migrate = Migrate()
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 
 def create_app():
     app = Flask(__name__)
@@ -33,11 +29,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
     db.init_app(app)
-<<<<<<< HEAD
-    migrate.init_app(app, db)
-=======
     migrate.init_app(app,db)
->>>>>>> develop
 
     import main.resources as resources
 
