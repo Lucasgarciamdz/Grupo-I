@@ -27,15 +27,15 @@ class Usuario(db.Model):
 
     def to_json(self):
         usuario_json = {
-            'id': str(self.id_usuario),
-            'nombre': str(self.nombre),
-            'apellido': str(self.apellido),
+            'id_usuario': self.id_usuario,
+            'nombre': self.nombre,
+            'apellido': self.apellido,
             'direccion': self.direccion,
-            'edad': str(self.edad),
-            'telefono': str(self.telefono),
-            'dni': str(self.dni),
-            'rol': str(self.rol),
-            'sexo': str(self.sexo),
+            'edad': self.edad,
+            'telefono': self.telefono,
+            'dni': self.dni,
+            'rol': self.rol,
+            'sexo': self.sexo,
             'email': self.email,
             'contrasena': self.contrasena,
         }

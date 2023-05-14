@@ -10,7 +10,6 @@ class Clase(db.Model):
     tipo = db.Column(db.String(45), nullable=False)
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
-    profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'))
 
     def __repr__(self):
         return '<clase: %r >' % (self.id_clase)
@@ -19,7 +18,15 @@ class Clase(db.Model):
         clase_json = {
             'id': str(self.id_clase),
             'tipo': self.tipo,
+        }
+        return clase_json
 
+    def to_json_complete(self):
+        clase_json = {
+            'id': self.id_clase,
+            'tipo': self.tipo,
+            'planificacion': self.planificacion.to_json(),
+            'profesores': [profesor.to_json() for profesor in self.profesores]
         }
         return clase_json
 

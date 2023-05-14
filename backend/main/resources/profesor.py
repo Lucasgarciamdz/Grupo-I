@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel
+from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel, UsuarioModel
 from sqlalchemy import desc, func, text
 
 
@@ -30,17 +30,29 @@ class Profesores(Resource):
                         .filter(ProfesorModel.estado.like(request.args.get('estado')))
 
         # devuelve los profesores con la cantidad de clases (chequear)
-        # if request.args.get('clases'):
-        #     profes_id = db.session.query(ProfesorModel.id_profesor, ClasesModel.id_clase)
-        #     primer_join = profes_id.join(profesores_clases, profesores_clases.id_profesor == ProfesorModel.id_profesor)
-        #     segundo_join = primer_join.join(ClasesModel, ClasesModel.id_clase == profesores_clases.id_clase)
-        #     profesores = segundo_join.order_by(ProfesorModel.id_profesor)
-
         if request.args.get('clases'):
-            db.session.execute(text("""SELECT p.id_profesor, c.id_clase\
-                        FROM profesor p JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor\
-                        JOIN clase c ON c.id_clase = pc.id_clase\
-                        ORDER BY p.id_profesor """))
+            page = request.args.get('page', 1, type=int)
+            per_page = request.args.get('per_page', 10, type=int)
+
+            profesores = db.session.query(ProfesorModel.usuario, func.count(ClasesModel.id_clase)) \
+                .outerjoin(ProfesorModel.clases) \
+                .group_by(ProfesorModel.id_profesor) \
+                .order_by(desc(func.count(ClasesModel.id_clase))) \
+                .paginate(page=page, per_page=per_page, error_out=True)
+
+            profesores_data = {
+                "profesor": [
+                    {
+                        "profesor": profesor[0],
+                        "cantidad_clases": profesor[1]
+                    } for profesor in profesores.items
+                ],
+                "page": page,
+                "pages": profesores.pages,
+                "total": profesores.total
+            }
+
+            return jsonify(profesores_data)
 
         # devuelve los profesores con sus alumnos (chequear)
         # if request.args.get('alumnos'):

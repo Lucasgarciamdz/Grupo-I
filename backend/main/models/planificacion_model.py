@@ -20,10 +20,21 @@ class Planificacion(db.Model):
 
     def to_json(self):
         planificacion_json = {
-            'id_planificacion': str(self.id_planificacion),
+            'id_planificacion': self.id_planificacion,
             'id_clase': self.id_clase,
-            'horas_semanales': str(self.horas_semanales),
-            'objetivo': str(self.objetivo),
+            'horas_semanales': self.horas_semanales,
+            'objetivo': self.objetivo,
+        }
+        return planificacion_json
+
+    def to_json_complete(self):
+        planificacion_json = {
+            'id_planificacion': self.id_planificacion,
+            'id_clase': self.id_clase,
+            'horas_semanales': self.horas_semanales,
+            'objetivo': self.objetivo,
+            'alumnos': [alumno.to_json() for alumno in self.alumnos],
+            'clase': self.clase.to_json()
         }
         return planificacion_json
 

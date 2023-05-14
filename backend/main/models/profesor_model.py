@@ -18,12 +18,22 @@ class Profesor(db.Model):
     estado = db.Column(db.String(45), nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_c', lazy='dynamic'))
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores', lazy='dynamic'))
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
 
     def to_json(self):
+        profesor_json = {
+            'id_profesor': self.id_profesor,
+            'certificacion': self.certificacion,
+            'fecha_inicio_actividad': self.fecha_inicio_actividad,
+            'sueldo': self.sueldo,
+            'estado': self.estado,
+        }
+        return profesor_json
+
+    def to_json_complete(self):
         profesor_json = {
             'id_profesor': str(self.id_profesor),
             'id_usuario': self.id_usuario,
@@ -31,7 +41,7 @@ class Profesor(db.Model):
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
-            "clases": [clase.to_json() for clase in self.clases]
+            "clases": [clase.to_json() for clase in self.clases],
         }
         return profesor_json
 

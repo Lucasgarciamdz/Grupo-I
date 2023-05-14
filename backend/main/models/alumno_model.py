@@ -23,11 +23,20 @@ class Alumno(db.Model):
 
     def to_json(self):
         alumno_json = {
-            'id': str(self.id_alumno),
-            'id usuario': self.id_usuario,
+            'id_alumno': self.id_alumno,
             'estado': self.estado,
             'planilla medica': self.planilla_medica,
+            }
+        return alumno_json
 
+    def to_json_complete(self):
+        alumno_json = {
+            'id_alumno': self.id_alumno,
+            'id_usuario': self.id_usuario,
+            'estado': self.estado,
+            'planilla_medica': self.planilla_medica,
+            "usuario": self.usuario.to_json(),
+            "planificaciones": [planificacion.to_json() for planificacion in self.planificaciones]
         }
         return alumno_json
 
