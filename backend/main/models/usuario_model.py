@@ -1,4 +1,5 @@
 from .. import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Usuario(db.Model):
@@ -22,6 +23,17 @@ class Usuario(db.Model):
     profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
     alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
+    @property
+    def plain_contrasena(self):
+        raise AttributeError('contrasena cant be read')
+
+    @plain_contrasena.setter
+    def plain_contrasena(self, contrasena):
+        self.contrasena = generate_password_hash(contrasena)
+
+    def validate_pass(self, contrasena):
+        return check_password_hash(self.contrasena, contrasena)
+
     def __repr__(self):
         return '<usuario: %r >' % (self.id_usuario)
 
@@ -37,7 +49,6 @@ class Usuario(db.Model):
             'rol': self.rol,
             'sexo': self.sexo,
             'email': self.email,
-            'contrasena': self.contrasena,
         }
         return usuario_json
 
@@ -65,5 +76,5 @@ class Usuario(db.Model):
                        rol=rol,
                        sexo=sexo,
                        email=email,
-                       contrasena=contrasena,
+                       plain_contrasena=contrasena,
                        )

@@ -3,10 +3,12 @@ from flask import request, jsonify
 from .. import db
 from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel, UsuarioModel
 from sqlalchemy import desc, func, text
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import role_required
 
 class Profesores(Resource):
 
+    @jwt_required()
     def get(self):
 
         profesores = db.session.query(ProfesorModel)
@@ -84,7 +86,7 @@ class Profesores(Resource):
                         "pages": profesores.pages,
                         "total": profesores.total
                         })
-
+    @jwt_required()
     def post(self):
         try:
             profesor = ProfesorModel.from_json(request.get_json())
@@ -97,10 +99,12 @@ class Profesores(Resource):
 
 class Profesor(Resource):
 
+    @jwt_required(optional=True)
     def get(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         return profesor.to_json()
 
+    @role_required(roles = "admin")
     def put(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         data = request.get_json().items()
@@ -110,7 +114,8 @@ class Profesor(Resource):
         db.sessiprofesormit()
         return profesor.to_json(), 201
 
-    def delete():
+    @role_required(roles = "admin")
+    def delete(self):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         db.session.delete(profesor)
         db.session.commit()

@@ -4,12 +4,16 @@ from flask_restful import Api
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
+
 
 api = Api()
 
 db = SQLAlchemy()
 
 migrate = Migrate()
+
+jwt = JWTManager()
 
 
 def create_app():
@@ -45,8 +49,15 @@ def create_app():
     api.add_resource(resources.PlanificacionesResource, '/planificaciones')
     api.add_resource(resources.PlanificacionResource, '/planificacion/<id>')
 
+    api.init_app(app)
+
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
+    jwt.init_app(app)
+
+    from main.auth import rutas
+    app.register_blueprint(rutas.auth)
+
     with app.app_context():
         db.create_all()
-    api.init_app(app)
-    # Por ultimo retornamos la aplicacion inicializada
     return app

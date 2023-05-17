@@ -3,6 +3,8 @@ from flask import request, jsonify
 from .. import db
 from main.models import PlanificacionModel, AlumnoModel
 from sqlalchemy import func, desc, text
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import role_required
 
 # def obtener_planificaciones_por_id(id):
 #     planificaciones = []
@@ -38,6 +40,7 @@ from sqlalchemy import func, desc, text
 
 class Planificaciones(Resource):
 
+    @jwt_required()
     def get(self):  
 
         planificaciones = db.session.query(PlanificacionModel)
@@ -76,7 +79,7 @@ class Planificaciones(Resource):
                         "pages": planificaciones.pages,
                         "total": planificaciones.total
                         })
-
+    @jwt_required()
     def post(self):
         try:
             planificacion = PlanificacionModel.from_json(request.get_json())
@@ -88,10 +91,13 @@ class Planificaciones(Resource):
 
 
 class Planificacion(Resource):
+    
+    @jwt_required(optional=True)
     def get(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         return planificacion.to_json()
 
+    @role_required(roles = "admin")
     def put(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         data = request.get_json().items()
@@ -101,6 +107,7 @@ class Planificacion(Resource):
         db.session.commit()
         return planificacion.to_json(), 201
 
+    @role_required(roles = "admin")
     def delete(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         db.session.delete(planificacion)

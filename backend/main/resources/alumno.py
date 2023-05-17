@@ -3,10 +3,12 @@ from flask import request, jsonify
 from .. import db
 from main.models import AlumnoModel
 from sqlalchemy import func, desc
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decoradores import role_required
 
 class Alumnos(Resource):
 
+    @jwt_required()
     def get(self):
         alumnos = db.session.query(AlumnoModel)
 
@@ -40,6 +42,7 @@ class Alumnos(Resource):
                         "total": alumnos.total
                         })
 
+    @jwt_required()
     def post(self):
         try:
             alumno = AlumnoModel.from_json(request.get_json())
@@ -52,10 +55,12 @@ class Alumnos(Resource):
 
 class Alumno(Resource):
 
+    @jwt_required(optional=True)
     def get(self, id):
         alumno = db.session.query(AlumnoModel).get_or_404(id)
         return alumno.to_json()
 
+    @role_required('admin')
     def put(self, id):
         alumno = db.session.query(AlumnoModel).get_or_404(id)
         data = request.get_json().items()
@@ -65,6 +70,7 @@ class Alumno(Resource):
         db.session.commit()
         return alumno.to_json(), 201
 
+    @role_required(roles="admin")
     def delete(self, id):
         alumno = db.session.query(AlumnoModel).get_or_404(id)
         db.session.delete(alumno)

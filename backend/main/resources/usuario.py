@@ -3,9 +3,12 @@ from flask import request, jsonify
 from main import db
 from main.models import UsuarioModel
 from sqlalchemy import func, desc, asc
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decoradores import role_required
 
 
 class Usuarios(Resource):
+    @jwt_required(optional=True)
     def get(self):
         usuarios = db.session.query(UsuarioModel)
 
@@ -41,14 +44,15 @@ class Usuarios(Resource):
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
         except:
-            return jsonify({"error":"Error inesperado"})
-        
+            return jsonify({"error": "Error inesperado"})
+
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,
                         "pages": usuarios.pages,
                         "total": usuarios.total
                         })
 
+    @jwt_required()
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
@@ -60,10 +64,12 @@ class Usuarios(Resource):
 
 
 class Usuario(Resource):
+    @jwt_required(optional=True)
     def get(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
+    @role_required(roles = "admin")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()
@@ -73,6 +79,7 @@ class Usuario(Resource):
         db.session.commit()
         return usuario.to_json(), 201
 
+    @role_required(role="admin")
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         db.session.delete(usuario)
