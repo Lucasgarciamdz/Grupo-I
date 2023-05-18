@@ -22,14 +22,16 @@ class Alumno(db.Model):
         return '<alumno: %r >' % (self.id_alumno)
 
     def to_json(self):
+        """Return a JSON representation of the Alumno object."""
         alumno_json = {
             'id_alumno': self.id_alumno,
             'estado': self.estado,
-            'planilla medica': self.planilla_medica,
-            }
+            'planilla_medica': self.planilla_medica,
+        }
         return alumno_json
 
     def to_json_complete(self):
+        """Return a complete JSON representation of the Alumno object."""
         alumno_json = {
             'id_alumno': self.id_alumno,
             'id_usuario': self.id_usuario,
@@ -42,10 +44,11 @@ class Alumno(db.Model):
 
     @staticmethod
     def from_json(alumno_json):
-        id_alumno = alumno_json.get('id_alumno')
-        id_usuario = alumno_json.get('id_usuario')
-        estado = alumno_json.get('estado')
-        planilla_medica = alumno_json.get('planilla_medica')
+        """Create an Alumno object from a JSON representation."""
+        id_alumno = alumno_json.get('id_alumno', None)
+        id_usuario = alumno_json.get('id_usuario', None)
+        estado = alumno_json.get('estado', None)
+        planilla_medica = alumno_json.get('planilla_medica', None)
         return Alumno(id_alumno=id_alumno,
                       id_usuario=id_usuario,
                       estado=estado,

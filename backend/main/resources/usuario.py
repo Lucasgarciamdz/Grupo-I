@@ -2,8 +2,8 @@ from flask_restful import Resource
 from flask import request, jsonify
 from main import db
 from main.models import UsuarioModel
-from sqlalchemy import func, desc, asc
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from sqlalchemy import desc
+from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
 
 
@@ -13,37 +13,33 @@ class Usuarios(Resource):
         usuarios = db.session.query(UsuarioModel)
 
         page = 1
-
         per_page = 10
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
+
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
 
         # devuelve los usuarios dado un determinado nombre
         if request.args.get('nombre'):
-            usuarios = usuarios\
-                        .filter(UsuarioModel.nombre.like('%' + request.args.get('nombre') + '%'))
+            usuarios = usuarios.filter(UsuarioModel.nombre.like('%' + request.args.get('nombre') + '%'))
 
         # devuelve todos los usuarios dado un determinado rol
         if request.args.get('rol'):
-            usuarios = usuarios\
-                        .filter(UsuarioModel.rol.like(request.args.get('rol')))
+            usuarios = usuarios.filter(UsuarioModel.rol.like(request.args.get('rol')))
 
         # devuelve el usuario dado un determinado dni
         if request.args.get('dni'):
-            usuarios = usuarios\
-                        .filter(UsuarioModel.dni.like(request.args.get('dni')))
+            usuarios = usuarios.filter(UsuarioModel.dni.like(request.args.get('dni')))
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_edad'):
-            usuarios = usuarios\
-                        .order_by(desc(UsuarioModel.edad))
+            usuarios = usuarios.order_by(desc(UsuarioModel.edad))
 
         try:
-            usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True, )
-        except:
+            usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+        except Exception:
             return jsonify({"error": "Error inesperado"})
 
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
@@ -56,7 +52,7 @@ class Usuarios(Resource):
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
-        except:
+        except Exception:
             return "Error al pasar a JSON"
         db.session.add(usuario)
         db.session.commit()
@@ -69,7 +65,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    @role_required(roles = "admin")
+    @role_required(roles="admin")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()
@@ -79,7 +75,6 @@ class Usuario(Resource):
         db.session.commit()
         return usuario.to_json(), 201
 
-    @role_required(role="admin")
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         db.session.delete(usuario)

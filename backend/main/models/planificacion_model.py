@@ -13,7 +13,16 @@ class Planificacion(db.Model):
     objetivo = db.Column(db.String(45))
 
     alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, backref=db.backref('planificaciones_a', lazy='dynamic'))
-    clase = db.relationship('Clase', back_populates='planificacion', single_parent=True)
+    clase = db.relationship('Clase',
+                            back_populates='planificacion',
+                            single_parent=True,
+                            uselist=False,
+                            cascade="all, delete-orphan",
+                            passive_deletes=True,
+                            lazy='joined',
+                            innerjoin=True,
+                            post_update=True,
+                            foreign_keys=[id_clase])
 
     def __repr__(self):
         return '<planificacion: %r >' % (self.id_planificacion)

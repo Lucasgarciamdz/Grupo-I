@@ -2,9 +2,10 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import AlumnoModel
-from sqlalchemy import func, desc
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from sqlalchemy import func
+from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
+
 
 class Alumnos(Resource):
 
@@ -13,11 +14,11 @@ class Alumnos(Resource):
         alumnos = db.session.query(AlumnoModel)
 
         page = 1
-
         per_page = 10
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
+
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
 
@@ -28,14 +29,13 @@ class Alumnos(Resource):
 
         # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos = alumnos\
-                        .filter(AlumnoModel.planilla_medica == False)
+            alumnos = alumnos.filter(not AlumnoModel.planilla_medica)
 
         try:
-            alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, )
-        except:
-            return jsonify({"error":"Error inesperado"})
-      
+            alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)
+        except Exception:
+            return jsonify({"error": "Error inesperado"})
+
         return jsonify({"alumnos": [alumno.to_json() for alumno in alumnos],
                         "page": page,
                         "pages": alumnos.pages,
@@ -46,7 +46,7 @@ class Alumnos(Resource):
     def post(self):
         try:
             alumno = AlumnoModel.from_json(request.get_json())
-        except:
+        except Exception:
             return "Error al pasar a JSON"
         db.session.add(alumno)
         db.session.commit()

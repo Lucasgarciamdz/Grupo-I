@@ -1,35 +1,33 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel, profesores_clases, PlanificacionModel, AlumnoModel, UsuarioModel
-from sqlalchemy import desc, func, text
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from main.auth.decorators import role_required
+from main.models import ProfesorModel, ClasesModel
+from sqlalchemy import desc, func
+from flask_jwt_extended import jwt_required
+from main.auth.decoradores import role_required
+
 
 class Profesores(Resource):
 
     @jwt_required()
     def get(self):
-
         profesores = db.session.query(ProfesorModel)
         page = 1
-
         per_page = 1
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
+
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
 
         # devuelve los profesores ordenados por sueldo de mayor a menor (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_sueldo'):
-            profesores = profesores\
-                        .order_by(desc(ProfesorModel.sueldo))
+            profesores = profesores.order_by(desc(ProfesorModel.sueldo))
 
         # devuelve los profesores filtrados por estado
         if request.args.get('estado'):
-            profesores = profesores\
-                        .filter(ProfesorModel.estado.like(request.args.get('estado')))
+            profesores = profesores.filter(ProfesorModel.estado.like(request.args.get('estado')))
 
         # devuelve los profesores con la cantidad de clases (chequear)
         if request.args.get('clases'):
@@ -67,30 +65,31 @@ class Profesores(Resource):
 
         if request.args.get('alumnos'):
             db.execsql("""SELECT u.nombre, u.apellido, COUNT(a.id_alumno) AS cantidad_alumnos
-                        FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario 
+                        FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario
                         JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor
                         JOIN clase c ON c.id_clase = pc.id_clase
-                        JOIN planificacion pl ON pl.id_clase  = c.id_clase 
-                        JOIN alumnos_planificaciones ap ON pl.id_planificacion = ap.id_planificacion 
-                        JOIN alumno a ON a.id_alumno = ap.id_alumno 
-                        GROUP BY u.nombre 
+                        JOIN planificacion pl ON pl.id_clase  = c.id_clase
+                        JOIN alumnos_planificaciones ap ON pl.id_planificacion = ap.id_planificacion
+                        JOIN alumno a ON a.id_alumno = ap.id_alumno
+                        GROUP BY u.nombre
                         ORDER BY u.nombre DESC""")
 
         try:
-            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True, )
-        except:
-             return jsonify({"error": "Error inesperado"})
+            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True)
+        except Exception:
+            return jsonify({"error": "Error inesperado"})
 
         return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
                         "page": page,
                         "pages": profesores.pages,
                         "total": profesores.total
                         })
+
     @jwt_required()
     def post(self):
         try:
             profesor = ProfesorModel.from_json(request.get_json())
-        except:
+        except Exception:
             return "Error al pasar a JSON"
         db.session.add(profesor)
         db.session.commit()
@@ -104,18 +103,18 @@ class Profesor(Resource):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         return profesor.to_json()
 
-    @role_required(roles = "admin")
+    @role_required(roles="admin")
     def put(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         data = request.get_json().items()
         for key, value in data:
             setattr(profesor, key, value)
         db.session.add(profesor)
-        db.sessiprofesormit()
+        db.session.commit()
         return profesor.to_json(), 201
 
-    @role_required(roles = "admin")
-    def delete(self):
+    @role_required(roles="admin")
+    def delete(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         db.session.delete(profesor)
         db.session.commit()

@@ -18,7 +18,7 @@ class Profesor(db.Model):
     estado = db.Column(db.String(45), nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores', lazy='dynamic'))
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
@@ -28,7 +28,7 @@ class Profesor(db.Model):
             'id_profesor': self.id_profesor,
             'certificacion': self.certificacion,
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
-            'sueldo': self.sueldo,
+            'sueldo': str(self.sueldo),
             'estado': self.estado,
         }
         return profesor_json

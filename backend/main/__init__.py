@@ -24,13 +24,12 @@ def create_app():
     database_name = os.getenv('DATABASE_NAME')
     full_path = os.path.join(database_path, database_name)
 
-    if not os.path.exists(database_path):
+    if not os.path.isdir(database_path):
         os.makedirs(database_path)
 
     if not os.path.exists(full_path):
-        os.mknod(full_path)
+        open(full_path, 'a').close()
 
-    # with open(os.path.join(os.getenv('DATABASE_PATH'), os.getenv('DATABASE_NAME')), 'w'):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
     db.init_app(app)

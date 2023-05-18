@@ -1,63 +1,30 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import PlanificacionModel, AlumnoModel
-from sqlalchemy import func, desc, text
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from main.auth.decorators import role_required
-
-# def obtener_planificaciones_por_id(id):
-#     planificaciones = []
-#     for planificacion in PLANIFICACIONES.values():
-#         if planificacion.get("alumno") == id:
-#             planificaciones.append(planificacion)
-#     return planificaciones
-
-
-# def crear_planificacion(data):
-#     id = int(max(PLANIFICACIONES.keys()))+1
-#     PLANIFICACIONES[id] = data
-#     return PLANIFICACIONES[id]
-
-
-# def obtener_planificacion(id):
-#     if int(id) in PLANIFICACIONES:
-#         return PLANIFICACIONES[int(id)]
-#     return "", 404
-
-
-# class PlanificacionAlumno(Resource):
-#     def get(self, id):
-#         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
-#         return planificacion.to_json()
-
-
-# class PlanificacionesAlumnos(Resource):
-#     def get(self):
-#         planificaciones = db.session.query(PlanificacionModel).all()
-#         return jsonify(planificacion.to_json() for planificacion in planificaciones)
+from main.models import PlanificacionModel
+from flask_jwt_extended import jwt_required
+from main.auth.decoradores import role_required
 
 
 class Planificaciones(Resource):
 
     @jwt_required()
-    def get(self):  
+    def get(self):
 
         planificaciones = db.session.query(PlanificacionModel)
 
         page = 1
-
         per_page = 10
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
-        
-        #devuelve las planificaciones con determinado objetivo
+
+        # devuelve las planificaciones con determinado objetivo
         if request.args.get('objetivo'):
             planificaciones = planificaciones.filter(PlanificacionModel.objetivo.like(request.args.get('objetivo')))
-        
+
         # #devuelve una lista ordenada de los alumnos que estan en esa planificacion
         # if request.args.get('sortby_planificacion'):
         #     planificaciones = planificaciones.order_by(desc(PlanificacionModel.id_planificacion))
@@ -68,22 +35,23 @@ class Planificaciones(Resource):
 
         # if request.args.get('sortby_planificacion'):
         #     planificaciones = planificaciones.innerjoin(PlanificacionModel.alumnos).order_by(desc(PlanificacionModel.id_planificacion))
-        
+
         try:
-            planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True, )
-        except:
-            return jsonify({"error":"Error inesperado"})
-        
+            planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True)
+        except Exception:
+            return jsonify({"error": "Error inesperado"})
+
         return jsonify({"planificacion": [planificacion.to_json() for planificacion in planificaciones],
                         "page": page,
                         "pages": planificaciones.pages,
                         "total": planificaciones.total
                         })
+
     @jwt_required()
     def post(self):
         try:
             planificacion = PlanificacionModel.from_json(request.get_json())
-        except:
+        except Exception:
             return "Error al pasar a JSON"
         db.session.add(planificacion)
         db.session.commit()
@@ -91,13 +59,13 @@ class Planificaciones(Resource):
 
 
 class Planificacion(Resource):
-    
+
     @jwt_required(optional=True)
     def get(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         return planificacion.to_json()
 
-    @role_required(roles = "admin")
+    @role_required(roles="admin")
     def put(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         data = request.get_json().items()
@@ -107,7 +75,7 @@ class Planificacion(Resource):
         db.session.commit()
         return planificacion.to_json(), 201
 
-    @role_required(roles = "admin")
+    @role_required(roles="admin")
     def delete(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         db.session.delete(planificacion)
