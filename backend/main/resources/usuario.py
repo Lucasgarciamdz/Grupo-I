@@ -65,7 +65,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    @role_required(roles="admin")
+    @role_required(roles="alumno")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()

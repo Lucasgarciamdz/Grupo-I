@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import PlanificacionModel
+from main.models import PlanificacionModel, AlumnoModel
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
 
@@ -25,16 +25,19 @@ class Planificaciones(Resource):
         if request.args.get('objetivo'):
             planificaciones = planificaciones.filter(PlanificacionModel.objetivo.like(request.args.get('objetivo')))
 
-        # #devuelve una lista ordenada de los alumnos que estan en esa planificacion
-        # if request.args.get('sortby_planificacion'):
-        #     planificaciones = planificaciones.order_by(desc(PlanificacionModel.id_planificacion))
+        # #devuelve una lista ordenada de los alumnos que estan en esa planificacion (chequear)
+        if request.args.get('sortby_planificacion'):
+            alumnos = db.session.query(AlumnoModel)\
+                        .join(AlumnoModel.planificaciones)\
+                        .filter(PlanificacionModel.id_planificacion.like(request.args.get('sortby_planificacion')))\
+                        .all()
 
-        # if request.args.get('sortby_planificacion'):
-        #     planificaciones = PlanificacionModel.query.order_by(desc(PlanificacionModel.id_planificacion))
-        #     alumnos = AlumnoModel.query.join(AlumnoModel.planificaciones).filter(PlanificacionModel.in_(planificaciones))
-
-        # if request.args.get('sortby_planificacion'):
-        #     planificaciones = planificaciones.innerjoin(PlanificacionModel.alumnos).order_by(desc(PlanificacionModel.id_planificacion))
+            return jsonify({
+                "alumno": [alumno.to_json() for alumno in alumnos],
+                "page": page,
+                "pages": planificaciones.pages,
+                "total": planificaciones.total
+                })
 
         try:
             planificaciones = planificaciones.paginate(page=page, per_page=per_page, error_out=True)

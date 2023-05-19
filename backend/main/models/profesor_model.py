@@ -1,8 +1,9 @@
 from .. import db
 
 profesores_clases = db.Table("profesores_clases",
-                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase"), primary_key=True),
-                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor"), primary_key=True))
+                             db.Column("id_profesor_clase", db.Integer, primary_key=True),
+                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase")),
+                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor")))
 
 
 class Profesor(db.Model):

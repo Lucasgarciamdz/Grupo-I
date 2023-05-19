@@ -54,15 +54,7 @@ class Profesores(Resource):
 
             return jsonify(profesores_data)
 
-        # devuelve los profesores con sus alumnos (chequear)
-        # if request.args.get('alumnos'):
-        #     query = db.session.query(ProfesorModel.id_profesor, AlumnoModel.id_alumno)\
-        #         .join(Profesor.clases)\
-        #         .join(ClasesModel.planificacion)\
-        #         .join(PlanificacionModel.alumnos)\
-        #         .join(AlumnoModel)\
-        #         .all()
-
+        # devuelve los profesores con la cantidad de clases, vesion SQL(chequear)
         if request.args.get('alumnos'):
             db.execsql("""SELECT u.nombre, u.apellido, COUNT(a.id_alumno) AS cantidad_alumnos
                         FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario
@@ -88,10 +80,14 @@ class Profesores(Resource):
     @jwt_required()
     def post(self):
         try:
-            profesor = ProfesorModel.from_json(request.get_json())
+            data = request.get_json()
         except Exception:
             return "Error al pasar a JSON"
+        clase = db.session.query(ClasesModel).filter(ClasesModel.tipo.like(data["clase"]["tipo"])).first()
+        profesor = ProfesorModel.from_json(data["profesor"])
+        clase.profesores_p.append(profesor)
         db.session.add(profesor)
+        db.session.add(clase)
         db.session.commit()
         return profesor.to_json(), 201
 
