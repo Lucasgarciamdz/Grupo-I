@@ -1,0 +1,4 @@
+/register deberia podre recibir todos los datos del usuario y a su vez dependiendo del rol acceptar datos
+de alumno y profesor. Tambien, cada uno podria traer planificacion o clase segun corresponda.
+
+Se puede agregar una clase o una planificacion mas tarde segun el dni del usuario. (chequear su rol)
