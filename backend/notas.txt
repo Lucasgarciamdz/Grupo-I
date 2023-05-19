@@ -2,3 +2,5 @@
 de alumno y profesor. Tambien, cada uno podria traer planificacion o clase segun corresponda.
 
 Se puede agregar una clase o una planificacion mas tarde segun el dni del usuario. (chequear su rol)
+
+Llenar base de datos y agregarla al migrations
