@@ -83,11 +83,14 @@ class Profesores(Resource):
             data = request.get_json()
         except Exception:
             return "Error al pasar a JSON"
-        clase = db.session.query(ClasesModel).filter(ClasesModel.tipo.like(data["clase"]["tipo"])).first()
         profesor = ProfesorModel.from_json(data["profesor"])
-        clase.profesores_p.append(profesor)
+        try:
+            clase = db.session.query(ClasesModel).filter(ClasesModel.tipo.like(data["clase"]["tipo"])).first()
+            db.session.add(clase)
+            clase.profesores_p.append(profesor)
+        except Exception:
+            pass
         db.session.add(profesor)
-        db.session.add(clase)
         db.session.commit()
         return profesor.to_json(), 201
 
