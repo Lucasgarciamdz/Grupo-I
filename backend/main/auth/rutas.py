@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from .. import db
-from main.models import UsuarioModel
+from main.models import UsuarioModel, ProfesorModel, AlumnoModel, ClasesModel, PlanificacionModel
 from flask_jwt_extended import create_access_token
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -39,17 +39,33 @@ def login():
 def register():
     try:
         data = request.get_json()
+        usuario = None
         if not data:
             return 'Invalid request data', 400
-
-        usuario = UsuarioModel.from_json(data)
-        exists = db.session.query(UsuarioModel).filter(UsuarioModel.email == usuario.email).scalar() is not None
-        if exists:
-            return 'Duplicated email', 409
-        else:
-            db.session.add(usuario)
-            db.session.commit()
+        if "usuario" in data:
+            usuario = UsuarioModel.from_json(data["usuario"])
+            exists = db.session.query(UsuarioModel).filter(UsuarioModel.email == usuario.email).scalar() is not None
+            if exists:
+                return 'Duplicated email', 409
+            else:
+                db.session.add(usuario)
+        if "profesor" in data:
+            profesor = ProfesorModel.from_json(data["profesor"])
+            db.session.add(profesor)
+        elif "alumno" in data:
+            alumno = AlumnoModel.from_json(data["alumno"])
+            db.session.add(alumno)
+        if "clases" in data:
+            clases = ClasesModel.from_json(data["clases"])
+            db.session.add(clases)
+        elif "planificacion" in data:
+            planificacion = PlanificacionModel.from_json(data["planificacion"])
+            db.session.add(planificacion)
+        db.session.commit()
+        if usuario:
             return usuario.to_json(), 201
+        else:
+            return 404
     except Exception as e:
         db.session.rollback()
         return str(e), 500
