@@ -77,22 +77,23 @@ class Profesores(Resource):
                         "total": profesores.total
                         })
 
-    @jwt_required()
-    def post(self):
-        try:
-            data = request.get_json()
-        except Exception:
-            return "Error al pasar a JSON"
+    @jwt_required(optional=True)
+    def post(self, data):
+        if not data:
+            try:
+                data = request.get_json()
+            except Exception:
+                return "Error al pasar a JSON"
         profesor = ProfesorModel.from_json(data["profesor"])
         try:
-            clase = db.session.query(ClasesModel).filter(ClasesModel.tipo.like(data["clase"]["tipo"])).first()
+            clase = db.session.query(ClasesModel).filter(ClasesModel.nombre.like(data["clase"]["nombre"])).first()
             db.session.add(clase)
             clase.profesores_p.append(profesor)
         except Exception:
-            pass
+            return f"no existe la clase nombre {data['clase']['nombre']}"
         db.session.add(profesor)
         db.session.commit()
-        return profesor.to_json(), 201
+        return profesor.to_json()
 
 
 class Profesor(Resource):

@@ -9,6 +9,7 @@ class Planificacion(db.Model):
     id_planificacion = db.Column(db.Integer, primary_key=True)
     id_clase = db.Column(db.Integer, db.ForeignKey('clase.id_clase'))
 
+    nombre = db.Column(db.String(45))
     horas_semanales = db.Column(db.Integer)
     objetivo = db.Column(db.String(45))
 
