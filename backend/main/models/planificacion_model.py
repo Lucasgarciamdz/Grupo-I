@@ -12,7 +12,7 @@ class Planificacion(db.Model):
     horas_semanales = db.Column(db.Integer)
     objetivo = db.Column(db.String(45))
 
-    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, backref=db.backref('planificaciones_a', lazy='dynamic'))
+    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, backref=db.backref('planificaciones_a', lazy='dynamic'), overlaps="alumnos_p,planificaciones")
     clase = db.relationship('Clase',
                             back_populates='planificacion',
                             single_parent=True,

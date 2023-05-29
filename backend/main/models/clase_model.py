@@ -10,7 +10,7 @@ class Clase(db.Model):
     tipo = db.Column(db.String(45), nullable=False)
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
-    profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'))
+    profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'), overlaps="clases,profesores_p")
 
     def __repr__(self):
         return '<clase: %r >' % (self.id_clase)
