@@ -60,7 +60,6 @@ def register():
     usuario = UsuarioModel.from_json(data["usuario"])
     try:
         db.session.add(usuario)
-        db.session.commit()
     except Exception:
         db.session.rollback()
         return "No se registro ningun usuario"
