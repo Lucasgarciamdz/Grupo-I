@@ -36,7 +36,7 @@ class Alumnos(Resource):
         except Exception:
             return jsonify({"error": "Error inesperado"})
 
-        return jsonify({"alumnos": [alumno.to_json_complete() for alumno in alumnos],
+        return jsonify({"alumnos": [alumno.to_json() for alumno in alumnos],
                         "page": page,
                         "pages": alumnos.pages,
                         "total": alumnos.total

@@ -13,7 +13,7 @@ class Profesores(Resource):
     def get(self):
         profesores = db.session.query(ProfesorModel)
         page = 1
-        per_page = 1
+        per_page = 10
 
         if request.args.get('page'):
             page = int(request.args.get('page'))

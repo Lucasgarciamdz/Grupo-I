@@ -68,19 +68,21 @@ def register():
         profesor_dict = profesor.to_json()
         last_usuario = db.session.query(UsuarioModel).order_by(UsuarioModel.id_usuario.desc()).first()
         profesor_dict['id_usuario'] = last_usuario.id_usuario
-        if "clase" in data:
+        try:
             response_profesor = ProfesoresResource().post(data={"profesor": profesor_dict, "clase": data["clase"]})
-        else:
-            response_profesor = ProfesoresResource().post(data={"profesor": profesor_dict})
+        except Exception:
+            db.session.rollback()
+            return "No hay clase" 
 
     elif alumno:
         alumno_dict = alumno.to_json()
         last_usuario = db.session.query(UsuarioModel).order_by(UsuarioModel.id_usuario.desc()).first()
         alumno_dict['id_usuario'] = last_usuario.id_usuario
-        if "planificacion" in data:
+        try:
             response_alumno = AlumnosResource.post(data={"alumno": alumno_dict, "planificacion": data["planificacion"]})
-        else:
-            response_alumno = AlumnosResource.post(data={"alumno": alumno_dict})
+        except Exception:
+            db.session.rollback()
+            return "No hay planificacion"
 
     db.session.commit()
 
