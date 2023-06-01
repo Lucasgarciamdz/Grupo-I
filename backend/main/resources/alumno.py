@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import AlumnoModel
+from main.models import AlumnoModel, PlanificacionModel, UsuarioModel
 from sqlalchemy import func
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
@@ -45,12 +45,26 @@ class Alumnos(Resource):
     @jwt_required()
     def post(self):
         try:
-            alumno = AlumnoModel.from_json(request.get_json())
+            data = request.get_json()
         except Exception:
             return "Error al pasar a JSON"
+        alumno = AlumnoModel.from_json(data["alumno"])
+        if "planificacion" in data:
+            try:
+                planificacion = db.session.query(PlanificacionModel).filter(PlanificacionModel.nombre.like(data["planificacion"]["nombre"])).first()
+                db.session.add(planificacion)
+                planificacion.alumnos_p.append(alumno)
+            except Exception:
+                return f"no existe la planificacion {data['planificacion']['nombre']}"
+        if "usuario" in data:
+            try:
+                usuario = db.session.query(UsuarioModel).filter(UsuarioModel.nombre.like(data["usuario"]["dni"])).first()
+                alumno['id_usuario'] = usuario.id_usuario
+            except Exception:
+                return f"no existe el usuario dni {data['usuario']['dni']}"
         db.session.add(alumno)
         db.session.commit()
-        return alumno.to_json(), 201
+        return alumno.to_json()
 
 
 class Alumno(Resource):

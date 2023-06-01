@@ -1,8 +1,9 @@
 from flask import request, Blueprint
 from .. import db
 from main.models import UsuarioModel, ProfesorModel, AlumnoModel, ClasesModel, PlanificacionModel
-from main.resources import ProfesorResource, AlumnoResource, ClasesResource, PlanificacionResource, UsuarioResource
+from main.resources import ProfesoresResource, AlumnosResource
 from flask_jwt_extended import create_access_token
+import pdb
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -36,70 +37,64 @@ def login():
         return str(e), 500
 
 
-def add_objects_to_session(data):
-    usuario = None
-    profesor = None
-    alumno = None
-    clase = None
-    planificacion = None
-    if "usuario" in data:
-        usuario_data = data["usuario"]
-        exists = db.session.query(UsuarioModel).filter(
-            (UsuarioModel.email == usuario_data['email']) |
-            (UsuarioModel.dni == usuario_data['dni']) |
-            (UsuarioModel.telefono == usuario_data['telefono'])
-        ).scalar() is not None
-        if exists:
-            return 'Duplicated email, dni, or telefono', 409
-        else:
-            usuario = UsuarioModel.from_json(usuario_data)
-    if "profesor" in data:
-        profesor = ProfesorModel.from_json(data["profesor"])
-    elif "alumno" in data:
-        alumno = AlumnoModel.from_json(data["alumno"])
-    if "clase" in data:
-        clase = ClasesModel.from_json(data["clase"])
-    elif "planificacion" in data:
-        planificacion = PlanificacionModel.from_json(data["planificacion"])
-    return usuario, profesor, alumno, clase, planificacion
-
-
 @auth.route('/register', methods=['POST'])
 def register():
+    data = request.get_json()
+    # usuario = None
+    # if "usuario" in data:
+    #     usuario_data = data["usuario"]
+    #     exists = db.session.query(UsuarioModel).filter(
+    #         (UsuarioModel.email == usuario_data['email']) |
+    #         (UsuarioModel.dni == usuario_data['dni']) |
+    #         (UsuarioModel.telefono == usuario_data['telefono'])
+    #     ).scalar() is not None
+    #     if exists:
+    #         return 'Duplicated email, dni, or telefono'
+    #     else:
+    #         usuario = UsuarioModel.from_json(usuario_data)
+    profesor = ProfesorModel.from_json(data["profesor"])
+    if "alumno" in data:
+        alumno = AlumnoModel.from_json(data["alumno"])
+    response_profesor = None
+    response_alumno = None
+    usuario = UsuarioModel.from_json(data["usuario"])
     try:
-        data = request.get_json()
-        usuario, profesor, alumno, clase, planificacion = add_objects_to_session(data)
-        if clase:
-            clase_resource = ClasesResource()
-            response = clase_resource.post(data=clase.to_json())
-            if response.status_code != 201:
-                db.session.rollback()
-                return response.json(), response.status_code
-        if profesor:
-            profesor_resource = ProfesorResource()
-            if "clase" in data:
-                response = profesor_resource.post(data={"profesor": profesor.to_json(), "clase": data["clase"]})
-            else:
-                response = profesor_resource.post(data={"profesor": profesor.to_json()})
-            if response.status_code != 201:
-                db.session.rollback()
-                return response.json(), response.status_code
-        db.session.commit()
-        response_data = {}
-        if usuario:
-            response_data['usuario'] = usuario.to_json()
-        if profesor:
-            response_data['profesor'] = profesor.to_json()
-        if alumno:
-            response_data['alumno'] = alumno.to_json()
-        if clase:
-            response_data['clase'] = clase.to_json()
-        if planificacion:
-            response_data['planificacion'] = planificacion.to_json()
-        if response_data:
-            return response_data, 201
-        else:
-            return 'No data provided', 400
-    except Exception as e:
+        db.session.add(usuario)
+    except Exception:
         db.session.rollback()
-        return str(e), 500
+        return "No se registro ningun usuario"
+
+    if profesor:
+        profesor_dict = profesor.to_json()
+        last_usuario = db.session.query(UsuarioModel).order_by(UsuarioModel.id_usuario.desc()).first()
+        profesor_dict['id_usuario'] = last_usuario.id_usuario
+        if "clase" in data:
+            response_profesor = ProfesoresResource().post(data={"profesor": profesor_dict, "clase": data["clase"]})
+        else:
+            response_profesor = ProfesoresResource().post(data={"profesor": profesor_dict})
+
+    elif alumno:
+        alumno_dict = alumno.to_json()
+        last_usuario = db.session.query(UsuarioModel).order_by(UsuarioModel.id_usuario.desc()).first()
+        alumno_dict['id_usuario'] = last_usuario.id_usuario
+        if "planificacion" in data:
+            response_alumno = AlumnosResource.post(data={"alumno": alumno_dict, "planificacion": data["planificacion"]})
+        else:
+            response_alumno = AlumnosResource.post(data={"alumno": alumno_dict})
+
+    db.session.commit()
+
+    response_data = {}
+    if usuario:
+        response_data['usuario'] = usuario.to_json()
+    if response_profesor:
+        response_data['profesor'] = response_profesor
+    if response_alumno:
+        response_data['alumno'] = response_alumno
+    if response_data:
+        return response_data
+    else:
+        return 'No data provided'
+    # except Exception:
+    #     db.session.rollback()
+    #     return "500"

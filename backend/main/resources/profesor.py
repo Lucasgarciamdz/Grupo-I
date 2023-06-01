@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ProfesorModel, ClasesModel
+from main.models import ProfesorModel, ClasesModel, UsuarioModel
 from sqlalchemy import desc, func
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
@@ -77,22 +77,30 @@ class Profesores(Resource):
                         "total": profesores.total
                         })
 
-    @jwt_required()
-    def post(self):
-        try:
-            data = request.get_json()
-        except Exception:
-            return "Error al pasar a JSON"
+    @jwt_required(optional=True)
+    def post(self, data):
+        if not data:
+            try:
+                data = request.get_json()
+            except Exception:
+                return "Error al pasar a JSON"
         profesor = ProfesorModel.from_json(data["profesor"])
-        try:
-            clase = db.session.query(ClasesModel).filter(ClasesModel.tipo.like(data["clase"]["tipo"])).first()
-            db.session.add(clase)
-            clase.profesores_p.append(profesor)
-        except Exception:
-            pass
+        if "clase " in data:
+            try:
+                clase = db.session.query(ClasesModel).filter(ClasesModel.nombre.like(data["clase"]["nombre"])).first()
+                db.session.add(clase)
+                clase.profesores_p.append(profesor)
+            except Exception:
+                return f"no existe la clase nombre {data['clase']['nombre']}"
+        if "usuario" in data:
+            try:
+                usuario = db.session.query(UsuarioModel).filter(UsuarioModel.nombre.like(data["usuario"]["dni"])).first()
+                profesor['id_usuario'] = usuario.id_usuario
+            except Exception:
+                return f"no existe el usuario dni {data['usuario']['dni']}"
         db.session.add(profesor)
         db.session.commit()
-        return profesor.to_json(), 201
+        return profesor.to_json()
 
 
 class Profesor(Resource):
