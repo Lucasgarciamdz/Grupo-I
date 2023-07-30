@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  gym_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: Arnold
+      POSTGRES_PASSWORD: Schwarzenegger
+      POSTGRES_DB: gym_database
+    volumes:
+      - gym_db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      DATABASE_URI: postgresql://Arnold:Schwarzenegger@gym_db/mydb
+      PORT: 5000
+      DATABASE_PATH: "path"
+      DATABASE_NAME: "gym.db"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - gym_db
+
+volumes:
+  gym_db_data:

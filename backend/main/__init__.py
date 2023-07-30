@@ -30,7 +30,7 @@ def create_app():
         open(full_path, 'a').close()
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
     db.init_app(app)
     migrate.init_app(app, db)
 
