@@ -1,26 +1,38 @@
 version: '3'
 
 services:
-  gym_db:
-    image: postgres
+  postgres:
+    image: postgres:15.3-alpine
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: Arnold
-      POSTGRES_PASSWORD: Schwarzenegger
+      POSTGRES_USER: root # Update the POSTGRES_USER environment variable
+      POSTGRES_PASSWORD: Sup3rSecret0
       POSTGRES_DB: gym_database
     volumes:
       - gym_db_data:/var/lib/postgresql/data
 
+    healthcheck:
+      test: ["CMD", "pg_isready","-d", "gym_database", "-U", "root"] # Update the user name in the healthcheck command
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   app:
     build: .
     environment:
-      DATABASE_URI: postgresql://Arnold:Schwarzenegger@gym_db/mydb
+      DATABASE_URI: postgresql://root:Sup3rSecret0@postgres:5432/gym_database # Update the user name in the DATABASE_URI environment variable
       PORT: 5000
       DATABASE_PATH: "path"
       DATABASE_NAME: "gym.db"
+      JWT_SECRET_KEY: "Sup3rSecret0"
+      JWT_ACCESS_TOKEN_EXPIRES: 90000000000000
     ports:
-      - "5000:5000"
+      - "5001:5000"
     depends_on:
-      - gym_db
+      postgres:
+        condition: service_healthy
+
 
 volumes:
   gym_db_data:
