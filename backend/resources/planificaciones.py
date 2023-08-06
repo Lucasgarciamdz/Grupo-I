@@ -1,9 +1,10 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from .. import db
-from main.models import PlanificacionModel, AlumnoModel
+from app import db
+from models.alumno_model import Alumno as AlumnoModel
+from models.planificacion_model import Planificacion as PlanificacionModel
 from flask_jwt_extended import jwt_required
-from main.auth.decoradores import role_required
+from auth.decoradores import role_required
 
 
 class Planificaciones(Resource):

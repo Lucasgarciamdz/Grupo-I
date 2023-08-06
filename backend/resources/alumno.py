@@ -1,10 +1,12 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from .. import db
-from main.models import AlumnoModel, PlanificacionModel, UsuarioModel
+from app import db
+from models.alumno_model import Alumno as AlumnoModel
+from models.planificacion_model import Planificacion as PlanificacionModel
+from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import func
 from flask_jwt_extended import jwt_required
-from main.auth.decoradores import role_required
+from auth.decoradores import role_required
 
 
 class Alumnos(Resource):

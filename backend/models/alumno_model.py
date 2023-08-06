@@ -1,4 +1,4 @@
-from .. import db
+from app import db
 
 alumnos_planificaciones = db.Table("alumnos_planificaciones",
                                    db.Column("id_alumno", db.Integer, db.ForeignKey("alumno.id_alumno"), primary_key=True),

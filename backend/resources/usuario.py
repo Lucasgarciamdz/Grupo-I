@@ -1,10 +1,10 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from main import db
-from main.models import UsuarioModel
+from app import db
+from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import desc
 from flask_jwt_extended import jwt_required
-from main.auth.decoradores import role_required
+from auth.decoradores import role_required
 
 
 class Usuarios(Resource):

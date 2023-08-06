@@ -1,9 +1,9 @@
 from flask_restful import Resource
-from .. import db
+from app import db
 from flask import request, jsonify
-from main.models import ClasesModel
+from models.clase_model import Clase as ClasesModel
 from flask_jwt_extended import jwt_required
-from main.auth.decoradores import role_required
+from auth.decoradores import role_required
 
 
 class Clases(Resource):

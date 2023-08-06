@@ -1,4 +1,4 @@
-from .. import db
+from app import db
 from .profesor_model import profesores_clases
 
 

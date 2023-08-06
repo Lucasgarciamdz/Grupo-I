@@ -1,4 +1,4 @@
-from .. import db
+from app import db
 from .alumno_model import alumnos_planificaciones
 
 
