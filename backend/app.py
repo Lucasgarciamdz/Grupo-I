@@ -1,13 +1,6 @@
-from flask_jwt_extended import JWTManager
-from flask_migrate import Migrate
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
+from factory import create_app
 
+app = create_app()
 
-api = Api()
-
-db = SQLAlchemy()
-
-migrate = Migrate()
-
-jwt = JWTManager()
+if __name__ == '__main__':
+    app.run(debug=True, port=5000, host='0.0.0.0')

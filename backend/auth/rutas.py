@@ -1,9 +1,8 @@
 from flask import request, Blueprint
-from app import db
-from models import UsuarioModel, ProfesorModel, AlumnoModel, ClasesModel, PlanificacionModel
-from resources import ProfesoresResource, AlumnosResource
+from factory import db
+from models.usuario_model import Usuario as UsuarioModel
 from flask_jwt_extended import create_access_token
-import pdb
+
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 

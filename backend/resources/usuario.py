@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from app import db
+from factory import db
 from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import desc
 from flask_jwt_extended import jwt_required

@@ -1,4 +1,4 @@
-from app import db
+from factory import db
 
 alumnos_planificaciones = db.Table("alumnos_planificaciones",
                                    db.Column("id_alumno", db.Integer, db.ForeignKey("alumno.id_alumno"), primary_key=True),

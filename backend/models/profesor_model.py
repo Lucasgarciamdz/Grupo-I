@@ -1,4 +1,4 @@
-from app import db
+from factory import db
 
 profesores_clases = db.Table("profesores_clases",
                              db.Column("id_profesor_clase", db.Integer, primary_key=True),

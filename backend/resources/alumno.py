@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from app import db
+from factory import db
 from models.alumno_model import Alumno as AlumnoModel
 from models.planificacion_model import Planificacion as PlanificacionModel
 from models.usuario_model import Usuario as UsuarioModel

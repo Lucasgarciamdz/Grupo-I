@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from app import db
+from factory import db
 from flask import request, jsonify
 from models.clase_model import Clase as ClasesModel
 from flask_jwt_extended import jwt_required
