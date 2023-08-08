@@ -27,14 +27,20 @@ services:
       DATABASE_URI: postgresql://root:Sup3rSecret0@postgres:5432/gym_database # Update the user name in the DATABASE_URI environment variable
       PORT: 5001
       DATABASE_PATH: "path"
-      DATABASE_NAME: "gym.db"
+      DATABASE_NAME: "gym_database"
       JWT_SECRET_KEY: "Sup3rSecret0"
       JWT_ACCESS_TOKEN_EXPIRES: 900
     ports:
-      - "5001:5001"
+      - "5001:5000"
     depends_on:
       postgres:
         condition: service_healthy
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
     networks:
       - gym_network
