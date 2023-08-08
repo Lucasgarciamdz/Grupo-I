@@ -1,8 +1,9 @@
 from factory import db
 
 alumnos_planificaciones = db.Table("alumnos_planificaciones",
-                                   db.Column("id_alumno", db.Integer, db.ForeignKey("alumno.id_alumno"), primary_key=True),
-                                   db.Column("id_planificacion", db.Integer, db.ForeignKey("planificacion.id_planificacion"), primary_key=True))
+                                   db.Column("id_alumno_planificacion", db.Integer, primary_key=True),
+                                   db.Column("id_alumno", db.Integer, db.ForeignKey("alumno.id_alumno")),
+                                   db.Column("id_planificacion", db.Integer, db.ForeignKey("planificacion.id_planificacion")))
 
 
 class Alumno(db.Model):
@@ -15,8 +16,8 @@ class Alumno(db.Model):
     estado = db.Column(db.String(45), nullable=False)
     planilla_medica = db.Column(db.Boolean, nullable=False)
 
-    usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref=db.backref('alumnos_p', lazy='dynamic'))
+    usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True, lazy='joined')
+    planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref="alumnos")
 
     def __repr__(self):
         return '<alumno: %r >' % (self.id_alumno)

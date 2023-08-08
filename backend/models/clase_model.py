@@ -1,5 +1,4 @@
 from factory import db
-from .profesor_model import profesores_clases
 
 
 class Clase(db.Model):
@@ -10,7 +9,6 @@ class Clase(db.Model):
     nombre = db.Column(db.String(45), nullable=False)
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
-    profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'))
 
     def __repr__(self):
         return '<clase: %r >' % (self.id_clase)

@@ -33,7 +33,7 @@ def login():
         else:
             return 'Incorrect password', 401
     except Exception as e:
-        return str(e), 500
+        return str(e), 201
 
 
 @auth.route('/register', methods=['POST'])

@@ -17,9 +17,8 @@ class Usuario(db.Model):
     rol = db.Column(db.String(45), nullable=False)
     sexo = db.Column(db.String(2), nullable=False)
     email = db.Column(db.String(45), nullable=False, unique=True)
-    contrasena = db.Column(db.String(45), nullable=False)
+    contrasena = db.Column(db.String(256), nullable=False)
 
-    # login = db.relationship('Login', back_populates='usuario', cascade="all, delete-orphan", uselist=False, single_parent=True)
     profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
     alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
