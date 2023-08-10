@@ -9,31 +9,29 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 @auth.route('/login', methods=['POST'])
 def login():
-    try:
-        data = request.get_json()
-        if not data:
-            return 'Invalid request data', 400
+    data = request.get_json()
+    if not data:
+        return 'Invalid request data', 400
 
-        email = data.get('email')
-        password = data.get('contrasena')
+    email = data.get('email')
+    password = data.get('contrasena')
 
-        if not email or not password:
-            return 'Email and password are required', 400
+    if not email or not password:
+        return 'Email and password are required', 400
 
-        usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email).first_or_404()
-        if usuario.validate_pass(password):
-            access_token = create_access_token(identity=usuario)
-            data = {
-                'id': str(usuario.id_usuario),
-                'email': usuario.email,
-                'access_token': access_token
-            }
+    usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email)
+    print(usuario)
+    if usuario.validate_pass(password):
+        access_token = create_access_token(identity=usuario)
+        data = {
+            'id': str(usuario.id_usuario),
+            'email': usuario.email,
+            'access_token': access_token
+        }
 
-            return data, 200
-        else:
-            return 'Incorrect password', 401
-    except Exception as e:
-        return str(e), 201
+        return data, 200
+    else:
+        return 'Incorrect password', 401
 
 
 @auth.route('/register', methods=['POST'])

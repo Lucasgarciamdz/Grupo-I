@@ -42,7 +42,6 @@ services:
       timeout: 3s
       retries: 1
 
-
     networks:
       - gym_network
 
