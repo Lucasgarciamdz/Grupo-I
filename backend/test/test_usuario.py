@@ -1,8 +1,9 @@
 import unittest
 import requests
+from test_settings import TestSettings
 
 
-class TestUsuario(unittest.TestCase):
+class TestUsuario(TestSettings):
     def test_usuario(self):
         url = "http://localhost:5001/auth/login"
         data = {

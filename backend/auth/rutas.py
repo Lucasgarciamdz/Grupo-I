@@ -2,6 +2,7 @@ from flask import request, Blueprint
 from factory import db
 from models.usuario_model import Usuario as UsuarioModel
 from flask_jwt_extended import create_access_token
+import logging
 
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -17,10 +18,14 @@ def login():
     password = data.get('contrasena')
 
     if not email or not password:
+        logging.error('Email and password are required')
         return 'Email and password are required', 400
 
-    usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email)
-    print(usuario)
+    logging.info('Buscando en la base de datos el Email: %s', email)
+
+    usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email).scalar()
+
+    logging.debug(usuario)
     if usuario.validate_pass(password):
         access_token = create_access_token(identity=usuario)
         data = {
@@ -31,6 +36,7 @@ def login():
 
         return data, 200
     else:
+        logging.error('Incorrect password')
         return 'Incorrect password', 401
 
 
