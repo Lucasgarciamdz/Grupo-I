@@ -91,7 +91,7 @@ class Profesores(Resource):
             try:
                 clase = db.session.query(ClasesModel).filter(ClasesModel.nombre.like(data["clase"]["nombre"])).first()
                 db.session.add(clase)
-                clase.profesores_p.append(profesor)
+                clase.profesores.append(profesor)
             except Exception:
                 return f"no existe la clase nombre {data['clase']['nombre']}"
         if "usuario" in data:

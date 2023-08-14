@@ -55,7 +55,7 @@ class Alumnos(Resource):
             try:
                 planificacion = db.session.query(PlanificacionModel).filter(PlanificacionModel.nombre.like(data["planificacion"]["nombre"])).first()
                 db.session.add(planificacion)
-                planificacion.alumnos_p.append(alumno)
+                planificacion.alumnos.append(alumno)
             except Exception:
                 return f"no existe la planificacion {data['planificacion']['nombre']}"
         if "usuario" in data:

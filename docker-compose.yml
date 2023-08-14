@@ -38,9 +38,6 @@ services:
 
     healthcheck:
       test: ["CMD", "wget", "-qO-", "--spider", "http://localhost:5000/readyz"]
-      interval: 5s
-      timeout: 3s
-      retries: 1
 
     networks:
       - gym_network
