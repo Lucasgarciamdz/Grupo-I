@@ -8,4 +8,4 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
     JWT_ACCESS_TOKEN_EXPIRES = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    logging.basicConfig(level=logging.log_level)
+    logging.basicConfig(level=log_level)

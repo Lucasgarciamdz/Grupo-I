@@ -2,6 +2,7 @@ import unittest
 import requests
 import os
 import faker
+from .test_client import SingletonClient
 
 
 class TestSettings(unittest.TestCase):
@@ -16,7 +17,7 @@ class TestSettings(unittest.TestCase):
             "apellido": fake.last_name(),
             "direccion": fake.address(),
             "edad": fake.random_int(min=18, max=65),
-            "telefono": fake.phone_number(),
+            "telefono": 111113,
             "dni": fake.random_int(min=10000000, max=99999999),
             "rol": "admin",
             "sexo": fake.random_element(elements=("M", "F")),
@@ -28,7 +29,7 @@ class TestSettings(unittest.TestCase):
             "apellido": fake.last_name(),
             "direccion": fake.address(),
             "edad": fake.random_int(min=18, max=65),
-            "telefono": fake.phone_number(),
+            "telefono": 111112,
             "dni": fake.random_int(min=10000000, max=99999999),
             "rol": "alumno",
             "sexo": fake.random_element(elements=("M", "F")),
@@ -40,7 +41,7 @@ class TestSettings(unittest.TestCase):
             "apellido": fake.last_name(),
             "direccion": fake.address(),
             "edad": fake.random_int(min=18, max=65),
-            "telefono": fake.phone_number(),
+            "telefono": 111111,
             "dni": fake.random_int(min=10000000, max=99999999),
             "rol": "profesor",
             "sexo": fake.random_element(elements=("M", "F")),
@@ -51,15 +52,19 @@ class TestSettings(unittest.TestCase):
 
     sessions = {}
 
-    def setUpClass(self):
-        for rol, data in self.users.items():
+    @classmethod
+    def setUpClass(cls):
+        for rol, data in cls.users.items():
             session = requests.Session()
-            session.post(f"{self.BASE_URL}/auth/register", json=data)
-            response = session.post(f"{self.BASE_URL}/auth/login", json=data)
+            response = session.post(f"{cls.BASE_URL}/auth/register", json=data)
+            print(response.status_code)
+
+            response = session.post(f"{cls.BASE_URL}/auth/login", json=data)
             token = response.json()["access_token"]
             session.headers.update({"Authorization": f"Bearer {token}"})
-            self.sessions[f"client_{rol}"] = session
+            cls.sessions[f"client_{rol}"] = SingletonClient(session)
 
-    CLIENT_ADMIN = sessions["client_admin"]
-    CLIENT_ALUMNO = sessions["client_alumno"]
-    CLIENT_PROFESOR = sessions["client_profesor"]
+        print(cls.sessions)
+        cls.CLIENT_ADMIN = cls.sessions["client_admin"]
+        cls.CLIENT_ALUMNO = cls.sessions["client_alumno"]
+        cls.CLIENT_PROFESOR = cls.sessions["client_profesor"]

@@ -1,19 +1,18 @@
 import unittest
 import requests
-from test_settings import TestSettings
+from .test_settings import TestSettings
 
 
 class TestUsuario(TestSettings):
     def test_usuario(self):
-        url = "http://localhost:5001/auth/login"
-        data = {
-            "email": "lu.garcia@gmail.com",
-            "contrasena": "12354",
-        }
+        url = f"{self.BASE_URL}/auth/login"
+        data = self.users["admin"]
 
         response = requests.post(url, json=data)
-        print(response)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("access_token", response.json())
+        self.assertIn("email", response.json())
+        self.assertIn("id", response.json())
 
 
 if __name__ == '__main__':

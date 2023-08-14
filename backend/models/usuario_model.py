@@ -10,7 +10,7 @@ class Usuario(db.Model):
 
     nombre = db.Column(db.String(45), nullable=False)
     apellido = db.Column(db.String(45), nullable=False)
-    direccion = db.Column(db.String(45), nullable=False)
+    direccion = db.Column(db.String(256), nullable=False)
     edad = db.Column(db.Integer, nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
     dni = db.Column(db.Integer, nullable=False)
