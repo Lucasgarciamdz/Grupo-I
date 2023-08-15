@@ -20,7 +20,7 @@ class Alumno(db.Model):
     planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref="alumnos")
 
     def __repr__(self):
-        return '<alumno: %r >' % (self.id_alumno)
+        return f'<alumno: {self.id_alumno} >'
 
     def to_json(self):
         """Return a JSON representation of the Alumno object."""

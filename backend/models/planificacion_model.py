@@ -24,7 +24,7 @@ class Planificacion(db.Model):
                             foreign_keys=[id_clase])
 
     def __repr__(self):
-        return '<planificacion: %r >' % (self.id_planificacion)
+        return f'<planificacion: {self.id_planificacion} >'
 
     def to_json(self):
         planificacion_json = {

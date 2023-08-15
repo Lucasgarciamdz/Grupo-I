@@ -11,7 +11,7 @@ class Clase(db.Model):
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
 
     def __repr__(self):
-        return '<clase: %r >' % (self.id_clase)
+        return f'<clase: {self.id_clase} >'
 
     def to_json(self):
         clase_json = {

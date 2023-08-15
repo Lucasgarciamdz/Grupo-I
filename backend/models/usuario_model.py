@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from factory import db
+import json
 
 
 class Usuario(db.Model):
@@ -22,6 +23,19 @@ class Usuario(db.Model):
     profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
     alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
+    def __init__(self, id_usuario=None, nombre=None, apellido=None, direccion=None, edad=None, telefono=None, dni=None, rol=None, sexo=None, email=None, plain_contrasena=None):
+        self.id_usuario = id_usuario
+        self.nombre = nombre
+        self.apellido = apellido
+        self.direccion = direccion
+        self.edad = edad
+        self.telefono = telefono
+        self.dni = dni
+        self.rol = rol
+        self.sexo = sexo
+        self.email = email
+        self.plain_contrasena = plain_contrasena
+
     @property
     def plain_contrasena(self):
         raise AttributeError('contrasena cant be read')
@@ -34,46 +48,17 @@ class Usuario(db.Model):
         return check_password_hash(self.contrasena, contrasena)
 
     def __repr__(self):
-        return '<usuario: %r >' % (self.id_usuario)
+        return f'<usuario: {self.id_usuario} >'
 
     def to_json(self):
-        usuario_json = {
-            'id_usuario': self.id_usuario,
-            'nombre': self.nombre,
-            'apellido': self.apellido,
-            'direccion': self.direccion,
-            'edad': self.edad,
-            'telefono': self.telefono,
-            'dni': self.dni,
-            'rol': self.rol,
-            'sexo': self.sexo,
-            'email': self.email,
-        }
-        return usuario_json
+        return json.dumps(self.__dict__)
 
     @staticmethod
-    def from_json(usuario_json):
-        id_usuario = usuario_json.get('id_usuario')
-        nombre = usuario_json.get('nombre')
-        apellido = usuario_json.get('apellido')
-        direccion = usuario_json.get('direccion')
-        edad = usuario_json.get('edad')
-        telefono = usuario_json.get('telefono')
-        dni = usuario_json.get('dni')
-        rol = usuario_json.get('rol')
-        sexo = usuario_json.get('sexo')
-        email = usuario_json.get('email')
-        contrasena = usuario_json.get('contrasena')
-
-        return Usuario(id_usuario=id_usuario,
-                       nombre=nombre,
-                       apellido=apellido,
-                       direccion=direccion,
-                       edad=edad,
-                       telefono=telefono,
-                       dni=dni,
-                       rol=rol,
-                       sexo=sexo,
-                       email=email,
-                       plain_contrasena=contrasena,
-                       )
+    def from_json(json_data):
+        if isinstance(json_data, str):
+            usuario_dict = json.loads(json_data)
+        elif isinstance(json_data, dict):
+            usuario_dict = json_data
+        else:
+            raise ValueError("Invalid JSON data")
+        return Usuario(**usuario_dict)
