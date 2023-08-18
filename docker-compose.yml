@@ -21,26 +21,26 @@ services:
     networks:
       - gym_network
 
-  app:
-    build: .
-    environment:
-      DATABASE_URI: postgresql://root:Sup3rSecret0@postgres:5432/gym_database # Update the user name in the DATABASE_URI environment variable
-      PORT: 5001
-      DATABASE_PATH: "path"
-      DATABASE_NAME: "gym_database"
-      JWT_SECRET_KEY: "Sup3rSecret0"
-      JWT_ACCESS_TOKEN_EXPIRES: 900
-    ports:
-      - "5001:5000"
-    depends_on:
-      postgres:
-        condition: service_healthy
+  # app:
+  #   build: .
+  #   environment:
+  #     DATABASE_URI: postgresql://root:Sup3rSecret0@postgres:5432/gym_database # Update the user name in the DATABASE_URI environment variable
+  #     PORT: 5001
+  #     DATABASE_PATH: "path"
+  #     DATABASE_NAME: "gym_database"
+  #     JWT_SECRET_KEY: "Sup3rSecret0"
+  #     JWT_ACCESS_TOKEN_EXPIRES: 900
+  #   ports:
+  #     - "5001:5000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
 
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "--spider", "http://localhost:5000/readyz"]
+  #   healthcheck:
+  #     test: ["CMD", "wget", "-qO-", "--spider", "http://localhost:5000/readyz"]
 
-    networks:
-      - gym_network
+  #   networks:
+  #     - gym_network
 
 volumes:
   gym_db_data:

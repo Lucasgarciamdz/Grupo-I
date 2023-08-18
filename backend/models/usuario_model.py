@@ -23,8 +23,7 @@ class Usuario(db.Model):
     profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
     alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
-    def __init__(self, id_usuario=None, nombre=None, apellido=None, direccion=None, edad=None, telefono=None, dni=None, rol=None, sexo=None, email=None, contrasena=None):
-        self.id_usuario = id_usuario
+    def __init__(self, nombre=None, apellido=None, direccion=None, edad=None, telefono=None, dni=None, rol=None, sexo=None, email=None, contrasena=None):
         self.nombre = nombre
         self.apellido = apellido
         self.direccion = direccion
@@ -34,7 +33,7 @@ class Usuario(db.Model):
         self.rol = rol
         self.sexo = sexo
         self.email = email
-        self.contrasena = self.plain_contrasena(contrasena)
+        self.plain_contrasena = contrasena
 
     @property
     def plain_contrasena(self):
@@ -51,7 +50,10 @@ class Usuario(db.Model):
         return f'<usuario: {self.id_usuario} >'
 
     def to_json(self):
-        return json.dumps(self.__dict__)
+        data = self.__dict__.copy()
+        print(data)
+        del data['_sa_instance_state']
+        return json.dumps(data)
 
     @staticmethod
     def from_json(json_data):
