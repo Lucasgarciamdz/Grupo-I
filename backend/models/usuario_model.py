@@ -50,8 +50,8 @@ class Usuario(db.Model):
         return f'<usuario: {self.id_usuario} >'
 
     def to_json(self):
+        db.session.refresh(self)
         data = self.__dict__.copy()
-        print(data)
         del data['_sa_instance_state']
         return json.dumps(data)
 

@@ -47,12 +47,9 @@ def register():
         if not data:
             return 'Invalid request data', 400
 
-        print(data)
         usuario = UsuarioModel.from_json(data)
         exists = db.session.query(UsuarioModel).filter(UsuarioModel.email == usuario.email).scalar() is not None
-        data = usuario.__dict__.copy()
-        del data['_sa_instance_state']
-        print(data)
+
         if exists:
             return 'Duplicated email', 409
         else:
