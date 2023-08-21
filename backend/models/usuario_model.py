@@ -53,7 +53,8 @@ class Usuario(db.Model):
         db.session.refresh(self)
         data = self.__dict__.copy()
         del data['_sa_instance_state']
-        return json.dumps(data)
+        del data['contrasena']
+        return data
 
     @staticmethod
     def from_json(json_data):
