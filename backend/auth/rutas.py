@@ -56,7 +56,7 @@ def register():
             db.session.add(usuario)
             db.session.commit()
             # sendMail([usuario.email], "Bienvenido!", 'register', usuario=usuario)
-            return usuario.to_json(), 201
+            return usuario.to_json(), 200
     except Exception as e:
         db.session.rollback()
         return str(e), 500
