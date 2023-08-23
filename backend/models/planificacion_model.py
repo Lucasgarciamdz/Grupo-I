@@ -24,6 +24,11 @@ class Planificacion(db.Model):
                             post_update=True,
                             foreign_keys=[id_clase])
 
+    def __init__(self, nombre=None, horas_semanales=None, objetivo=None):
+        self.nombre = nombre
+        self.horas_semanales = horas_semanales
+        self.objetivo = objetivo
+
     def __repr__(self):
         return f'<planificacion: {self.id_planificacion} >'
 

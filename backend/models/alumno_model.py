@@ -20,6 +20,10 @@ class Alumno(db.Model):
     usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True, lazy='joined')
     planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref="alumnos")
 
+    def __init__(self, estado=None, planilla_medica=None):
+        self.estado = estado
+        self.planilla_medica = planilla_medica
+
     def __repr__(self):
         return f'<alumno: {self.id_alumno} >'
 

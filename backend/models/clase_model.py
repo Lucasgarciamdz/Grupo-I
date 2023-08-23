@@ -11,6 +11,9 @@ class Clase(db.Model):
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
 
+    def __init__(self, nombre=None):
+        self.nombre = nombre
+
     def __repr__(self):
         return f'<clase: {self.id_clase} >'
 
