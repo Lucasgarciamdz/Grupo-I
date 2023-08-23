@@ -1,9 +1,10 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from factory import db
 import json
+from base_model import BaseModel
 
 
-class Usuario(db.Model):
+class Usuario(BaseModel):
 
     __tablename__ = "usuario"
 
