@@ -1,3 +1,4 @@
+import json
 from factory import db
 
 
@@ -27,13 +28,21 @@ class Planificacion(db.Model):
         return f'<planificacion: {self.id_planificacion} >'
 
     def to_json(self):
-        planificacion_json = {
-            'id_planificacion': self.id_planificacion,
-            'id_clase': self.id_clase,
-            'horas_semanales': self.horas_semanales,
-            'objetivo': self.objetivo,
-        }
-        return planificacion_json
+        db.session.refresh(self)
+        data = self.__dict__.copy()
+        del data['_sa_instance_state']
+        del data['contrasena']
+        return data
+
+    @staticmethod
+    def from_json(json_data):
+        if isinstance(json_data, str):
+            data_dict = json.loads(json_data)
+        elif isinstance(json_data, dict):
+            data_dict = json_data
+        else:
+            raise ValueError("Invalid JSON data")
+        return Planificacion(**data_dict)
 
     def to_json_complete(self):
         planificacion_json = {
@@ -45,15 +54,3 @@ class Planificacion(db.Model):
             'clase': self.clase.to_json()
         }
         return planificacion_json
-
-    @staticmethod
-    def from_json(planificacion_json):
-        id_planificacion = planificacion_json.get('id_planificacion')
-        id_clase = planificacion_json.get('id_clase')
-        horas_semanales = planificacion_json.get('horas_semanales')
-        objetivo = planificacion_json.get('objetivo')
-        return Planificacion(id_planificacion=id_planificacion,
-                             id_clase=id_clase,
-                             horas_semanales=horas_semanales,
-                             objetivo=objetivo,
-                             )

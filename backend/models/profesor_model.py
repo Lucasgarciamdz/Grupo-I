@@ -1,4 +1,5 @@
 from factory import db
+import json
 
 profesores_clases = db.Table("profesores_clases",
                              db.Column("id_profesor_clase", db.Integer, primary_key=True),
@@ -25,14 +26,21 @@ class Profesor(db.Model):
         return '<profesor: %r >' % (self.id_profesor)
 
     def to_json(self):
-        profesor_json = {
-            'id_profesor': self.id_profesor,
-            'certificacion': self.certificacion,
-            'fecha_inicio_actividad': self.fecha_inicio_actividad,
-            'sueldo': str(self.sueldo),
-            'estado': self.estado,
-        }
-        return profesor_json
+        db.session.refresh(self)
+        data = self.__dict__.copy()
+        del data['_sa_instance_state']
+        del data['contrasena']
+        return data
+
+    @staticmethod
+    def from_json(json_data):
+        if isinstance(json_data, str):
+            data_dict = json.loads(json_data)
+        elif isinstance(json_data, dict):
+            data_dict = json_data
+        else:
+            raise ValueError("Invalid JSON data")
+        return Profesor(**data_dict)
 
     def to_json_complete(self):
         profesor_json = {
@@ -45,19 +53,3 @@ class Profesor(db.Model):
             "clases": [clase.to_json() for clase in self.clases],
         }
         return profesor_json
-
-    @staticmethod
-    def from_json(profesor_json):
-        id_profesor = profesor_json.get('id_profesor')
-        id_usuario = profesor_json.get('id_usuario')
-        certificacion = profesor_json.get('certificacion')
-        fecha_inicio_actividad = profesor_json.get('fecha_inicio_actividad')
-        sueldo = profesor_json.get('sueldo')
-        estado = profesor_json.get('estado')
-        return Profesor(id_profesor=id_profesor,
-                        id_usuario=id_usuario,
-                        certificacion=certificacion,
-                        fecha_inicio_actividad=fecha_inicio_actividad,
-                        sueldo=sueldo,
-                        estado=estado,
-                        )

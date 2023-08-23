@@ -1,3 +1,4 @@
+import json
 from factory import db
 
 
@@ -14,11 +15,21 @@ class Clase(db.Model):
         return f'<clase: {self.id_clase} >'
 
     def to_json(self):
-        clase_json = {
-            'id': str(self.id_clase),
-            'nombre': self.nombre,
-        }
-        return clase_json
+        db.session.refresh(self)
+        data = self.__dict__.copy()
+        del data['_sa_instance_state']
+        del data['contrasena']
+        return data
+
+    @staticmethod
+    def from_json(json_data):
+        if isinstance(json_data, str):
+            data_dict = json.loads(json_data)
+        elif isinstance(json_data, dict):
+            data_dict = json_data
+        else:
+            raise ValueError("Invalid JSON data")
+        return Clase(**data_dict)
 
     def to_json_complete(self):
         clase_json = {
@@ -28,11 +39,3 @@ class Clase(db.Model):
             'profesores': [profesor.to_json() for profesor in self.profesores]
         }
         return clase_json
-
-    @staticmethod
-    def from_json(clase_json):
-        id_clase = clase_json.get('id_clase')
-        nombre = clase_json.get('nombre')
-        return Clase(id_clase=id_clase,
-                     nombre=nombre,
-                     )
