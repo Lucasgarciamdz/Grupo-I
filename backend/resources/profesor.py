@@ -7,6 +7,7 @@ from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import desc, func
 from flask_jwt_extended import jwt_required
 from auth.decoradores import role_required
+from base_resource import BaseResource
 
 
 class Profesores(Resource):
@@ -80,7 +81,7 @@ class Profesores(Resource):
                         })
 
     @jwt_required(optional=True)
-    def post(self, data):
+    def post(self, data=None):
         if not data:
             try:
                 data = request.get_json()
@@ -105,26 +106,17 @@ class Profesores(Resource):
         return profesor.to_json()
 
 
-class Profesor(Resource):
+class Profesor(BaseResource):
+    model_class = ProfesorModel
 
     @jwt_required(optional=True)
     def get(self, id):
-        profesor = db.session.query(ProfesorModel).get_or_404(id)
-        return profesor.to_json()
+        return super().get(id)
 
     @role_required(roles="admin")
     def put(self, id):
-        profesor = db.session.query(ProfesorModel).get_or_404(id)
-        data = request.get_json().items()
-        for key, value in data:
-            setattr(profesor, key, value)
-        db.session.add(profesor)
-        db.session.commit()
-        return profesor.to_json(), 201
+        return super().put(id)
 
     @role_required(roles="admin")
     def delete(self, id):
-        profesor = db.session.query(ProfesorModel).get_or_404(id)
-        db.session.delete(profesor)
-        db.session.commit()
-        return '', 204
+        return self.delete_object(id)

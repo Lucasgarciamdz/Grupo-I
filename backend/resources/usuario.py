@@ -61,13 +61,15 @@ class Usuarios(Resource):
 
 class Usuario(Resource):
     @jwt_required(optional=True)
-    def get(self, id):
-        usuario = db.session.query(UsuarioModel).get_or_404(id)
+    def get(self, id_usuario):
+        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
+        if usuario is None:
+            return {"message": "Usuario not found"}, 404
         return usuario.to_json()
 
     @role_required(roles="alumno")
-    def put(self, id):
-        usuario = db.session.query(UsuarioModel).get_or_404(id)
+    def put(self, id_usuario):
+        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
         data = request.get_json().items()
         for key, value in data:
             setattr(usuario, key, value)
@@ -75,8 +77,8 @@ class Usuario(Resource):
         db.session.commit()
         return usuario.to_json(), 201
 
-    def delete(self, id):
-        usuario = db.session.query(UsuarioModel).get_or_404(id)
+    def delete(self, id_usuario):
+        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
         db.session.delete(usuario)
         db.session.commit()
         return '', 204

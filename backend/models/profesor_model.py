@@ -22,14 +22,15 @@ class Profesor(db.Model):
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
     clases = db.relationship('Clase', secondary=profesores_clases, backref="profesores")
 
-    def __init__(self, certificacion=None, fecha_inicio_actividad=None, sueldo=None, estado=None):
+    def __init__(self, certificacion=None, fecha_inicio_actividad=None, sueldo=None, estado=None, id_usuario=None):
         self.certificacion = certificacion
         self.fecha_inicio_actividad = fecha_inicio_actividad
         self.sueldo = sueldo
         self.estado = estado
+        self.id_usuario = id_usuario
 
     def __repr__(self):
-        return '<profesor: %r >' % (self.id_profesor)
+        return f"<profesor: {self.id_profesor} >"
 
     def to_json(self):
         db.session.refresh(self)

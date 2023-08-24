@@ -38,7 +38,7 @@ def create_app():
     api = Api(app)
 
     api.add_resource(UsuariosResource, '/usuarios')
-    api.add_resource(UsuarioResource, '/usuario/<id>')
+    api.add_resource(UsuarioResource, '/usuario/<id_usuario>')
     api.add_resource(AlumnosResource, '/alumnos')
     api.add_resource(AlumnoResource, '/alumno/<id>')
     api.add_resource(ProfesoresResource, '/profesores')
