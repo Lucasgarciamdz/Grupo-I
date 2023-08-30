@@ -5,6 +5,7 @@ from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import desc
 from flask_jwt_extended import jwt_required
 from auth.decoradores import role_required
+from base_resource import BaseResource
 
 
 class Usuarios(Resource):
@@ -59,26 +60,17 @@ class Usuarios(Resource):
         return usuario.to_json(), 201
 
 
-class Usuario(Resource):
+class Usuario(BaseResource):
+    model_class = UsuarioModel
+
     @jwt_required(optional=True)
-    def get(self, id_usuario):
-        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
-        if usuario is None:
-            return {"message": "Usuario not found"}, 404
-        return usuario.to_json()
+    def get(self, id):
+        return super().get(id)
 
-    @role_required(roles="alumno")
-    def put(self, id_usuario):
-        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
-        data = request.get_json().items()
-        for key, value in data:
-            setattr(usuario, key, value)
-        db.session.add(usuario)
-        db.session.commit()
-        return usuario.to_json(), 201
+    @role_required(roles="admin")
+    def put(self, id):
+        return super().put(id)
 
-    def delete(self, id_usuario):
-        usuario = db.session.query(UsuarioModel).get_or_404(id_usuario)
-        db.session.delete(usuario)
-        db.session.commit()
-        return '', 204
+    @role_required(roles="admin")
+    def delete(self, id):
+        return self.delete_object(id)

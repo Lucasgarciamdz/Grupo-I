@@ -104,8 +104,6 @@ class Profesores(Resource):
         db.session.add(profesor)
         db.session.commit()
         return profesor.to_json()
-
-
 class Profesor(BaseResource):
     model_class = ProfesorModel
 
