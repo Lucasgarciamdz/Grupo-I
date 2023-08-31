@@ -1,0 +1,130 @@
+/* Estilos de home.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+    font-family: sans-serif;
+}
+body{
+    font-family: sans-serif;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+header{
+    display: flex;
+    min-height: 70px;
+    background-color: #7c7c7c;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav a{
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+nav a:hover{
+    color: #fff;
+}
+
+@media (max-width: 700px){
+    header{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo{
+        margin-bottom: 10px;
+    }
+
+    nav{
+        padding: 10px 0pz;
+    }
+
+    nav a{
+        padding: 0;
+    }
+}
+nav a:hover {
+    color: #fff;
+}
+
+.frase {
+    margin-top: auto;
+    text-align: center;
+}
+
+.container {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    width: auto;
+    height: auto;
+
+}
+
+input {
+    padding: 10px;
+    padding-right: 25px;
+    border-radius: 5px 0 0 5px;
+    border: 0.5;
+    outline: none;
+    font-size: 1rem;
+    min-width: 300px;
+}
+
+button {
+    background: rgb(29, 29, 95);
+    padding: 10px;
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    color: #fff;
+    cursor: pointer;
+    height: 50px;
+    outline: none;
+    width: 50px;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+@media (max-width: 700px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    nav {
+        padding: 10px 0;
+    }
+
+    nav a {
+        padding: 0;
+    }
+
+    .frase {
+        margin-top: 70px;
+    }
+}
