@@ -1,0 +1,116 @@
+/* Estilos de home.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    display: flex;
+    min-height: 70px;
+    background-color: #7c7c7c;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav a {
+    font-weight: 600;
+    padding-right: 10px;
+    color: black; /* Cambio de color */
+}
+
+nav a:hover {
+    color: #2691d9; /* Cambio de color */
+}
+
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    nav {
+        padding: 10px 0;
+    }
+
+    nav a {
+        padding: 0;
+    }
+}
+
+.frase {
+    margin-top: auto;
+    text-align: center;
+    margin-top: 20px; /* Ajuste de margen superior */
+}
+
+/* Nuevos estilos para el formulario de búsqueda */
+.container {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    width: auto;
+    height: auto;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    border: 1px solid #d3d3d3; /* Contorno gris claro */
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Color de fondo gris claro */
+}
+
+.search-input {
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #d3d3d3; /* Borde gris claro */
+    outline: none;
+    font-size: 1rem;
+    min-width: 300px;
+}
+
+.search-button {
+    background: #2691d9;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+@media (max-width: 700px) {
+    .frase {
+        margin-top: 70px;
+    }
+}
