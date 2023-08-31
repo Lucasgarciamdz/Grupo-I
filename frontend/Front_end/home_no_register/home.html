@@ -5,87 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flex&Fitness</title>
   <link rel="stylesheet" href="home.css">
-  <link rel="stylesheet" href="navbar.css">
-
   <style>
     .bg-color {
       background-color: #1a4d6c6c;
     }
     .nav-item {
-      margin-right: 25px; /* Ajusta el margen según tus preferencias */
+      margin-right: 25px;
+    }
+    /* Estilos hover para la información */
+    .carousel-inner .carousel-item {
+      position: relative;
+    }
+    .carousel-inner .carousel-item img {
+      filter: brightness(100%);
+      transition: filter 0.3s ease-in-out;
+    }
+    .carousel-inner .carousel-item:hover img {
+      filter: brightness(50%);
+    }
+    .carousel-inner .carousel-item::before {
+      content: attr(data-info); /* Usar el atributo data-info para el texto */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      pointer-events: none; /* Evitar interferencia con clics */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .carousel-inner .carousel-item:hover::before {
+      opacity: 1;
+      visibility: visible;
     }
   </style>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-color">
-  <div class="container-fluid">
-    <div class="d-flex align-items-center">
-      <img src="logo.png" alt="logo" width="50" height="50">
-      <a class="navbar-brand" href="#">Flex&Fitness</a>
+  <nav class="navbar navbar-expand-lg bg-color">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+        <img src="logo.png" alt="logo" width="50" height="50">
+        <a class="navbar-brand" href="#">Flex&Fitness</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Users/login.html">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Users/register.html">Registrarse</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profesores
-          </a>
-          <ul class="dropdown-menu" style="left: auto;">
-            <li><a class="dropdown-item" href="#">Prof.1</a></li>
-            <li><a class="dropdown-item" href="#">Prof.2</a></li>
-            <li><a class="dropdown-item" href="#">Prof.3</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Clases
-          </a>
-          <ul class="dropdown-menu" style="left: auto;">
-            <li><a class="dropdown-item" href="#">Musculacion</a></li>
-            <li><a class="dropdown-item" href="#">Pilates</a></li>
-            <li><a class="dropdown-item" href="#">Yoga</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- FRASE -->
+  </nav>
 <div class="container">
   <div class="frase">
     <h2>¿Ready to work out?</h2>
   </div>
-  
-  <!-- SEARCHBOX -->
   <form class="search-form">
     <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-secondary search-button" type="submit">Search</button>
   </form>
 </div>
-
-<!-- CARROUSEL -->
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="#" class="d-block w-100" alt="..."> <!-- CLASES -->
+    <div class="carousel-item active" data-info="¡Descubre nuestras emocionantes clases de Musculación, Pilates y Yoga!">
+      <img src="/home_no_register/imgs/clases.jpeg" class="d-block w-100" alt="clases">
     </div>
-    <div class="carousel-item">
-      <img src="#" class="d-block w-100" alt="..."> <!-- INSTALACIONES -->
+    <div class="carousel-item" data-info="Nuestras instalaciones cuentan con una amplia variedad de máquinas de gimnasio, desde cintas de correr hasta pesas libres.">
+      <img src="/home_no_register/imgs/instalaciones.jpeg" class="d-block w-100" alt="instalaciones">
     </div>
-    <div class="carousel-item">
-      <img src="#" class="d-block w-100" alt="..."> <!-- PROFESORES -->
+    <div class="carousel-item" data-info="Conoce a nuestros profesionales altamente capacitados que te guiarán en tu viaje hacia una vida más saludable.">
+      <img src="/home_no_register/imgs/coach.jpeg" class="d-block w-100" alt="coach">
     </div>
-    <div class="carousel-item">
-      <img src="#" class="d-block w-100" alt="..."> <!-- BENEFICIOS -->
+    <div class="carousel-item" data-info="Elige entre nuestros 4 planes de membresía y disfruta de beneficios exclusivos como asesoramiento personalizado y clases ilimitadas.">
+      <img src="/home_no_register/imgs/benefits.jpeg" class="d-block w-100" alt="beneficio">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -97,8 +107,6 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
