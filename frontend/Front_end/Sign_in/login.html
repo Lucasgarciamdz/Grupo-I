@@ -4,18 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flex&Fitness</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
+  <header>
+    <div class="logo">
         <img src="logo.png" alt="logo">
-      </div>
-      <div class="titulo">
-        <h1>Flex&Fitness</h1>
-      </div>
+        <h2 class="gym-name">Flex&Fitness</h2>
     </div>
+    <nav>
+        <a href="" class="nav-link">Home</a>
+        <a href="" class="nav-link">Profesores</a>
+        <a href="" class="nav-link">Clases</a>
+    </nav>
+  </header>
+  <div class="container">
     <div class="formulario">
       <h2>Inicio de sesion</h2>
       <form method="post">
@@ -30,7 +34,7 @@
       <div class="recordar">¿Olvido su contraseña?</div>
       <input type="submit" value="Iniciar sesion">
       <div class="register">
-        Quiero hacer el <a class="btn" href="register.html">registro</a>
+        Me quiero registrar <a class="btn" href="register.html">Registro</a>
       </div>
     </form>
   </div>
