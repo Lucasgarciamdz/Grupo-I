@@ -2,7 +2,7 @@ import unittest
 import requests
 import os
 import faker
-from .test_client import SingletonClient
+from .client import SingletonClient
 
 
 class TestSettings(unittest.TestCase):

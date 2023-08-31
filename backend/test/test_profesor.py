@@ -1,4 +1,4 @@
-from .test_settings import TestSettings
+from .settings import TestSettings
 
 
 class TestProfesor(TestSettings):

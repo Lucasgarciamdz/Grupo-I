@@ -1,4 +1,4 @@
-from .test_settings import TestSettings
+from .settings import TestSettings
 from models import profesor_model
 from filtros import estado_filter
 
