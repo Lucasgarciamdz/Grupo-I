@@ -1,52 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <link rel="stylesheet" href="globals.css" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex&Fitness</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="sign-in">
-    <div class="overlap-wrapper">
-      <div class="overlap">
-        <div class="logo">
-          <img class="mancuerna" src="img/mancuerna-1.png" />
-          <div class="flex-fitness">Flex &amp; Fitness</div>
-        </div>
-        <div class="text-wrapper">Welcome!</div>
-        <div class="sign-in-buttons">
-          <div class="overlap-group-wrapper">
-            <div class="overlap-group-3">
-              <button class="button button-google">
-                <div class="text-wrapper-2">Sign in with Google</div>
-              </button>
-            </div>
-          </div>
-          <div class="overlap-group-wrapper">
-            <div class="overlap-2">
-              <button class="button button-facebook">
-                <div class="text-wrapper-3">Sign in with Facebook</div>
-              </button>
-            </div>
-          </div>
-          <div class="overlap-group-wrapper">
-            <div class="overlap-3">
-              <button class="button button-email">
-                <div class="text-wrapper-4">Sign in with Email</div>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="button button-sign-in">
-          <div class="text-wrapper-5">Sign In</div>
-        </button>
-        <button class="button button-sign-up">
-          <div class="sign-up-here">
-            <span class="span">You don't have an account? Sign up </span>
-            <span class="text-wrapper-6">here</span>
-          </div>
-        </button>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img src="logo.png" alt="logo">
+      </div>
+      <div class="titulo">
+        <h1>Flex&Fitness</h1>
       </div>
     </div>
+    <div class="formulario">
+      <h2>Inicio de sesion</h2>
+      <form method="post">
+      <div class="username">
+        <input type="text" required>
+        <label>Usuario</label>
+      </div>
+      <div class="password">
+        <input type="password" required>
+        <label>Contraseña</label>
+      </div>
+      <div class="recordar">¿Olvido su contraseña?</div>
+      <input type="submit" value="Iniciar sesion">
+      <div class="register">
+        Quiero hacer el <a class="btn" href="register.html">registro</a>
+      </div>
+    </form>
   </div>
 </body>
-</html>
+</html>         
