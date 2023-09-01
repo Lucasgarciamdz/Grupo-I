@@ -7,6 +7,18 @@ body {
   height: 100vh;
 }
 
+/* El nombre del boton es login en realidad*/
+.formulario .register .btn{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: auto;
+  border-radius: 0;
+  border-color: transparent;
+  margin-bottom: 3px;
+}
+
+
 /* Estilos para el Navbar */
 .navbar {
   margin-bottom: 20px;

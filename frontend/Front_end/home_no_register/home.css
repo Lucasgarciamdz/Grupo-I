@@ -146,3 +146,60 @@ nav a:hover {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.carousel-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 20px 0; /* Ajusta el margen superior e inferior según tu diseño */
+  }
+  
+  .carousel-list {
+    display: inline-flex;
+  }
+
+/* Agrega estos estilos al final de tu archivo CSS
+
+/* Estilos para el carousel
+.carousel-inner {
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+}
+
+.carousel-inner .carousel-item {
+  flex: 0 0 calc(33.33% - 10px); /* Ajusta el ancho de cada tarjeta
+  margin-right: 10px; /* Espacio entre las tarjetas
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-inner .carousel-item.active {
+  transform: translateX(0);
+}
+
+.carousel-inner .carousel-item.next {
+  transform: translateX(calc(33.33% + 10px)); /* Ajusta el valor para mostrar la siguiente tarjeta
+}
+
+.carousel-inner .carousel-item.prev {
+  transform: translateX(calc(-33.33% - 10px)); /* Ajusta el valor para mostrar la tarjeta previa
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: 15px;
+}
+
+/* Estilos para las imágenes en las tarjetas
+.carousel-inner .carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+/* Estilos para los botones de control del carousel
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: #2691d9;
+}
+
+/* Estilos para los botones de control en hover
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  background-color: #1380b5;
+}
+*/
