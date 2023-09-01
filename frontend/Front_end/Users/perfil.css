@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.box {
+    width: 200px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    text-align: center;
+}
+
+.text {
+    margin-bottom: 10px;
+}
+.img-button {
+    width: 24px; /* Establece el ancho de la imagen según tus necesidades */
+    height: 24px; /* Establece la altura de la imagen según tus necesidades */
+    background-image: url('arrow.png'); /* Ruta a tu imagen PNG */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ajusta el tamaño de la imagen para llenar el botón */
+    background-position: center; /* Centra la imagen en el botón */
+  }
+
