@@ -4,51 +4,66 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flex&Fitness Home</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Navbar -->
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-color">
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="./logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                    Flex&Fitness
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
+        <div class="d-flex align-items-center">
+            <img src="logo.png" alt="logo" width="50" height="50">
+            <a class="navbar-brand" href="#">Flex&Fitness</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profesores
+                    </a>
+                    <ul class="dropdown-menu" style="left: auto;">
+                        <li><a class="dropdown-item" href="#">Prof.1</a></li>
+                        <li><a class="dropdown-item" href="#">Prof.2</a></li>
+                        <li><a class="dropdown-item" href="#">Prof.3</a></li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Clases
+                    </a>
+                    <ul class="dropdown-menu" style="left: auto;">
+                        <li><a class="dropdown-item" href="#">Musculacion</a></li>
+                        <li><a class="dropdown-item" href="#">Pilates</a></li>
+                        <li><a class="dropdown-item" href="#">Yoga</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<!-- NAVBAR RESPONSIVE -->
+<div class="d-lg-none d-flex justify-content-center align-items-center"
+  style="position: fixed; bottom: 20px; width: calc(100% - 40px); background-color: #2691d9; border-radius: 30px; padding: 10px; margin-left: 20px;">
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="../home_register/new_home.html"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="home(1).png" alt="casa" style="max-width: 35px; max-height: 35px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="#"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="logo.png" alt="mancuerna" style="max-width: 50px; max-height: 50px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="perfil.html"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="user.png" alt="user" style="max-width: 30px; max-height: 30px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+</div>
 
     <!-- Título -->
     <div class="container text-center">
@@ -58,7 +73,7 @@
     <!-- Barra de búsqueda -->
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center mt-3 mb-3"> <!-- Agregamos mt-3 para el margen superior y mb-3 para el margen inferior -->
                 <div class="form">
                     <i class="fa fa-search"></i>
                     <input type="text" class="form-control form-input" placeholder="Search anything...">
@@ -68,48 +83,54 @@
         </div>
     </div>
 
-    <!-- Contenedor de Tarjetas -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <div class="card">
-                    <img src="./imgs/clases_img/clase1.jpg" card="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Clase 1</h5>
-                        <p class="card-text">Descripción general</p>
-                        <a href="#" class="btn btn-primary">Ver clase</a>
+    <div class="container text-center">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="col-sm">
+                        <div class="card">
+                            <img src="./imgs/clases_img/clase1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Clase 1</h5>
+                                <p class="card-text">Descripción general</p>
+                                <a href="#" class="btn btn-primary">Ver clase</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm">
+                        <div class="card">
+                            <img src="./imgs/clases_img/clase2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Clase 2</h5>
+                                <p class="card-text">Descripción general</p>
+                                <a href="#" class="btn btn-primary">Ver clase</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm">
+                        <div class="card">
+                            <img src="./imgs/clases_img/clase3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Clase 3</h5>
+                                <p class="card-text">Descripción general</p>
+                                <a href="#" class="btn btn-primary">Ver clase</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm">
-                <div class="card">
-                    <img src="./imgs/clases_img/clase2.jpg" card="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Clase 2</h5>
-                        <p class="card-text">Descripción general</p>
-                        <a href="#" class="btn btn-primary">Ver clase</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="card">
-                    <img src="./imgs/clases_img/clase3.jpg" card="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Clase 3</h5>
-                        <p class="card-text">Descripción general</p>
-                        <a href="#" class="btn btn-primary">Ver clase</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Barra de Navegación inferior -->
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">Casa</div>
-            <div class="col text-center">Pesa</div>
-            <div class="col text-center">Perfil</div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 
