@@ -1,94 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flex&Fitness</title>
-  <link rel="stylesheet" href="register.css">
-  
-  <style>
-    .bg-color {
-      background-color: #1a4d6c6c;
-    }
-    .nav-item {
-      margin-right: 25px; /* Ajusta el margen según tus preferencias */
-    }
-  </style>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex&Fitness</title>
+    <link rel="stylesheet" href="register.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
 <body>
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-color">
-  <div class="container-fluid">
-    <div class="d-flex align-items-center">
-      <img src="logo.png" alt="logo" width="50" height="50">
-      <a class="navbar-brand" href="#">Flex&Fitness</a>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-color">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <img src="logo.png" alt="logo" width="50" height="50">
+                    <a class="navbar-brand ml-auto" href="#">Flex&Fitness</a> <!-- Aplicar la clase ml-auto para mover a la izquierda -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor de Registro -->
+        <div class="container">
+            <div class="formulario">
+                <h2>Registro</h2>
+                <form method="post">
+                    <div class="nombre">
+                        <input type="text" required>
+                        <label>Nombre</label>
+                    </div>
+                    <div class="apellido">
+                        <input type="text" required>
+                        <label>Apellido</label>
+                    </div>
+                    <div class="password">
+                        <input type="password" required>
+                        <label>Contraseña</label>
+                    </div>
+                    <div class="conf-password">
+                        <input type="password" required>
+                        <label>Confirmar contraseña</label>
+                    </div>
+                    <input type="submit" value="Registrarse">
+                    <div class="register">
+                        Ya tengo una cuenta <a class="btn" href="login.html">Iniciar sesión</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profesores
-          </a>
-          <ul class="dropdown-menu" style="left: auto;">
-            <li><a class="dropdown-item" href="#">Prof.1</a></li>
-            <li><a class="dropdown-item" href="#">Prof.2</a></li>
-            <li><a class="dropdown-item" href="#">Prof.3</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Clases
-          </a>
-          <ul class="dropdown-menu" style="left: auto;">
-            <li><a class="dropdown-item" href="#">Musculacion</a></li>
-            <li><a class="dropdown-item" href="#">Pilates</a></li>
-            <li><a class="dropdown-item" href="#">Yoga</a></li>
-          </ul>
-        </li>
-      </ul> -->
-    </div>
-  </div>
-</nav>
-
-<!-- CAJA DE REGISTRO-->
-
-<div class="container">
-  <div class="formulario">
-    <h2>Registro</h2>
-    <form method="post">
-      <div class="nombre">
-        <input type="text" required>
-        <label>Nombre</label>
-      </div>
-      <div class="apellido">
-        <input type="text" required>
-        <label>Apellido</label>
-      </div>
-      <div class="password">
-        <input type="password" required>
-        <label>Contraseña</label>
-      </div>
-      <div class="conf-password">
-        <input type="password" required>
-        <label>Confirmar contraseña</label>
-      </div>
-      <input type="submit" value="Registrarse">
-      <div class="register">
-        Ya tengo una cuenta <a class="btn" href="login.html">Iniciar sesión</a>
-      </div>
-    </form>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
