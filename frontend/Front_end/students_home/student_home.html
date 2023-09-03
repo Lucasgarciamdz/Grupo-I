@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Owl Carousel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      img {
+        height: 280px;
+      }
+
+      body {
+        background: hsl(0, 0, 94%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-color">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center">
+            <img src="/frontend/Front_end/imgs/logo.png" alt="logo"width="100" height="20" />
+            <a class="navbar-brand" href="#">Flex&Fitness</a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Profesores
+                </a>
+                <ul class="dropdown-menu" style="left: auto">
+                  <li><a class="dropdown-item" href="#">Prof.1</a></li>
+                  <li><a class="dropdown-item" href="#">Prof.2</a></li>
+                  <li><a class="dropdown-item" href="#">Prof.3</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Clases
+                </a>
+                <ul class="dropdown-menu" style="left: auto">
+                  <li><a class="dropdown-item" href="#">Musculacion</a></li>
+                  <li><a class="dropdown-item" href="#">Pilates</a></li>
+                  <li><a class="dropdown-item" href="#">Yoga</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  
+      <!-- NAVBAR RESPONSIVE -->
+      <div
+        class="d-lg-none d-flex justify-content-center align-items-center"
+        style="
+          position: fixed;
+          bottom: 20px;
+          width: calc(100% - 40px);
+          background-color: #2691d9;
+          border-radius: 30px;
+          padding: 10px;
+          margin-left: 20px;
+        "
+      >
+        <a
+          class="btn btn-outline-primary rounded-circle mx-2"
+          href="../home_register/new_home.html"
+          style="
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <img
+            src="home(1/frontend/Front_end/imgs/)".png
+            alt="casa"
+            style="max-width: 35px; max-height: 35px; align-self: center"
+          />
+          <span style="align-self: center"></span>
+        </a>
+        <a
+          class="btn btn-outline-primary rounded-circle mx-2"
+          href="#"
+          style="
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <img
+            src="/frontend/Front_end/imgs/logo.png"
+            alt="mancuerna"
+            style="max-width: 50px; max-height: 50px; align-self: center"
+          />
+          <span style="align-self: center"></span>
+        </a>
+        <a
+          class="btn btn-outline-primary rounded-circle mx-2"
+          href="/frontend/Front_end/Users/perfil.html"
+          style="
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <img
+            src="/frontend/Front_end/imgs/user.png"
+            alt="user"
+            style="max-width: 30px; max-height: 30px; align-self: center"
+          />
+          <span style="align-self: center"></span>
+        </a>
+      </div>
+  
+
+
+    <div class="container-fluid my-5">
+      <div class="row">
+        <div class="col-12 m-auto">
+          <div class="owl-carousel owl-theme">
+            <div class="item mb-4">
+              <div class="card border-0 shadow">
+                <img
+                  src="/frontend/Front_end/imgs/clases/clase1.jpg"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <div class="card-title text-center">
+                    <h4>Owl Carousel</h4>
+                    <p class="card-text">Descripción general</p>
+                    <a href="#" class="btn btn-primary">Ver clase</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item mb-4">
+              <div class="card border-0 shadow">
+                <img
+                  src="/frontend/Front_end/imgs/clases/clase2.jpg"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <div class="card-title text-center">
+                    <h4>Owl Carousel</h4>
+                    <p class="card-text">Descripción general</p>
+                    <a href="#" class="btn btn-primary">Ver clase</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="card border-0 shadow">
+                <img
+                  src="/frontend/Front_end/imgs/clases/clase3.jpg"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <div class="card-title text-center">
+                    <h4>Owl Carousel</h4>
+                    <p class="card-text">Descripción general</p>
+                    <a href="#" class="btn btn-primary">Ver clase</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+          loop: true,
+          margin: 15,
+          nav: true,
+          responsive: {
+            0: {
+              items: 1,
+            },
+            600: {
+              items: 2,
+            },
+            1000: {
+              items: 3,
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
