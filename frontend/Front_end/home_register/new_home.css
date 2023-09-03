@@ -1,0 +1,59 @@
+/* Estilos para la barra de búsqueda */
+.form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 5px 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #2691d9;
+}
+
+.form-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+}
+
+.left-pan {
+    font-size: 20px;
+    cursor: pointer;
+    color: #2691d9;
+}
+
+/* Estilos para la barra de navegación responsive */
+.navbar-responsive {
+    position: fixed;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    background-color: #2691d9;
+    border-radius: 30px;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.navbar-responsive .btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-responsive .btn img {
+    max-width: 35px;
+    max-height: 35px;
+    align-self: center;
+}
+
+.navbar-responsive .btn span {
+    align-self: center;
+}
