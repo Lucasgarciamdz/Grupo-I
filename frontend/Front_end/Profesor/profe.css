@@ -1,33 +1,5 @@
 /* Estilos para la barra de búsqueda */
 .form {
-<<<<<<< HEAD
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 30px;
-  padding: 5px 10px;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.form i {
-  font-size: 20px;
-  margin-right: 10px;
-  color: #2691d9;
-}
-
-.form-input {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-}
-
-.left-pan {
-  font-size: 20px;
-  cursor: pointer;
-  color: #2691d9;
-=======
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
@@ -54,39 +26,10 @@
     font-size: 20px;
     cursor: pointer;
     color: #2691d9;
->>>>>>> develop-flg
 }
 
 /* Estilos para la barra de navegación responsive */
 .navbar-responsive {
-<<<<<<< HEAD
-  position: fixed;
-  bottom: 20px;
-  width: calc(100% - 40px);
-  background-color: #2691d9;
-  border-radius: 30px;
-  padding: 10px;
-  margin-left: 20px;
-}
-
-.navbar-responsive .btn {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.navbar-responsive .btn img {
-  max-width: 35px;
-  max-height: 35px;
-  align-self: center;
-}
-
-.navbar-responsive .btn span {
-  align-self: center;
-=======
     position: fixed;
     bottom: 20px;
     width: calc(100% - 40px);
@@ -113,5 +56,37 @@
 
 .navbar-responsive .btn span {
     align-self: center;
->>>>>>> develop-flg
+}
+
+.titulo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Estilos para la sección con scroll */
+.scroll-container {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+/* Estilos personalizados para la barra de título fija */
+.fixed-title {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    border-top: 2px solid #007BFF;
+}
+
+/* Estilos para los botones grandes */
+.btn-lg {
+    font-size: 18px;
+}
+
+/* Estilos para la línea divisoria personalizada */
+.custom-divider {
+    border-top: 2px solid #007BFF;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
