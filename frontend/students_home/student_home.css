@@ -1,0 +1,80 @@
+/* Estilos generales */
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+img {
+    height: 280px;
+}
+
+body {
+    background: hsl(0, 0, 94%);
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #2691d9;
+    color: #fff;
+}
+
+.navbar-brand img {
+    max-width: 100px;
+    height: auto;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+
+/* Estilos para el navbar responsive */
+.d-lg-none.d-flex {
+    position: fixed;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    background-color: #2691d9;
+    border-radius: 30px;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.btn-outline-primary {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el contenido principal */
+.container-fluid.my-5 {
+    padding: 0;
+}
+
+.owl-carousel .item {
+    margin-bottom: 20px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 18px;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #2691d9;
+    color: #fff;
+}
