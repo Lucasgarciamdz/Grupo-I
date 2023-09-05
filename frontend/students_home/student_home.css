@@ -1,80 +1,44 @@
-/* Estilos generales */
-* {
-    font-family: "Poppins", sans-serif;
+#carta-clase {
+  width: 280px;
+  height: 174px;
+  min-width: 280px;
+  min-height: 174px;
+  margin-right: 20px;
+  border-radius: 23px;
+  border-top-left-radius: 23px;
 }
 
-img {
-    height: 280px;
+#img-clase {
+  border-radius: 23px;
+  height: 174px;
+  width: 280px;
+  object-fit: cover;
+  opacity: 0.7;
+  filter: brightness(0.5);
 }
 
-body {
-    background: hsl(0, 0, 94%);
-    margin: 0;
-    padding: 0;
+#img-profesor {
+  min-width: 85px;
+  min-height: 85px;
+  max-width: 85px;
+  max-height: 85px;
 }
 
-/* Estilos para la barra de navegación */
-.navbar {
-    background-color: #2691d9;
-    color: #fff;
+#nav-btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.navbar-brand img {
-    max-width: 100px;
-    height: auto;
-}
-
-.navbar-brand {
-    font-size: 24px;
-}
-
-.nav-link {
-    color: #fff !important;
-}
-
-/* Estilos para el navbar responsive */
-.d-lg-none.d-flex {
-    position: fixed;
-    bottom: 20px;
-    width: calc(100% - 40px);
-    background-color: #2691d9;
-    border-radius: 30px;
-    padding: 10px;
-    margin-left: 20px;
-}
-
-.btn-outline-primary {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Estilos para el contenido principal */
-.container-fluid.my-5 {
-    padding: 0;
-}
-
-.owl-carousel .item {
-    margin-bottom: 20px;
-}
-
-.card {
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.card-title {
-    font-size: 18px;
-}
-
-.card-text {
-    font-size: 14px;
-}
-
-.btn-primary {
-    background-color: #2691d9;
-    color: #fff;
+#nav-responsive {
+  position: fixed;
+  bottom: 20px;
+  width: calc(100% - 40px);
+  background-color: #2691d9;
+  border-radius: 30px;
+  padding: 10px;
+  margin-left: 20px;
 }
