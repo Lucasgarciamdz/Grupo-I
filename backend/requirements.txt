@@ -4,5 +4,8 @@ flask-restful
 flask-sqlalchemy
 flask-migrate
 flask-jwt-extended
-werkzeug
 flask-mail
+werkzeug
+psycopg2-binary
+requests
+faker

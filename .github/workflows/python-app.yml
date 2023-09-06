@@ -1,0 +1,28 @@
+name: Docker Compose
+
+on:
+  push:
+    branches: [ develop2.0 ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+    - name: Start Docker Compose
+      run: docker-compose up -d
+    - name: Run tests
+      run: |
+        docker-compose exec app python -m unittest
+    - name: Stop Docker Compose
+      run: docker-compose down

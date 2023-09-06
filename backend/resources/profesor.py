@@ -1,0 +1,120 @@
+from flask_restful import Resource
+from flask import request, jsonify
+from factory import db
+from models.clase_model import Clase as ClasesModel
+from models.profesor_model import Profesor as ProfesorModel
+from models.usuario_model import Usuario as UsuarioModel
+from sqlalchemy import desc, func
+from flask_jwt_extended import jwt_required
+from auth.decoradores import role_required
+from base_resource import BaseResource
+
+
+class Profesores(Resource):
+
+    @jwt_required()
+    def get(self):
+        profesores = db.session.query(ProfesorModel)
+        page = 1
+        per_page = 10
+
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+
+        # devuelve los profesores ordenados por sueldo de mayor a menor (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
+        if request.args.get('sort_by_sueldo'):
+            profesores = profesores.order_by(desc(ProfesorModel.sueldo))
+
+        # devuelve los profesores filtrados por estado
+        if request.args.get('estado'):
+            profesores = profesores.filter(ProfesorModel.estado.like(request.args.get('estado')))
+
+        # devuelve los profesores con la cantidad de clases (chequear)
+        if request.args.get('clases'):
+            page = request.args.get('page', 1, type=int)
+            per_page = request.args.get('per_page', 10, type=int)
+
+            profesores = db.session.query(ProfesorModel.usuario, func.count(ClasesModel.id_clase)) \
+                .outerjoin(ProfesorModel.clases) \
+                .group_by(ProfesorModel.id_profesor) \
+                .order_by(desc(func.count(ClasesModel.id_clase))) \
+                .paginate(page=page, per_page=per_page, error_out=True)
+
+            profesores_data = {
+                "profesor": [
+                    {
+                        "profesor": profesor[0],
+                        "cantidad_clases": profesor[1]
+                    } for profesor in profesores.items
+                ],
+                "page": page,
+                "pages": profesores.pages,
+                "total": profesores.total
+            }
+
+            return jsonify(profesores_data)
+
+        # devuelve los profesores con la cantidad de clases, vesion SQL(chequear)
+        if request.args.get('alumnos'):
+            db.execsql("""SELECT u.nombre, u.apellido, COUNT(a.id_alumno) AS cantidad_alumnos
+                        FROM usuario u JOIN profesor p ON u.id_usuario = p.id_usuario
+                        JOIN profesores_clases pc ON p.id_profesor = pc.id_profesor
+                        JOIN clase c ON c.id_clase = pc.id_clase
+                        JOIN planificacion pl ON pl.id_clase  = c.id_clase
+                        JOIN alumnos_planificaciones ap ON pl.id_planificacion = ap.id_planificacion
+                        JOIN alumno a ON a.id_alumno = ap.id_alumno
+                        GROUP BY u.nombre
+                        ORDER BY u.nombre DESC""")
+
+        try:
+            profesores = profesores.paginate(page=page, per_page=per_page, error_out=True)
+        except Exception:
+            return jsonify({"error": "Error inesperado"})
+
+        return jsonify({"profesor": [profesor.to_json() for profesor in profesores],
+                        "page": page,
+                        "pages": profesores.pages,
+                        "total": profesores.total
+                        })
+
+    @jwt_required(optional=True)
+    def post(self, data=None):
+        if not data:
+            try:
+                data = request.get_json()
+            except Exception:
+                return "Error al pasar a JSON"
+        profesor = ProfesorModel.from_json(data["profesor"])
+        if "clase " in data:
+            try:
+                clase = db.session.query(ClasesModel).filter(ClasesModel.nombre.like(data["clase"]["nombre"])).first()
+                db.session.add(clase)
+                clase.profesores.append(profesor)
+            except Exception:
+                return f"no existe la clase nombre {data['clase']['nombre']}"
+        if "usuario" in data:
+            try:
+                usuario = db.session.query(UsuarioModel).filter(UsuarioModel.nombre.like(data["usuario"]["dni"])).first()
+                profesor['id_usuario'] = usuario.id_usuario
+            except Exception:
+                return f"no existe el usuario dni {data['usuario']['dni']}"
+        db.session.add(profesor)
+        db.session.commit()
+        return profesor.to_json()
+class Profesor(BaseResource):
+    model_class = ProfesorModel
+
+    @jwt_required(optional=True)
+    def get(self, id):
+        return super().get(id)
+
+    @role_required(roles="admin")
+    def put(self, id):
+        return super().put(id)
+
+    @role_required(roles="admin")
+    def delete(self, id):
+        return self.delete_object(id)
