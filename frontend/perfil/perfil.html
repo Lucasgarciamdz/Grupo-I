@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <rel rel="stylesheet" href="perfil.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-color">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <img src="../imgs/logo.png" alt="logo" width="50" height="50">
+            <a class="navbar-brand" href="#">Flex&Fitness</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profesores
+                    </a>
+                    <ul class="dropdown-menu" style="left: auto;">
+                        <li><a class="dropdown-item" href="#">Prof.1</a></li>
+                        <li><a class="dropdown-item" href="#">Prof.2</a></li>
+                        <li><a class="dropdown-item" href="#">Prof.3</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Clases
+                    </a>
+                    <ul class="dropdown-menu" style="left: auto;">
+                        <li><a class="dropdown-item" href="#">Musculacion</a></li>
+                        <li><a class="dropdown-item" href="#">Pilates</a></li>
+                        <li><a class="dropdown-item" href="#">Yoga</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- NAVBAR RESPONSIVE -->
+<div class="d-lg-none d-flex justify-content-center align-items-center"
+  style="position: fixed; bottom: 20px; width: calc(100% - 40px); background-color: #2691d9; border-radius: 30px; padding: 10px; margin-left: 20px;">
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="../home/home.html"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="../imgs/home(1).png" alt="casa" style="max-width: 35px; max-height: 35px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="../students_home/student_home.html"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="../imgs/logo.png" alt="mancuerna" style="max-width: 50px; max-height: 50px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+  <a class="btn btn-outline-primary rounded-circle mx-2" href="perfil.html"
+    style="width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <img src="../imgs/user.png" alt="user" style="max-width: 30px; max-height: 30px; align-self: center;">
+    <span style="align-self: center;"></span>
+  </a>
+</div>
+
+
+
+
+<!-- PRIMER RECUADRO-->
+<ul class="list-group">
+  <li class="list-group-item">
+    <!-- Prof_Picture -->
+    <div class="picture">
+      <img src="../imgs/man.png" class="rounded mx-auto d-block" alt="profile" style="max-width: 50px; max-height: 50px; align-self: center; margin-top: 10px; margin: 10px;">
+    </div>
+  </li>
+  <!-- NOMBRE ALUMNO-->
+  <li class="list-group-item" style="align-self: center; margin-top: 10px; border-top: 0cap;">Alumno 1</li>
+  <li class="list-group-item">
+    <!-- BOTON EDITAR-->
+    <div class="text-center">
+      <a type="button" class="btn btn-primary" style="align-self: center" href="../editarPerfil/editarPerfil.html">Editar perfil</a>
+    </div>
+  </li>
+</ul>
+
+<!-- SEGUNDO RECUADRO-->
+  <!--DATOS-->
+
+  <div class="d-flex justify-content-center" >
+    <ul class="list-group list-group-horizontal" >
+      <li class="list-group-item" id="perfil-btn">Altura</li>
+      <li class="list-group-item" id="perfil-btn">Peso</li>
+      <li class="list-group-item" id="perfil-btn">Edad</li>
+    </ul>
+  </div>
+  
+  
+
+<!-- TERCER RECUADRO-->
+  
+<div class="">
+  <h2 style="margin-left: 10px; margin-top: 20px;">Account</h2>
+  <div class="list-group">
+    <div class="list-group-item">
+      Personal data
+      <button type="button" class="btn btn-primary img-button" style="float: right;">
+        <img src="../imgs/arrow.png" alt="arrow" width="10px" height="10px">
+      </button>
+    </div>
+    <div class="list-group-item">
+      Achivement
+      <button type="button" class="btn btn-primary img-button" style="float: right;">
+        <img src="../imgs/arrow.png" alt="arrow" width="10px" height="10px">
+      </button>
+    </div>
+    <div class="list-group-item">
+      Activity history
+      <button type="button" class="btn btn-primary img-button" style="float: right;">
+        <img src="../imgs/arrow.png" alt="arrow" width="10px" height="10px">
+      </button>
+    </div>
+    <div class="list-group-item">
+      Workout Progress
+      <button type="button" class="btn btn-primary img-button" style="float: right;">
+        <img src="../imgs/arrow.png" alt="arrow" width="10px" height="10px">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CUARTO RECUADRO-->
+<div class="">
+  <h2 style="margin-left: 10px;">Notificaciones</h2>
+  <div class="list-group-item d-flex justify-content-between align-items-center">
+    <span style="font-size: 18px; margin-left: 18px;">Notificaciones pop-up</span>
+    <div class="form-check form-switch" style="font-size: 24px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+    </div>
+</div>
+
+</style>
+  
+  
+  
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</html>

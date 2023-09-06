@@ -61,6 +61,10 @@ def register():
     response_alumno = None
     usuario = UsuarioModel.from_json(data["usuario"])
     try:
+<<<<<<< HEAD
+        db.session.add(usuario)
+    except Exception:
+=======
         data = request.get_json()
         if not data:
             return 'Invalid request data', 400
@@ -75,6 +79,7 @@ def register():
             sent = sendMail ([usuario.email], "Welcome!",'register', usuario=usuario)
             #return usuario.to_json(), 201
     except Exception as e:
+>>>>>>> develop-front-end
         db.session.rollback()
         return "No se registro ningun usuario"
 

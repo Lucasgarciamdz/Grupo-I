@@ -1,0 +1,89 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat, sans-serif;
+    background: #cacaca;
+    height: 100vh;
+}
+
+/* Estilos para el Navbar */
+.navbar {
+    background-color: #2691d9;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 24px;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+/* Estilos para los botones de la barra de navegación responsive */
+.navbar .btn {
+    background-color: #2691d9;
+    border-color: #2691d9;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.navbar .btn img {
+    max-width: 35px;
+    max-height: 35px;
+    align-self: center;
+}
+
+/* Estilos para los recuadros y elementos de perfil */
+.list-group {
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.list-group-item {
+    background-color: #fff;
+}
+
+/* Estilos para los botones de editar perfil */
+.btn-primary {
+    background-color: #2691d9;
+    border-color: #2691d9;
+    color: #fff;
+}
+
+/* Estilos para los elementos de datos */
+.list-group-horizontal .list-group-item {
+    background-color: #fff;
+    border: none;
+    margin: 0;
+}
+
+/* Estilos para las flechas en los elementos de cuenta */
+.img-button {
+    background-color: transparent;
+    border: none;
+}
+
+/* Estilos para el interruptor de notificaciones pop-up */
+.form-check-input:checked {
+    background-color: #2691d9;
+    border-color: #2691d9;
+}
+
+#perfil-btn{
+    margin: 10px 10px 10px 10px; 
+    border-radius: 20px;
+
+}
