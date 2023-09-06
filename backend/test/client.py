@@ -9,20 +9,16 @@ class SingletonClient:
 
     def get(self, url, **kwargs):
         response = self.session.get(url, **kwargs)
-        response.raise_for_status()
-        return response.json()
+        return response
 
     def post(self, url, data=None, json=None, **kwargs):
         response = self.session.post(url, data=data, json=json, **kwargs)
-        response.raise_for_status()
-        return response.json()
+        return response
 
     def put(self, url, data=None, json=None, **kwargs):
         response = self.session.put(url, data=data, json=json, **kwargs)
-        response.raise_for_status()
-        return response.json()
+        return response
 
     def delete(self, url, **kwargs):
         response = self.session.delete(url, **kwargs)
-        response.raise_for_status()
-        return response.json()
+        return response

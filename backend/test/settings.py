@@ -7,7 +7,7 @@ from .client import SingletonClient
 
 class TestSettings(unittest.TestCase):
 
-    BASE_URL = f"http://localhost:{os.getenv('PORT', 5001)}"
+    BASE_URL = f"http://localhost:{os.getenv('PORT', 5002)}"
 
     fake = faker.Faker()
 

@@ -7,7 +7,7 @@ from models.usuario_model import Usuario as UsuarioModel
 from sqlalchemy import desc, func
 from flask_jwt_extended import jwt_required
 from auth.decoradores import role_required
-from base_resource import BaseResource
+from .base_resource import BaseResource
 
 
 class Profesores(Resource):

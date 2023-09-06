@@ -33,8 +33,8 @@ def login():
             'email': usuario.email,
             'access_token': access_token
         }
-
         return data, 200
+
     else:
         logging.error('Incorrect password')
         return 'Incorrect password', 401
@@ -93,7 +93,7 @@ def register():
     # #         response_profesor = ProfesoresResource().post(data={"profesor": profesor_dict, "clase": data["clase"]})
     # #     except Exception:
     # #         db.session.rollback()
-    # #         return "No hay clase" 
+    # #         return "No hay clase"
 
     # # elif alumno:
     # #     alumno_dict = alumno.to_json()
