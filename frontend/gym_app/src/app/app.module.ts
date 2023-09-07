@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarResponsiveComponent } from './navbar-responsive/navbar-responsive.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ListaPlanificacionesComponent } from './lista-planificaciones/lista-planificaciones.component';
+import { PlanificacionesComponent } from './planificaciones/planificaciones.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     HomeComponent,
     NavbarComponent,
     NavbarResponsiveComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ListaPlanificacionesComponent,
+    PlanificacionesComponent
   ],
   imports: [
     BrowserModule,
