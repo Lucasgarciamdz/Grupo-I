@@ -1,0 +1,30 @@
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .form-input {
+    border-radius: 30px;
+    padding-left: 40px;
+  }
+  
+  .form-input:focus {
+    box-shadow: none;
+  }
+  
+  .form .fa-search {
+    position: absolute;
+    left: 10px;
+  }
+  
+  .form .left-pan {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .form .left-pan:hover {
+    color: #007bff;
+  }

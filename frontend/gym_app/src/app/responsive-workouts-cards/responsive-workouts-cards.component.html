@@ -1,0 +1,15 @@
+<div class="container-fluid py-2">
+    <h2 class="font-weight-light">{{ title }}</h2>
+    <div class="d-flex flex-row overflow-x-scroll overflow-y-hidden card-container">
+      <div class="card mb-3" *ngFor="let item of items">
+        <img [src]="item.image" class="img-fluid rounded-start" alt="..." />
+        <div class="card-img-overlay">
+          <div class="card-body text-white">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <a href="#" class="btn btn-primary">{{ item.buttonText }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

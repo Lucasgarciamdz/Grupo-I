@@ -1,0 +1,31 @@
+.card-container {
+    height: 174px;
+    border-radius: 23px;
+  }
+  
+  .card {
+    width: 280px;
+    height: 174px;
+    min-width: 280px;
+    min-height: 174px;
+    margin-right: 20px;
+    border-radius: 23px;
+    border-top-left-radius: 23px;
+  }
+  
+  .card-img-overlay {
+    border-radius: 23px;
+  }
+  
+  .card-img-overlay .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-img-overlay .card-text {
+    font-size: 1rem;
+  }
+  
+  .card-img-overlay .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
