@@ -10,7 +10,8 @@ import { NavbarResponsiveComponent } from './components/navbar-responsive/navbar
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ListaPlanificacionesComponent } from './components/lista-planificaciones/lista-planificaciones.component';
 import { PlanificacionesComponent } from './components/planificaciones/planificaciones.component';
-import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
+import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProfilePictureComponent } from './profile-picture/profile-picture.compo
     SearchBarComponent,
     ListaPlanificacionesComponent,
     PlanificacionesComponent,
-    ProfilePictureComponent
+    ProfilePictureComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
