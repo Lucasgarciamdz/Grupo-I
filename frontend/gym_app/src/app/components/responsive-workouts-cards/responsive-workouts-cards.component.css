@@ -10,7 +10,10 @@
     min-height: 174px;
     margin-right: 20px;
     border-radius: 23px;
-    border-top-left-radius: 23px;
+  }
+
+  .img-fluid {
+    border-radius: 23px;
   }
   
   .card-img-overlay {

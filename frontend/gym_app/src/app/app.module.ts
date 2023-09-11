@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ResponsiveWorkoutsCardsComponent } from './responsive-workouts-cards/responsive-workouts-cards.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { NavbarResponsiveComponent } from './navbar-responsive/navbar-responsive.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { ListaPlanificacionesComponent } from './lista-planificaciones/lista-planificaciones.component';
-import { PlanificacionesComponent } from './planificaciones/planificaciones.component';
+import { ResponsiveWorkoutsCardsComponent } from './components/responsive-workouts-cards/responsive-workouts-cards.component';
+import { HomeComponent } from './views/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarResponsiveComponent } from './components/navbar-responsive/navbar-responsive.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { ListaPlanificacionesComponent } from './components/lista-planificaciones/lista-planificaciones.component';
+import { PlanificacionesComponent } from './components/planificaciones/planificaciones.component';
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlanificacionesComponent } from './planificaciones/planificaciones.comp
     NavbarResponsiveComponent,
     SearchBarComponent,
     ListaPlanificacionesComponent,
-    PlanificacionesComponent
+    PlanificacionesComponent,
+    ProfilePictureComponent
   ],
   imports: [
     BrowserModule,
