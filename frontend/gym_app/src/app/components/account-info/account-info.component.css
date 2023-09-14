@@ -1,0 +1,159 @@
+.box {
+  position: relative;
+  width: 315px;
+  height: 189px;
+}
+
+.box .account-section {
+  position: fixed;
+  width: 315px;
+  height: 189px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0px 10px 40px #1d161712;
+  top: 0;
+  left: 0;
+}
+
+.box .title {
+  position: absolute;
+  width: 64px;
+  height: 24px;
+  top: 20px;
+  left: 20px;
+}
+
+.box .text-wrapper {
+  position: absolute;
+  font-family: "Font Awesome 5 Free-Regular", Helvetica;
+  font-weight: 400;
+  color: #1d1517;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+}
+
+.box .personal-data {
+  position: absolute;
+  width: 280px;
+  height: 20px;
+  top: 59px;
+  left: 20px;
+}
+
+.box .icon-profile {
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: 100% 100%;
+}
+
+.box .text {
+  width: 84px;
+  position: absolute;
+  height: 18px;
+  top: 1px;
+  left: 30px;
+}
+
+.box .div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Font Awesome 5 Free-Regular", Helvetica;
+  font-weight: 400;
+  color: #7b6f72;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.box .icon-arrow {
+  width: 18px;
+  height: 18px;
+  top: 1px;
+  left: 262px;
+  position: absolute;
+  background-size: 100% 100%;
+}
+
+.box .achievement {
+  position: absolute;
+  width: 280px;
+  height: 20px;
+  top: 89px;
+  left: 20px;
+}
+
+.box .icon-achievement {
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: 100% 100%;
+}
+
+.box .div-wrapper {
+  width: 75px;
+  position: absolute;
+  height: 18px;
+  top: 1px;
+  left: 30px;
+}
+
+.box .workout-progress {
+  position: absolute;
+  width: 280px;
+  height: 20px;
+  top: 149px;
+  left: 20px;
+}
+
+.box .text-2 {
+  width: 108px;
+  position: absolute;
+  height: 18px;
+  top: 1px;
+  left: 30px;
+}
+
+.box .icon-workout {
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: 100% 100%;
+}
+
+.box .activity-history {
+  position: absolute;
+  width: 280px;
+  height: 20px;
+  top: 119px;
+  left: 20px;
+}
+
+.box .text-3 {
+  width: 89px;
+  position: absolute;
+  height: 18px;
+  top: 1px;
+  left: 30px;
+}
+
+.box .icon-activity {
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: 100% 100%;
+}

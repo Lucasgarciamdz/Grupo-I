@@ -12,6 +12,9 @@ import { ListaPlanificacionesComponent } from './components/lista-planificacione
 import { PlanificacionesComponent } from './components/planificaciones/planificaciones.component';
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { AccountInfoComponent } from './components/account-info/account-info.component';
+import { NotificationsBoxComponent } from './components/notifications-box/notifications-box.component';
+import { ProfileStatsBoxComponent } from './components/profile-stats-box/profile-stats-box.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ProfileComponent } from './views/profile/profile.component';
     ListaPlanificacionesComponent,
     PlanificacionesComponent,
     ProfilePictureComponent,
-    ProfileComponent
+    ProfileComponent,
+    AccountInfoComponent,
+    NotificationsBoxComponent,
+    ProfileStatsBoxComponent
   ],
   imports: [
     BrowserModule,
