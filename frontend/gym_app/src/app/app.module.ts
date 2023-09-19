@@ -15,6 +15,11 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { AccountInfoComponent } from './components/account-info/account-info.component';
 import { NotificationsBoxComponent } from './components/notifications-box/notifications-box.component';
 import { ProfileStatsBoxComponent } from './components/profile-stats-box/profile-stats-box.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SigninComponent } from './views/signin/signin.component';
+import { SignupComponent } from './views/signup/signup.component';
+import { ProfButtonsComponent } from './components/prof-buttons/prof-buttons.component';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import { ProfileStatsBoxComponent } from './components/profile-stats-box/profile
     ProfileComponent,
     AccountInfoComponent,
     NotificationsBoxComponent,
-    ProfileStatsBoxComponent
+    ProfileStatsBoxComponent,
+    SignUpComponent,
+    SigninComponent,
+    SignupComponent,
+    ProfButtonsComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,
