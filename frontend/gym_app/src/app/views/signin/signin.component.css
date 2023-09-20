@@ -1,4 +1,4 @@
-/* Estilos generales */
+/*Estilos generales
 body {
   margin: 0;
   padding: 0;
@@ -18,7 +18,6 @@ body {
 }
 
 
-/* Estilos para el Navbar */
 .navbar {
   margin-bottom: 20px;
 }
@@ -32,8 +31,6 @@ body {
 .nav-item {
   margin-right: 15px;
 }
-
-/* Estilos para el formulario */
 
 .formulario {
   position: absolute;
@@ -148,3 +145,6 @@ body {
 .formulario .register a:hover {
   text-decoration: underline;
 }
+
+
+*/

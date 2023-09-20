@@ -20,6 +20,10 @@ import { SigninComponent } from './views/signin/signin.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { ProfButtonsComponent } from './components/prof-buttons/prof-buttons.component';
 import { TitleComponent } from './components/title/title.component';
+import { EditProfileBtnComponent } from './components/edit-profile-btn/edit-profile-btn.component';
+import { HomeProfComponent } from './views/home-prof/home-prof.component';
+import { EditProfileFormComponent } from './components/edit-profile-form/edit-profile-form.component';
+import { EditProfileComponent } from './views/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { TitleComponent } from './components/title/title.component';
     SigninComponent,
     SignupComponent,
     ProfButtonsComponent,
-    TitleComponent
+    TitleComponent,
+    EditProfileBtnComponent,
+    HomeProfComponent,
+    EditProfileFormComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
