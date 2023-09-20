@@ -1,50 +1,59 @@
-
 <div class="container">
-    <div class="formulario">
-        <h2>Registro</h2>
-        <form method="post">
-            <div class="nombre">
-                <input type="text" required>
-                <label>Nombre</label>
-            </div>
-            <div class="apellido">
-                <input type="text" required>
-                <label>Apellido</label>
-            </div>
-            <div class="password">
-                <div class="row">
-                    <div class="col">
-                        <input type="password" required>
-                        <label>Contraseña</label>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="formulario mt-5">
+                <h2 class="text-center">Registro</h2>
+                <form method="post">
+                    <div class="mb-3 text-center">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required>
                     </div>
-                    <div class="col-md-4">
-                        <a class="fa-solid fa-eye-slash"></a>
+                    <div class="mb-3 text-center">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" required>
                     </div>
-                </div>
-            </div>
-            <div class="conf-password">
-                <div class="row">
-                    <div class="col">
-                        <input type="password" required>
-                        <label>Confirmar contraseña</label>
+                    <div class="mb-3 text-center">
+                        <label for="contrasena" class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="contrasena" required>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <a class="fa-solid fa-eye-slash"></a>
+                    <div class="mb-3 text-center">
+                        <label for="confirmar-contrasena" class="form-label">Confirmar contraseña</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmar-contrasena" required>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                    <div class="mb-3 text-center">
+                        <input type="submit" class="btn btn-primary" value="Registrarse">
+                    </div>
+                    <div class="text-center">
+                        Ya tengo una cuenta <a href="../views/login.html">Iniciar sesión</a>
+                    </div>
+                </form>
             </div>
-            <!-- Probar esta opcion para ver si se ve bien el ojo -->
-            <div class="otra-password">
-                <div class="row">
-                    <input type="password" required>
-                    <label>Confirmar contraseña</label>
-                    <a class="fa-solid fa-eye-slash"></a>
-                </div>
-            </div>
-            <input type="submit" value="Registrarse">
-            <div class="register">
-                Ya tengo una cuenta <a class="btn" href="../views/login.html">Iniciar sesión</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<!-- Add Bootstrap JS and jQuery for password toggle functionality -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script>
+    // Password toggle functionality
+    $("#togglePassword").click(function () {
+        const passwordInput = $("#contrasena");
+        passwordInput.attr("type", passwordInput.attr("type") === "password" ? "text" : "password");
+    });
+
+    $("#toggleConfirmPassword").click(function () {
+        const confirmPasswordInput = $("#confirmar-contrasena");
+        confirmPasswordInput.attr("type", confirmPasswordInput.attr("type") === "password" ? "text" : "password");
+    });
+</script>
