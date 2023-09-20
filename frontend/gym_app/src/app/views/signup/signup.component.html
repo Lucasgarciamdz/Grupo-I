@@ -6,42 +6,20 @@
             <div class="formulario mt-5">
                 <h2 class="text-center">Registro</h2>
                 <form method="post">
-                    <div class="mb-3 text-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="nombre" required>
-                            <label for="nombre" class="form-label">Nombre</label>
-                        </div>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="apellido" required>
-                            <label for="apellido" class="form-label">Apellido</label>
-                        </div>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="contrasena" required>
-                            <label for="contrasena" class="form-label">Contraseña</label>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                    <i class="fa-solid fa-eye-slash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="confirmar-contrasena" required>
-                            <label for="confirmar-contrasena" class="form-label">Confirmar contraseña</label>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
-                                    <i class="fa-solid fa-eye-slash"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Contrasenia" aria-label="Contrasenia" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" placeholder="Apellido" aria-label="Apellido">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Confirmar contraseña" aria-label="Confirmar contraseña" aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
@@ -50,7 +28,7 @@
                         <input type="submit" class="btn btn-primary" value="Registrarse">
                     </div>
                     <div class="text-center">
-                        Ya tengo una cuenta <a href="../views/login.html">Iniciar sesión</a>
+                        Ya tengo una cuenta <a href="../views/signin/signin.component.html">Iniciar sesión</a>
                     </div>
                 </form>
             </div>

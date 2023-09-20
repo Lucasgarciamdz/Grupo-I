@@ -1,150 +1,60 @@
-/*Estilos generales
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Montserrat, sans-serif;
-  background: #cacaca;
-  height: 100vh;
-}
-
-.formulario .register .btn{
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width: auto;
-  border-radius: 0;
-  border-color: transparent;
-  margin-bottom: 2.9px;
-}
-
-
-.navbar {
-  margin-bottom: 20px;
-}
-
-.navbar-brand img {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.nav-item {
-  margin-right: 15px;
-}
-
-.formulario {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: #fff;
-  border-radius: 10px;
+/* Container Styles */
+.container {
+  margin-top: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.formulario h2 {
-  text-align: center;
-  padding: 0 0 20px 0;
-  border-bottom: 1px solid silver;
+/* Input Styles */
+.input-group.mb-3 {
+  margin-bottom: 15px;
 }
 
-.formulario form {
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-.formulario .username,
-.formulario .password {
+/* Floating Label Styles */
+.form-floating {
   position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
 }
 
-.formulario input {
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
+.form-floating input {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.formulario label {
+.form-floating label {
   position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
   pointer-events: none;
+  left: 15px;
+  top: 18px;
+  transition: top 0.2s, left 0.2s, font-size 0.2s;
 }
 
-.formulario span::before {
-  content: '';
+.form-floating input:focus ~ label,
+.form-floating input:not(:placeholder-shown) ~ label {
+  top: 5px;
+  left: 10px;
+  font-size: 0.8rem;
+}
+
+/* Button Styles */
+.btn-outline-secondary {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Align eye-slash icons with password inputs */
+.input-group {
+  position: relative;
+}
+
+.input-group .btn {
   position: absolute;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #2691d9;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.formulario input:focus ~ label,
-.formulario input:valid ~ label {
-  top: -5px;
-  color: #2691d9;
-}
-
-.formulario input:focus ~ span::before,
-.formulario input:valid ~ span::before {
-  width: 100%;
-}
-
-.formulario .recordar {
-  margin: -5px 0 20px 5px;
-  color: #2691d9;
-  cursor: pointer;
-}
-
-.formulario .recordar:hover {
-  text-decoration: underline;
-}
-
-.formulario input[type="submit"] {
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-}
-
-.formulario input[type="submit"]:hover {
-  border-color: #110c41;
-  transition: .5s;
-}
-
-.formulario .register {
+.ml-2 {
   text-align: center;
-  margin: 30px 0;
-  font-size: 16px;
-  color: black;
 }
-
-.formulario .register a {
-  color: #2691d9;
-  text-decoration: none;
-}
-
-.formulario .register a:hover {
-  text-decoration: underline;
-}
-
-
-*/

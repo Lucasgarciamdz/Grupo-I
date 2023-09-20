@@ -24,6 +24,7 @@ import { EditProfileBtnComponent } from './components/edit-profile-btn/edit-prof
 import { HomeProfComponent } from './views/home-prof/home-prof.component';
 import { EditProfileFormComponent } from './components/edit-profile-form/edit-profile-form.component';
 import { EditProfileComponent } from './views/edit-profile/edit-profile.component';
+import { StudWorkComponent } from './views/stud-work/stud-work.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EditProfileComponent } from './views/edit-profile/edit-profile.componen
     EditProfileBtnComponent,
     HomeProfComponent,
     EditProfileFormComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    StudWorkComponent
   ],
   imports: [
     BrowserModule,
