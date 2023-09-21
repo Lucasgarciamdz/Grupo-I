@@ -1,3 +1,5 @@
+/* Estilos originales */
+
 .welcome-header {
   text-align: center;
   padding: 20px;
@@ -22,26 +24,51 @@
 }
 
 .button-scroll {
-  max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+  max-height: 200px;
   overflow-y: auto;
 }
 
 .button {
   display: block;
   width: 100%;
-  padding: 15px 20px; /* Ajusta el padding para hacer los botones más grandes */
-  margin-bottom: 10px; /* Ajusta el margen entre los botones */
-  border: none; /* Quita el borde para un aspecto más limpio */
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border: none;
   border-radius: 5px;
-  background-color: #2196f3; /* Cambia el color de fondo a #2196f3 */
-  color: #fff; /* Cambia el color del texto a blanco */
-  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 16px;
 }
 
 .button:hover {
-  background-color: #1976d2; /* Cambia el color de fondo al hacer hover */
+  background-color: #1976d2;
 }
 
 .button-group:nth-child(2) {
-  margin-top: 20px; /* Ajusta la cantidad de margen superior según sea necesario */
+  margin-top: 20px;
+}
+
+/* Estilos para pantallas más grandes (computadoras) */
+
+@media (min-width: 768px) {
+  .button-container {
+    flex-direction: column; /* Cambia a columna para mostrar elementos uno encima del otro */
+  }
+
+  .button-group {
+    width: 100%; /* Ancho completo para cada grupo */
+    margin: 0 0 20px 0; /* Ajusta los márgenes entre los grupos de botones */
+  }
+  
+  /* Estilos para que los botones se muestren 3 por fila dentro de cada grupo */
+  .button-group .button-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .button-group .button {
+    width: calc(33.33% - 10px);
+    margin-bottom: 10px;
+  }
 }
