@@ -5,11 +5,15 @@
 <div class="button-container">
   <div class="button-group">
     <h2>My students</h2>
-    <button class="button" *ngFor="let student of students">{{ student }}</button>
+    <div class="button-scroll">
+      <button class="button" *ngFor="let student of students">{{ student }}</button>
+    </div>
   </div>
 
   <div class="button-group">
     <h2>My classes</h2>
-    <button class="button" *ngFor="let class of classes">{{ class }}</button>
+    <div class="button-scroll">
+      <button class="button" *ngFor="let class of classes">{{ class }}</button>
+    </div>
   </div>
 </div>
