@@ -25,6 +25,8 @@ import { EditProfileFormComponent } from './components/edit-profile-form/edit-pr
 import { EditProfileComponent } from './views/edit-profile/edit-profile.component';
 import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { UpdateBtnComponent } from './components/update-btn/update-btn.component';
+import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
+import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { UpdateBtnComponent } from './components/update-btn/update-btn.component
     EditProfileComponent,
     StudWorkComponent,
     UpdateBtnComponent,
+    AdminButtonsComponent,
+    HomeAdminComponent,
   ],
   imports: [
     BrowserModule,
