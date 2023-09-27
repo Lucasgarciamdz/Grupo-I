@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 <div class="card">
   <div class="card-body">
     <div class="d-flex flex-column align-items-center">
-      <div class="text-primary">{{ number }}</div>
+      <div class="text">{{ number }}</div>
       <div class="text-muted">{{ label }}</div>
     </div>
   </div>
@@ -24,10 +24,10 @@ import { Component, Input } from '@angular/core';
   padding: 20px;
 }
 
-.text-primary {
+.text {
   font-size: 24px;
   font-weight: bold;
-  color: #007bff;
+  color: #3A6A87;
 }
 
 .text-muted {

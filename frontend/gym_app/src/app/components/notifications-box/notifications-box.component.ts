@@ -23,6 +23,6 @@ import { Component } from '@angular/core';
   }
   
   .card-header {
-    background-color: #007bff4e;}`],
+    background-color: #80ADCA;}`],
 })
 export class NotificationsBoxComponent {}

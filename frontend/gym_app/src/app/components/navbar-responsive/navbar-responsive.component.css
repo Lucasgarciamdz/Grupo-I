@@ -1,0 +1,20 @@
+.d-lg-none {
+    /* display: none !important; */
+    background-color: #3A6A87;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.btn
+{
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 0;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+}
