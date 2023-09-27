@@ -1,0 +1,51 @@
+.card-container {
+    height: 180px;
+    border-radius: 23px;
+    padding-bottom: 200px;
+  }
+
+  
+  .card {
+    width: 174px;
+    height: 200px;
+    min-width: 280px;
+    min-height: 174px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border-radius: 23px;
+    object-fit: cover;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+  .img-fluid {
+    border-radius: 23px;
+  }
+  
+  .card-img-overlay {
+    border-radius: 23px;
+  }
+  
+  .card-img-overlay .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-img-overlay .card-text {
+    font-size: 1rem;
+  }
+  
+  .card-img-overlay .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .btn
+  {
+    background-color: #3A6A87;
+    color: #fff
+  }
