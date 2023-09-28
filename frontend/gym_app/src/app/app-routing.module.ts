@@ -8,14 +8,14 @@ import { EditProfileComponent } from './views/edit-profile/edit-profile.componen
 import { HomeProfComponent } from './views/home-prof/home-prof.component';
 import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { ProfButtonsComponent } from './components/prof-buttons/prof-buttons.component';
-
+import { authsessionGuard } from './guards/authsession.guard';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [authsessionGuard] },
   { path: 'edit-profile', component: EditProfileComponent},
   { path: 'home-prof', component: HomeProfComponent},
   { path: 'stud-work', component: StudWorkComponent},

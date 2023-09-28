@@ -6,12 +6,12 @@
         <div class="col-md-6">
             <div class="formulario mt-5">
                 <h2 class="text-center">Inicio de Sesión</h2>
-                <form method="post">
+                <form [formGroup]="loginForm">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" id="username">
+                        <input type="text" class="form-control" placeholder="Mail" aria-label="Usuario" formControlName="email">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" id="password">
+                        <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" formControlName="password">
                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
@@ -22,7 +22,7 @@
                         </label>
                       </div>
                     <div class="mb-3 text-center">
-                        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-primary btn-block" (click)="submit()">Iniciar sesión</button>
                     </div>
                     <div class="mb-3 text-center">
                       <a href="#" class="ml-2">¿Olvidó su contraseña?</a>
@@ -32,7 +32,6 @@
                     </div>
                 </form>
             </div>
-        </div>
     </div>
 </div>
 

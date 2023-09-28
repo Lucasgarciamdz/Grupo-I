@@ -28,6 +28,9 @@ import { UpdateBtnComponent } from './components/update-btn/update-btn.component
 import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 
+import { HttpClientModule } from '@angular/common/http'
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,10 @@ import { HomeAdminComponent } from './views/home-admin/home-admin.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -60,3 +60,8 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.text-center {
+    text-align: left;
+    margin-bottom: 40px;
+}
