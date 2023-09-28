@@ -1,20 +1,30 @@
 .navbar {
-    background-color: white;
-    color: white;
-  }
-  
-  .navbar-brand {
-    color: rgb(0, 0, 0);
-  }
-  
-  .nav-link {
-    color: rgb(0, 0, 0);
-  }
-  
-  .dropdown-menu {
-    background-color: #333;
-  }
-  
-  .dropdown-item {
-    color: rgb(0, 0, 0);
-  }
+  background-color: white;
+  color: white;
+}
+
+.navbar-brand {
+  color: rgb(0, 0, 0);
+}
+
+.nav-link {
+  color: rgb(0, 0, 0);
+}
+
+.dropdown-menu {
+  background-color: #333;
+}
+
+.dropdown-item {
+  color: rgb(0, 0, 0);
+}
+
+.positioned-log-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#navbar-list {
+  margin-right: 150px; /* Adjust the margin-right to provide space for the login button */
+}
