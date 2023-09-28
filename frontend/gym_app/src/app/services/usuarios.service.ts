@@ -5,19 +5,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsuariosService {
-
-  url = 'api'
-  constructor(private httpClient: HttpClient,) { }
+  url = '/api';
+  constructor(
+    private httpClient: HttpClient,
+  ) { }
 
   getUsers() {
-    let auth_token = localStorage.getItem('auth_token');
+    let auth_token = localStorage.getItem('token');
 
-    const headers: new HttpHeaders({
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $(auth_token)'
+      'Authorization': `Bearer ${auth_token}`
     });
 
-    return this.httpClient.get(this.url + '/users', { headers: headers });
-
+    return this.httpClient.get(this.url + '/animales', {headers: headers});
   }
+
 }

@@ -30,7 +30,8 @@ import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 
 import { HttpClientModule } from '@angular/common/http'
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     UpdateBtnComponent,
     AdminButtonsComponent,
     HomeAdminComponent,
+    LogButtonComponent,
   ],
   imports: [
     BrowserModule,
