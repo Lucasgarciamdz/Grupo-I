@@ -8,16 +8,16 @@ import { EditProfileComponent } from './views/edit-profile/edit-profile.componen
 import { HomeProfComponent } from './views/home-prof/home-prof.component';
 import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { ProfButtonsComponent } from './components/prof-buttons/prof-buttons.component';
-import { authsessionGuard } from './guards/authsession.guard';
+import { AuthsessionGuard } from './guards/authsession.guard';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [authsessionGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard] },
   { path: 'edit-profile', component: EditProfileComponent},
-  { path: 'home-prof', component: HomeProfComponent},
+  { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard]},
   { path: 'stud-work', component: StudWorkComponent},
   { path: 'prof-buttons', component: ProfButtonsComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },

@@ -8,7 +8,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LogButtonComponent {
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService
+    ) {}
 
   get isToken() {
     return localStorage.getItem('token');
