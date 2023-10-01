@@ -4,5 +4,5 @@ flask-restful
 flask-sqlalchemy
 flask-migrate
 flask-jwt-extended
-werkzeug
 flask-mail
+Werkzeug==2.2.3
