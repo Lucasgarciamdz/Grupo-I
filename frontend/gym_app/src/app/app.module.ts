@@ -27,10 +27,11 @@ import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { UpdateBtnComponent } from './components/update-btn/update-btn.component';
 import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { ClassListComponent } from './components/class-list/class-list.component';
 import { JWTService } from './services/jwt.service';
 
 @NgModule({
@@ -60,7 +61,7 @@ import { JWTService } from './services/jwt.service';
     UpdateBtnComponent,
     AdminButtonsComponent,
     HomeAdminComponent,
-    LogButtonComponent
+    LogButtonComponent,
   ],
   imports: [
     BrowserModule,

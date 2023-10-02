@@ -1,0 +1,24 @@
+<div class="class-list">
+  <h2>Class List</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre de clase</th>
+        <th>Cantidad de alumnos</th>
+        <th>Profesor a cargo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let class of classes">
+        <td>{{ class.name }}</td>
+        <td>{{ class.studentCount }}</td>
+        <td>{{ class.instructor }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="editClass(class)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteClass(class)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
