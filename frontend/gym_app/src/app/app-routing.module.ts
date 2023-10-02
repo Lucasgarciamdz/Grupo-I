@@ -17,19 +17,17 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard] },
-  { path: 'edit-profile', component: EditProfileComponent},
-  { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard]},
-  { path: 'stud-work', component: StudWorkComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno'] } },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno'] } },
+  { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
+  { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },
   { path: 'home-admin', component: HomeAdminComponent},
   { path: 'user-list', component: UserListComponent},
   { path: 'class-list', component: ClassListComponent},
-  { path: 'prof-buttons', component: ProfButtonsComponent},
+  { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' }
-
+  { path: '**', redirectTo: '/home' },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
