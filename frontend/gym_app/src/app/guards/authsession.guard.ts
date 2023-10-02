@@ -1,29 +1,43 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JWTService } from '../services/jwt.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthsessionGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private jwtService: JWTService
+  ) {}
 
-  canActivate(): boolean {
-    const token = localStorage.getItem('token');
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const token = localStorage.getItem('token') ?? '';
+    this.jwtService.setToken(token);
+    console.log("HOLA SOY EL GUARD Y ESTE ES EL TOKEN:", token);
 
     if (!token) {
       this.router.navigateByUrl('/home');
       return false;
-    } else {
-      const userRole = localStorage.getItem('role'); // Obtener el rol del usuario desde el local storage
+    }
 
-      if (userRole === 'profesor') {
-        this.router.navigateByUrl('/home-prof');
-      } else if (userRole === 'admin') {
-        this.router.navigateByUrl('/home-admin'); // Ruta para administradores
-      } else {
-        this.router.navigateByUrl('/profile');
-      }
+    if (this.jwtService.isTokenExpired()) {
+      this.router.navigateByUrl('/home');
+      return false;
+    }
+
+    const userRole = this.jwtService.getRol() ?? '';
+    const requiredRoles = route.data['roles'] as string[];
+
+    console.log("ESTE ES EL ROL:", userRole);
+    console.log("ESTOS SON LOS ROLES REQUERIDOS", requiredRoles);
+
+    if (requiredRoles.includes(userRole)) {
       return true;
+    } else {
+      this.router.navigateByUrl('/home');
+      return false;
     }
   }
 }

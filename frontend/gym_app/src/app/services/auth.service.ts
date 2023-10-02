@@ -14,8 +14,7 @@ export class AuthService {
   ) { }
 
   login(dataLogin:any): Observable<any> {
-    //let dataLogin = {email: "rodrigo.bartolome@um.edu.ar", password: "123456"}
-    return this.httpClient.post(this.url + '/auth/signin', dataLogin).pipe(take(1));
+    return this.httpClient.post(this.url + '/auth/login', dataLogin).pipe(take(1));
   }
 
   logout() {
@@ -23,4 +22,3 @@ export class AuthService {
     this.router.navigate(['/', 'home']);
   }
 }
-

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-button',
@@ -9,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LogButtonComponent {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     ) {}
 
   get isToken() {

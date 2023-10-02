@@ -21,17 +21,16 @@ export class SigninComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ["francobertoldi@gmail.com", Validators.required],
       password: ['12345', Validators.required]
-    });
+    })
   }
 
-  login(dataLogin: any = {}) {
+  login(dataLogin:any = {}) {
+    //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
     console.log('Comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
-      next: (rta: any) => {
+      next: (rta:any) => {
         alert('Login exitoso');
-        console.log('Respuesta login: ', rta.access_token);
-
-        // Almacenar el token y el rol en el almacenamiento local
+        console.log('Respuesta login: ',rta.access_token);
         localStorage.setItem('token', rta.access_token);
         localStorage.setItem('role', rta.role); // Suponiendo que el backend envía el rol en la respuesta
 
