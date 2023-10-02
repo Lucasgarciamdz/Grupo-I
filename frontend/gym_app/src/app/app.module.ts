@@ -28,10 +28,11 @@ import { UpdateBtnComponent } from './components/update-btn/update-btn.component
 import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
+import { JWTService } from './services/jwt.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,16 +60,19 @@ import { LogButtonComponent } from './components/log-buttons/log-buttons.compone
     UpdateBtnComponent,
     AdminButtonsComponent,
     HomeAdminComponent,
-    LogButtonComponent,
+    LogButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
-  providers: [],
+  providers: [
+    JWTService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

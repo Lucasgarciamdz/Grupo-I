@@ -1,11 +1,18 @@
 <div class="d-lg-none d-flex justify-content-center align-items-center fixed-bottom rounded-pill p-2 m-3">
-    <a class="btn btn-outline-light rounded-circle mx-2" routerLink="/home">
-      <i class="fa-solid fa-house-chimney"></i>
+  <a class="btn btn-outline-light rounded-circle mx-2" routerLink="/home">
+    <i class="fa-solid fa-house-chimney"></i>
+  </a>
+  <ng-container *ngIf="userRole === 'Profesor'">
+    <a class="btn btn-outline-light rounded-circle mx-2" routerLink="/home-prof">
+      <i class="fa-solid fa-dumbbell"></i>
     </a>
+  </ng-container>
+  <ng-container *ngIf="userRole === 'Alumno'">
     <a class="btn btn-outline-light rounded-circle mx-2" routerLink="/stud-work">
       <i class="fa-solid fa-dumbbell"></i>
     </a>
-    <a class="btn btn-outline-light rounded-circle mx-2" routerLink="views/profile">
-      <i class="fa-solid fa-user"></i>
-    </a>
-  </div>
+  </ng-container>
+  <a class="btn btn-outline-light rounded-circle mx-2" routerLink="/profile">
+    <i class="fa-solid fa-user"></i>
+  </a>
+</div>

@@ -1,6 +1,6 @@
-<button class="btn" [ngClass]="{'btn-primary': !isToken, 'btn-danger': isToken}" *ngIf="!isToken" routerLink="/login">
+<button class="btn" [ngClass]="{'btn-danger': isToken}" *ngIf="!isToken" routerLink="/signin">
     <i class="fa-solid fa-user"></i> Iniciar Sesión
 </button>
-<button class="btn" [ngClass]="{'btn-primary': !isToken, 'btn-danger': isToken}" *ngIf="isToken" (click)="cerrarSesion()">
+<button class="btn" [ngClass]="{'btn-danger': isToken}" *ngIf="isToken" (click)="cerrarSesion()">
     <i class="fa-solid fa-user"></i> Cerrar Sesión
 </button>

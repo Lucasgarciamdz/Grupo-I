@@ -19,18 +19,17 @@ export class SigninComponent {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["francobertoldi@gmail.com", Validators.required],
-      password: ['12345', Validators.required]
+      email: ["f.bertoldi@alumno.um.edu.ar", Validators.required],
+      contrasena: ['123', Validators.required]
     })
   }
 
   login(dataLogin:any = {}) {
-    //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
     console.log('Comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
       next: (rta:any) => {
-        alert('Login exitoso');
-        console.log('Respuesta login: ',rta.access_token);
+        // alert('Login exitoso');
+        console.log('Token: ',rta.access_token);
         localStorage.setItem('token', rta.access_token);
         this.router.navigateByUrl('home');
       }, error:(error) => {
