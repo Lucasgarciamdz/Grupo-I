@@ -1,0 +1,17 @@
+.class-list {
+  padding: 20px;
+}
+
+.class-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.class-list th, .class-list td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.class-list th {
+  background-color: #f0f0f0;
+}

@@ -1,20 +1,9 @@
-<div class="welcome-header">
-    <h1>Welcome back profesor!</h1>
+<div class="button-container">
+  <div class="button-row">
+    <button class="button" (click)="showUserList()">Usuarios</button>
   </div>
-  
-  <div class="button-container">
-    <div class="button-group">
-      <h2>My students</h2>
-      <div class="button-scroll">
-        <button class="button" *ngFor="let student of students">{{ student }}</button>
-      </div>
-    </div>
-  
-    <div class="button-group">
-      <h2>My classes</h2>
-      <div class="button-scroll">
-        <button class="button" *ngFor="let class of classes">{{ class }}</button>
-      </div>
-    </div>
+
+  <div class="button-row">
+    <button class="button" (click)="showClassList()">Clases</button>
   </div>
-  
+</div>
