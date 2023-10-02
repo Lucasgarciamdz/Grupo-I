@@ -14,10 +14,12 @@ export class AuthsessionGuard implements CanActivate {
       this.router.navigateByUrl('/home');
       return false;
     } else {
-      const userRole = 'profesor'; //Chequear name de rol
+      const userRole = localStorage.getItem('role'); // Obtener el rol del usuario desde el local storage
 
       if (userRole === 'profesor') {
         this.router.navigateByUrl('/home-prof');
+      } else if (userRole === 'admin') {
+        this.router.navigateByUrl('/home-admin'); // Ruta para administradores
       } else {
         this.router.navigateByUrl('/profile');
       }

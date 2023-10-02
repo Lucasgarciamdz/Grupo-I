@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(
@@ -21,33 +21,39 @@ export class SigninComponent {
     this.loginForm = this.formBuilder.group({
       email: ["francobertoldi@gmail.com", Validators.required],
       password: ['12345', Validators.required]
-    })
+    });
   }
 
-  login(dataLogin:any = {}) {
-    //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
+  login(dataLogin: any = {}) {
     console.log('Comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
-      next: (rta:any) => {
+      next: (rta: any) => {
         alert('Login exitoso');
-        console.log('Respuesta login: ',rta.access_token);
+        console.log('Respuesta login: ', rta.access_token);
+
+        // Almacenar el token y el rol en el almacenamiento local
         localStorage.setItem('token', rta.access_token);
+        localStorage.setItem('role', rta.role); // Suponiendo que el backend envía el rol en la respuesta
+
         this.router.navigateByUrl('home');
-      }, error:(error) => {
-        alert('Credenciales incorectas');
+      },
+      error: (error) => {
+        alert('Credenciales incorrectas');
         localStorage.removeItem('token');
-      }, complete: () => {
-        console.log('Finalizo')
+        localStorage.removeItem('role'); // Eliminar el rol en caso de error
+      },
+      complete: () => {
+        console.log('Finalizó');
       }
-    })
+    });
   }
 
   submit() {
-    if(this.loginForm.valid) {
-      console.log('Form login: ',this.loginForm.value);
-      this.login(this.loginForm.value)
+    if (this.loginForm.valid) {
+      console.log('Form login: ', this.loginForm.value);
+      this.login(this.loginForm.value);
     } else {
-      alert('Formulario invalido');
+      alert('Formulario inválido');
     }
   }
 }
