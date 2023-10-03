@@ -19,8 +19,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["francobertoldi@gmail.com", Validators.required],
-      password: ['12345', Validators.required]
+      email: ["l@gmail.com.ar", Validators.required],
+      contrasena: ['12345', Validators.required]
     })
   }
 
@@ -32,14 +32,11 @@ export class SigninComponent implements OnInit {
         alert('Login exitoso');
         console.log('Respuesta login: ',rta.access_token);
         localStorage.setItem('token', rta.access_token);
-        localStorage.setItem('role', rta.role); // Suponiendo que el backend envía el rol en la respuesta
-
         this.router.navigateByUrl('home');
       },
       error: (error) => {
         alert('Credenciales incorrectas');
         localStorage.removeItem('token');
-        localStorage.removeItem('role'); // Eliminar el rol en caso de error
       },
       complete: () => {
         console.log('Finalizó');

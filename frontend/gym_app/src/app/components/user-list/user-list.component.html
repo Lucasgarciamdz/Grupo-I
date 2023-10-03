@@ -11,13 +11,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>{{ user.role }}</td>
-        <td>{{ user.status }}</td>
-        <td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.rol }}</td>
+        <td>{{ user.edad }}</td>
+        <!-- <td>
           <button class="btn btn-primary" (click)="editUser(user)">Editar</button>
           <button class="btn btn-danger" (click)="deleteUser(user)">Eliminar</button>
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>

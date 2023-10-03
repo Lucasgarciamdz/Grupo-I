@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },
-  { path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthsessionGuard], data: { roles: ['Admin'] }},
+  { path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthsessionGuard], data: { roles: ['admin'] }},
   { path: 'user-list', component: UserListComponent},
   { path: 'class-list', component: ClassListComponent},
   { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },

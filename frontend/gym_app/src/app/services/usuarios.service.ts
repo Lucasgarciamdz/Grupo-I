@@ -17,6 +17,6 @@ export class UsuariosService {
       'Authorization': `Bearer ${auth_token}`
     });
 
-    return this.httpClient.get(this.url + '/animales', { headers });
+    return this.httpClient.get(this.url + '/usuarios', { headers });
   }
 }
