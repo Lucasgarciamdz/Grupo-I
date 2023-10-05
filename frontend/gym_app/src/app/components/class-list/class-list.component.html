@@ -3,21 +3,16 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Nombre de clase</th>
-        <th>Cantidad de alumnos</th>
-        <th>Profesor a cargo</th>
-        <th>Acciones</th>
+        <th>Nombre de la Clase</th>
+        <th>Cantidad de Alumnos</th>
+        <th>Profesor a Cargo</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let class of classes">
-        <td>{{ class.name }}</td>
-        <td>{{ class.studentCount }}</td>
-        <td>{{ class.instructor }}</td>
-        <td>
-          <button class="btn btn-primary" (click)="editClass(class)">Editar</button>
-          <button class="btn btn-danger" (click)="deleteClass(class)">Eliminar</button>
-        </td>
+        <td>{{ class.className }}</td>
+        <td>{{ class.numberOfStudents }}</td>
+        <td>{{ class.professor }}</td>
       </tr>
     </tbody>
   </table>

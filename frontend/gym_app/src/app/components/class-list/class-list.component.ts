@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-class-list',
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.css']
 })
-export class ClassListComponent {
-  classes = [
-    { name: 'Class A', studentCount: 25, instructor: 'Instructor A' },
-    { name: 'Class B', studentCount: 20, instructor: 'Instructor B' },
-    { name: 'Class C', studentCount: 30, instructor: 'Instructor C' },
-    // ... other classes
-  ];
+export class ClassListComponent implements OnInit {
 
-  editClass(classInfo: any) {
-    // Implement logic to edit class here
-    alert('Edit class functionality will be implemented soon!');
-  }
+  classes: any[] | undefined;
 
-  deleteClass(classInfo: any) {
-    // Implement logic to delete class here
-    alert('Delete class functionality will be implemented soon!');
+  constructor(private userService: UsuariosService) {}
+
+  ngOnInit() {
+    this.userService.getClasses().subscribe({
+      next: (classes: any) => {
+        this.classes = classes;
+      },
+      error: (error) => {
+        alert('Error al obtener las clases');
+      },
+      complete: () => {
+        console.log('Finalizó');
+      }
+    });
   }
 }

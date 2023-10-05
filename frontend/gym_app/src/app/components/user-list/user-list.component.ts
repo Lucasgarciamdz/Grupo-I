@@ -27,38 +27,6 @@ export class UserListComponent implements OnInit {
       }
     });
   }
-
-  // editUser(user: any) {
-  //   this.userSvc.editUser(user).subscribe({
-  //     next: (updatedUser: any) => {
-  //       // update the user in the users array
-  //       const index = this.users.findIndex(u => u.id === updatedUser.id);
-  //       this.users[index] = updatedUser;
-  //     },
-  //     error: (error) => {
-  //       alert('Error al editar usuario');
-  //     },
-  //     complete: () => {
-  //       console.log('Usuario editado');
-  //     }
-  //   });
-  // }
-
-  // deleteUser(user: any) {
-  //   this.userSvc.deleteUser(user.id).subscribe({
-  //     next: () => {
-  //       // remove the user from the users array
-  //       const index = this.users.findIndex(u => u.id === user.id);
-  //       this.users.splice(index, 1);
-  //     },
-  //     error: (error) => {
-  //       alert('Error al eliminar usuario');
-  //     },
-  //     complete: () => {
-  //       console.log('Usuario eliminado');
-  //     }
-  //   });
-  // }
 }
 
 @NgModule({  declarations: [UserListComponent],
