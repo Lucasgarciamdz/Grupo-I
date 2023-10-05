@@ -10,10 +10,10 @@ export class AdminButtonsComponent {
   constructor(private router: Router) {}
 
   showUserList() {
-    this.router.navigate(['/user-list']);
+    this.router.navigate(['/user-list-view']);
   }
 
   showClassList() {
-    this.router.navigate(['/class-list']);
+    this.router.navigate(['/class-list-view']);
   }
 }

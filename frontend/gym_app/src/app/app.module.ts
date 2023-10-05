@@ -33,6 +33,8 @@ import { LogButtonComponent } from './components/log-buttons/log-buttons.compone
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { JWTService } from './services/jwt.service';
+import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
+import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,9 @@ import { JWTService } from './services/jwt.service';
     AdminButtonsComponent,
     HomeAdminComponent,
     LogButtonComponent,
+    ClassListComponent,
+    UserListViewComponent,
+    ClassListViewComponent,
   ],
   imports: [
     BrowserModule,
