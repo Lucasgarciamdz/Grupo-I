@@ -16,6 +16,7 @@ export class ClassListComponent implements OnInit {
     this.userService.getClasses().subscribe({
       next: (classes: any) => {
         this.classes = classes;
+        console.log(this.classes);
       },
       error: (error) => {
         alert('Error al obtener las clases');

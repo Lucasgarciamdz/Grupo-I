@@ -24,6 +24,12 @@ export class SigninComponent implements OnInit {
     })
   }
 
+  //f.bertoldi@alumno.um.edu.ar
+  //123
+  //l.garcia@alumno.um.edu.ar
+  //456
+  ///frg.lopez@alumno.um.edu.ar
+  ///789
   login(dataLogin:any = {}) {
     //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
     console.log('Comprobando credenciales');
