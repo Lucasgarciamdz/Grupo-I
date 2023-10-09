@@ -9,6 +9,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UserListComponent implements OnInit {
 
+  editingUser: number = 0;
+
   users: any[] | undefined;
 
   constructor(private userSvc: UsuariosService) { 
@@ -27,7 +29,25 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+
+  editUser(id: number): void { 
+    this.editingUser = id;
+  }
+
+  deleteUser(id: number): void {
+    alert('Eliminar usuario con id ' + id);
+  }
+
+  saveUser(): void {
+    alert('Guardar usuario');
+  }
+
+  cancelEdit(): void {
+    alert('Cancelar edición');
+  }
 }
+
 
 @NgModule({  declarations: [UserListComponent],
   imports: [CommonModule],

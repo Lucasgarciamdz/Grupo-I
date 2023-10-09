@@ -30,55 +30,55 @@ import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
-import { UserListComponent } from './components/user-list/user-list.component';
+import { UserListComponent, UserListModule } from './components/user-list/user-list.component';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { JWTService } from './services/jwt.service';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ResponsiveWorkoutsCardsComponent,
-    HomeComponent,
-    NavbarComponent,
-    NavbarResponsiveComponent,
-    SearchBarComponent,
-    ListaPlanificacionesComponent,
-    PlanificacionesComponent,
-    ProfilePictureComponent,
-    ProfileComponent,
-    AccountInfoComponent,
-    NotificationsBoxComponent,
-    ProfileStatsBoxComponent,
-    SigninComponent,
-    SignupComponent,
-    ProfButtonsComponent,
-    TitleComponent,
-    EditProfileBtnComponent,
-    HomeProfComponent,
-    EditProfileFormComponent,
-    EditProfileComponent,
-    StudWorkComponent,
-    UpdateBtnComponent,
-    AdminButtonsComponent,
-    HomeAdminComponent,
-    LogButtonComponent,
-    ClassListComponent,
-    UserListViewComponent,
-    ClassListViewComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule, 
-    ReactiveFormsModule,
-    
-  ],
-  providers: [
-    JWTService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ResponsiveWorkoutsCardsComponent,
+        HomeComponent,
+        NavbarComponent,
+        NavbarResponsiveComponent,
+        SearchBarComponent,
+        ListaPlanificacionesComponent,
+        PlanificacionesComponent,
+        ProfilePictureComponent,
+        ProfileComponent,
+        AccountInfoComponent,
+        NotificationsBoxComponent,
+        ProfileStatsBoxComponent,
+        SigninComponent,
+        SignupComponent,
+        ProfButtonsComponent,
+        TitleComponent,
+        EditProfileBtnComponent,
+        HomeProfComponent,
+        EditProfileFormComponent,
+        EditProfileComponent,
+        StudWorkComponent,
+        UpdateBtnComponent,
+        AdminButtonsComponent,
+        HomeAdminComponent,
+        LogButtonComponent,
+        ClassListComponent,
+        UserListViewComponent,
+        ClassListViewComponent,
+    ],
+    providers: [
+        JWTService
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        UserListModule
+    ]
 })
 export class AppModule { }

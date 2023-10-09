@@ -48,6 +48,7 @@ def register():
         if exists:
             return 'Duplicated email', 409
         else:
+            usuario.rol = 'admin'
             db.session.add(usuario)
             db.session.commit()
             sent = sendMail ([usuario.email], "Welcome!",'register', usuario=usuario)

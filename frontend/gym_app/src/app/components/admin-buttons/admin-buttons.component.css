@@ -14,7 +14,7 @@
 .button-row {
   margin-bottom: 20px;
   text-align: center;
-  width: 50%; /* Ajusta el ancho según sea necesario */
+  width: 100%; /* Use full width */
 }
 
 .button {
@@ -27,8 +27,15 @@
   background-color: #2196f3;
   color: #fff;
   font-size: 16px;
+  transition: background-color 0.3s ease; /* Add transition effect */
 }
 
 .button:hover {
   background-color: #1976d2;
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.container {
+  max-width: 960px; /* Set max width for container */
+  margin: 0 auto; /* Center container horizontally */
 }
