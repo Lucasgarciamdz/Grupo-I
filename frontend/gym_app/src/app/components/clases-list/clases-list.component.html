@@ -1,60 +1,57 @@
-<p>hola</p>
+ 
 
-<!--<div class="container ">-->
-<!--  <div class="row">-->
-<!--    <div class="col">-->
-<!--      <h2>User List</h2>-->
-<!--      <table class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th class="text-center">Nombre y Apellido</th>-->
-<!--          <th class="text-center">Rol</th>-->
-<!--          <th class="text-center">Edad</th>-->
-<!--          <th class="text-center">Acciones</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody *ngFor="let user of users">-->
-<!--        <tr *ngIf="user.id_usuario != editingUserId">-->
+<div class="container ">
+  <div class="row">
+    <div class="col">
+      <h2>User List</h2>
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center">Nombre y Apellido</th>
+          <th class="text-center">Rol</th>
+          <th class="text-center">Edad</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let clase of clases">
+        <tr *ngIf="clase.id_usuario != editingClaseId">
 
-<!--          <td>{{ user.nombre }} {{user.apellido}}</td>-->
-<!--          <td>{{ user.rol }}</td>-->
-<!--          <td>{{ user.edad }}</td>-->
-<!--          <td>-->
-<!--            <button class="btn btn-primary ms-5 text-center" (click)="editUser(user.id_usuario)">Editar</button>-->
+          <td>{{ clase.tipo }}</td>
+          <td>
+            <button class="btn btn-primary ms-5 text-center" (click)="editUser(clase.id_usuario)">Editar</button>
 
-<!--            <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(user.id_usuario)">Eliminar</button>-->
-<!--          </td>-->
+            <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(clase.id_usuario)">Eliminar</button>
+          </td>
 
-<!--        </tr>-->
-<!--        <tr *ngIf="editingUserId == user.id_usuario">-->
-<!--          <td colspan="4">-->
-<!--            <div class="card">-->
-<!--              <div class="card-header">-->
-<!--                Editar usuario-->
-<!--              </div>-->
-<!--              <div class="card-body">-->
-<!--                <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">-->
-<!--                  <div class="mb-3">-->
-<!--                    <label for="nombre" class="form-label">Nombre y Apellido:</label>-->
-<!--                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="user.nombre">-->
-<!--                  </div>-->
-<!--                  <div class="mb-3">-->
-<!--                    <label for="rol" class="form-label">Rol:</label>-->
-<!--                    <input type="text" class="form-control" id="rol" name="rol" [(ngModel)]="user.rol">-->
-<!--                  </div>-->
-<!--                  <div class="mb-3">-->
-<!--                    <label for="edad" class="form-label">Edad:</label>-->
-<!--                    <input type="number" class="form-control" id="edad" name="edad" [(ngModel)]="user.edad">-->
-<!--                  </div>-->
-<!--                  <button type="submit" class="btn btn-primary">Guardar</button>-->
-<!--                  <button type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancelar</button>-->
-<!--                </form>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+        </tr>
+        <tr *ngIf="editingClaseId == clase.id_usuario">
+          <td colspan="4">
+            <div class="card">
+              <div class="card-header">
+                Editar usuario
+              </div>
+              <div class="card-body">
+                <form #userForm="ngForm" (ngSubmit)="saveClaseuserForm)">
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre y Apellido:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="clase.nombre">
+                  </div>
+                  <div class="mb-3">
+                    <label for="rol" class="form-label">Rol:</label>
+                    <input type="text" class="form-control" id="rol" name="rol" [(ngModel)]="clase.rol">
+                  </div>
+                  <div class="mb-3">
+                    <label for="edad" class="form-label">Edad:</label>
+                    <input type="number" class="form-control" id="edad" name="edad" [(ngModel)]="clase.edad">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancelar</button>
+                </form>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div> 
+
