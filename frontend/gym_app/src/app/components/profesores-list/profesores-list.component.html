@@ -18,9 +18,9 @@
           <td>{{ user.rol }}</td>
           <td>{{ user.edad }}</td>
           <td>
-            <button class="btn btn-primary ms-5 text-center" (click)="editUser(user.id_usuario)">Editar</button>
+            <button class="btn btn-primary ms-5 text-center" (click)="editProfesor(user.id_usuario)">Editar</button>
 
-            <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(user.id_usuario)">Eliminar</button>
+            <button class="btn btn-danger ms-5 text-center" (click)="deleteProfesor(user.id_usuario)">Eliminar</button>
           </td>
 
         </tr>
@@ -31,7 +31,7 @@
                 Editar usuario
               </div>
               <div class="card-body">
-                <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
+                <form #userForm="ngForm" (ngSubmit)="saveProfesor(userForm)">
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre y Apellido:</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="user.nombre">

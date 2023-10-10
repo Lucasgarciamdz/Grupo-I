@@ -31,7 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
 import { UserListComponent, UserListModule } from './components/user-list/user-list.component';
-import { ClassListComponent } from './components/class-list/class-list.component';
 import { JWTService } from './services/jwt.service';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
@@ -66,7 +65,6 @@ import { ProfesoresListComponent } from './components/profesores-list/profesores
         AdminButtonsComponent,
         HomeAdminComponent,
         LogButtonComponent,
-        ClassListComponent,
         UserListViewComponent,
         ClassListViewComponent,
         ClasesListComponent,
