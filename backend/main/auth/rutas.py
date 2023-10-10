@@ -35,11 +35,11 @@ def login():
         return 'Incorrect password', 401
 
 
-
 @auth.route('/register', methods=['POST'])
 def register():
     try:
         data = request.get_json()
+        data.rol = ""
         if not data:
             return 'Invalid request data', 400
 
@@ -48,7 +48,6 @@ def register():
         if exists:
             return 'Duplicated email', 409
         else:
-            usuario.rol = 'admin'
             db.session.add(usuario)
             db.session.commit()
             sent = sendMail ([usuario.email], "Welcome!",'register', usuario=usuario)

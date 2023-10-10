@@ -91,3 +91,7 @@
 .user-list .btn-danger:hover {
   background-color: #c82333;
 }
+
+.container{
+  padding-bottom: 80px;
+}

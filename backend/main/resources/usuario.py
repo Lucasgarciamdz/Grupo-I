@@ -52,6 +52,7 @@ class Usuarios(Resource):
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
+            usuario.rol = ""
         except Exception:
             return "Error al pasar a JSON"
         db.session.add(usuario)
@@ -65,7 +66,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    @role_required(roles="alumno")
+    @role_required(roles="admin")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()

@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {CommonModule} from '@angular/common';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
+import {UsuariosService} from 'src/app/services/usuarios.service';
+import {FormsModule, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-user-list',
@@ -9,11 +10,14 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UserListComponent implements OnInit {
 
-  editingUser: number = 0;
+  @ViewChild('userForm')
+  userForm!: NgForm;
+
+  editingUserId: number = 0;
 
   users: any[] | undefined;
 
-  constructor(private userSvc: UsuariosService) { 
+  constructor(private userSvc: UsuariosService) {
   }
 
   ngOnInit() {
@@ -31,17 +35,48 @@ export class UserListComponent implements OnInit {
   }
 
 
-  editUser(id: number): void { 
-    this.editingUser = id;
+  editUser(id: number): void {
+    this.editingUserId = id;
+    alert('Editar usuario con id ' + id)
   }
 
   deleteUser(id: number): void {
-    alert('Eliminar usuario con id ' + id);
+    this.userSvc.deleteUser(id).subscribe({
+      next: (user: any) => {
+        alert('Usuario eliminado');
+      },
+      error: (error) => {
+        alert('Error al eliminar usuario');
+      },
+      complete: () => {
+        console.log('Finalizó');
+      }
+    });
   }
 
-  saveUser(): void {
-    alert('Guardar usuario');
+
+  saveUser(form: NgForm): void {
+    alert('Guardar usuario')
+    const {nombre, rol, edad} = form.value;
+
+    const user = {nombre, rol, edad};
+
+    const userJson = JSON.stringify(user);
+    this.userSvc.putUser(this.editingUserId, userJson).subscribe({
+      next: (user: any) => {
+        alert('Usuario actualizado');
+      },
+      error: (error) => {
+        alert('Error al actualizar usuario');
+      },
+      complete: () => {
+        console.log('Finalizó');
+        this.editingUserId = 0
+
+      }
+    });
   }
+
 
   cancelEdit(): void {
     alert('Cancelar edición');
@@ -49,8 +84,11 @@ export class UserListComponent implements OnInit {
 }
 
 
-@NgModule({  declarations: [UserListComponent],
-  imports: [CommonModule],
-  exports: [UserListComponent]})
+@NgModule({
+  declarations: [UserListComponent],
+  imports: [CommonModule, FormsModule],
+  exports: [UserListComponent]
+})
 
-export class UserListModule { }
+export class UserListModule {
+}

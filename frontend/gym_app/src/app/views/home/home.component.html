@@ -6,4 +6,6 @@
 <app-responsive-workouts-cards [title]="'Most popular'" [items]="workoutItems"></app-responsive-workouts-cards>
 <app-responsive-workouts-cards [title]="'Most intense'" [items]="workoutItems"></app-responsive-workouts-cards>
 
+<div *ngIf="isToken">
 <app-navbar-responsive></app-navbar-responsive>
+</div>
