@@ -1,6 +1,6 @@
 import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import {UsuariosService} from 'src/app/services/usuarios.service';
 import {FormsModule, NgForm} from "@angular/forms";
+import { BaseService } from 'src/app/services/base.service';
 
 @Component({
   selector: 'app-clases-list',
@@ -10,20 +10,20 @@ import {FormsModule, NgForm} from "@angular/forms";
 export class ClasesListComponent {
 
 
-  @ViewChild('userForm')
-  userForm!: NgForm;
+  @ViewChild('clasesForm')
+  clasesForm!: NgForm;
 
-  editingUserId: number = 0;
+  editingClaseId: number = 0;
 
-  users: any[] | undefined;
+  clases: any[] | undefined;
 
-  constructor(private userSvc: UsuariosService) {
+  constructor(private backSvc: BaseService) {
   }
 
   ngOnInit() {
-    this.userSvc.getUsers().subscribe({
-      next: (users: any) => {
-        this.users = users.usuario;
+    this.backSvc.get("clases").subscribe({
+      next: (clases: any) => {
+        this.clases = clases.clase;
       },
       error: (error) => {
         alert('Error al obtener usuarios');
@@ -35,14 +35,14 @@ export class ClasesListComponent {
   }
 
 
-  editUser(id: number): void {
-    this.editingUserId = id;
-    alert('Editar usuario con id ' + id)
+  editclases(id: number): void {
+    this.editingClaseId = id;
+    alert('Editar clase con id ' + id)
   }
 
-  deleteUser(id: number): void {
-    this.userSvc.deleteUser(id).subscribe({
-      next: (user: any) => {
+  deleteclases(id: number): void {
+    this.backSvc.delete("clases" + id).subscribe({
+      next: (clases: any) => {
         alert('Usuario eliminado');
       },
       error: (error) => {
@@ -55,15 +55,17 @@ export class ClasesListComponent {
   }
 
 
-  saveUser(form: NgForm): void {
-    alert('Guardar usuario')
-    const {nombre, rol, edad} = form.value;
+  saveclases(form: NgForm): void {
+    alert('Guardar clase')
+    const {tipo} = form.value;
 
-    const user = {nombre, rol, edad};
+    const clases = {tipo};
 
-    const userJson = JSON.stringify(user);
-    this.userSvc.putUser(this.editingUserId, userJson).subscribe({
-      next: (user: any) => {
+    const clasesJson = JSON.stringify(clases);
+
+    const strId = (this.editingClaseId).toString(10)
+    this.backSvc.put(strId, clasesJson).subscribe({
+      next: (clases: any) => {
         alert('Usuario actualizado');
       },
       error: (error) => {
@@ -71,19 +73,14 @@ export class ClasesListComponent {
       },
       complete: () => {
         console.log('Finalizó');
-        this.editingUserId = 0
+        this.editingClaseId = 0
 
       }
     });
   }
 
-
   cancelEdit(): void {
     alert('Cancelar edición');
   }
-  @NgModule({
-    declarations: [ClasesListComponent],
-    imports: [CommonModule, FormsModule],
-    exports: [ClasesListComponent]
-  })
+
 }
