@@ -4,6 +4,7 @@ from .. import db
 from main.models import PlanificacionModel, AlumnoModel
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
+from main.mail.functions import sendMail
 
 
 class Planificaciones(Resource):
@@ -56,6 +57,8 @@ class Planificaciones(Resource):
             planificacion = PlanificacionModel.from_json(request.get_json())
         except Exception:
             return "Error al pasar a JSON"
+        alumnos = db.session.query(AlumnoModel)
+        sendMail([alumno.email for alumno in alumnos], "Nueva planificacion!", 'planificacion_nueva', planificacion=planificacion)
         db.session.add(planificacion)
         db.session.commit()
         return planificacion.to_json(), 201

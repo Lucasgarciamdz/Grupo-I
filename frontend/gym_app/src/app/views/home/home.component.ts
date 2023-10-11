@@ -29,7 +29,6 @@ export class HomeComponent {
       description: 'Fuerza',
       buttonText: 'Ver Clase'
     },
-
   ];
 }
 
