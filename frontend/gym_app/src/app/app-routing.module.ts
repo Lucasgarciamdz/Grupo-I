@@ -8,24 +8,29 @@ import { EditProfileComponent } from './views/edit-profile/edit-profile.componen
 import { HomeProfComponent } from './views/home-prof/home-prof.component';
 import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { ProfButtonsComponent } from './components/prof-buttons/prof-buttons.component';
-
-
+import { AuthsessionGuard } from './guards/authsession.guard';
+import { HomeAdminComponent } from './views/home-admin/home-admin.component';
+import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
+import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
-  { path: 'profile', component: ProfileComponent },
-  { path: 'edit-profile', component: EditProfileComponent},
-  { path: 'home-prof', component: HomeProfComponent},
-  { path: 'stud-work', component: StudWorkComponent},
-  { path: 'prof-buttons', component: ProfButtonsComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
+  { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
+  { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },
+  { path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthsessionGuard], data: { roles: ['admin', 'Profesor'] }},
+  { path: 'user-list-view', component: UserListViewComponent},
+  { path: 'class-list-view', component: ClassListViewComponent},
+  { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
+  { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['admin', 'Profesor'] } },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

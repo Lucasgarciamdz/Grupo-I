@@ -27,40 +27,60 @@ import { StudWorkComponent } from './views/stud-work/stud-work.component';
 import { UpdateBtnComponent } from './components/update-btn/update-btn.component';
 import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogButtonComponent } from './components/log-buttons/log-buttons.component';
+import { UserListComponent, UserListModule } from './components/user-list/user-list.component';
+import { JWTService } from './services/jwt.service';
+import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
+import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
+import { ClasesListComponent } from './components/clases-list/clases-list.component';
+import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ResponsiveWorkoutsCardsComponent,
-    HomeComponent,
-    NavbarComponent,
-    NavbarResponsiveComponent,
-    SearchBarComponent,
-    ListaPlanificacionesComponent,
-    PlanificacionesComponent,
-    ProfilePictureComponent,
-    ProfileComponent,
-    AccountInfoComponent,
-    NotificationsBoxComponent,
-    ProfileStatsBoxComponent,
-    SigninComponent,
-    SignupComponent,
-    ProfButtonsComponent,
-    TitleComponent,
-    EditProfileBtnComponent,
-    HomeProfComponent,
-    EditProfileFormComponent,
-    EditProfileComponent,
-    StudWorkComponent,
-    UpdateBtnComponent,
-    AdminButtonsComponent,
-    HomeAdminComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ResponsiveWorkoutsCardsComponent,
+        HomeComponent,
+        NavbarComponent,
+        NavbarResponsiveComponent,
+        SearchBarComponent,
+        ListaPlanificacionesComponent,
+        PlanificacionesComponent,
+        ProfilePictureComponent,
+        ProfileComponent,
+        AccountInfoComponent,
+        NotificationsBoxComponent,
+        ProfileStatsBoxComponent,
+        SigninComponent,
+        SignupComponent,
+        ProfButtonsComponent,
+        TitleComponent,
+        EditProfileBtnComponent,
+        HomeProfComponent,
+        EditProfileFormComponent,
+        EditProfileComponent,
+        StudWorkComponent,
+        UpdateBtnComponent,
+        AdminButtonsComponent,
+        HomeAdminComponent,
+        LogButtonComponent,
+        UserListViewComponent,
+        ClassListViewComponent,
+        ClasesListComponent,
+        ProfesoresListComponent,
+    ],
+    providers: [
+        JWTService
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        UserListModule
+    ]
 })
 export class AppModule { }

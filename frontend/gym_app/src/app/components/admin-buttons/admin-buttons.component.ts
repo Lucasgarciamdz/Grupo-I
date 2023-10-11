@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-buttons',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-buttons.component.css']
 })
 export class AdminButtonsComponent {
-  students: string[] = ['Student 1', 'Student 2', 'Student 3', 'Student 4', 'Student 5', 'Student 6'];
-  classes: string[] = ['Class A', 'Class B', 'Class C', 'Class D', 'Class E', 'Class F'];
-}
+  constructor(private router: Router) {}
 
+  showUserList() {
+    this.router.navigate(['/user-list-view']);
+  }
+
+  showClassList() {
+    this.router.navigate(['/class-list-view']);
+  }
+}

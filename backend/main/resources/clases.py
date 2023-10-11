@@ -8,7 +8,7 @@ from main.auth.decoradores import role_required
 
 class Clases(Resource):
 
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         clases = db.session.query(ClasesModel)
 
@@ -36,7 +36,7 @@ class Clases(Resource):
                         "total": clases.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             clase = ClasesModel.from_json(request.get_json())

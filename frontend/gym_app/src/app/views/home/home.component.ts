@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  get isToken() {
+    return localStorage.getItem('token');
+  }
 
   workoutItems = [
     {
@@ -27,7 +29,6 @@ export class HomeComponent {
       description: 'Fuerza',
       buttonText: 'Ver Clase'
     },
-    
   ];
 }
 

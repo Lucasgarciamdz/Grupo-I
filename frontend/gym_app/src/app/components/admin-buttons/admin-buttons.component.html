@@ -1,20 +1,16 @@
-<div class="welcome-header">
-    <h1>Welcome back profesor!</h1>
-  </div>
-  
-  <div class="button-container">
-    <div class="button-group">
-      <h2>My students</h2>
-      <div class="button-scroll">
-        <button class="button" *ngFor="let student of students">{{ student }}</button>
-      </div>
-    </div>
-  
-    <div class="button-group">
-      <h2>My classes</h2>
-      <div class="button-scroll">
-        <button class="button" *ngFor="let class of classes">{{ class }}</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="button-container">
+        <div class="button-row">
+          <button class="button" routerLink="/user-list-view">Usuarios</button>
+        </div>
+
+        <div class="button-row">
+          <button class="button" routerLink="/class-list-view">Clases</button>
+        </div>
+
       </div>
     </div>
   </div>
-  
+</div>
