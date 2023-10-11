@@ -13,24 +13,24 @@
         </tr>
         </thead>
         <tbody *ngFor="let clase of clases">
-        <tr *ngIf="clase.id_clase != editingClaseId">
+        <tr *ngIf="clase.id != editingClaseId">
 
           <td>{{ clase.tipo }}</td>
           <td>
-            <button class="btn btn-primary ms-5 text-center" (click)="editclases(clase.id_clase)">Editar</button>
+            <button class="btn btn-primary ms-5 text-center" (click)="editclases(clase.id)">Editar</button>
 
-            <button class="btn btn-danger ms-5 text-center" (click)="deleteclases(clase.id_clase)">Eliminar</button>
+            <button class="btn btn-danger ms-5 text-center" (click)="deleteclases(clase.id)">Eliminar</button>
           </td>
 
         </tr>
-        <tr *ngIf="editingClaseId == clase.id_clase">
+        <tr *ngIf="editingClaseId == clase.id">
           <td colspan="4">
             <div class="card">
               <div class="card-header">
                 Editar clase
               </div>
               <div class="card-body">
-                <form #userForm="ngForm" (ngSubmit)="(saveclases)">
+                <form #claseForm="ngForm" (ngSubmit)="saveclases(claseForm)">
                   <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
                     <input type="text" class="form-control" id="tipo" name="tipo" [(ngModel)]="clase.tipo">

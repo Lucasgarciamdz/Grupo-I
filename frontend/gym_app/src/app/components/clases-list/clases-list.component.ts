@@ -1,5 +1,5 @@
-import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import {FormsModule, NgForm} from "@angular/forms";
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from "@angular/forms";
 import { BaseService } from 'src/app/services/base.service';
 
 @Component({
@@ -64,12 +64,16 @@ export class ClasesListComponent {
     const clasesJson = JSON.stringify(clases);
 
     const strId = (this.editingClaseId).toString(10)
-    this.backSvc.put(strId, clasesJson).subscribe({
+
+    console.log(clasesJson);
+    console.log(strId);
+    
+    this.backSvc.put("clase/" + strId, clasesJson).subscribe({
       next: (clases: any) => {
-        alert('Usuario actualizado');
+        alert('Clase actualizada');
       },
       error: (error) => {
-        alert('Error al actualizar usuario');
+        alert('Error al actualizar clase');
       },
       complete: () => {
         console.log('Finalizó');
@@ -81,6 +85,7 @@ export class ClasesListComponent {
 
   cancelEdit(): void {
     alert('Cancelar edición');
+    this.editingClaseId = 0
   }
 
 }
