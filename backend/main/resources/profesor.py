@@ -9,7 +9,7 @@ from main.auth.decoradores import role_required
 
 class Profesores(Resource):
 
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         profesores = db.session.query(ProfesorModel)
         page = 1
@@ -77,7 +77,7 @@ class Profesores(Resource):
                         "total": profesores.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             data = request.get_json()
