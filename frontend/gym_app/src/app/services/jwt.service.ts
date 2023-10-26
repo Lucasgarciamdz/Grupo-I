@@ -39,6 +39,11 @@ export class JWTService {
     const decodedToken = this.decodeToken();
     return decodedToken ? decodedToken['email'] : null;
   }
+  
+  getId(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id'] : null;
+  }
 
   getExpiryTime(): number | null {
     const decodedToken = this.decodeToken();

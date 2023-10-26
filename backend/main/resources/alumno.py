@@ -1,11 +1,10 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import AlumnoModel
+from main.models import AlumnoModel, PlanificacionModel, ClaseModel  # Agrega los modelos necesarios
 from sqlalchemy import func
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
-
 
 class Alumnos(Resource):
 
@@ -22,14 +21,12 @@ class Alumnos(Resource):
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
 
-        # devuelve la cantidad de alumnos por cada estado posible (chequear)
         if request.args.get('estado'):
-            alumnos = db.session.query(AlumnoModel.estado, func.count(AlumnoModel.id_alumno))\
-                        .group_by(AlumnoModel.estado)
+            alumnos = db.session.query(AlumnoModel.estado, func.count(AlumnoModel.id_alumno)).group_by(AlumnoModel.estado)
 
-        # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos = alumnos.filter(not AlumnoModel.planilla_medica)
+            # Filtra los alumnos que no tienen planilla médica válida
+            alumnos = alumnos.filter(AlumnoModel.planilla_medica.is_(False))
 
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)
@@ -51,7 +48,6 @@ class Alumnos(Resource):
         db.session.add(alumno)
         db.session.commit()
         return alumno.to_json(), 201
-
 
 class Alumno(Resource):
 
@@ -76,3 +72,20 @@ class Alumno(Resource):
         db.session.delete(alumno)
         db.session.commit()
         return '', 204
+
+    @app.route('/clases_asociadas/<int:id_alumno>')
+    def obtener_clases_asociadas(id_alumno):
+        # Obtiene el alumno por ID
+        alumno = db.session.query(AlumnoModel).get_or_404(id_alumno)
+        
+        # Obtiene las planificaciones asociadas al alumno
+        planificaciones = db.session.query(PlanificacionModel).filter(PlanificacionModel.alumnos.contains(alumno)).all()
+        clases_asociadas = []
+
+        # Recorre las planificaciones y obtén las clases asociadas a cada una
+        for planificacion in planificaciones:
+            clase = db.session.query(ClaseModel).filter(ClaseModel.id_clase == planificacion.id_clase).first()
+            if clase:
+                clases_asociadas.append(clase.to_json())
+
+        return jsonify({"clases_asociadas": clases_asociadas})

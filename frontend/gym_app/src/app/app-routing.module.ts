@@ -12,6 +12,7 @@ import { AuthsessionGuard } from './guards/authsession.guard';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
+import { ClassComponent } from './views/class/class.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'class-list-view', component: ClassListViewComponent},
   { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['admin', 'Profesor'] } },
+  { path: 'views/class', component: ClassComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

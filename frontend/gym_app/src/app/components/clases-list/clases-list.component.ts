@@ -34,7 +34,6 @@ export class ClasesListComponent implements OnInit{
     });
   }
 
-
   editclases(id: number): void {
     this.editingClaseId = id;
     alert('Editar clase con id ' + id)

@@ -14,19 +14,23 @@ export class ClasesService extends BaseService{
 
   getClases(): Observable<any[]> {
     const headers = this.getHeaders();
-
     return this.httpClient.get<any[]>(`${this.url}/clases`, { headers });
   }
+  // Clases asociadas al alumno
+  getClasesByAlumno(alumnoId: number): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any[]>(`${this.url}/clases?alumnoId=${alumnoId}`, { headers });
+  }
+
 
   putClase(id: number, clase: any): Observable<any> {
     const headers = this.getHeaders();
-
     return this.httpClient.put<any>(`${this.url}/clase/${id}`, clase, { headers });
   }
 
   deleteClase(id: number): Observable<any> {
     const headers = this.getHeaders();
-
     return this.httpClient.delete<any>(`${this.url}/clase/${id}`, { headers });
   }
 }
+
