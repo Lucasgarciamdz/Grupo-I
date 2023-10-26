@@ -2,7 +2,7 @@
 
 ## Front
 
-### Clases @Francisco 'dale fran'
+### Clases @Francisco 
 
 - hacer vista para boton ver clases
   - se tienen que mostrar las planificaciones de cada clase
@@ -11,6 +11,7 @@
 
 - ver si es solo en las listas del admin
 - anda a saber que es
+- ver de NPM, se pasan datos de backend y se arma la paginacion
 
 ### Admin
 
@@ -50,3 +51,7 @@
 - formatear el codigo
 - documentar????
 - postman_collection?
+
+### Detalles
+
+- hacer filtros (usar los filtros del back)
