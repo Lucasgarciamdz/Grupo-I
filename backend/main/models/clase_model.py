@@ -7,7 +7,7 @@ class Clase(db.Model):
     __tablename__ = "clase"
 
     id_clase = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(45), nullable=False)
+    tipo = db.Column(db.String(45), nullable=False)
 
     planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
     profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'), overlaps="clases,profesores_p")

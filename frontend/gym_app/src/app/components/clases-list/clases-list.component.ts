@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import { BaseService } from 'src/app/services/base.service';
 
@@ -7,7 +7,7 @@ import { BaseService } from 'src/app/services/base.service';
   templateUrl: './clases-list.component.html',
   styleUrls: ['./clases-list.component.css']
 })
-export class ClasesListComponent {
+export class ClasesListComponent implements OnInit{
 
 
   @ViewChild('clasesForm')

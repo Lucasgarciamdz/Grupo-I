@@ -60,7 +60,7 @@ class Usuario(db.Model):
         direccion = usuario_json.get('direccion')
         edad = usuario_json.get('edad')
         telefono = usuario_json.get('telefono')
-        dni = usuario_json.get('dni')
+        # dni = usuario_json.get('dni')
         rol = usuario_json.get('rol')
         sexo = usuario_json.get('sexo')
         email = usuario_json.get('email')
@@ -72,7 +72,7 @@ class Usuario(db.Model):
                        direccion=direccion,
                        edad=edad,
                        telefono=telefono,
-                       dni=dni,
+                    #    dni=dni,
                        rol=rol,
                        sexo=sexo,
                        email=email,

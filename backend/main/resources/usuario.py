@@ -48,7 +48,7 @@ class Usuarios(Resource):
                         "total": usuarios.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
