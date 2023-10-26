@@ -66,7 +66,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    @role_required(roles="admin")
+    # @role_required(roles="admin")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()
@@ -75,7 +75,8 @@ class Usuario(Resource):
         db.session.add(usuario)
         db.session.commit()
         return usuario.to_json(), 201
-
+    
+    @role_required(roles="admin")
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         db.session.delete(usuario)

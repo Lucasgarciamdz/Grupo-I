@@ -17,6 +17,12 @@ export class UsuariosService extends BaseService {
     return this.httpClient.get<any[]>(`${this.url}/usuarios`, {headers});
   }
 
+  getUserById<T>(id: number): Observable<T> {
+    const headers = this.getHeaders();
+
+    return this.httpClient.get<T>(`${this.url}/usuario/${id}`, {headers});
+  }
+
   getClasses(): Observable<any[]> {
     const headers = this.getHeaders();
 

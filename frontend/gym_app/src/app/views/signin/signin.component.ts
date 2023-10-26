@@ -30,6 +30,7 @@ export class SigninComponent implements OnInit {
   //456
   ///frg.lopez@alumno.um.edu.ar   admin
   ///789
+
   login(dataLogin:any = {}) {
     //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
     console.log('Comprobando credenciales');
@@ -50,6 +51,11 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  togglePasswordVisibility(): void {
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+  }
+  
   submit() {
     if (this.loginForm.valid) {
       console.log('Form login: ', this.loginForm.value);

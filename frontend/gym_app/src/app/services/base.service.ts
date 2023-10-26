@@ -33,6 +33,12 @@ export class BaseService {
     });
   }
 
+  public getById<T>(endpoint: string, id: number): Observable<T> {
+    return this.httpClient.get<T>(`${this.url}/${endpoint}/${id}`, {
+      headers: this.headers
+    });
+  }
+  
   public put<T>(endpoint: string, body: any): Observable<T> {
     return this.httpClient.put<T>(`${this.url}/${endpoint}`, body, {
       headers: this.headers
