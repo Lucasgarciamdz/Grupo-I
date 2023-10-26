@@ -34,7 +34,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-
   editUser(id: number): void {
     this.editingUserId = id;
     alert('Editar usuario con id ' + id)

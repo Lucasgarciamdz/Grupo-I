@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { JWTService } from 'src/app/services/jwt.service';
 
 @Component({
   selector: 'app-profile-picture',
@@ -15,7 +17,24 @@ import { Component, Input } from '@angular/core';
     `
   ]
 })
-export class ProfilePictureComponent {
+export class ProfilePictureComponent implements OnInit {
   @Input() image: string | undefined;
   @Input() name: string | undefined;
+
+  constructor(private usuariosService: UsuariosService, private jwtService: JWTService) {}
+
+  ngOnInit() {
+    const userId = parseInt(this.jwtService.getId() || '', 10);
+    if (userId) {
+      this.usuariosService.getUserById<any>(userId).subscribe({
+        next: (data) => {
+          // this.image = data.imagen;
+          this.name = `${data.nombre} ${data.apellido}`;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
+  }
 }

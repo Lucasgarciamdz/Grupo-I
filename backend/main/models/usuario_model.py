@@ -18,6 +18,8 @@ class Usuario(db.Model):
     sexo = db.Column(db.String(2), nullable=False)
     email = db.Column(db.String(45), nullable=False, unique=True)
     contrasena = db.Column(db.String(45), nullable=False)
+    # imagen = db.Column(db.String(45), nullable=True)
+    # fecha_nacimiento = db.Column(db.Date, nullable=True)
 
     # login = db.relationship('Login', back_populates='usuario', cascade="all, delete-orphan", uselist=False, single_parent=True)
     profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
@@ -49,6 +51,8 @@ class Usuario(db.Model):
             'rol': self.rol,
             'sexo': self.sexo,
             'email': self.email,
+            # 'imagen': self.imagen,
+            # 'fecha_nacimiento': self.fecha_nacimiento,
         }
         return usuario_json
 
@@ -65,6 +69,8 @@ class Usuario(db.Model):
         sexo = usuario_json.get('sexo')
         email = usuario_json.get('email')
         contrasena = usuario_json.get('contrasena')
+        # imagen = usuario_json.get('imagen')
+        # fecha_nacimiento = usuario_json.get('fecha_nacimiento')
 
         return Usuario(id_usuario=id_usuario,
                        nombre=nombre,
@@ -77,4 +83,6 @@ class Usuario(db.Model):
                        sexo=sexo,
                        email=email,
                        plain_contrasena=contrasena,
+                    #    imagen=imagen,
+                    #    fecha_nacimiento=fecha_nacimiento,
                        )
