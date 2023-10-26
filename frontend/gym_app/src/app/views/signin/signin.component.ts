@@ -24,11 +24,11 @@ export class SigninComponent implements OnInit {
     })
   }
 
-  //f.bertoldi@alumno.um.edu.ar
+  //f.bertoldi@alumno.um.edu.ar   Alumno
   //123
-  //l.garcia@alumno.um.edu.ar
+  //l.garcia@alumno.um.edu.ar   Profesor
   //456
-  ///frg.lopez@alumno.um.edu.ar
+  ///frg.lopez@alumno.um.edu.ar   admin
   ///789
   login(dataLogin:any = {}) {
     //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
