@@ -36,6 +36,8 @@ import { UserListViewComponent } from './views/user-list-view/user-list-view.com
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 import { ClasesListComponent } from './components/clases-list/clases-list.component';
 import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
+import { ClasesComponent } from './views/clases/clases.component';
+import { ClassCardComponent } from './components/class-card/class-card.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +71,8 @@ import { ProfesoresListComponent } from './components/profesores-list/profesores
         ClassListViewComponent,
         ClasesListComponent,
         ProfesoresListComponent,
+        ClasesComponent,
+        ClassCardComponent,
     ],
     providers: [
         JWTService

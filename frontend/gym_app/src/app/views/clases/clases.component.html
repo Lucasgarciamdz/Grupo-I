@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+<h1 style="text-align: center; width: 100%; padding-top: 40px;">My classes</h1>
+
+
+<!-- <app-search-bar></app-search-bar> -->
+
+<div *ngIf="isToken">
+<app-navbar-responsive></app-navbar-responsive>
+</div>
+
+<app-class-card [title]="'Título del Carousel'" [items]="classItems"></app-class-card>
