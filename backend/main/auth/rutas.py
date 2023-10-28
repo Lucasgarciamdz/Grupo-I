@@ -38,7 +38,8 @@ def login():
             'id_profesor': str(id_profesor),
             'id_alumno': str(id_alumno),
             'email': usuario.email,
-            'access_token': access_token
+            'access_token': access_token,
+            'usuario': usuario.to_json()
         }
 
         return data, 200

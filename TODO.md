@@ -2,44 +2,44 @@
 
 ## Front
 
-### Clases @Francisco 
+### Clases @Francisco (por terminar)
 
 - hacer vista para boton ver clases
   - se tienen que mostrar las planificaciones de cada clase
 
-### Paginacion
+### Paginacion (falta)
 
 - ver si es solo en las listas del admin
 - anda a saber que es
 - ver de NPM, se pasan datos de backend y se arma la paginacion
 
-### Admin
+### Admin (falta) Franco
 
 - agregar la posibilidad de filtrar
 - mostrar lista clases
 - agregar posibilidad de crear clases y planificaiones
 
-### Usuario @Franco 'no hice nada todavia'
+### Usuario @Franco (falta clases)
 
 - asegurarse de ver solo las clases propias
-- mejorar edit, agregar opcion de cancel y ver el boton de update
+- mejorar edit, agregar opcion de cancel y ver el boton de update (listo)
 
-#### Perfil @Franco 'no hice nada todavia'
+#### Perfil @Franco (listo)
 
-- IMPORTANTE, hacer el perfil personalizado
+- ~~IMPORTANTE, hacer el perfil personalizado (listo)~~
 
-### Profesor @Lucas 'hecho'
+### Profesor @Lucas (falta)
 
-- que funcionen los botones de students y clases
+- que funcionen los botones de students y clases (falta un toque)
 
 ## Back
 
-### Base de datos @Lucas 'hecho'
+### Base de datos @Lucas (listo)
 
 - Revisar muy bien el modelo de base de datos
 - llenar con cosas random par ver que se vea todo bien
 
-### Register
+### Register (falta) Franco
 
 - enviar mail al admin cuando hay un nuevo register
 

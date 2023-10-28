@@ -11,19 +11,13 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./edit-profile-form.component.css'],
 })
 export class EditProfileFormComponent {
-  public get userDataService(): UserDataService {
-    return this._userDataService;
-  }
-  public set userDataService(value: UserDataService) {
-    this._userDataService = value;
-  }
+ 
   form: FormGroup;
 
   constructor(
     private router: Router,
     private usuariosService: UsuariosService,
     private jwtService: JWTService,
-    private _userDataService: UserDataService
   ) {
     this.form = new FormGroup({
       name: new FormControl(''),
@@ -48,34 +42,20 @@ export class EditProfileFormComponent {
   };
 
   ngOnInit() {
-    const userId = parseInt(this.jwtService.getId() || '', 10);
-    if (userId) {
-      this.usuariosService.getUserById<any>(userId).subscribe({
-        next: (data) => {
-          this.form.patchValue({
-            name: data.nombre,
-            lastname: data.apellido,
-            email: data.email,
-            phone: data.telefono,
-            gender: data.sexo,
-            address: data.direccion,
-          });
+    const user = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.form.patchValue({
+      name: user.nombre,
+      lastname: user.apellido,
+      email: user.email,
+      phone: user.telefono,
+      gender: user.sexo,
+      address: user.direccion,
+    });
 
-          // Almacena los datos del formulario en el servicio UserDataService
-          this.userDataService.setUserData(this.form.value);
-
-          this.userData.id_usuario = data.id_usuario;
-          this.userData.edad = data.edad;
-          this.userData.dni = data.dni;
-          this.userData.rol = data.rol;
-
-
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
-    }
+    this.userData.id_usuario = user.id_usuario;
+    this.userData.edad = user.edad;
+    this.userData.dni = user.dni;
+    this.userData.rol = user.rol;
   }
   
   onSubmit() {
@@ -87,6 +67,8 @@ export class EditProfileFormComponent {
     this.userData.direccion = this.form.value.address;
     this.userData.sexo = this.form.value.gender;
 
+    localStorage.setItem('usuario', JSON.stringify(this.userData));
+
     this.usuariosService.putUser(this.userData.id_usuario, this.userData).subscribe({
       next: (data: any) => {
         this.router.navigate(['/profile']);
@@ -96,19 +78,37 @@ export class EditProfileFormComponent {
       },
     });
     }
+
   }
 
   // ngOnInit() {
-  //   const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-  //   this.form.patchValue({
-  //     name: userData.nombre,
-  //     lastname: userData.apellido,
-  //     email: userData.email,
-  //     phone: userData.telefono,
-  //     gender: userData.sexo,
-  //     address: userData.direccion,
-  //   });
-  
-  //   // Almacena los datos del formulario en el servicio UserDataService
-  //   this.userDataService.setUserData(this.form.value);
+  //   const userId = parseInt(this.jwtService.getId() || '', 10);
+  //   if (userId) {
+  //     this.usuariosService.getUserById<any>(userId).subscribe({
+  //       next: (data) => {
+  //         this.form.patchValue({
+  //           name: data.nombre,
+  //           lastname: data.apellido,
+  //           email: data.email,
+  //           phone: data.telefono,
+  //           gender: data.sexo,
+  //           address: data.direccion,
+  //         });
+
+  //         // Almacena los datos del formulario en el servicio UserDataService
+  //         this.userDataService.setUserData(this.form.value);
+
+  //         this.userData.id_usuario = data.id_usuario;
+  //         this.userData.edad = data.edad;
+  //         this.userData.dni = data.dni;
+  //         this.userData.rol = data.rol;
+
+
+  //       },
+  //       error: (error) => {
+  //         console.error(error);
+  //       },
+  //     });
+  //   }
   // }
+

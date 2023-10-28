@@ -39,9 +39,9 @@ export class ProfilePictureComponent implements OnInit {
   // }
 
   ngOnInit() {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    console.log(userData);
-    this.name = `${userData.name} ${userData.lastname}`;
+    const userData = JSON.parse(localStorage.getItem('usuario') || '{}');
+    // console.log(userData);
+    this.name = `${userData.nombre} ${userData.apellido}`;
     // this.image = userData.imagen;
   }
 }
