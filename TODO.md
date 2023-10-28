@@ -28,13 +28,13 @@
 
 - IMPORTANTE, hacer el perfil personalizado
 
-### Profesor @Lucas 'en desarrollo'
+### Profesor @Lucas 'hecho'
 
 - que funcionen los botones de students y clases
 
 ## Back
 
-### Base de datos @Lucas 'en desarrollo'
+### Base de datos @Lucas 'hecho'
 
 - Revisar muy bien el modelo de base de datos
 - llenar con cosas random par ver que se vea todo bien

@@ -1,0 +1,21 @@
+id_planificacion,id_clase,horas_semanales,nivel,objetivo
+1,1,3,principiante,relajación
+2,2,2,intermedio,fortalecimiento
+3,3,4,avanzado,quemar calorías
+4,4,1,principiante,bailar y divertirse
+5,5,3,intermedio,tonificar músculos
+6,6,2,avanzado,defensa personal
+7,7,4,principiante,mejorar resistencia
+8,8,1,intermedio,aprender ritmos latinos
+9,9,3,avanzado,mejorar técnica
+10,10,2,principiante,aprender escalada
+11,11,4,intermedio,mejorar saque
+12,12,1,avanzado,jugar partidos
+13,13,3,principiante,mejorar velocidad
+14,14,2,intermedio,remar en equipo
+15,15,4,avanzado,levantar pesas
+16,16,1,principiante,ejercicios con peso corporal
+17,17,3,intermedio,defensa personal
+18,18,2,avanzado,aprender trucos
+19,19,4,principiante,patinar en rampa
+20,20,1,intermedio,surfear olas grandes

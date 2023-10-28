@@ -15,7 +15,7 @@ class Profesor(db.Model):
 
     certificacion = db.Column(db.String(45), nullable=False)
     fecha_inicio_actividad = db.Column(db.String(45), nullable=False)
-    # sueldo = db.Column(db.Float, nullable=False)
+    sueldo = db.Column(db.Float, nullable=False)
     estado = db.Column(db.String(45), nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
@@ -29,7 +29,7 @@ class Profesor(db.Model):
             'id_profesor': self.id_profesor,
             'certificacion': self.certificacion,
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
-            # 'sueldo': str(self.sueldo),
+            'sueldo': str(self.sueldo),
             'estado': self.estado,
         }
         return profesor_json
@@ -40,7 +40,7 @@ class Profesor(db.Model):
             'id_usuario': self.id_usuario,
             'certificacion': self.certificacion,
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
-            # 'sueldo': str(self.sueldo),
+            'sueldo': str(self.sueldo),
             'estado': self.estado,
             "clases": [clase.to_json() for clase in self.clases],
         }

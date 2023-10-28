@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,10 +21,12 @@ export class BaseService {
     });
   }
 
-  public get<T>(endpoint: string): Observable<T> {
-    return this.httpClient.get<T>(`${this.url}/${endpoint}`, {
-      headers: this.headers
-    });
+  public get<T>(endpoint: string, params?: any): Observable<T> {
+    const options = {
+      headers: this.headers,
+      params: new HttpParams({ fromString: params })
+    };
+    return this.httpClient.get<T>(`${this.url}/${endpoint}`, options);
   }
 
   public post<T>(endpoint: string, body: any): Observable<T> {

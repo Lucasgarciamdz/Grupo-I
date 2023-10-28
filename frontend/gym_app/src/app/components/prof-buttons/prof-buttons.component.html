@@ -1,15 +1,13 @@
-<div class="button-container">
-  <div class="button-group">
-    <h2>My students</h2>
-    <div class="button-scroll">
-      <button class="button" *ngFor="let student of students">{{ student }}</button>
-    </div>
+<div class="button-group">
+  <h2>My students</h2>
+  <div class="button-scroll">
+      <button class="button" *ngFor="let student of students" [routerLink]="['/profile']">{{ student.name }}</button>
+    </div>  
   </div>
 
-  <div class="button-group">
-    <h2>My classes</h2>
-    <div class="button-scroll">
-      <button class="button" *ngFor="let class of classes">{{ class }}</button>
-    </div>
+<div class="button-group">
+  <h2>My classes</h2>
+  <div class="button-scroll">
+    <button class="button" *ngFor="let clase of classes" [routerLink]="['/clase']">{{ clase.name }}</button>
   </div>
 </div>

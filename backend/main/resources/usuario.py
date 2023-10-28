@@ -13,7 +13,7 @@ class Usuarios(Resource):
         usuarios = db.session.query(UsuarioModel)
 
         page = 1
-        per_page = 10
+        per_page = 50
 
         if request.args.get('page'):
             page = int(request.args.get('page'))

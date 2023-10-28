@@ -42,7 +42,15 @@ export class JWTService {
 
   getId(): string | null {
     const decodedToken = this.decodeToken();
-    return decodedToken ? decodedToken['id'] : null;
+    return decodedToken ? decodedToken['id_usuario'] : null;
+  }
+  getIdAlumno(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id_alumno'] : null;
+  }
+  getIdProfesor(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id_profesor'] : null;
   }
 
   getExpiryTime(): number | null {
