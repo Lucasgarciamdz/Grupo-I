@@ -1,7 +1,8 @@
-import {CommonModule} from '@angular/common';
-import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import {UsuariosService} from 'src/app/services/usuarios.service';
-import {FormsModule, NgForm} from "@angular/forms";
+import { CommonModule, Location } from '@angular/common';
+import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { FormsModule, NgForm } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -13,11 +14,17 @@ export class UserListComponent implements OnInit {
   @ViewChild('userForm')
   userForm!: NgForm;
 
-  editingUserId: number = 0;
+  editingUserId: number = -1;
 
   users: any[] | undefined;
 
-  constructor(private userSvc: UsuariosService) {
+  showFilterForm: number = 0;
+
+  minAge: number | undefined;
+  maxAge: number | undefined;
+  rol: string | undefined;
+
+  constructor(private userSvc: UsuariosService, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
@@ -34,6 +41,10 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  reloadPage() {
+    window.location.reload();
+  }  
+
   editUser(id: number): void {
     this.editingUserId = id;
     alert('Editar usuario con id ' + id)
@@ -43,6 +54,7 @@ export class UserListComponent implements OnInit {
     this.userSvc.deleteUser(id).subscribe({
       next: (user: any) => {
         alert('Usuario eliminado');
+        this.reloadPage();
       },
       error: (error) => {
         alert('Error al eliminar usuario');
@@ -52,7 +64,6 @@ export class UserListComponent implements OnInit {
       }
     });
   }
-
 
   saveUser(form: NgForm): void {
     alert('Guardar usuario')
@@ -70,18 +81,25 @@ export class UserListComponent implements OnInit {
       },
       complete: () => {
         console.log('Finalizó');
-        this.editingUserId = 0
+        this.editingUserId = -1
 
       }
     });
   }
 
-
   cancelEdit(): void {
+    this.editingUserId = -1
     alert('Cancelar edición');
   }
-}
 
+  toggleFilterForm(): void {
+    this.showFilterForm = 1;
+  }
+
+  applyFilters() {
+    
+  }
+}
 
 @NgModule({
   declarations: [UserListComponent],

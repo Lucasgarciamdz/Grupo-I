@@ -1,7 +1,34 @@
 <div class="container ">
   <div class="row">
     <div class="col">
-      <h2>User List</h2>
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <h2 class="user-list-title">User List</h2>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary ms-5 text-center" (click)="toggleFilterForm()">Filtrar</button>
+        </div>
+      </div>
+      <div class="filter-form" *ngIf="showFilterForm">
+        <form (submit)="applyFilters()">
+          <!-- Add filter input fields here (e.g., min age, max age, name, etc.) -->
+          <div class="mb-3">
+            <label for="min_age" class="form-label">Mínima Edad:</label>
+            <input type="number" class="form-control" id="min_age" name="min_age" [(ngModel)]="minAge">
+          </div>
+          <div class="mb-3">
+            <label for="max_age" class="form-label">Máxima Edad:</label>
+            <input type="number" class="form-control" id="max_age" name="max_age" [(ngModel)]="maxAge">
+          </div>
+          <div class="mb-3">
+            <label for="min_age" class="form-label">Rol:</label>
+            <input type="number" class="form-control" id="rol" name="rol" [(ngModel)]="rol">
+          </div>
+          <!-- Add more filter fields here as needed -->
+
+          <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+        </form>
+      </div>
       <table class="table">
         <thead>
           <tr>
@@ -19,7 +46,6 @@
             <td>{{ user.edad }}</td>
             <td>
               <button class="btn btn-primary ms-5 text-center" (click)="editUser(user.id_usuario)">Editar</button>
-
               <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(user.id_usuario)">Eliminar</button>
             </td>
 

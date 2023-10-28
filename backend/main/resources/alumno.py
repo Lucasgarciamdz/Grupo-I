@@ -60,6 +60,11 @@ class Alumno(Resource):
     @jwt_required(optional=True)
     def get(self, id):
         alumno = db.session.query(AlumnoModel).get_or_404(id)
+
+        if request.args.get('full'):
+            return alumno.to_json_complete()
+
+
         return alumno.to_json()
 
     @role_required('admin')

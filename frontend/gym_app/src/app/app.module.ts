@@ -35,6 +35,7 @@ import { UserListViewComponent } from './views/user-list-view/user-list-view.com
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 import { ClasesListComponent } from './components/clases-list/clases-list.component';
 import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
+import { AlumnoClaseGuard } from './guards/alumnoclase.guard';
 
 @NgModule({
     declarations: [
@@ -69,7 +70,8 @@ import { ProfesoresListComponent } from './components/profesores-list/profesores
         ProfesoresListComponent,
     ],
     providers: [
-        JWTService
+        JWTService,
+        AlumnoClaseGuard
     ],
     bootstrap: [AppComponent],
     imports: [

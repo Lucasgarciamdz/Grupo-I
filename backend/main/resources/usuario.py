@@ -35,7 +35,15 @@ class Usuarios(Resource):
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_edad'):
-            usuarios = usuarios.order_by(desc(UsuarioModel.edad))
+            min_age = request.args.get('min_age')
+            max_age = request.args.get('max_age')
+
+            if min_age is not None and max_age is not None:
+                usuarios = usuarios.filter(UsuarioModel.edad >= min_age and UsuarioModel.edad <= max_age)
+            elif min_age is not None:
+                usuarios = usuarios.filter(UsuarioModel.edad >= min_age)
+            elif max_age is not None:
+                usuarios = usuarios.filter(UsuarioModel.edad <= max_age)
 
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)

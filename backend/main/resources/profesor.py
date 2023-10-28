@@ -119,9 +119,20 @@ class Profesor(Resource):
                 "clases": [clase.to_json() for clase in clases],
                 "alumnos": [alumno.to_json_complete() for alumno in alumnos]
             })
-
+        if request.args.get('myAlumno'):
+            profesor = db.session.query(ProfesorModel).get(id)
+            clases = profesor.clases
+            planificaciones = [clase.planificacion for clase in clases]
+            alumnos = [alumno for planificacion in planificaciones for plan in planificacion for alumno in plan.alumnos]
+            alumno_id = request.args.get('myAlumno')
+            try:
+                return int(alumno_id) in [alumno.id_alumno for alumno in alumnos]
+            except Exception:
+                return False
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         return profesor.to_json()
+
+    
 
     @role_required(roles="admin")
     def put(self, id):
