@@ -1,0 +1,21 @@
+id_profesor,id_usuario,certificacion,fecha_inicio_actividad,sueldo,estado
+1,21,yoga,2020-01-01,2000,activo
+2,22,pilates,2020-02-01,2500,inactivo
+3,23,spinning,2020-03-01,3000,activo
+4,24,zumba,2020-04-01,3500,inactivo
+5,25,funcional,2020-05-01,4000,activo
+6,26,boxeo,2020-06-01,4500,inactivo
+7,27,crossfit,2020-07-01,5000,activo
+8,28,baile,2020-08-01,5500,inactivo
+9,29,natacion,2020-09-01,6000,activo
+10,30,escalada,2020-10-01,6500,inactivo
+11,31,tenis,2020-11-01,7000,activo
+12,32,padel,2020-12-01,7500,inactivo
+13,33,atletismo,2021-01-01,8000,activo
+14,34,remo,2021-02-01,8500,inactivo
+15,35,halterofilia,2021-03-01,9000,activo
+16,36,calistenia,2021-04-01,9500,inactivo
+17,37,artes marciales,2021-05-01,10000,activo
+18,38,patinaje,2021-06-01,10500,inactivo
+19,39,skateboarding,2021-07-01,11000,activo
+20,40,surf,2021-08-01,11500,inactivo

@@ -5,6 +5,7 @@ from main.models import ProfesorModel, ClasesModel
 from sqlalchemy import desc, func
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
+import pdb
 
 
 class Profesores(Resource):
@@ -30,7 +31,7 @@ class Profesores(Resource):
             profesores = profesores.filter(ProfesorModel.estado.like(request.args.get('estado')))
 
         # devuelve los profesores con la cantidad de clases (chequear)
-        if request.args.get('clases'):
+        if request.args.get('cant_clases'):
             page = request.args.get('page', 1, type=int)
             per_page = request.args.get('per_page', 10, type=int)
 
@@ -53,6 +54,8 @@ class Profesores(Resource):
             }
 
             return jsonify(profesores_data)
+
+        # if request.args.get()
 
         # devuelve los profesores con la cantidad de clases, vesion SQL(chequear)
         if request.args.get('alumnos'):
@@ -96,6 +99,27 @@ class Profesor(Resource):
 
     @jwt_required(optional=True)
     def get(self, id):
+
+        if request.args.get('alumnosyclases'):
+
+            profesor = db.session.query(ProfesorModel).get(id)
+            print(f"PROFESOR: {profesor}")
+
+            clases = profesor.clases
+            print(f"CLASES: {clases}")
+
+            planificaciones = [clase.planificacion for clase in clases]
+            print(f"PLANIFICACIONES: {planificaciones}")
+
+            alumnos = [alumno for planificacion in planificaciones for plan in planificacion for alumno in plan.alumnos]
+            print(f"ALUMNOS: {alumnos}")
+
+            return jsonify({
+                "profesor": profesor.to_json(),
+                "clases": [clase.to_json() for clase in clases],
+                "alumnos": [alumno.to_json_complete() for alumno in alumnos]
+            })
+
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         return profesor.to_json()
 

@@ -31,6 +31,8 @@ class Alumnos(Resource):
         if request.args.get('planilla_medica_falso'):
             alumnos = alumnos.filter(not AlumnoModel.planilla_medica)
 
+        # if reques.args.get('clase')
+
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)
         except Exception:

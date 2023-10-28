@@ -18,6 +18,7 @@ class Usuario(db.Model):
     sexo = db.Column(db.String(2), nullable=False)
     email = db.Column(db.String(45), nullable=False, unique=True)
     contrasena = db.Column(db.String(45), nullable=False)
+    
     # imagen = db.Column(db.String(45), nullable=True)
     # fecha_nacimiento = db.Column(db.Date, nullable=True)
 
@@ -50,7 +51,8 @@ class Usuario(db.Model):
             'dni': self.dni,
             'rol': self.rol,
             'sexo': self.sexo,
-            'email': self.email,
+            'email': self.email
+        
             # 'imagen': self.imagen,
             # 'fecha_nacimiento': self.fecha_nacimiento,
         }
@@ -64,11 +66,13 @@ class Usuario(db.Model):
         direccion = usuario_json.get('direccion')
         edad = usuario_json.get('edad')
         telefono = usuario_json.get('telefono')
-        # dni = usuario_json.get('dni')
+        dni = usuario_json.get('dni')
         rol = usuario_json.get('rol')
         sexo = usuario_json.get('sexo')
         email = usuario_json.get('email')
         contrasena = usuario_json.get('contrasena')
+        
+
         # imagen = usuario_json.get('imagen')
         # fecha_nacimiento = usuario_json.get('fecha_nacimiento')
 
@@ -78,11 +82,13 @@ class Usuario(db.Model):
                        direccion=direccion,
                        edad=edad,
                        telefono=telefono,
-                    #    dni=dni,
+                       dni=dni,
                        rol=rol,
                        sexo=sexo,
                        email=email,
                        plain_contrasena=contrasena,
-                    #    imagen=imagen,
+                       
+                
+                    # imagen=imagen,
                     #    fecha_nacimiento=fecha_nacimiento,
                        )

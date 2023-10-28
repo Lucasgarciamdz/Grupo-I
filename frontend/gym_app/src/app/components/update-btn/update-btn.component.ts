@@ -4,8 +4,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { JWTService } from 'src/app/services/jwt.service';
 import { UserDataService } from 'src/app/services/user-data.service';
 
-// Importa la interfaz UserData
-import { UserData } from 'src/app/services/user-data.service';
+// // Importa la interfaz UserData
+// import { UserData } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-update-btn',
@@ -14,7 +14,7 @@ import { UserData } from 'src/app/services/user-data.service';
 })
 
 export class UpdateBtnComponent implements OnInit {
-  userData: UserData = {
+  userData: any = {
     nombre: '',
     apellido: '',
     email: '',
