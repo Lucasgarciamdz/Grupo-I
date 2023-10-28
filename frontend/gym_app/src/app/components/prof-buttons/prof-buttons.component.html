@@ -1,13 +1,13 @@
 <div class="button-group">
   <h2>My students</h2>
   <div class="button-scroll">
-    <button class="button" *ngFor="let student of students">{{ student.name}}</button>
+      <button class="button" *ngFor="let student of students" [routerLink]="['/profile']">{{ student.name }}</button>
+    </div>  
   </div>
-</div>
 
 <div class="button-group">
   <h2>My classes</h2>
   <div class="button-scroll">
-    <button class="button" *ngFor="let clase of classes">{{ clase.name }}</button>
+    <button class="button" *ngFor="let clase of classes" [routerLink]="['/clase']">{{ clase.name }}</button>
   </div>
 </div>

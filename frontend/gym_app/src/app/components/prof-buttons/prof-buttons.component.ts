@@ -17,7 +17,7 @@ export class ProfButtonsComponent {
     private jwtService: JWTService ) { }
 
   ngOnInit() {
-    const profesorId = this.jwtService.getId();
+    const profesorId = localStorage.getItem('id_profesor');
     this.backSvc.get("/profesor/" + profesorId, "alumnosyclases=1").subscribe({
       next: (profesorData: any) => {
         this.students = profesorData.alumnos.map((alumno: any) => ({

@@ -38,7 +38,11 @@ export class SigninComponent implements OnInit {
       next: (rta:any) => {
         alert('Login exitoso');
         console.log('Respuesta login: ',rta.access_token);
+        console.log('Respuesta login: ',rta);
         localStorage.setItem('token', rta.access_token);
+        localStorage.setItem('id_usuario', rta.id_usuario);
+        localStorage.setItem('id_alumno', rta.id_alumno);
+        localStorage.setItem('id_profesor', rta.id_profesor);
         this.router.navigateByUrl('home');
       },
       error: (error) => {
