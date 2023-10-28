@@ -39,7 +39,7 @@ def login():
 def register():
     try:
         data = request.get_json()
-        data.rol = ""
+        # data.rol = ""
         if not data:
             return 'Invalid request data', 400
 

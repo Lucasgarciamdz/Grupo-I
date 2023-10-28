@@ -10,12 +10,18 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./edit-profile-form.component.css'],
 })
 export class EditProfileFormComponent {
+  public get userDataService(): UserDataService {
+    return this._userDataService;
+  }
+  public set userDataService(value: UserDataService) {
+    this._userDataService = value;
+  }
   form: FormGroup;
 
   constructor(
     private usuariosService: UsuariosService,
     private jwtService: JWTService,
-    private userDataService: UserDataService
+    private _userDataService: UserDataService
   ) {
     this.form = new FormGroup({
       name: new FormControl(''),
