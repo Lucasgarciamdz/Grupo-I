@@ -21,20 +21,27 @@ export class ProfilePictureComponent implements OnInit {
   @Input() image: string | undefined;
   @Input() name: string | undefined;
 
-  constructor(private usuariosService: UsuariosService, private jwtService: JWTService) {}
+  // constructor(private usuariosService: UsuariosService, private jwtService: JWTService) {}
+
+  // ngOnInit() {
+  //   const userId = parseInt(this.jwtService.getId() || '', 10);
+  //   if (userId) {
+  //     this.usuariosService.getUserById<any>(userId).subscribe({
+  //       next: (data) => {
+  //         // this.image = data.imagen;
+  //         this.name = `${data.nombre} ${data.apellido}`;
+  //       },
+  //       error: (error) => {
+  //         console.error(error);
+  //       }
+  //     });
+  //   }
+  // }
 
   ngOnInit() {
-    const userId = parseInt(this.jwtService.getId() || '', 10);
-    if (userId) {
-      this.usuariosService.getUserById<any>(userId).subscribe({
-        next: (data) => {
-          // this.image = data.imagen;
-          this.name = `${data.nombre} ${data.apellido}`;
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
-    }
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    console.log(userData);
+    this.name = `${userData.name} ${userData.lastname}`;
+    // this.image = userData.imagen;
   }
 }
