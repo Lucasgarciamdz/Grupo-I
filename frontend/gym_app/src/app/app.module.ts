@@ -38,6 +38,7 @@ import { ClasesListComponent } from './components/clases-list/clases-list.compon
 import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
+import { ClasesAlumnoComponent } from './components/clases-alumno/clases-alumno.component';
 
 @NgModule({
     declarations: [
@@ -73,6 +74,7 @@ import { ClassCardComponent } from './components/class-card/class-card.component
         ProfesoresListComponent,
         ClasesComponent,
         ClassCardComponent,
+        ClasesAlumnoComponent,
     ],
     providers: [
         JWTService
