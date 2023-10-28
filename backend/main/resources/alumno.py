@@ -44,7 +44,7 @@ class Alumnos(Resource):
                         "total": alumnos.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             alumno = AlumnoModel.from_json(request.get_json())

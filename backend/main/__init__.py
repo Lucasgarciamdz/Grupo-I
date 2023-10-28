@@ -11,15 +11,17 @@ api = Api()
 
 db = SQLAlchemy()
 
-migrate = Migrate()
+app = Flask(__name__)
+load_dotenv()
+
+migrate = Migrate(app, db)
 
 jwt = JWTManager()
 
 mailsender = Mail()
 
 def create_app():
-    app = Flask(__name__)
-    load_dotenv()
+    
 
     database_path = os.getenv('DATABASE_PATH')
     database_name = os.getenv('DATABASE_NAME')

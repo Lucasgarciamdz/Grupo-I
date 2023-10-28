@@ -12,9 +12,9 @@ class Alumno(db.Model):
     id_alumno = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
 
-    estado = db.Column(db.String(45), nullable=False)
-    altura = db.Column(db.Integer, nullable=False)
-    peso = db.Column(db.Integer, nullable=False)
+    estado = db.Column(db.String(45))
+    altura = db.Column(db.Integer)
+    peso = db.Column(db.Integer)
     # planilla_medica = db.Column(db.Boolean, nullable=False)
 
     usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
@@ -26,6 +26,7 @@ class Alumno(db.Model):
     def to_json(self):
         alumno_json = {
             'id_alumno': self.id_alumno,
+            'id_usuario': self.id_usuario,
             'estado': self.estado,
             'altura': self.altura,
             'peso': self.peso,
@@ -57,6 +58,7 @@ class Alumno(db.Model):
         return Alumno(id_alumno=id_alumno,
                       id_usuario=id_usuario,
                       estado=estado,
-
+                      altura=altura,
+                      peso=peso,
                     #   planilla_medica=planilla_medica,
                       )
