@@ -24,8 +24,19 @@ def login():
     usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email).first_or_404()
     if usuario.validate_pass(password):
         access_token = create_access_token(identity=usuario)
+        try:
+            id_profesor = usuario.profesor.id_profesor
+        except Exception:
+            id_profesor = None
+
+        try:
+            id_alumno = usuario.alumno.id_alumno
+        except Exception:
+            id_alumno = None
         data = {
-            'id': str(usuario.id_usuario),
+            'id_usuario': str(usuario.id_usuario),
+            'id_profesor': str(id_profesor),
+            'id_alumno': str(id_alumno),
             'email': usuario.email,
             'access_token': access_token
         }
