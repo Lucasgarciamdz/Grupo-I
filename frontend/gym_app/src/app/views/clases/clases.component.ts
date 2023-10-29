@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ClassCardComponent } from '../../components/class-card/class-card.component';
-
 
 @Component({
   selector: 'app-clases',
@@ -12,7 +10,13 @@ export class ClasesComponent {
     return localStorage.getItem('token');
   }
 
-  classItems = [
+  planificaciones: any[] = [
+
+  ];
+  
+  title: string = 'My Classes';
+  
+  items: { image: string, title: string, description: string, buttonText: string }[] = [
     {
       image: 'assets/clases/clase1.jpg',
       title: 'Clase 1',

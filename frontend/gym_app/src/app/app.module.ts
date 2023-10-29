@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +40,6 @@ import { ClasesListComponent } from './components/clases-list/clases-list.compon
 import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
-import { ClasesAlumnoComponent } from './components/clases-alumno/clases-alumno.component';
 
 @NgModule({
     declarations: [
@@ -74,7 +75,6 @@ import { ClasesAlumnoComponent } from './components/clases-alumno/clases-alumno.
         ProfesoresListComponent,
         ClasesComponent,
         ClassCardComponent,
-        ClasesAlumnoComponent,
     ],
     providers: [
         JWTService
