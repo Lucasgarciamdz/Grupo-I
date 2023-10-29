@@ -164,6 +164,7 @@ export class UserListComponent implements OnInit {
       this.maxAge = 0; // Reset Max Age filter
     }
 
+    this.pageNumber = 1;
     this.showNoFilter = 0
 
     const params = new HttpParams()
@@ -190,9 +191,6 @@ export class UserListComponent implements OnInit {
     const params = new HttpParams()
       .set('page', this.pageNumber.toString())
       .set('perpage', this.perPage.toString())
-      .set('rol', this.rol)
-      .set('minAge', this.minAge.toString())
-      .set('maxAge', this.maxAge.toString());
   
     if (this.filterOption === 'rol') {
       params.set('rol', this.rol);
