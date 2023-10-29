@@ -7,7 +7,7 @@
 - hacer vista para boton ver clases
   - se tienen que mostrar las planificaciones de cada clase
 
-### Paginacion (falta)
+### Paginacion @Lucas (listo)
 
 - ver si es solo en las listas del admin
 - anda a saber que es
@@ -28,7 +28,7 @@
 
 - ~~IMPORTANTE, hacer el perfil personalizado (listo)~~
 
-### Profesor @Lucas (falta)
+### Profesor @Lucas (listo students)
 
 - que funcionen los botones de students y clases (falta un toque)
 
