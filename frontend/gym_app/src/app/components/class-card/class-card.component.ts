@@ -26,5 +26,3 @@ export class ClassCardComponent implements OnInit {
     });
   }
 }
-
-
