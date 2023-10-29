@@ -8,7 +8,7 @@ from main.auth.decoradores import role_required
 
 
 class Usuarios(Resource):
-    @jwt_required(optional=True)
+    # @jwt_required(optional=True)
     def get(self):
         usuarios = db.session.query(UsuarioModel)
 
@@ -34,12 +34,13 @@ class Usuarios(Resource):
             usuarios = usuarios.filter(UsuarioModel.dni.like(request.args.get('dni')))
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
-        if request.args.get('sort_by_edad'):
+    
+        if request.args.get('minAge') and request.args.get('maxAge'):
             min_age = request.args.get('minAge')
             max_age = request.args.get('maxAge')
 
             if min_age is not None and max_age is not None:
-                usuarios = usuarios.filter(UsuarioModel.edad >= min_age and UsuarioModel.edad <= max_age)
+                usuarios = usuarios.filter((UsuarioModel.edad >= min_age) & (UsuarioModel.edad <= max_age))
             elif min_age is not None:
                 usuarios = usuarios.filter(UsuarioModel.edad >= min_age)
             elif max_age is not None:

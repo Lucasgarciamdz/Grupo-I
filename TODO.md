@@ -9,9 +9,7 @@
 
 ### Paginacion @Lucas (listo)
 
-- ver si es solo en las listas del admin
-- anda a saber que es
-- ver de NPM, se pasan datos de backend y se arma la paginacion
+- ~~ver si es solo en las listas del admin~~
 
 ### Admin (falta) Franco
 
@@ -30,14 +28,14 @@
 
 ### Profesor @Lucas (listo students)
 
-- que funcionen los botones de students y clases (falta un toque)
+- ~~que funcionen los botones de students y clases (falta un toque)~~
 
 ## Back
 
 ### Base de datos @Lucas (listo)
 
-- Revisar muy bien el modelo de base de datos
-- llenar con cosas random par ver que se vea todo bien
+- ~~Revisar muy bien el modelo de base de datos~~
+- ~~llenar con cosas random par ver que se vea todo bien~~
 
 ### Register (falta) Franco
 

@@ -20,12 +20,13 @@ export class UserListComponent implements OnInit {
   users: any[] | undefined;
 
   showFilterForm: number = 0;
+  showNoFilter: number = 0;
 
   minAge: number = 0;
   maxAge: number = 0;
   rol: string = '';
 
-  filterOption: string = 'rol';
+  filterOption: string = '';
 
   pageNumber: number = 1;
   perPage: number = 10;
@@ -41,35 +42,26 @@ export class UserListComponent implements OnInit {
     const params = new HttpParams()
     .set('page', this.pageNumber.toString())
     .set('perpage', this.perPage.toString());
-  // Replace this.backSvc with the appropriate service
-  // and update the endpoint and response accordingly
-  this.userSvc.get("/usuarios", params.toString()).subscribe({
-    next: (users: any) => {
-      if (users.usuario?.length < this.perPage) {
-        this.noMoreUsers = true;
-      }
-        this.users = users.usuario;
-      },
-      error: (error) => {
-        alert('Error al obtener usuarios');
-      },
-      complete: () => {
-        console.log('Finalizó');
-      }
+    this.userSvc.getUsers().subscribe({
+      next: (users: any) => {
+        if (users.usuario?.length < this.perPage) {
+          this.noMoreUsers = true;
+        }
+          this.users = users.usuario;
+          console.log(this.users);
+        },
+        error: (error) => {
+          alert('Error al obtener usuarios');
+        },
+        complete: () => {
+          console.log('Finalizó');
+        }
     });
-  }
-  
-  resetFilters(): void {
-    if (this.filterOption === 'rol') {
-      this.rol = ''; // Reset Rol filter
-    } else if (this.filterOption === 'age') {
-      this.minAge = 0; // Reset Min Age filter
-      this.maxAge = 0; // Reset Max Age filter
-    }
   }
 
   reloadPage() {
-    window.location.reload();
+    this.location;
+    console.log("re piola se recargo la pagina")
   }  
 
   editUser(id: number): void {
@@ -120,16 +112,24 @@ export class UserListComponent implements OnInit {
   }
 
   toggleFilterForm(): void {
-    this.showFilterForm = 1;
+    this.filterOption = ''
+
+    if (this.showFilterForm === 1) {
+      this.showFilterForm = 0;
+    }
+    else {
+      this.showFilterForm = 1;
+    }
   }
 
   applyFilters() : void {
-    alert('aaaa');
+    this.showFilterForm = 0
+    this.showNoFilter = 1
     if (this.filterOption === 'rol') {
       console.log(this.rol);
       this.userSvc.getUsersByRol(this.rol).subscribe({
         next: (data: any) => {
-          this.users = data
+          this.users = data.usuario
           console.log('Filtered users by Rol:', data);
         },
         error: (error) => {
@@ -143,25 +143,64 @@ export class UserListComponent implements OnInit {
 
       this.userSvc.getUsersByAge(this.minAge, this.maxAge).subscribe({
         next: (data: any) => {
-          console.log("age")
-          this.users = data
+          this.users = data.usuario
           console.log('Filtered users by Age:', data);
         },
         error: (error) => {
           console.error('Error filtering by Age:', error);
         }
       });
+    } else {
+      this.showNoFilter = 0
     }
   }
 
+  resetFilters(): void {
+
+    if (this.filterOption === 'rol') {
+      this.rol = ''; // Reset Rol filter
+    } else if (this.filterOption === 'age') {
+      this.minAge = 0; // Reset Min Age filter
+      this.maxAge = 0; // Reset Max Age filter
+    }
+
+    this.showNoFilter = 0
+
+    const params = new HttpParams()
+    .set('page', this.pageNumber.toString())
+    .set('perpage', this.perPage.toString());
+    this.userSvc.get("/usuarios", params.toString()).subscribe({
+      next: (users: any) => {
+        if (users.usuario?.length < this.perPage) {
+          this.noMoreUsers = true;
+        }
+          this.users = users.usuario;
+        },
+        error: (error) => {
+          alert('Error al obtener usuarios');
+        },
+        complete: () => {
+          console.log('Finalizó');
+        }
+    });
+  }
 
   loadMore(): void {
     this.pageNumber++;
     const params = new HttpParams()
       .set('page', this.pageNumber.toString())
-      .set('perpage', this.perPage.toString());
-    // Replace this.backSvc with the appropriate service
-    // and update the endpoint and response accordingly
+      .set('perpage', this.perPage.toString())
+      .set('rol', this.rol)
+      .set('minAge', this.minAge.toString())
+      .set('maxAge', this.maxAge.toString());
+  
+    if (this.filterOption === 'rol') {
+      params.set('rol', this.rol);
+    } else if (this.filterOption === 'age') {
+      params.set('minAge', this.minAge.toString());
+      params.set('maxAge', this.maxAge.toString());
+    }
+  
     this.userSvc.get("/usuarios", params.toString()).subscribe({
       next: (users: any) => {
         if (users.usuario?.length < this.perPage) {
