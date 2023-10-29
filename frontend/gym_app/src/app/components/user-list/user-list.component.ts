@@ -20,9 +20,11 @@ export class UserListComponent implements OnInit {
 
   showFilterForm: number = 0;
 
-  minAge: number | undefined;
-  maxAge: number | undefined;
-  rol: string | undefined;
+  minAge: number = 0;
+  maxAge: number = 0;
+  rol: string = '';
+
+  filterOption: string = 'rol';
 
   constructor(private userSvc: UsuariosService, private router: Router, private location: Location) {
   }
@@ -39,6 +41,15 @@ export class UserListComponent implements OnInit {
         console.log('Finalizó');
       }
     });
+  }
+  
+  resetFilters(): void {
+    if (this.filterOption === 'rol') {
+      this.rol = ''; // Reset Rol filter
+    } else if (this.filterOption === 'age') {
+      this.minAge = 0; // Reset Min Age filter
+      this.maxAge = 0; // Reset Max Age filter
+    }
   }
 
   reloadPage() {
@@ -96,9 +107,37 @@ export class UserListComponent implements OnInit {
     this.showFilterForm = 1;
   }
 
-  applyFilters() {
-    
-  }
+  // applyFilters() : void {
+  //   alert('aaaa');
+  //   if (this.filterOption === 'rol') {
+  //     console.log(this.rol);
+  //     this.userSvc.getUsersByRol(this.rol).subscribe({
+  //       next: (data: any) => {
+  //         this.users = data
+  //         console.log('Filtered users by Rol:', data);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error filtering by Rol:', error);
+  //       }
+  //     });
+  //   } else if (this.filterOption === 'age') {
+
+  //     console.log(this.minAge)
+  //     console.log(this.maxAge)
+
+  //     this.userSvc.getUsersByAge(this.minAge, this.maxAge).subscribe({
+  //       next: (data: any) => {
+  //         console.log("age")
+  //         this.users = data
+  //         console.log('Filtered users by Age:', data);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error filtering by Age:', error);
+  //       }
+  //     });
+  //   }
+  // }
+
 }
 
 @NgModule({

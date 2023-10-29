@@ -12,14 +12,14 @@ import { AuthsessionGuard } from './guards/authsession.guard';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
-import { AlumnoClaseGuard } from './guards/alumnoclase.guard';
+import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
-  { path: 'profile/:id', component: ProfileComponent, canActivate: [AlumnoClaseGuard], data: { roles: ['Profesor', 'Admin'] }},
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [PerfilParticularGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },

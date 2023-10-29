@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container">
   <div class="row">
     <div class="col">
       <div class="row justify-content-between">
@@ -6,30 +6,54 @@
           <h2 class="user-list-title">User List</h2>
         </div>
         <div class="col-auto">
-          <button class="btn btn-primary ms-5 text-center" (click)="toggleFilterForm()">Filtrar</button>
+          <button class="btn btn-primary ms-5 text-center" (click)="toggleFilterForm()" *ngIf="showFilterForm == 0">Filtrar</button>
         </div>
       </div>
-      <div class="filter-form" *ngIf="showFilterForm">
-        <form (submit)="applyFilters()">
-          <!-- Add filter input fields here (e.g., min age, max age, name, etc.) -->
-          <div class="mb-3">
-            <label for="min_age" class="form-label">Mínima Edad:</label>
-            <input type="number" class="form-control" id="min_age" name="min_age" [(ngModel)]="minAge">
-          </div>
-          <div class="mb-3">
-            <label for="max_age" class="form-label">Máxima Edad:</label>
-            <input type="number" class="form-control" id="max_age" name="max_age" [(ngModel)]="maxAge">
-          </div>
-          <div class="mb-3">
-            <label for="min_age" class="form-label">Rol:</label>
-            <input type="number" class="form-control" id="rol" name="rol" [(ngModel)]="rol">
-          </div>
-          <!-- Add more filter fields here as needed -->
 
-          <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+      <div class="filter-form" *ngIf="showFilterForm == 1">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Filtrar por:</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="filterByRol" name="filterOption" [(ngModel)]="filterOption" value="rol">
+              <label class="form-check-label" for="filterByRol">Rol</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="filterByAge" name="filterOption" [(ngModel)]="filterOption" value="age">
+              <label class="form-check-label" for="filterByAge">Edad</label>
+            </div>
+          </div>
+      
+          <!-- Filter by Rol -->
+          <div *ngIf="filterOption === 'rol'">
+            <div class="mb-3">
+              <label for="rol" class="form-label">Rol:</label>
+              <input type="text" class="form-control" id="rol" name="rol" [(ngModel)]="rol">
+            </div>
+          </div>
+      
+          <!-- Filter by Age -->
+          <div *ngIf="filterOption === 'age'">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="min_age" class="form-label">Mínima Edad:</label>
+                  <input type="number" class="form-control" id="min_age" name="min_age" [(ngModel)]="minAge">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="max_age" class="form-label">Máxima Edad:</label>
+                  <input type="number" class="form-control" id="max_age" name="max_age" [(ngModel)]="maxAge">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>
         </form>
       </div>
-      <table class="table">
+      
+      <table class="user-table">
         <thead>
           <tr>
             <th class="text-center">Nombre y Apellido</th>
@@ -40,7 +64,6 @@
         </thead>
         <tbody *ngFor="let user of users">
           <tr *ngIf="user.id_usuario != editingUserId">
-
             <td>{{ user.nombre }} {{user.apellido}}</td>
             <td>{{ user.rol }}</td>
             <td>{{ user.edad }}</td>
@@ -48,7 +71,6 @@
               <button class="btn btn-primary ms-5 text-center" (click)="editUser(user.id_usuario)">Editar</button>
               <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(user.id_usuario)">Eliminar</button>
             </td>
-
           </tr>
           <tr *ngIf="editingUserId == user.id_usuario">
             <td colspan="4">

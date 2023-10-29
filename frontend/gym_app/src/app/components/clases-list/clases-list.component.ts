@@ -17,19 +17,23 @@ export class ClasesListComponent implements OnInit{
 
   clases: any[] | undefined;
 
+  noMoreclases: boolean = false;
+
+  pageNumber: number = 1;
+
+  perPage: number = 10;
+
   constructor(private backSvc: BaseService) {
   }
 
+
   ngOnInit() {
-    this.backSvc.get("clases").subscribe({
+    this.backSvc.get("clases", { page: this.pageNumber, perpage: this.perPage }).subscribe({
       next: (clases: any) => {
-        this.clases = clases.clase;
+        this.clases = clases;
       },
-      error: (error) => {
-        alert('Error al obtener usuarios');
-      },
-      complete: () => {
-        console.log('Finalizó');
+      error: (err: any) => {
+        console.error(err);
       }
     });
   }
@@ -50,6 +54,21 @@ export class ClasesListComponent implements OnInit{
       },
       complete: () => {
         console.log('Finalizó');
+      }
+    });
+  }
+
+  loadMore() : void {
+    this.pageNumber++;
+    this.backSvc.get("clases", { page: this.pageNumber, perpage: this.perPage }).subscribe({
+      next: (clases: any) => {
+        if (clases.size == 0) {
+          this.noMoreclases = true;
+        }
+        this.clases = this.clases?.concat(clases);
+      },
+      error: (err: any) => {
+        console.error(err);
       }
     });
   }

@@ -35,8 +35,8 @@ class Usuarios(Resource):
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
         if request.args.get('sort_by_edad'):
-            min_age = request.args.get('min_age')
-            max_age = request.args.get('max_age')
+            min_age = request.args.get('minAge')
+            max_age = request.args.get('maxAge')
 
             if min_age is not None and max_age is not None:
                 usuarios = usuarios.filter(UsuarioModel.edad >= min_age and UsuarioModel.edad <= max_age)
