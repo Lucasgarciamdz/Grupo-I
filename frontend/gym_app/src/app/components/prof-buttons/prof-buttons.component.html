@@ -1,8 +1,7 @@
 <div class="button-group">
   <h2>My students</h2>
   <div class="button-scroll">
-    <button class="button" *ngFor="let student of students" [routerLink]="['/profile']" [queryParams]="{id: student.id}">{{ student.name }}</button> 
-  </div>  
+    <button class="button" *ngFor="let student of students" [routerLink]="['/profile', student.id]">{{ student.name }}</button>  
   </div>
 
 <div class="button-group">

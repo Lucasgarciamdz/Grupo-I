@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { JWTService } from '../services/jwt.service';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -20,8 +19,7 @@ export class PerfilParticularGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const alumnoId = route.params['id'];
-    const profesorId = this.jwtService.getId();
-    if (alumnoId && profesorId) {
+    const profesorId = this.jwtService.getIdProfesor();
       return this.backendService.get("/profesor/" + profesorId, "myAlumno=" + alumnoId).pipe(
         map((response: any) => {
           if (response) {
@@ -36,9 +34,5 @@ export class PerfilParticularGuard implements CanActivate {
           return of(false);
         })
       );
-    } else {
-      this.router.navigate(['/home']);
-      return of(false);
-    }
   }
 }

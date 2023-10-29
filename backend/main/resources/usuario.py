@@ -13,7 +13,7 @@ class Usuarios(Resource):
         usuarios = db.session.query(UsuarioModel)
 
         page = 1
-        per_page = 50
+        per_page = 10
 
         if request.args.get('page'):
             page = int(request.args.get('page'))
@@ -48,7 +48,7 @@ class Usuarios(Resource):
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
         except Exception:
-            return jsonify({"error": "Error inesperado"})
+            return jsonify({"usuario": []})
 
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,

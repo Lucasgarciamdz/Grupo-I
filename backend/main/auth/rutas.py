@@ -23,7 +23,6 @@ def login():
 
     usuario = db.session.query(UsuarioModel).filter(UsuarioModel.email == email).first_or_404()
     if usuario.validate_pass(password):
-        access_token = create_access_token(identity=usuario)
         try:
             id_profesor = usuario.profesor.id_profesor
         except Exception:
@@ -38,9 +37,11 @@ def login():
             'id_profesor': str(id_profesor),
             'id_alumno': str(id_alumno),
             'email': usuario.email,
-            'access_token': access_token,
             'usuario': usuario.to_json()
         }
+        access_token = create_access_token(identity=usuario, additional_claims=data)
+        
+        data['access_token'] = access_token
 
         return data, 200
     else:

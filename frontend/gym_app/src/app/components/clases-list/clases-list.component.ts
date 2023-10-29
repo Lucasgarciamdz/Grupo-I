@@ -1,14 +1,15 @@
-import {Component, ViewChild, OnInit} from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import { BaseService } from 'src/app/services/base.service';
-
 @Component({
   selector: 'app-clases-list',
   templateUrl: './clases-list.component.html',
   styleUrls: ['./clases-list.component.css']
 })
 export class ClasesListComponent implements OnInit{
-
+  
+  @ViewChild('tableWrapper') tableWrapper!: ElementRef;
 
   @ViewChild('clasesForm')
   clasesForm!: NgForm;
@@ -30,7 +31,7 @@ export class ClasesListComponent implements OnInit{
   ngOnInit() {
     this.backSvc.get("clases", { page: this.pageNumber, perpage: this.perPage }).subscribe({
       next: (clases: any) => {
-        this.clases = clases;
+        this.clases = clases.clase;
       },
       error: (err: any) => {
         console.error(err);
@@ -58,14 +59,26 @@ export class ClasesListComponent implements OnInit{
     });
   }
 
-  loadMore() : void {
+
+  // ...
+
+  loadMore(): void {
     this.pageNumber++;
-    this.backSvc.get("clases", { page: this.pageNumber, perpage: this.perPage }).subscribe({
+    const params = new HttpParams()
+      .set('page', this.pageNumber.toString())
+      .set('perpage', this.perPage.toString());
+    this.backSvc.get("clases", params.toString()).subscribe({
       next: (clases: any) => {
-        if (clases.size == 0) {
+        if (clases.clase?.length < this.perPage) {
           this.noMoreclases = true;
         }
-        this.clases = this.clases?.concat(clases);
+        this.clases = this.clases?.concat(clases.clase);
+        setTimeout(() => {
+          if (this.tableWrapper) {
+            this.tableWrapper.nativeElement.style.maxHeight = '600px';
+            this.tableWrapper.nativeElement.style.overflowY = 'auto';
+          }
+        });
       },
       error: (err: any) => {
         console.error(err);

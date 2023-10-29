@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
-  { path: 'profile/:id', component: ProfileComponent, canActivate: [PerfilParticularGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [PerfilParticularGuard], data: { roles: ['Profesor'] } },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },

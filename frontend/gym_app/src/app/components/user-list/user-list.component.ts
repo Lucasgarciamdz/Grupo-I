@@ -3,6 +3,7 @@ import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { FormsModule, NgForm } from "@angular/forms";
 import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-list',
@@ -26,12 +27,27 @@ export class UserListComponent implements OnInit {
 
   filterOption: string = 'rol';
 
+  pageNumber: number = 1;
+  perPage: number = 10;
+  noMoreUsers: boolean = false;
+
+  @ViewChild('tableWrapper')
+  tableWrapper: any;
+
   constructor(private userSvc: UsuariosService, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
-    this.userSvc.getUsers().subscribe({
-      next: (users: any) => {
+    const params = new HttpParams()
+    .set('page', this.pageNumber.toString())
+    .set('perpage', this.perPage.toString());
+  // Replace this.backSvc with the appropriate service
+  // and update the endpoint and response accordingly
+  this.userSvc.get("/usuarios", params.toString()).subscribe({
+    next: (users: any) => {
+      if (users.usuario?.length < this.perPage) {
+        this.noMoreUsers = true;
+      }
         this.users = users.usuario;
       },
       error: (error) => {
@@ -107,37 +123,63 @@ export class UserListComponent implements OnInit {
     this.showFilterForm = 1;
   }
 
-  // applyFilters() : void {
-  //   alert('aaaa');
-  //   if (this.filterOption === 'rol') {
-  //     console.log(this.rol);
-  //     this.userSvc.getUsersByRol(this.rol).subscribe({
-  //       next: (data: any) => {
-  //         this.users = data
-  //         console.log('Filtered users by Rol:', data);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error filtering by Rol:', error);
-  //       }
-  //     });
-  //   } else if (this.filterOption === 'age') {
+  applyFilters() : void {
+    alert('aaaa');
+    if (this.filterOption === 'rol') {
+      console.log(this.rol);
+      this.userSvc.getUsersByRol(this.rol).subscribe({
+        next: (data: any) => {
+          this.users = data
+          console.log('Filtered users by Rol:', data);
+        },
+        error: (error) => {
+          console.error('Error filtering by Rol:', error);
+        }
+      });
+    } else if (this.filterOption === 'age') {
 
-  //     console.log(this.minAge)
-  //     console.log(this.maxAge)
+      console.log(this.minAge)
+      console.log(this.maxAge)
 
-  //     this.userSvc.getUsersByAge(this.minAge, this.maxAge).subscribe({
-  //       next: (data: any) => {
-  //         console.log("age")
-  //         this.users = data
-  //         console.log('Filtered users by Age:', data);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error filtering by Age:', error);
-  //       }
-  //     });
-  //   }
-  // }
+      this.userSvc.getUsersByAge(this.minAge, this.maxAge).subscribe({
+        next: (data: any) => {
+          console.log("age")
+          this.users = data
+          console.log('Filtered users by Age:', data);
+        },
+        error: (error) => {
+          console.error('Error filtering by Age:', error);
+        }
+      });
+    }
+  }
 
+
+  loadMore(): void {
+    this.pageNumber++;
+    const params = new HttpParams()
+      .set('page', this.pageNumber.toString())
+      .set('perpage', this.perPage.toString());
+    // Replace this.backSvc with the appropriate service
+    // and update the endpoint and response accordingly
+    this.userSvc.get("/usuarios", params.toString()).subscribe({
+      next: (users: any) => {
+        if (users.usuario?.length < this.perPage) {
+          this.noMoreUsers = true;
+        }
+        this.users = this.users?.concat(users.usuario);
+        setTimeout(() => {
+          if (this.tableWrapper) {
+            this.tableWrapper.nativeElement.style.maxHeight = '600px';
+            this.tableWrapper.nativeElement.style.overflowY = 'auto';
+          }
+        });
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    });
+  }
 }
 
 @NgModule({
