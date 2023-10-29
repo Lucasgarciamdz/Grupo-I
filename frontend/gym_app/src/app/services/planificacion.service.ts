@@ -17,14 +17,6 @@ export class PlanificacionService extends BaseService {
   }
 
 
-  // CREAR LA PLANI ES DE 1 PROFESOR A 1 ALUMNO
-  // 1 ALUMNO N PLANIS
-
-  // createPlanificacion(planificacion: any): Observable<any> {
-  //   const headers = this.getHeaders();
-  //   return this.httpClient.post<any>(`${this.url}/planificaciones`, planificacion, { headers });
-  // }
-
   updatePlanificacion(id: number, planificacion: any): Observable<any> {
     const headers = this.getHeaders();
     return this.httpClient.put<any>(`${this.url}/planificaciones/${id}`, planificacion, { headers });
@@ -34,4 +26,10 @@ export class PlanificacionService extends BaseService {
     const headers = this.getHeaders();
     return this.httpClient.delete<any>(`${this.url}/planificaciones/${id}`, { headers });
   }
+
+  getPlanificacionesPorClase(claseId: number): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any[]>(`${this.url}/clase/${claseId}/planificaciones`, { headers });
+  }
+
 }

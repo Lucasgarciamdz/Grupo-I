@@ -1,15 +1,16 @@
-<div class="container-fluid py-2">
-  <div class="overflow-x-hidden overflow-y-auto card-container">
-    <div class="card mb-3" *ngFor="let clase of items">
-      <img [src]="clase.image" class="img-fluid" alt="..." />
-      <div class="card-img-overlay">
-        <div class="card-body text-white">
-          <h5 class="card-title">{{ clase.title }}</h5>
-          <p class="card-text">{{ clase.description }}</p>
-          <a routerLink()="/views/class" class="btn">{{ clase.buttonText }}</a>
-        </div>
+<div class="card-container">
+  <div class="card" *ngFor="let clase of items">
+    <img [src]="clase.image" class="img-fluid" alt="...">
+    <div class="card-img-overlay">
+      <div class="card-body text-white">
+        <h5 class="card-title">{{ clase.title }}</h5>
+        <p class="card-text">{{ clase.description }}</p>
+        <a routerLink="/views/class" class="btn">{{ clase.buttonText }}</a>
       </div>
-      <div class="card-body" *ngFor="let planificacion of planificaciones">
+    </div>
+    <div class="card-body">
+      <div *ngFor="let planificacion of planificaciones">
+        <p>{{ planificacion.id_planificacion }} - {{ planificacion.objetivo }}</p>
       </div>
     </div>
   </div>
