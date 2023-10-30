@@ -15,7 +15,7 @@ class Alumno(db.Model):
     estado = db.Column(db.String(45))
     altura = db.Column(db.Integer)
     peso = db.Column(db.Integer)
-    # planilla_medica = db.Column(db.Boolean, nullable=False)
+    planilla_medica = db.Column(db.String(45))
 
     usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
     planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref=db.backref('alumnos_p', lazy='dynamic'), overlaps="alumnos_p,planificaciones")
@@ -30,7 +30,7 @@ class Alumno(db.Model):
             'estado': self.estado,
             'altura': self.altura,
             'peso': self.peso,
-            # 'planilla_medica': self.planilla_medica,
+            'planilla_medica': self.planilla_medica,
         }
         return alumno_json
 
@@ -41,7 +41,7 @@ class Alumno(db.Model):
             'estado': self.estado,
             'altura': self.altura,
             'peso': self.peso,
-            # 'planilla_medica': self.planilla_medica,
+            'planilla_medica': self.planilla_medica,
             "usuario": self.usuario.to_json(),
             "planificaciones": [planificacion.to_json() for planificacion in self.planificaciones]
         }
@@ -54,11 +54,11 @@ class Alumno(db.Model):
         estado = alumno_json.get('estado', None)
         altura = alumno_json.get('altura', None)
         peso = alumno_json.get('peso', None)
-        # planilla_medica = alumno_json.get('planilla_medica', None)
+        planilla_medica = alumno_json.get('planilla_medica', None)
         return Alumno(id_alumno=id_alumno,
                       id_usuario=id_usuario,
                       estado=estado,
                       altura=altura,
                       peso=peso,
-                    #   planilla_medica=planilla_medica,
+                      planilla_medica=planilla_medica,
                       )

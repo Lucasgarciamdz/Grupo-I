@@ -29,9 +29,8 @@ class Alumnos(Resource):
 
         # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos = alumnos.filter(not AlumnoModel.planilla_medica)
+            alumnos = alumnos.filter(AlumnoModel.planilla_medica == "vencida")
 
-        # if reques.args.get('clase')
 
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)

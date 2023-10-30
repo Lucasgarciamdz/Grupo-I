@@ -61,7 +61,7 @@ class Usuarios(Resource):
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
-            usuario.rol = ""
+            # usuario.rol = ""
         except Exception:
             return "Error al pasar a JSON"
         db.session.add(usuario)

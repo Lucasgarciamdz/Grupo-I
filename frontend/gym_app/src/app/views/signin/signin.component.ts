@@ -19,17 +19,10 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["l.garcia@alumno.um.edu.ar", Validators.required],
-      contrasena: ['456', Validators.required]
+      email: ["alumno@gmail.com.ar", Validators.required],
+      contrasena: ['123', Validators.required]
     })
   }
-
-  //f.bertoldi@alumno.um.edu.ar   Alumno
-  //123
-  //l.garcia@alumno.um.edu.ar   Alumno
-  //456
-  ///frg.lopez@alumno.um.edu.ar   admin
-  ///789
 
   login(dataLogin:any = {}) {
     //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}

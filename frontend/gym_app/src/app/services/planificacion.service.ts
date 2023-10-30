@@ -34,4 +34,9 @@ export class PlanificacionService extends BaseService {
     const headers = this.getHeaders();
     return this.httpClient.delete<any>(`${this.url}/planificaciones/${id}`, { headers });
   }
+
+  getPlanificacionesByAlumnoId(alumnoId: number): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any[]>(`${this.url}/planificaciones?alumno_id_plani=${alumnoId}`, { headers });
+  }
 }

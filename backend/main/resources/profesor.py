@@ -144,7 +144,7 @@ class Profesor(Resource):
         db.session.commit()
         return profesor.to_json(), 201
 
-    @role_required(roles="admin")
+    # @role_required(roles="admin")
     def delete(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         db.session.delete(profesor)
