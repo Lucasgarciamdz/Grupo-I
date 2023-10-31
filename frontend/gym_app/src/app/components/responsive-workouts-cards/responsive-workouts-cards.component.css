@@ -49,3 +49,13 @@
     background-color: #3A6A87;
     color: #fff
   }
+  .title{
+    color: #3A6A87;
+
+  }
+  .title::first-letter{
+    text-transform: uppercase;
+  }
+  .card-text{
+    color: #3A6A87;
+  }
