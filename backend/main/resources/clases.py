@@ -24,26 +24,20 @@ class Clases(Resource):
         
         if request.args.get('alumno_id_clase'):
 
-            # Get the alumno_id from the request parameters
             alumno_id = request.args.get('alumno_id_clase')
 
-            # Get the Alumno object with the specified alumno_id
             alumno = AlumnoModel.query.filter_by(id_alumno=alumno_id).first()
 
-            # Get a list of Planificacion objects associated with the Alumno object
             planificaciones = alumno.planificaciones
 
-            # Get a list of Clase objects associated with each Planificacion object
             clases = []
             for planificacion in planificaciones:
                 clase = planificacion.clase
                 if clase is not None:
                     clases.append(clase)
 
-            # Convert the list of Clase objects to a list of JSON objects
             clases_json = [clase.to_json() for clase in clases]
 
-            # Return the list of JSON objects as a response
             return clases_json
 
         # devuelve todas las planificaciones que tienen una determinada clase

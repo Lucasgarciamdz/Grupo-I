@@ -39,7 +39,6 @@ export class StudWorkComponent {
     const alumnoId = localStorage.getItem('id_alumno') ?? '';
     const alumnoIdNumber = parseInt(alumnoId, 10);
   
-    // Get the list of Clase objects associated with the Alumno object
     this.clasesService.getClasesByAlumnoId(alumnoIdNumber).subscribe({
       next: (clases) => {
         console.log('esto trae el recurso', clases);
@@ -51,7 +50,7 @@ export class StudWorkComponent {
             buttonText: 'Ver clase'
           });
         }
-        console.log('esta es la lista', this.classItems); // Move console.log() here
+        console.log('esta es la lista', this.classItems);
       },
       error: (error) => {
         // Manejo de errores si es necesario
@@ -59,7 +58,6 @@ export class StudWorkComponent {
       }
     });
   
-    // Get the list of Planificacion objects associated with the Alumno object
   //   this.planificacionService.getPlanificacionesByAlumnoId(alumnoIdNumber).subscribe({
   //     next: (planificaciones) => {
   //       for (const planificacion of planificaciones) {
@@ -70,7 +68,7 @@ export class StudWorkComponent {
   //           buttonText: 'Ver Planificación'
   //         });
   //       }
-  //       console.log(this.planItems); // Move console.log() here
+  //       console.log(this.planItems);
   //     },
   //     error: (error) => {
   //       // Manejo de errores si es necesario

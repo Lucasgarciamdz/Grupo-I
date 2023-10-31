@@ -34,7 +34,6 @@ class Usuarios(Resource):
             usuarios = usuarios.filter(UsuarioModel.dni.like(request.args.get('dni')))
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
-    
         if request.args.get('minAge') and request.args.get('maxAge'):
             min_age = request.args.get('minAge')
             max_age = request.args.get('maxAge')

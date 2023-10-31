@@ -30,7 +30,6 @@ class Planificaciones(Resource):
 
             planificaciones_json = [planificacion.to_json() for planificacion in planificaciones]
 
-            # Return the list of JSON objects as a response
             return planificaciones_json
 
         # devuelve las planificaciones con determinado objetivo
