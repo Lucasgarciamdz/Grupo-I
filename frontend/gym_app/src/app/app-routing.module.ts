@@ -16,7 +16,7 @@ import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: SignupComponent},
+  { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'profile/:id', component: ProfileComponent, canActivate: [PerfilParticularGuard], data: { roles: ['Profesor'] } },
