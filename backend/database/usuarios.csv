@@ -1,0 +1,18 @@
+id_usuario,nombre,apellido,direccion,edad,telefono,dni,rol,sexo,email,contrasena
+1,John,Doe,Calle Falsa 123,25,1234567890,12345678,alumno,M,john.doe@example.com,123456
+2,Jane,Doe,Calle Falsa 456,30,987654321,87654321,alumno,F,jane.doe@example.com,654321
+3,Bob,Smith,Calle Falsa 789,35,1111111111,11111111,alumno,M,bob.smith@example.com,abcdef
+4,Alice,Johnson,Calle Falsa 012,40,2222222222,22222222,alumno,F,alice.johnson@example.com,ghijkl
+5,Michael,Williams,Calle Falsa 345,45,3333333333,33333333,alumno,M,michael.williams@example.com,mnopqr
+6,Samantha,Brown,Calle Falsa 678,50,4444444444,44444444,alumno,F,samantha.brown@example.com,stuabc
+7,David,Jones,Calle Falsa 901,55,5555555555,55555555,alumno,M,david.jones@example.com,vwxyz
+8,Emily,Garcia,Calle Falsa 234,60,6666666666,66666666,alumno,F,emily.garcia@example.com,123abc
+9,William,Martinez,Calle Falsa 567,65,7777777777,77777777,alumno,M,william.martinez@example.com,456def
+10,Sophia,Lopez,Calle Falsa 890,70,8888888888,88888888,alumno,F,sophia.lopez@example.com,789ghi
+11,James,Gonzalez,Calle Falsa 123,25,1234567890,12345678,profesor,M,james.gonzalez@example.com,123456
+12,Olivia,Rodriguez,Calle Falsa 456,30,987654321,87654321,profesor,F,olivia.rodriguez@example.com,654321
+13,Liam,Garcia,Calle Falsa 789,35,1111111111,11111111,profesor,M,liam.garcia@example.com,abcdef
+14,Emma,Martinez,Calle Falsa 012,40,2222222222,22222222,profesor,F,emma.martinez@example.com,ghijkl
+15,Noah,Hernandez,Calle Falsa 345,45,3333333333,33333333,profesor,M,noah.hernandez@example.com,mnopqr
+16,Ava,Gonzalez,Calle Falsa 678,50,4444444444,44444444,profesor,F,ava.gonzalez@example.com,stuabc
+17,William,Perez,Calle Falsa 901,55,5555555555,55555555,profesor,M,william.perez@example.com,vwxyz

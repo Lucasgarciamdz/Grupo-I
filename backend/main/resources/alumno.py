@@ -29,7 +29,8 @@ class Alumnos(Resource):
 
         # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
-            alumnos = alumnos.filter(not AlumnoModel.planilla_medica)
+            alumnos = alumnos.filter(AlumnoModel.planilla_medica == "vencida")
+
 
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)
@@ -42,7 +43,7 @@ class Alumnos(Resource):
                         "total": alumnos.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             alumno = AlumnoModel.from_json(request.get_json())
@@ -58,6 +59,11 @@ class Alumno(Resource):
     @jwt_required(optional=True)
     def get(self, id):
         alumno = db.session.query(AlumnoModel).get_or_404(id)
+
+        if request.args.get('full'):
+            return alumno.to_json_complete()
+
+
         return alumno.to_json()
 
     @role_required('admin')

@@ -15,19 +15,22 @@ export class HomeComponent {
       image: 'assets/clases/clase1.jpg',
       title: 'Clase 1',
       description: 'Fuerza',
-      buttonText: 'Ver Clase'
+      buttonText: 'Ver Clase',
+      id_clase: 1
     },
     {
       image: 'assets/clases/clase2.jpg',
       title: 'Clase 2',
       description: 'Fuerza',
-      buttonText: 'Ver Clase'
+      buttonText: 'Ver Clase',
+      id_clase: 2
     },
     {
       image: 'assets/clases/clase3.jpg',
       title: 'Clase 3',
       description: 'Fuerza',
-      buttonText: 'Ver Clase'
+      buttonText: 'Ver Clase',
+      id_clase: 3
     },
   ];
 }

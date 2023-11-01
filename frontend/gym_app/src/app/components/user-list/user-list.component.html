@@ -1,8 +1,59 @@
-<div class="container ">
+<div class="container">
   <div class="row">
     <div class="col">
-      <h2>User List</h2>
-      <table class="table">
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <h2 class="user-list-title">User List</h2>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary ms-5 text-center" (click)="toggleFilterForm()" *ngIf="showFilterForm == 0">Filtrar</button>
+          <button class="btn btn-secondary ms-5 text-center" (click)="resetFilters()" *ngIf="showNoFilter == 1">Quitar filtros</button>
+          <button class="btn btn-primary ms-5 text-center btn-danger" (click)="toggleFilterForm()" *ngIf="showFilterForm == 1">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="filter-form" *ngIf="showFilterForm == 1">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Filtrar por:</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="filterByRol" name="filterOption" [(ngModel)]="filterOption" value="rol">
+              <label class="form-check-label" for="filterByRol">Rol</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="filterByAge" name="filterOption" [(ngModel)]="filterOption" value="age">
+              <label class="form-check-label" for="filterByAge">Edad</label>
+            </div>
+          </div>
+      
+          <div *ngIf="filterOption === 'rol'">
+            <div class="mb-3">
+              <label for="rol" class="form-label">Rol:</label>
+              <input type="text" class="form-control" id="rol" name="rol" [(ngModel)]="rol">
+            </div>
+          </div>
+
+          <div *ngIf="filterOption === 'age'">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="min_age" class="form-label">Mínima Edad:</label>
+                  <input type="number" class="form-control" id="min_age" name="min_age" [(ngModel)]="minAge">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="max_age" class="form-label">Máxima Edad:</label>
+                  <input type="number" class="form-control" id="max_age" name="max_age" [(ngModel)]="maxAge">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>
+        </form>
+      </div>
+      <div class="table-wrapper" #tableWrapper>
+      <table class="user-table-1">
         <thead>
           <tr>
             <th class="text-center">Nombre y Apellido</th>
@@ -13,16 +64,13 @@
         </thead>
         <tbody *ngFor="let user of users">
           <tr *ngIf="user.id_usuario != editingUserId">
-
             <td>{{ user.nombre }} {{user.apellido}}</td>
             <td>{{ user.rol }}</td>
             <td>{{ user.edad }}</td>
             <td>
               <button class="btn btn-primary ms-5 text-center" (click)="editUser(user.id_usuario)">Editar</button>
-
               <button class="btn btn-danger ms-5 text-center" (click)="deleteUser(user.id_usuario)">Eliminar</button>
             </td>
-
           </tr>
           <tr *ngIf="editingUserId == user.id_usuario">
             <td colspan="4">
@@ -54,5 +102,8 @@
         </tbody>
       </table>
     </div>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" (click)="loadMore()" *ngIf="!noMoreUsers">Load More</button>
+      </div>    </div>
   </div>
 </div>

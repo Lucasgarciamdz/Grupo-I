@@ -1,14 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import { BaseService } from 'src/app/services/base.service';
-
 @Component({
   selector: 'app-clases-list',
   templateUrl: './clases-list.component.html',
   styleUrls: ['./clases-list.component.css']
 })
-export class ClasesListComponent {
-
+export class ClasesListComponent implements OnInit{
+  
+  @ViewChild('tableWrapper') tableWrapper!: ElementRef;
 
   @ViewChild('clasesForm')
   clasesForm!: NgForm;
@@ -17,19 +18,23 @@ export class ClasesListComponent {
 
   clases: any[] | undefined;
 
+  noMoreclases: boolean = false;
+
+  pageNumber: number = 1;
+
+  perPage: number = 10;
+
   constructor(private backSvc: BaseService) {
   }
 
+
   ngOnInit() {
-    this.backSvc.get("clases").subscribe({
+    this.backSvc.get("clases", { page: this.pageNumber, perpage: this.perPage }).subscribe({
       next: (clases: any) => {
         this.clases = clases.clase;
       },
-      error: (error) => {
-        alert('Error al obtener usuarios');
-      },
-      complete: () => {
-        console.log('Finalizó');
+      error: (err: any) => {
+        console.error(err);
       }
     });
   }
@@ -50,6 +55,33 @@ export class ClasesListComponent {
       },
       complete: () => {
         console.log('Finalizó');
+      }
+    });
+  }
+
+
+  // ...
+
+  loadMore(): void {
+    this.pageNumber++;
+    const params = new HttpParams()
+      .set('page', this.pageNumber.toString())
+      .set('perpage', this.perPage.toString());
+    this.backSvc.get("clases", params.toString()).subscribe({
+      next: (clases: any) => {
+        if (clases.clase?.length < this.perPage) {
+          this.noMoreclases = true;
+        }
+        this.clases = this.clases?.concat(clases.clase);
+        setTimeout(() => {
+          if (this.tableWrapper) {
+            this.tableWrapper.nativeElement.style.maxHeight = '600px';
+            this.tableWrapper.nativeElement.style.overflowY = 'auto';
+          }
+        });
+      },
+      error: (err: any) => {
+        console.error(err);
       }
     });
   }

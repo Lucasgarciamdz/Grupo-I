@@ -2,6 +2,7 @@ from flask_restful import Resource
 from .. import db
 from flask import request, jsonify
 from main.models import ClasesModel
+from main.models import AlumnoModel
 from flask_jwt_extended import jwt_required
 from main.auth.decoradores import role_required
 
@@ -20,6 +21,24 @@ class Clases(Resource):
 
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+        
+        if request.args.get('alumno_id_clase'):
+
+            alumno_id = request.args.get('alumno_id_clase')
+
+            alumno = AlumnoModel.query.filter_by(id_alumno=alumno_id).first()
+
+            planificaciones = alumno.planificaciones
+
+            clases = []
+            for planificacion in planificaciones:
+                clase = planificacion.clase
+                if clase is not None:
+                    clases.append(clase)
+
+            clases_json = [clase.to_json() for clase in clases]
+
+            return clases_json
 
         # devuelve todas las planificaciones que tienen una determinada clase
         if request.args.get('clase'):
@@ -28,7 +47,7 @@ class Clases(Resource):
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True)
         except Exception:
-            return jsonify({"error": "Error inesperado"})
+            return jsonify({"clase": []})
 
         return jsonify({"clase": [clase.to_json() for clase in clases],
                         "page": page,
@@ -51,6 +70,12 @@ class Clase(Resource):
 
     @jwt_required(optional=True)
     def get(self, id):
+        if request.args.get('planificaciones'):
+            clase = db.session.query(ClasesModel).get_or_404(id)
+            planificaciones = clase.planificacion
+            return jsonify({"clase":clase.to_json(),
+            "planificaciones": [planificacion.to_json() for planificacion in planificaciones]})
+
         clase = db.session.query(ClasesModel).get_or_404(id)
         return clase.to_json()
 

@@ -6,26 +6,29 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
-
-
+from database import insert
 
 api = Api()
 
 db = SQLAlchemy()
 
-migrate = Migrate()
+app = Flask(__name__)
+load_dotenv()
+
+migrate = Migrate(app, db)
 
 jwt = JWTManager()
 
 mailsender = Mail()
 
 def create_app():
-    app = Flask(__name__)
-    load_dotenv()
+    
 
     database_path = os.getenv('DATABASE_PATH')
     database_name = os.getenv('DATABASE_NAME')
     full_path = os.path.join(database_path, database_name)
+
+    # insert()
 
     if not os.path.isdir(database_path):
         os.makedirs(database_path)

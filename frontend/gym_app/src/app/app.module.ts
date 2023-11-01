@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +26,6 @@ import { HomeProfComponent } from './views/home-prof/home-prof.component';
 import { EditProfileFormComponent } from './components/edit-profile-form/edit-profile-form.component';
 import { EditProfileComponent } from './views/edit-profile/edit-profile.component';
 import { StudWorkComponent } from './views/stud-work/stud-work.component';
-import { UpdateBtnComponent } from './components/update-btn/update-btn.component';
 import { AdminButtonsComponent } from './components/admin-buttons/admin-buttons.component';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -36,6 +37,12 @@ import { UserListViewComponent } from './views/user-list-view/user-list-view.com
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 import { ClasesListComponent } from './components/clases-list/clases-list.component';
 import { ProfesoresListComponent } from './components/profesores-list/profesores-list.component';
+
+import { PerfilParticularGuard } from './guards/perfil-particular.guard';
+
+import { ClasesComponent } from './views/clases/clases.component';
+import { ClassCardComponent } from './components/class-card/class-card.component';
+
 
 @NgModule({
     declarations: [
@@ -61,7 +68,6 @@ import { ProfesoresListComponent } from './components/profesores-list/profesores
         EditProfileFormComponent,
         EditProfileComponent,
         StudWorkComponent,
-        UpdateBtnComponent,
         AdminButtonsComponent,
         HomeAdminComponent,
         LogButtonComponent,
@@ -69,9 +75,11 @@ import { ProfesoresListComponent } from './components/profesores-list/profesores
         ClassListViewComponent,
         ClasesListComponent,
         ProfesoresListComponent,
+        ClasesComponent,
+        ClassCardComponent,
     ],
     providers: [
-        JWTService
+        JWTService,
     ],
     bootstrap: [AppComponent],
     imports: [

@@ -9,7 +9,7 @@ from main.mail.functions import sendMail
 
 class Planificaciones(Resource):
 
-    @jwt_required()
+    # @jwt_required()
     def get(self):
 
         planificaciones = db.session.query(PlanificacionModel)
@@ -21,6 +21,16 @@ class Planificaciones(Resource):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
+
+        # devuelve una lista de planificaciones asociadas a un alumno
+        if request.args.get('alumno_id_plani'):
+            alumno_id = request.args.get('alumno_id_plani')
+            alumno = AlumnoModel.query.filter_by(id_alumno=alumno_id).first()
+            planificaciones = alumno.planificaciones
+
+            planificaciones_json = [planificacion.to_json() for planificacion in planificaciones]
+
+            return planificaciones_json
 
         # devuelve las planificaciones con determinado objetivo
         if request.args.get('objetivo'):

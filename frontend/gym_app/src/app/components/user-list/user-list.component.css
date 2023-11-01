@@ -95,3 +95,16 @@
 .container{
   padding-bottom: 80px;
 }
+
+.filtrar-title {
+  font-size: 24px;
+}
+
+.table-wrapper {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* .user-list .user-table-1 {
+  margin-top: 20px;
+} */

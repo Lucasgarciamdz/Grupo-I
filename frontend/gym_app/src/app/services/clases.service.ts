@@ -29,4 +29,9 @@ export class ClasesService extends BaseService{
 
     return this.httpClient.delete<any>(`${this.url}/clase/${id}`, { headers });
   }
+
+  getClasesByAlumnoId(alumnoId: number): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any[]>(`${this.url}/clases?alumno_id_clase=${alumnoId}`, { headers });
+  }
 }

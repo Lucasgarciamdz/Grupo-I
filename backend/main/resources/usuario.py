@@ -8,7 +8,7 @@ from main.auth.decoradores import role_required
 
 
 class Usuarios(Resource):
-    @jwt_required(optional=True)
+    # @jwt_required(optional=True)
     def get(self):
         usuarios = db.session.query(UsuarioModel)
 
@@ -34,13 +34,21 @@ class Usuarios(Resource):
             usuarios = usuarios.filter(UsuarioModel.dni.like(request.args.get('dni')))
 
         # devuelve una lista ordenada de los usuarios por edad (NO ANDA O EL POSTMAN NO MUESTRA LAS COSAS ORDENADAS)
-        if request.args.get('sort_by_edad'):
-            usuarios = usuarios.order_by(desc(UsuarioModel.edad))
+        if request.args.get('minAge') and request.args.get('maxAge'):
+            min_age = request.args.get('minAge')
+            max_age = request.args.get('maxAge')
+
+            if min_age is not None and max_age is not None:
+                usuarios = usuarios.filter((UsuarioModel.edad >= min_age) & (UsuarioModel.edad <= max_age))
+            elif min_age is not None:
+                usuarios = usuarios.filter(UsuarioModel.edad >= min_age)
+            elif max_age is not None:
+                usuarios = usuarios.filter(UsuarioModel.edad <= max_age)
 
         try:
             usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
         except Exception:
-            return jsonify({"error": "Error inesperado"})
+            return jsonify({"usuario": []})
 
         return jsonify({"usuario": [usuario.to_json() for usuario in usuarios],
                         "page": page,
@@ -48,11 +56,11 @@ class Usuarios(Resource):
                         "total": usuarios.total
                         })
 
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
-            usuario.rol = ""
+            # usuario.rol = ""
         except Exception:
             return "Error al pasar a JSON"
         db.session.add(usuario)
@@ -66,7 +74,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    @role_required(roles="admin")
+    # @role_required(roles="admin")
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()
@@ -75,7 +83,8 @@ class Usuario(Resource):
         db.session.add(usuario)
         db.session.commit()
         return usuario.to_json(), 201
-
+    
+    @role_required(roles="admin")
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         db.session.delete(usuario)

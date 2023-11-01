@@ -13,11 +13,16 @@ import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
 
+import { PerfilParticularGuard } from './guards/perfil-particular.guard';
+import { ClasesComponent } from './views/clases/clases.component';
+
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: SignupComponent},
+  { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [PerfilParticularGuard], data: { roles: ['Profesor'] } },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor', 'Alumno', 'Admin'] } },
   { path: 'home-prof', component: HomeProfComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'stud-work', component: StudWorkComponent, canActivate: [AuthsessionGuard], data: { roles: ['Alumno'] } },
@@ -26,6 +31,8 @@ const routes: Routes = [
   { path: 'class-list-view', component: ClassListViewComponent},
   { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['admin', 'Profesor'] } },
+  { path: 'views/class', component: ClasesComponent },
+  { path: 'views/class/:id', component: ClasesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

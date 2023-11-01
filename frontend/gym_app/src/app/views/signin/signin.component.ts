@@ -19,17 +19,11 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["l@gmail.com.ar", Validators.required],
-      contrasena: ['12345', Validators.required]
+      email: ["alumno@gmail.com.ar", Validators.required],
+      contrasena: ['123', Validators.required]
     })
   }
 
-  //f.bertoldi@alumno.um.edu.ar
-  //123
-  //l.garcia@alumno.um.edu.ar
-  //456
-  ///frg.lopez@alumno.um.edu.ar
-  ///789
   login(dataLogin:any = {}) {
     //dataLogin = {email: this.loginForm.value.email, password: this.loginForm.value.password}
     console.log('Comprobando credenciales');
@@ -37,7 +31,12 @@ export class SigninComponent implements OnInit {
       next: (rta:any) => {
         alert('Login exitoso');
         console.log('Respuesta login: ',rta.access_token);
+        console.log('Respuesta login: ',rta);
         localStorage.setItem('token', rta.access_token);
+        localStorage.setItem('id_usuario', rta.id_usuario);
+        localStorage.setItem('id_alumno', rta.id_alumno);
+        localStorage.setItem('id_profesor', rta.id_profesor);
+        localStorage.setItem('usuario', JSON.stringify(rta.usuario));
         this.router.navigateByUrl('home');
       },
       error: (error) => {
@@ -50,6 +49,11 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  togglePasswordVisibility(): void {
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+  }
+  
   submit() {
     if (this.loginForm.valid) {
       console.log('Form login: ', this.loginForm.value);

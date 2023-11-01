@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div class="d-flex flex-column align-items-center mb-2">
-        <app-profile-picture [image]="'../../assets/default-profile-picture.jpeg'" [name]="'Lucas Garcia'"></app-profile-picture>
-        <app-edit-profile-btn></app-edit-profile-btn>
+        <app-profile-picture [image]="'../../assets/default-profile-picture.jpeg'" [name]="profileName"></app-profile-picture>
+        <app-edit-profile-btn *ngIf="currentUser == profileId"></app-edit-profile-btn>
     </div>
     <div class="d-flex justify-content-between mb-4">
-        <app-profile-stats-box [label]="'Height'" [number]="'180cm'"></app-profile-stats-box>
-        <app-profile-stats-box [label]="'Weight'" [number]="'60kg'"></app-profile-stats-box>
-        <app-profile-stats-box [label]="'Age'" [number]="'21yo'"></app-profile-stats-box>
-    </div>
+        <app-profile-stats-box [label]="'Height'" [number]="height"></app-profile-stats-box>
+        <app-profile-stats-box [label]="'Weight'" [number]="weight"></app-profile-stats-box>
+        <app-profile-stats-box [label]="'Age'" [number]="age"></app-profile-stats-box>
+      </div>
     <div class="d-flex flex-column mb-4">
         <app-account-info></app-account-info>
     </div>

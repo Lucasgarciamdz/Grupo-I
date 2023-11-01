@@ -40,6 +40,19 @@ export class JWTService {
     return decodedToken ? decodedToken['email'] : null;
   }
 
+  getId(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id_usuario'] : null;
+  }
+  getIdAlumno(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id_alumno'] : null;
+  }
+  getIdProfesor(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken['id_profesor'] : null;
+  }
+
   getExpiryTime(): number | null {
     const decodedToken = this.decodeToken();
     return decodedToken ? parseInt(decodedToken['exp'], 10) : null;
