@@ -47,7 +47,8 @@ export class StudWorkComponent {
             // image: clase.imagen,
             title: clase.tipo,
             description: clase.descripcion,
-            buttonText: 'Ver clase'
+            buttonText: 'Ver clase',
+            id_clase: clase.id
           });
         }
         console.log('esta es la lista', this.classItems);

@@ -70,6 +70,12 @@ class Clase(Resource):
 
     @jwt_required(optional=True)
     def get(self, id):
+        if request.args.get('planificaciones'):
+            clase = db.session.query(ClasesModel).get_or_404(id)
+            planificaciones = clase.planificacion
+            return jsonify({"clase":clase.to_json(),
+            "planificaciones": [planificacion.to_json() for planificacion in planificaciones]})
+
         clase = db.session.query(ClasesModel).get_or_404(id)
         return clase.to_json()
 

@@ -2,7 +2,7 @@
 
 ## Front
 
-### Clases @Francisco (por terminar)
+### Clases @Francisco 'hecho, revisar con DB cargada'
 
 - hacer vista para boton ver clases
   - se tienen que mostrar las planificaciones de cada clase

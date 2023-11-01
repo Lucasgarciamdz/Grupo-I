@@ -1,0 +1,18 @@
+<div class="card-container">
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Planification ID</th>
+          <th>Objective</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let planificacion of planificaciones">
+        <tr>
+          <td>{{ planificacion.id_planificacion }}</td>
+          <td>{{ planificacion.objetivo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
