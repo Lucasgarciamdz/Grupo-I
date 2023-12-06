@@ -20,6 +20,8 @@ export class ProfileComponent {
   weight: string = '';
   age: string = '';
   profileId: any;
+  alumno_id: any;
+
 
   constructor(
     private alumnoService: AlumnoService,
@@ -31,16 +33,18 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     this.currentUser = this.jwtService.getId();
-    this.route.queryParams.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.profileId = params['id'];
     });
 
+  
     console.log(this.profileId);
     console.log(this.currentUser);
     if (this.profileId) {
       console.log('viendo usuario particular');
       this.baseService.get('/alumno/' + this.profileId, 'full=1').subscribe({
         next: (response: any) => {
+          console.log(response);
           // this.usuario = response.usuario;
           this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
           this.age = response.usuario.edad;
@@ -52,22 +56,21 @@ export class ProfileComponent {
         },
       });
     } else {
+      this.alumno_id = this.jwtService.getIdAlumno();
       console.log('viendo mi perfil');
       const userData = JSON.parse(localStorage.getItem('usuario') ?? '{}');
+      console.log(userData);
       this.usuario = userData;
       this.age = this.usuario.edad;
       this.profileName = this.usuario.nombre + ' ' + this.usuario.apellido;
-      this.alumnoService.getAlumnos().subscribe({
+      this.alumnoService.getAlumno(this.alumno_id).subscribe({
         next: (response: any) => {
-          this.alumnos = response.alumnos;
-          for (let alumno of this.alumnos) {
-            // console.log(alumno);
-            if (alumno.id_usuario == this.usuario.id_usuario) {
-              this.height = alumno.altura;
-              this.weight = alumno.peso;
-              // console.log(`Height: ${this.height}, Weight: ${this.weight}`);
-            }
-          }
+          console.log(response);
+          this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
+          this.height = response.altura;
+          this.weight = response.peso;
+          this.age = response.usuario.edad;
+
         },
         error: (error) => {
           console.error(error);

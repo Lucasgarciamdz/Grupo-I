@@ -2,54 +2,24 @@
 
 ## Front
 
-### Clases @Francisco 'hecho, revisar con DB cargada'
+### Home alumno
 
-- hacer vista para boton ver clases
-  - se tienen que mostrar las planificaciones de cada clase
+- El alumno debe poder ver sus propias planificaciones o clases de forma mas ordenada.
 
-### Paginacion @Lucas (listo)
+### Perfil
 
-- ~~ver si es solo en las listas del admin~~
+- Desaparecio el boton de editar perfil
+- creo que no cargan bien los datos del alumno
+- El perfil deberia ser distinto dependiendo si es un profe o un alumno
 
-### Admin (falta) Franco
+### home profesor
 
-- agregar la posibilidad de filtrar
-- mostrar lista clases
-- agregar posibilidad de crear clases y planificaiones
-
-### Usuario @Franco (falta clases)
-
-- asegurarse de ver solo las clases propias
-- mejorar edit, agregar opcion de cancel y ver el boton de update (listo)
-
-#### Perfil @Franco (listo)
-
-- ~~IMPORTANTE, hacer el perfil personalizado (listo)~~
-
-### Profesor @Lucas (listo students)
-
-- ~~que funcionen los botones de students y clases (falta un toque)~~
+- El profesor no puede acceder a una clase especifica
 
 ## Back
 
-### Base de datos @Lucas (listo)
+### Excepciones
 
-- ~~Revisar muy bien el modelo de base de datos~~
-- ~~llenar con cosas random par ver que se vea todo bien~~
+- si las credenciales son incorrectas, salta un 404 en vez de un 401
 
-### Register (falta) Franco
-
-- enviar mail al admin cuando hay un nuevo register
-
-## Para lo ultimo
-
-### Estructura general
-
-- revisar archivos inutiles
-- formatear el codigo
-- documentar????
-- postman_collection?
-
-### Detalles
-
-- hacer filtros (usar los filtros del back)
+### Orden general del proyecto

@@ -16,6 +16,10 @@ export class AlumnoService extends BaseService {
     return this.httpClient.get<any[]>(`${this.url}/alumnos`, { headers });
   }
 
+  getAlumno(id: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any>(`${this.url}/alumno/${id}?full=1`, { headers });
+  }
   // createAlumno(alumno: any): Observable<any> {
   //   const headers = this.getHeaders();
   //   return this.httpClient.post<any>(`${this.url}/alumnos`, alumno, { headers });
