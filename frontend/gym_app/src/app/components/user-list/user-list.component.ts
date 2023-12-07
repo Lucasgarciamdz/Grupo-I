@@ -188,17 +188,17 @@ export class UserListComponent implements OnInit {
 
   loadMore(): void {
     this.pageNumber++;
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('page', this.pageNumber.toString())
-      .set('perpage', this.perPage.toString())
-  
+      .set('perpage', this.perPage.toString());
+
     if (this.filterOption === 'rol') {
-      params.set('rol', this.rol);
+      params = params.set('rol', this.rol);
     } else if (this.filterOption === 'age') {
-      params.set('minAge', this.minAge.toString());
-      params.set('maxAge', this.maxAge.toString());
+      params = params.set('minAge', this.minAge.toString());
+      params = params.set('maxAge', this.maxAge.toString());
     }
-  
+
     this.userSvc.get("/usuarios", params.toString()).subscribe({
       next: (users: any) => {
         if (users.usuario?.length < this.perPage) {
