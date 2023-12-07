@@ -5,12 +5,15 @@
         <tr>
           <th>Planification ID</th>
           <th>Objective</th>
+          <th>Join</th>
         </tr>
       </thead>
       <tbody *ngFor="let planificacion of planificaciones">
         <tr>
           <td>{{ planificacion.id_planificacion }}</td>
           <td>{{ planificacion.objetivo }}</td>
+          <td>  <button (click)="joinPlanificacion(planificacion.id)">Join</button>
+          </td>
         </tr>
       </tbody>
     </table>

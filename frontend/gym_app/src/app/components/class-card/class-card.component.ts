@@ -47,4 +47,10 @@ export class ClassCardComponent implements OnInit {
     });
   }
 }
+joinPlanificacion(planificacionId: number) {
+  // Call the service method to join the planificacion
+  // this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
+  //   // Handle the response here
+  // });
+}
 }
