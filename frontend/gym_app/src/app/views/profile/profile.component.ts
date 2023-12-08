@@ -42,7 +42,7 @@ export class ProfileComponent {
     console.log(this.currentUser);
     if (this.profileId) {
       console.log('viendo usuario particular');
-      this.baseService.get('/alumno/' + this.profileId, 'full=1').subscribe({
+      this.alumnoService.getAlumnoFull(this.profileId).subscribe({
         next: (response: any) => {
           console.log(response);
           // this.usuario = response.usuario;

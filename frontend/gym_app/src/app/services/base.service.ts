@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 export class BaseService {
   protected url = '/api';
 
-  private headers= this.getHeaders();
-
   constructor(protected httpClient: HttpClient) {}
 
   protected getHeaders(): HttpHeaders {
@@ -23,7 +21,7 @@ export class BaseService {
 
   public get<T>(endpoint: string, params?: any): Observable<T> {
     const options = {
-      headers: this.headers,
+      headers: this.getHeaders(),
       params: new HttpParams({ fromString: params })
     };
     return this.httpClient.get<T>(`${this.url}/${endpoint}`, options);
@@ -31,26 +29,25 @@ export class BaseService {
 
   public post<T>(endpoint: string, body: any): Observable<T> {
     return this.httpClient.post<T>(`${this.url}/${endpoint}`, body, {
-      headers: this.headers
+      headers: this.getHeaders()
     });
   }
 
   public getById<T>(endpoint: string, id: number): Observable<T> {
     return this.httpClient.get<T>(`${this.url}/${endpoint}/${id}`, {
-      headers: this.headers
+      headers: this.getHeaders()
     });
   }
   
   public put<T>(endpoint: string, body: any): Observable<T> {
     return this.httpClient.put<T>(`${this.url}/${endpoint}`, body, {
-      headers: this.headers
+      headers: this.getHeaders()
     });
   }
 
   public delete<T>(endpoint: string): Observable<T> {
     return this.httpClient.delete<T>(`${this.url}/${endpoint}`, {
-      headers: this.headers
+      headers: this.getHeaders()
     });
   }
-
 }

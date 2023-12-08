@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseService } from 'src/app/services/base.service';
+import { JWTService } from 'src/app/services/jwt.service';
 import { PlanificacionService } from 'src/app/services/planificacion.service';  // Importa el servicio de planificaciones
 
 @Component({
@@ -13,10 +14,12 @@ export class ClassCardComponent implements OnInit {
   @Input() items!: { image: string, title: string, description: string, buttonText: string }[];
   planificaciones: any[] = [];
   claseId: any;
+  alumnoId: any;
 
   constructor(private planificacionService: PlanificacionService,
     private route: ActivatedRoute,
-    private baseService: BaseService) {}  // Inyecta el servicio de planificaciones
+    private baseService: BaseService,
+    private jwtService: JWTService) {}  // Inyecta el servicio de planificaciones
 
     ngOnInit() {
       this.route.params.subscribe(params => {
@@ -48,9 +51,9 @@ export class ClassCardComponent implements OnInit {
   }
 }
 joinPlanificacion(planificacionId: number) {
-  // Call the service method to join the planificacion
-  // this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
-  //   // Handle the response here
-  // });
+  this.alumnoId = this.jwtService.getIdAlumno()
+  this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
+    console.log(response);
+  });
 }
 }

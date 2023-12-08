@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { BaseService } from "./base.service";
 
@@ -12,24 +12,26 @@ export class PlanificacionService extends BaseService {
   }
 
   getPlanificaciones(): Observable<any[]> {
-    const headers = this.getHeaders();
-    return this.httpClient.get<any[]>(`${this.url}/planificaciones`, { headers });
+    return this.get<any[]>('planificaciones');
   }
 
-
   updatePlanificacion(id: number, planificacion: any): Observable<any> {
-    const headers = this.getHeaders();
-    return this.httpClient.put<any>(`${this.url}/planificaciones/${id}`, planificacion, { headers });
+    return this.put<any>(`planificaciones/${id}`, planificacion);
   }
 
   deletePlanificacion(id: number): Observable<any> {
-    const headers = this.getHeaders();
-    return this.httpClient.delete<any>(`${this.url}/planificaciones/${id}`, { headers });
+    return this.delete<any>(`planificaciones/${id}`);
   }
 
   getPlanificacionesPorClase(claseId: number): Observable<any[]> {
-    const headers = this.getHeaders();
-    return this.httpClient.get<any[]>(`${this.url}/clase/${claseId}/planificaciones`, { headers });
+    return this.get<any[]>(`clase/${claseId}/planificaciones`);
   }
 
+  joinPlanificacion(alumnoId: number, planificacionId: number): Observable<any> {
+    return this.put<any>(`planificacion/${planificacionId}?alumno_id=${alumnoId}`, {});
+  }
+
+  getPlanificacionesPorAlumno(alumnoId: number): Observable<any[]> {
+    return this.get<any[]>(`planificaciones?alumno_id_plani=${alumnoId}`);
+  }
 }

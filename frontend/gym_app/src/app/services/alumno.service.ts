@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { BaseService } from "./base.service";
 
@@ -12,26 +12,22 @@ export class AlumnoService extends BaseService {
   }
 
   getAlumnos(): Observable<any[]> {
-    const headers = this.getHeaders();
-    return this.httpClient.get<any[]>(`${this.url}/alumnos`, { headers });
+    return this.get<any[]>('alumnos');
   }
 
   getAlumno(id: number): Observable<any> {
-    const headers = this.getHeaders();
-    return this.httpClient.get<any>(`${this.url}/alumno/${id}?full=1`, { headers });
+    return this.get<any>(`alumno/${id}?full=1`);
   }
-  // createAlumno(alumno: any): Observable<any> {
-  //   const headers = this.getHeaders();
-  //   return this.httpClient.post<any>(`${this.url}/alumnos`, alumno, { headers });
-  // }
 
   updateAlumno(id: number, alumno: any): Observable<any> {
-    const headers = this.getHeaders();
-    return this.httpClient.put<any>(`${this.url}/alumnos/${id}`, alumno, { headers });
+    return this.put<any>(`alumnos/${id}`, alumno);
   }
 
   deleteAlumno(id: number): Observable<any> {
-    const headers = this.getHeaders();
-    return this.httpClient.delete<any>(`${this.url}/alumnos/${id}`, { headers });
+    return this.delete<any>(`alumnos/${id}`);
+  }
+
+  getAlumnoFull(id: number): Observable<any> {
+    return this.get<any>(`alumno/${id}?full=1`);
   }
 }

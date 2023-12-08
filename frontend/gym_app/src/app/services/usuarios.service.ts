@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {BaseService} from "./base.service";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { BaseService } from "./base.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,52 +12,32 @@ export class UsuariosService extends BaseService {
   }
 
   getUsers(): Observable<any[]> {
-    const headers = this.getHeaders();
-
-    return this.httpClient.get<any[]>(`${this.url}/usuarios`, {headers});
+    return this.get<any[]>('usuarios');
   }
 
-  getUserById<T>(id: number): Observable<T> {
-    const headers = this.getHeaders();
-
-    return this.httpClient.get<T>(`${this.url}/usuario/${id}`, {headers});
+  getUserById(id: number): Observable<any> {
+    return this.getById<any>(`usuario`, id);
   }
 
-  getUsersByAge<T>(minAge: number, maxAge: number): Observable<T> {
-    const headers = this.getHeaders();
-
-    let params = new HttpParams();
-    params = params.set('minAge', minAge);
-    params = params.set('maxAge', maxAge);
-
-    return this.httpClient.get<T>(`${this.url}/usuarios`, { headers, params });
+  getUsersByAge(minAge: number, maxAge: number): Observable<any> {
+    const params = `minAge=${minAge}&maxAge=${maxAge}`;
+    return this.get<any>('usuarios', params);
   }
 
-  getUsersByRol<T>(rol: string): Observable<T> {
-    const headers = this.getHeaders();
-
-    let params = new HttpParams();
-    params = params.set('rol', rol);
-
-    return this.httpClient.get<T>(`${this.url}/usuarios?rol=${rol}`, { headers });
-
+  getUsersByRol(rol: string): Observable<any> {
+    const params = `rol=${rol}`;
+    return this.get<any>('usuarios', params);
   }
 
   getClasses(): Observable<any[]> {
-    const headers = this.getHeaders();
-
-    return this.httpClient.get<any[]>(`${this.url}/clases`, {headers});
+    return this.get<any[]>('clases');
   }
 
   putUser(id: number, user: any): Observable<any> {
-    const headers = this.getHeaders();
-
-    return this.httpClient.put<any>(`${this.url}/usuario/${id}`, user, {headers});
+    return this.put<any>(`usuario/${id}`, user);
   }
 
   deleteUser(id: number): Observable<any> {
-    const headers = this.getHeaders();
-
-    return this.httpClient.delete<any>(`${this.url}/usuario/${id}`, {headers});
+    return this.delete<any>(`usuario/${id}`);
   }
 }

@@ -27,7 +27,9 @@ export class ProfButtonsComponent {
         console.log(profesorData);
         this.classes = profesorData.clases.map((clase: any) => ({
           id: clase.id,
-          name: clase.tipo
+          name: clase.tipo,
+          description: clase.descripcion,
+          image: clase.imagen
         }));
       },
       error: (err: any) => {

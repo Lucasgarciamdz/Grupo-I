@@ -1,6 +1,328 @@
-/register deberia podre recibir todos los datos del usuario y a su vez dependiendo del rol acceptar datos
-de alumno y profesor. Tambien, cada uno podria traer planificacion o clase segun corresponda.
 
-Se puede agregar una clase o una planificacion mas tarde segun el dni del usuario. (chequear su rol)
+alumnos_planificaciones = db.Table("alumnos_planificaciones",
+                                   db.Column("id_alumno", db.Integer, db.ForeignKey("alumno.id_alumno"), primary_key=True),
+                                   db.Column("id_planificacion", db.Integer, db.ForeignKey("planificacion.id_planificacion"), primary_key=True))
 
-Llenar base de datos y agregarla al migrations
+
+class Alumno(db.Model):
+
+    __tablename__ = "alumno"
+
+    id_alumno = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
+
+    estado = db.Column(db.String(45))
+    altura = db.Column(db.Integer)
+    peso = db.Column(db.Integer)
+    planilla_medica = db.Column(db.String(45))
+
+    usuario = db.relationship('Usuario', back_populates='alumno', uselist=False, cascade="all, delete-orphan", single_parent=True)
+    planificaciones = db.relationship('Planificacion', secondary=alumnos_planificaciones, backref=db.backref('alumnos_p', lazy='dynamic'), overlaps="alumnos_p,planificaciones")
+
+    def __repr__(self):
+        return '<alumno: %r >' % (self.id_alumno)
+
+    def to_json(self):
+        alumno_json = {
+            'id_alumno': self.id_alumno,
+            'id_usuario': self.id_usuario,
+            'estado': self.estado,
+            'altura': self.altura,
+            'peso': self.peso,
+            'planilla_medica': self.planilla_medica,
+        }
+        return alumno_json
+
+    def to_json_complete(self):
+        alumno_json = {
+            'id_alumno': self.id_alumno,
+            'id_usuario': self.id_usuario,
+            'estado': self.estado,
+            'altura': self.altura,
+            'peso': self.peso,
+            'planilla_medica': self.planilla_medica,
+            "usuario": self.usuario.to_json(),
+            "planificaciones": [planificacion.to_json() for planificacion in self.planificaciones]
+        }
+        return alumno_json
+
+    @staticmethod
+    def from_json(alumno_json):
+        id_alumno = alumno_json.get('id_alumno', None)
+        id_usuario = alumno_json.get('id_usuario', None)
+        estado = alumno_json.get('estado', None)
+        altura = alumno_json.get('altura', None)
+        peso = alumno_json.get('peso', None)
+        planilla_medica = alumno_json.get('planilla_medica', None)
+        return Alumno(id_alumno=id_alumno,
+                      id_usuario=id_usuario,
+                      estado=estado,
+                      altura=altura,
+                      peso=peso,
+                      planilla_medica=planilla_medica,
+                      )
+
+
+class Clase(db.Model):
+
+    __tablename__ = "clase"
+
+    id_clase = db.Column(db.Integer, primary_key=True)
+    tipo = db.Column(db.String(45))
+    descripcion = db.Column(db.String(45))
+    imagen = db.Column(db.String(45))
+
+    planificacion = db.relationship('Planificacion', back_populates='clase', cascade="all, delete-orphan", single_parent=True)
+    profesores = db.relationship('Profesor', secondary=profesores_clases, backref=db.backref('clases_p', lazy='dynamic'), overlaps="clases,profesores_p")
+
+    def __repr__(self):
+        return '<clase: %r >' % (self.id_clase)
+
+    def to_json(self):
+        clase_json = {
+            'id': str(self.id_clase),
+            'tipo': self.tipo,
+            'descripcion': self.descripcion,
+            'imagen': self.imagen
+        }
+        return clase_json
+
+    def to_json_complete(self):
+        clase_json = {
+            'id': self.id_clase,
+            'tipo': self.tipo,
+            'desscripcion': self.descripcion,
+            'imagen': self.imagen,
+            'planificacion': self.planificacion.to_json(),
+            'profesores': [profesor.to_json() for profesor in self.profesores]
+        }
+        return clase_json
+
+    @staticmethod
+    def from_json(clase_json):
+        id_clase = clase_json.get('id_clase')
+        tipo = clase_json.get('tipo')
+        descripcion = clase_json('descripcion')
+        imagen = clase_json('imagen')
+        return Clase(id_clase=id_clase,
+                     tipo=tipo,
+                     descripcion=descripcion,
+                     imagen=imagen
+                     )
+
+
+class Planificacion(db.Model):
+
+    __tablename__ = "planificacion"
+
+    id_planificacion = db.Column(db.Integer, primary_key=True)
+    id_clase = db.Column(db.Integer, db.ForeignKey('clase.id_clase'))
+
+    horas_semanales = db.Column(db.Integer)
+    nivel = db.Column(db.String(20))
+    objetivo = db.Column(db.String(45))
+
+    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, backref=db.backref('planificaciones_a', lazy='dynamic'), overlaps="alumnos_p,planificaciones")
+    clase = db.relationship('Clase',
+                            back_populates='planificacion',
+                            single_parent=True,
+                            uselist=False,
+                            cascade="all, delete-orphan",
+                            passive_deletes=True,
+                            lazy='joined',
+                            innerjoin=True,
+                            post_update=True,
+                            foreign_keys=[id_clase])
+
+    def __repr__(self):
+        return '<planificacion: %r >' % (self.id_planificacion)
+
+    def to_json(self):
+        planificacion_json = {
+            'id_planificacion': self.id_planificacion,
+            'id_clase': self.id_clase,
+            'horas_semanales': self.horas_semanales,
+            'objetivo': self.objetivo,
+            'nivel': self.nivel
+        }
+        return planificacion_json
+
+    def to_json_complete(self):
+        planificacion_json = {
+            'id_planificacion': self.id_planificacion,
+            'id_clase': self.id_clase,
+            'horas_semanales': self.horas_semanales,
+            'objetivo': self.objetivo,
+            'nivel': self.nivel,
+            'alumnos': [alumno.to_json() for alumno in self.alumnos],
+            'clase': self.clase.to_json()
+        }
+        return planificacion_json
+
+    @staticmethod
+    def from_json(planificacion_json):
+        id_planificacion = planificacion_json.get('id_planificacion')
+        id_clase = planificacion_json.get('id_clase')
+        horas_semanales = planificacion_json.get('horas_semanales')
+        objetivo = planificacion_json.get('objetivo')
+        nivel = planificacion_json.get('nivel')
+        return Planificacion(id_planificacion=id_planificacion,
+                             id_clase=id_clase,
+                             horas_semanales=horas_semanales,
+                             objetivo=objetivo,
+                             nivel=nivel,
+                             )
+
+profesores_clases = db.Table("profesores_clases",
+                             db.Column("id_profesor_clase", db.Integer, primary_key=True),
+                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase")),
+                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor")))
+
+
+class Profesor(db.Model):
+
+    __tablename__ = "profesor"
+
+    id_profesor = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
+
+    certificacion = db.Column(db.String(45), nullable=False)
+    fecha_inicio_actividad = db.Column(db.String(45), nullable=False)
+    sueldo = db.Column(db.Float, nullable=False)
+    estado = db.Column(db.String(45), nullable=False)
+
+    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'), lazy='dynamic', overlaps="clases,profesores_p")
+
+    def __repr__(self):
+        return '<profesor: %r >' % (self.id_profesor)
+
+    def to_json(self):
+        profesor_json = {
+            'id_profesor': self.id_profesor,
+            'certificacion': self.certificacion,
+            'fecha_inicio_actividad': self.fecha_inicio_actividad,
+            'sueldo': str(self.sueldo),
+            'estado': self.estado,
+        }
+        return profesor_json
+
+    def to_json_complete(self):
+        profesor_json = {
+            'id_profesor': str(self.id_profesor),
+            'id_usuario': self.id_usuario,
+            'certificacion': self.certificacion,
+            'fecha_inicio_actividad': self.fecha_inicio_actividad,
+            'sueldo': str(self.sueldo),
+            'estado': self.estado,
+            "clases": [clase.to_json() for clase in self.clases],
+        }
+        return profesor_json
+
+    @staticmethod
+    def from_json(profesor_json):
+        id_profesor = profesor_json.get('id_profesor')
+        id_usuario = profesor_json.get('id_usuario')
+        certificacion = profesor_json.get('certificacion')
+        fecha_inicio_actividad = profesor_json.get('fecha_inicio_actividad')
+        sueldo = profesor_json.get('sueldo')
+        estado = profesor_json.get('estado')
+        return Profesor(id_profesor=id_profesor,
+                        id_usuario=id_usuario,
+                        certificacion=certificacion,
+                        fecha_inicio_actividad=fecha_inicio_actividad,
+                        sueldo=sueldo,
+                        estado=estado,
+                        )
+
+
+class Usuario(db.Model):
+
+    __tablename__ = "usuario"
+
+    id_usuario = db.Column(db.Integer, primary_key=True)
+
+    nombre = db.Column(db.String(45), nullable=False)
+    apellido = db.Column(db.String(45), nullable=False)
+    direccion = db.Column(db.String(45), nullable=False)
+    edad = db.Column(db.Integer, nullable=False)
+    telefono = db.Column(db.Integer, nullable=False)
+    dni = db.Column(db.Integer, nullable=False)
+    rol = db.Column(db.String(45), nullable=False)
+    sexo = db.Column(db.String(2), nullable=False)
+    email = db.Column(db.String(45), nullable=False, unique=True)
+    contrasena = db.Column(db.String(45), nullable=False)
+    
+    # imagen = db.Column(db.String(45), nullable=True)
+    # fecha_nacimiento = db.Column(db.Date, nullable=True)
+
+    # login = db.relationship('Login', back_populates='usuario', cascade="all, delete-orphan", uselist=False, single_parent=True)
+    profesor = db.relationship('Profesor', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
+    alumno = db.relationship('Alumno', back_populates='usuario', uselist=False, cascade="all, delete-orphan", single_parent=True)
+
+    @property
+    def plain_contrasena(self):
+        raise AttributeError('contrasena cant be read')
+
+    @plain_contrasena.setter
+    def plain_contrasena(self, contrasena):
+        self.contrasena = generate_password_hash(contrasena)
+
+    def validate_pass(self, contrasena):
+        return check_password_hash(self.contrasena, contrasena)
+
+    def __repr__(self):
+        return '<usuario: %r >' % (self.id_usuario)
+
+    def to_json(self):
+        usuario_json = {
+            'id_usuario': self.id_usuario,
+            'nombre': self.nombre,
+            'apellido': self.apellido,
+            'direccion': self.direccion,
+            'edad': self.edad,
+            'telefono': self.telefono,
+            'dni': self.dni,
+            'rol': self.rol,
+            'sexo': self.sexo,
+            'email': self.email
+        
+            # 'imagen': self.imagen,
+            # 'fecha_nacimiento': self.fecha_nacimiento,
+        }
+        return usuario_json
+
+    @staticmethod
+    def from_json(usuario_json):
+        id_usuario = usuario_json.get('id_usuario')
+        nombre = usuario_json.get('nombre')
+        apellido = usuario_json.get('apellido')
+        direccion = usuario_json.get('direccion')
+        edad = usuario_json.get('edad')
+        telefono = usuario_json.get('telefono')
+        dni = usuario_json.get('dni')
+        rol = usuario_json.get('rol')
+        sexo = usuario_json.get('sexo')
+        email = usuario_json.get('email')
+        contrasena = usuario_json.get('contrasena')
+        
+
+        # imagen = usuario_json.get('imagen')
+        # fecha_nacimiento = usuario_json.get('fecha_nacimiento')
+
+        return Usuario(id_usuario=id_usuario,
+                       nombre=nombre,
+                       apellido=apellido,
+                       direccion=direccion,
+                       edad=edad,
+                       telefono=telefono,
+                       dni=dni,
+                       rol=rol,
+                       sexo=sexo,
+                       email=email,
+                       plain_contrasena=contrasena,
+                       
+                
+                    # imagen=imagen,
+                    #    fecha_nacimiento=fecha_nacimiento,
+                       )

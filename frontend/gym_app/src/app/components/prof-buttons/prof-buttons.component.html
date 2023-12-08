@@ -7,6 +7,6 @@
 <div class="button-group">
   <h2>My classes</h2>
   <div class="button-scroll">
-    <button class="button" *ngFor="let clase of classes" [routerLink]="['/clase']">{{ clase.name }}</button>
+    <button class="button" *ngFor="let clase of classes" [routerLink]="['/views/class', clase.id]">{{ clase.name }}</button>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlanificacionService } from 'src/app/services/planificacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { BaseService } from 'src/app/services/base.service';
+import { ClasesService } from 'src/app/services/clases.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { BaseService } from 'src/app/services/base.service';
 export class ClasesComponent implements OnInit {
 
   constructor(private planificacionService: PlanificacionService,
+    private claseService: ClasesService,
     private route: ActivatedRoute,
     private baseService: BaseService) {}
 
@@ -58,7 +60,7 @@ export class ClasesComponent implements OnInit {
     });
 
     // http://127.0.0.1:5000/clase/18
-    this.baseService.get('/clase/' + this.claseId).subscribe({
+    this.claseService.getClassById(this.claseId).subscribe({
       next: (response: any) => {
         console.log(response);
         this.claseTitle = response.tipo;

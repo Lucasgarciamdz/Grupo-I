@@ -38,43 +38,37 @@ export class StudWorkComponent {
   ngOnInit(): void {
     const alumnoId = localStorage.getItem('id_alumno') ?? '';
     const alumnoIdNumber = parseInt(alumnoId, 10);
-  
-    this.clasesService.getClasesByAlumnoId(alumnoIdNumber).subscribe({
-      next: (clases) => {
-        console.log('esto trae el recurso', clases);
-        for (const clase of clases) {
-          this.classItems.push({
-            // image: clase.imagen,
-            title: clase.tipo,
-            description: clase.descripcion,
-            buttonText: 'Ver clase',
-            id_clase: clase.id
-          });
+
+    this.planificacionService.getPlanificacionesPorAlumno(alumnoIdNumber).subscribe({
+      next: (planificaciones) => {
+        const uniqueClaseIds = [...new Set(planificaciones.map(item => item.id_clase))];
+        for (const id of uniqueClaseIds) {
+          this.getClaseName(id, planificaciones.filter(p => p.id_clase === id));
         }
-        console.log('esta es la lista', this.classItems);
       },
       error: (error) => {
-        // Manejo de errores si es necesario
-        console.error('Error al obtener las clases:', error);
+        console.error('Error al obtener las planificaciones:', error);
       }
     });
-  
-  //   this.planificacionService.getPlanificacionesByAlumnoId(alumnoIdNumber).subscribe({
-  //     next: (planificaciones) => {
-  //       for (const planificacion of planificaciones) {
-  //         this.planItems.push({
-  //           image: planificacion.imagen,
-  //           title: planificacion.id_planificacion,
-  //           description: planificacion.descripcion,
-  //           buttonText: 'Ver Planificación'
-  //         });
-  //       }
-  //       console.log(this.planItems);
-  //     },
-  //     error: (error) => {
-  //       // Manejo de errores si es necesario
-  //       console.error('Error al obtener las planificaciones:', error);
-  //     }
-  //   });
-   }
+  }
+
+  getClaseName(id: number, planificaciones: any[]) {
+    this.clasesService.getClassById(id).subscribe({
+      next: (clase) => {
+        console.log('clase:', clase);
+        this.classItems.push({
+          title: clase.tipo,
+          planificaciones: planificaciones.map(p => ({
+            title: `Planificación ${p.id_planificacion}`,
+            description: `Objetivo: ${p.objetivo}, Nivel: ${p.nivel}, Horas Semanales: ${p.horas_semanales}`,
+            buttonText: 'Ver Planificación',
+            id_planificacion: p.id_planificacion
+          }))
+        });
+      },
+      error: (error) => {
+        console.error('Error al obtener la clase:', error);
+      }
+    });
+  }
 }
