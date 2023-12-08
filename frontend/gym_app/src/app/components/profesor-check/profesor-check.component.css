@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    margin: 20px;
+}
+
+.col {
+    margin-bottom: 20px;
+}
+
+.user-list-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.professor-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.professor-name,
+.class-name,
+.certification {
+    margin-bottom: 10px;
+}
+
+.professor-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.class-name,
+.certification {
+    font-size: 1em;
+}
