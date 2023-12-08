@@ -19,6 +19,7 @@ export class ClasesComponent implements OnInit {
 
   claseId: any;
   claseTitle: string = '';
+  claseDescription: string = '';
   items: { image: string, title: string, description: string, buttonText: string }[] = [
     {
       image: 'assets/clases/clase1.jpg',
@@ -57,6 +58,7 @@ export class ClasesComponent implements OnInit {
     // });
     this.route.params.subscribe(params => {
       this.claseId = params['id'];
+      
     });
 
     // http://127.0.0.1:5000/clase/18
@@ -64,6 +66,7 @@ export class ClasesComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         this.claseTitle = response.tipo;
+        this.claseDescription = response.descripcion;
       },
       error: (error) => {
         console.error(error);
