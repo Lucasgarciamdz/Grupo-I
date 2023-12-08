@@ -13,19 +13,33 @@ export class ClassCardComponent implements OnInit {
   @Input() title!: string;
   @Input() items!: { image: string, title: string, description: string, buttonText: string }[];
   planificaciones: any[] = [];
+  planificacionesAlumno: any[] = [];
   claseId: any;
   alumnoId: any;
 
   constructor(private planificacionService: PlanificacionService,
     private route: ActivatedRoute,
     private baseService: BaseService,
-    private jwtService: JWTService) {}  // Inyecta el servicio de planificaciones
+    private jwtService: JWTService) {} 
 
     ngOnInit() {
       this.route.params.subscribe(params => {
         this.claseId = params['id'];
       });
 
+    this.alumnoId = this.jwtService.getIdAlumno()
+
+    this.planificacionService.getPlanificacionesPorAlumno(this.alumnoId).subscribe({
+      next: (data: any) => {
+        // Asigna los datos de las planificaciones a la propiedad 'planificaciones'
+        this.planificacionesAlumno = data.planificacion;
+        console.log(this.planificacionesAlumno);
+      },
+      error: (err: any) => {
+        console.error('Error al obtener planificaciones', err);
+      }
+    });
+    
     if (this.claseId > 0) {
       this.baseService.get('/clase/' + this.claseId, "planificaciones=1").subscribe({
         next: (response: any) => {
@@ -50,10 +64,9 @@ export class ClassCardComponent implements OnInit {
     });
   }
 }
-joinPlanificacion(planificacionId: number) {
-  this.alumnoId = this.jwtService.getIdAlumno()
-  this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
-    console.log(response);
-  });
-}
+  joinPlanificacion(planificacionId: number) {
+    this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
+      console.log(response);
+    });
+  }
 }

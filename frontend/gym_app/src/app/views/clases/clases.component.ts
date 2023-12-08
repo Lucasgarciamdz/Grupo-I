@@ -20,6 +20,7 @@ export class ClasesComponent implements OnInit {
   claseId: any;
   claseTitle: string = '';
   claseDescription: string = '';
+  claseImage: string = '';
   items: { image: string, title: string, description: string, buttonText: string }[] = [
     {
       image: 'assets/clases/clase1.jpg',
@@ -67,6 +68,7 @@ export class ClasesComponent implements OnInit {
         console.log(response);
         this.claseTitle = response.tipo;
         this.claseDescription = response.descripcion;
+        this.claseImage = response.imagen;
       },
       error: (error) => {
         console.error(error);
