@@ -7,7 +7,6 @@ profesores_clases = db.Table("profesores_clases",
 
 
 class Profesor(db.Model):
-
     __tablename__ = "profesor"
 
     id_profesor = db.Column(db.Integer, primary_key=True)
@@ -17,9 +16,12 @@ class Profesor(db.Model):
     fecha_inicio_actividad = db.Column(db.String(45), nullable=False)
     sueldo = db.Column(db.Float, nullable=False)
     estado = db.Column(db.String(45), nullable=False)
+    aprobacion_pendiente = db.Column(db.Boolean, nullable=False, default=True)
 
-    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'), lazy='dynamic', overlaps="clases,profesores_p")
+    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan",
+                              single_parent=True)
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'),
+                             lazy='dynamic', overlaps="clases,profesores_p")
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)

@@ -1,10 +1,11 @@
-from flask_restful import Resource
 from flask import request, jsonify
-from .. import db
-from main.models import AlumnoModel
-from sqlalchemy import func
 from flask_jwt_extended import jwt_required
+from flask_restful import Resource
+from sqlalchemy import func
+
 from main.auth.decoradores import role_required
+from main.models import AlumnoModel
+from .. import db
 
 
 class Alumnos(Resource):
@@ -24,13 +25,12 @@ class Alumnos(Resource):
 
         # devuelve la cantidad de alumnos por cada estado posible (chequear)
         if request.args.get('estado'):
-            alumnos = db.session.query(AlumnoModel.estado, func.count(AlumnoModel.id_alumno))\
-                        .group_by(AlumnoModel.estado)
+            alumnos = db.session.query(AlumnoModel.estado, func.count(AlumnoModel.id_alumno)) \
+                .group_by(AlumnoModel.estado)
 
         # devuleve todos los alumnos que tienen la planilla medica vencida (NO ANDA)
         if request.args.get('planilla_medica_falso'):
             alumnos = alumnos.filter(AlumnoModel.planilla_medica == "vencida")
-
 
         try:
             alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True)
@@ -62,7 +62,6 @@ class Alumno(Resource):
 
         if request.args.get('full'):
             return alumno.to_json_complete()
-
 
         return alumno.to_json()
 

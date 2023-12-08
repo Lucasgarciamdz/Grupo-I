@@ -1,9 +1,8 @@
-from .. import db
 from .alumno_model import alumnos_planificaciones
+from .. import db
 
 
 class Planificacion(db.Model):
-
     __tablename__ = "planificacion"
 
     id_planificacion = db.Column(db.Integer, primary_key=True)
@@ -13,7 +12,9 @@ class Planificacion(db.Model):
     nivel = db.Column(db.String(20))
     objetivo = db.Column(db.String(45))
 
-    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones, backref=db.backref('planificaciones_a', lazy='dynamic'), overlaps="alumnos_p,planificaciones")
+    alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones,
+                              backref=db.backref('planificaciones_a', lazy='dynamic'),
+                              overlaps="alumnos_p,planificaciones")
     clase = db.relationship('Clase',
                             back_populates='planificacion',
                             single_parent=True,

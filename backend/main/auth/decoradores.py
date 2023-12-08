@@ -1,5 +1,6 @@
-from .. import jwt
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
+
+from .. import jwt
 
 
 def role_required(roles):
@@ -11,7 +12,9 @@ def role_required(roles):
                 return fn(*args, **kwargs)
             else:
                 return 'Rol sin permisos de acceso al recurso', 403
+
         return wrapper
+
     return decorator
 
 

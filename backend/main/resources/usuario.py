@@ -1,10 +1,10 @@
-from flask_restful import Resource
 from flask import request, jsonify
-from main import db
-from main.models import UsuarioModel
-from sqlalchemy import desc
 from flask_jwt_extended import jwt_required
+from flask_restful import Resource
+
+from main import db
 from main.auth.decoradores import role_required
+from main.models import UsuarioModel
 
 
 class Usuarios(Resource):
@@ -83,7 +83,7 @@ class Usuario(Resource):
         db.session.add(usuario)
         db.session.commit()
         return usuario.to_json(), 201
-    
+
     @role_required(roles="admin")
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)

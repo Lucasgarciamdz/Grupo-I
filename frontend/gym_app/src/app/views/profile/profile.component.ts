@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AlumnoService } from 'src/app/services/alumno.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
 import { JWTService } from 'src/app/services/jwt.service';
 import { ActivatedRoute } from '@angular/router';
-import { BaseService } from 'src/app/services/base.service';
+import { ProfesoresService } from 'src/app/services/profesores.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,71 +10,58 @@ import { BaseService } from 'src/app/services/base.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  alumnos: any[] = [];
-  usuario: any;
-  currentUser: any;
-
   profileName: string = '';
   height: string = '';
   weight: string = '';
   age: string = '';
   profileId: any;
-  alumno_id: any;
-
+  role: string = '';
+  certificacion: string = '';
+  fecha_inicio_actividad: string = '';
+  currentUser: any;
 
   constructor(
     private alumnoService: AlumnoService,
-    private usuarioService: UsuariosService,
     private jwtService: JWTService,
     private route: ActivatedRoute,
-    private baseService: BaseService
+    private profesorService: ProfesoresService
   ) {}
 
   ngOnInit(): void {
-    this.currentUser = this.jwtService.getId();
+    const currentUser = this.jwtService.getId() ?? 1;
+    this.role = this.jwtService.getRol() ?? '';
+
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
+
+      switch (this.role) {
+        case 'Alumno':
+          const alumno_id = this.profileId || this.jwtService.getIdAlumno();
+          const {nombre, apellido, edad} = JSON.parse(localStorage.getItem('usuario') ?? '{}');
+          this.profileName = `${nombre} ${apellido}`;
+          this.age = edad;
+          this.alumnoService.getAlumno(alumno_id).subscribe({
+            next: ({usuario: {nombre, apellido, edad}, altura, peso}) => {
+              this.profileName = `${nombre} ${apellido}`;
+              this.height = altura;
+              this.weight = peso;
+              this.age = edad;
+            },
+            error: console.error,
+          });
+          break;
+        case 'Profesor':
+          const profesor_id = this.profileId || currentUser;
+          this.profesorService.getProfesor(profesor_id).subscribe({
+            next: ({usuario: {nombre, apellido}, certificacion, fecha_inicio_actividad}) => {
+              this.profileName = `${nombre} ${apellido}`;
+              this.certificacion = certificacion;
+              this.fecha_inicio_actividad = fecha_inicio_actividad;
+            },
+            error: console.error,
+          });
+          break;
+      }
     });
-
-  
-    console.log(this.profileId);
-    console.log(this.currentUser);
-    if (this.profileId) {
-      console.log('viendo usuario particular');
-      this.alumnoService.getAlumnoFull(this.profileId).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          // this.usuario = response.usuario;
-          this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
-          this.age = response.usuario.edad;
-          this.height = response.altura;
-          this.weight = response.peso;
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
-    } else {
-      this.alumno_id = this.jwtService.getIdAlumno();
-      console.log('viendo mi perfil');
-      const userData = JSON.parse(localStorage.getItem('usuario') ?? '{}');
-      console.log(userData);
-      this.usuario = userData;
-      this.age = this.usuario.edad;
-      this.profileName = this.usuario.nombre + ' ' + this.usuario.apellido;
-      this.alumnoService.getAlumno(this.alumno_id).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
-          this.height = response.altura;
-          this.weight = response.peso;
-          this.age = response.usuario.edad;
-
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
-    }
   }
 }

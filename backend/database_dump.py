@@ -35,7 +35,7 @@ for _ in range(105, 200):
     # Insert a new entry into the 'clase' table
     c.execute("INSERT INTO clase (tipo, descripcion, imagen) VALUES (?, ?, ?)",
               (tipo, descripcion, imagen))
-    
+
 for _ in range(105, 200):
     # Generate random data for 'horas_semanales', 'nivel', and 'objetivo'
     horas_semanales = randint(1, 10)
@@ -46,7 +46,6 @@ for _ in range(105, 200):
     c.execute("INSERT INTO planificacion (id_clase, horas_semanales, nivel, objetivo) VALUES (?, ?, ?, ?)",
               (randint(1, 100), horas_semanales, nivel, objetivo))
 
-
 for _ in range(105, 200):
     # Generate random data for 'certificacion', 'fecha_inicio_actividad', 'sueldo', and 'estado'
     certificacion = f"certificacion_{randint(1, 100)}"
@@ -55,8 +54,9 @@ for _ in range(105, 200):
     estado = 'active'
 
     # Insert a new entry into the 'profesor' table
-    c.execute("INSERT INTO profesor (id_usuario, certificacion, fecha_inicio_actividad, sueldo, estado) VALUES (?, ?, ?, ?, ?)",
-              (randint(1, 100), certificacion, fecha_inicio_actividad, sueldo, estado))
+    c.execute(
+        "INSERT INTO profesor (id_usuario, certificacion, fecha_inicio_actividad, sueldo, estado) VALUES (?, ?, ?, ?, ?)",
+        (randint(1, 100), certificacion, fecha_inicio_actividad, sueldo, estado))
 
     # Get the ID of the last inserted row
     id_profesor = c.lastrowid
@@ -64,7 +64,7 @@ for _ in range(105, 200):
     # Insert a new entry into the 'profesores_clases' table
     c.execute("INSERT INTO profesores_clases (id_clase, id_profesor) VALUES (?, ?)",
               (randint(1, 100), id_profesor))
-    
+
 # Define some lists for random selection
 roles = ['Alumno', 'Profesor', 'Admin']
 sexos = ['Hombre', 'Mujer']
@@ -84,8 +84,9 @@ for i in range(105, 200):
     contrasena = f"contrasena_{randint(1, 100)}"
 
     # Insert a new entry into the 'usuario' table
-    c.execute("INSERT INTO usuario (nombre, apellido, direccion, edad, telefono, dni, rol, sexo, email, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-              (nombre, apellido, direccion, edad, telefono, dni, rol, sexo, email, contrasena))
+    c.execute(
+        "INSERT INTO usuario (nombre, apellido, direccion, edad, telefono, dni, rol, sexo, email, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (nombre, apellido, direccion, edad, telefono, dni, rol, sexo, email, contrasena))
 
 # Commit the changes
 conn.commit()
