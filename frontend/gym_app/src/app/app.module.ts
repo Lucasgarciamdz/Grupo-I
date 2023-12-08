@@ -43,6 +43,7 @@ import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
 import { ProfesorCheckComponent } from './components/profesor-check/profesor-check.component';
+import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ProfesorCheckComponent } from './components/profesor-check/profesor-che
         ClasesComponent,
         ClassCardComponent,
         ProfesorCheckComponent,
+        ProfCheckViewComponent,
     ],
     providers: [
         JWTService,

@@ -1,18 +1,26 @@
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="row justify-content-between">
-                <div class="col-auto">
-                    <h2 class="user-list-title">Profesor Details</h2>
-                </div>
-            </div>
-
-            <div class="professor-card">
-                <div class="professor-name">Profesor: [Nombre del Profesor]</div>
-                <div class="class-name">Clase a la que postula: [Nombre de la Clase]</div>
-                <div class="certification">Certificación del profesor: [Nombre del Profesor]</div>
-            </div>
-        </div>
+<div class="user-list">
+    <div class="table-wrapper">
+      <table class="user-table-1">
+        <thead>
+          <tr>
+            <th class="text-center">Profesor</th>
+            <th class="text-center">Aplica a</th>
+            <th class="text-center">Certificación</th>
+            <th class="text-center">Acción</th> <!-- Nueva columna para aceptar o rechazar -->
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Agrega filas de datos aquí si es necesario -->
+          <tr>
+            <td>Nombre del profesor</td>
+            <td>Nombre de la clase</td>
+            <td>Nombre de la certificación</td>
+            <td>
+              <button class="btn btn-primary">✔️</button>
+              <button class="btn btn-danger">❌</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>

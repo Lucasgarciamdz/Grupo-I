@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { ProfileComponent } from './views/profile/profile.component';
@@ -15,6 +15,8 @@ import { ClassListViewComponent } from './views/class-list-view/class-list-view.
 
 import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 import { ClasesComponent } from './views/clases/clases.component';
+import { ProfesorCheckComponent } from './components/profesor-check/profesor-check.component';
+import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthsessionGuard], data: { roles: ['Admin', 'Profesor'] }},
   { path: 'user-list-view', component: UserListViewComponent},
   { path: 'class-list-view', component: ClassListViewComponent},
+  { path: 'prof-check-view', component: ProfCheckViewComponent },
   { path: 'prof-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Profesor'] } },
   { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Admin', 'Profesor'] } },
   { path: 'views/class', component: ClasesComponent },

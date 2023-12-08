@@ -16,4 +16,8 @@ export class AdminButtonsComponent {
   showClassList() {
     this.router.navigate(['/class-list-view']);
   }
+
+  showProfList() {
+    this.router.navigate(['/prof-check-view']);
+  }
 }
