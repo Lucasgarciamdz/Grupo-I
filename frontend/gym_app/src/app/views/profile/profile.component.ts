@@ -18,50 +18,82 @@ export class ProfileComponent {
   role: string = '';
   certificacion: string = '';
   fecha_inicio_actividad: string = '';
-  currentUser: any;
+  currentUser: string = '';
 
   constructor(
     private alumnoService: AlumnoService,
     private jwtService: JWTService,
     private route: ActivatedRoute,
     private profesorService: ProfesoresService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    const currentUser = this.jwtService.getId() ?? 1;
+    this.currentUser = this.jwtService.getId() ?? '';
     this.role = this.jwtService.getRol() ?? '';
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
-
+      console.log(this.profileId)
       switch (this.role) {
         case 'Alumno':
-          const alumno_id = this.profileId || this.jwtService.getIdAlumno();
-          const {nombre, apellido, edad} = JSON.parse(localStorage.getItem('usuario') ?? '{}');
-          this.profileName = `${nombre} ${apellido}`;
-          this.age = edad;
-          this.alumnoService.getAlumno(alumno_id).subscribe({
-            next: ({usuario: {nombre, apellido, edad}, altura, peso}) => {
-              this.profileName = `${nombre} ${apellido}`;
-              this.height = altura;
-              this.weight = peso;
-              this.age = edad;
-            },
-            error: console.error,
-          });
+          if (this.profileId){
+            this.role = 'Profesor';
+            this.getProfesorProfile(this.profileId);
+          }
+          else {
+            this.getAlumnoProfile();
+          }
           break;
         case 'Profesor':
-          const profesor_id = this.profileId || currentUser;
-          this.profesorService.getProfesor(profesor_id).subscribe({
-            next: ({usuario: {nombre, apellido}, certificacion, fecha_inicio_actividad}) => {
-              this.profileName = `${nombre} ${apellido}`;
-              this.certificacion = certificacion;
-              this.fecha_inicio_actividad = fecha_inicio_actividad;
-            },
-            error: console.error,
-          });
+          if (this.profileId){
+            this.role = 'Alumno';
+            this.getAlumnoProfile(this.profileId);
+          }
+          else {
+            this.getProfesorProfile();
+          }
           break;
       }
     });
+  }
+
+  getAlumnoProfile(id?: string): void {
+    const alumno_id = id || this.jwtService.getIdAlumno();
+    if (alumno_id) {
+      console.log(alumno_id)
+      const { nombre, apellido, edad } = JSON.parse(localStorage.getItem('usuario') ?? '{}');
+      this.profileName = `${nombre} ${apellido}`;
+      this.age = edad;
+      this.alumnoService.getAlumno(parseInt(alumno_id)).subscribe({
+        next: (response) => {
+          this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
+          this.height = response.altura;
+          this.weight = response.peso;
+          this.age = edad;
+        },
+        error: console.error,
+      });
+    } else {
+      // Handle the case when alumno_id is null
+      console.error('alumno_id is null');
+    }
+  }
+
+  getProfesorProfile(id?: string): void {
+    const profesor_id = id || this.jwtService.getIdProfesor();
+    if (profesor_id) {
+      this.profesorService.getProfesorFull(parseInt(profesor_id)).subscribe({
+        next: (response) => {
+          this.profileName = response.nombre + ' ' + response.apellido;
+          this.certificacion = response.certificacion;
+          this.fecha_inicio_actividad = response.fecha_inicio_actividad;
+          this.age = response.edad;
+        },
+        error: console.error,
+      });
+    } else {
+      // Handle the case when profesor_id is null
+      console.error('profesor_id is null');
+    }
   }
 }

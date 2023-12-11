@@ -33,6 +33,7 @@ class Profesor(db.Model):
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
+            'aprobacion_pendiente': self.aprobacion_pendiente,
         }
         return profesor_json
 
@@ -40,11 +41,15 @@ class Profesor(db.Model):
         profesor_json = {
             'id_profesor': str(self.id_profesor),
             'id_usuario': self.id_usuario,
+            'nombre': self.usuario.nombre,
+            'apellido': self.usuario.apellido,
+            'edad': self.usuario.edad,
             'certificacion': self.certificacion,
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
             "clases": [clase.to_json() for clase in self.clases],
+            'aprobacion_pendiente': self.aprobacion_pendiente,
         }
         return profesor_json
 
@@ -56,10 +61,12 @@ class Profesor(db.Model):
         fecha_inicio_actividad = profesor_json.get('fecha_inicio_actividad')
         sueldo = profesor_json.get('sueldo')
         estado = profesor_json.get('estado')
+        aprobacion_pendiente = profesor_json.get('aprobacion_pendiente')
         return Profesor(id_profesor=id_profesor,
                         id_usuario=id_usuario,
                         certificacion=certificacion,
                         fecha_inicio_actividad=fecha_inicio_actividad,
                         sueldo=sueldo,
                         estado=estado,
+                        aprobacion_pendiente=aprobacion_pendiente
                         )

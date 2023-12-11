@@ -18,6 +18,8 @@ import { Component, Input } from '@angular/core';
   border: none;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: min-content;
+  min-width: 100px;
 }
 
 .card-body {
@@ -25,13 +27,13 @@ import { Component, Input } from '@angular/core';
 }
 
 .text {
-  font-size: 24px;
+  font-size: calc(10px + 2vw);
   font-weight: bold;
   color: #3A6A87;
 }
 
 .text-muted {
-  font-size: 14px;
+  font-size: calc(8px + 1vw);
   color: #6c757d;
 }
     `
