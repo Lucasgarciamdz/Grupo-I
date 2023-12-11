@@ -23,12 +23,12 @@ export class PlanificacionService extends BaseService {
     return this.delete<any>(`planificaciones/${id}`);
   }
 
-  getPlanificacionesPorClase(claseId: number): Observable<any[]> {
-    return this.get<any[]>(`clase/${claseId}/planificaciones`);
+  joinPlanificacion(alumnoId: number, planificacionId: number): Observable<any> {
+    return this.put<any>(`planificacion/${planificacionId}?alumno_id_join=${alumnoId}`, {});
   }
 
-  joinPlanificacion(alumnoId: number, planificacionId: number): Observable<any> {
-    return this.put<any>(`planificacion/${planificacionId}?alumno_id=${alumnoId}`, {});
+  removePlanificacion(alumnoId: number, planificacionId: number): Observable<any> {
+    return this.put<any>(`planificacion/${planificacionId}?alumno_id_remove=${alumnoId}`, {});
   }
 
   getPlanificacionesPorAlumno(alumnoId: number): Observable<any[]> {

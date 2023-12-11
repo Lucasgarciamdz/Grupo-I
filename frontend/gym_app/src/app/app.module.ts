@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 
 
@@ -42,6 +43,7 @@ import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -88,7 +90,9 @@ import { ClassCardComponent } from './components/class-card/class-card.component
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        UserListModule
+        UserListModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule
     ]
 })
 export class AppModule { }

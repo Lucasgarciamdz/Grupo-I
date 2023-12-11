@@ -37,7 +37,7 @@
 
 ### Clases
 
-- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class)
+- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class). **Instalar ng add @angular/material**
 
 ## Profesor
 

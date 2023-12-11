@@ -40,10 +40,6 @@ class Clases(Resource):
 
             return clases_json
 
-        # devuelve todas las planificaciones que tienen una determinada clase
-        if request.args.get('clase'):
-            clases = clases.join(ClasesModel.planificacion).filter_by(clases.tipo.like(request.args.get('clase')))
-
         try:
             clases = clases.paginate(page=page, per_page=per_page, error_out=True)
         except Exception:
