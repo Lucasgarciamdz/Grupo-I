@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<h1>Planificación {{ planificacionData.id_planificacion }}</h1>
+
+<p>{{ planificacionData.objetivo }}</p>
+
+<p>{{ planificacionData.horas_semanales }}</p>
+
+<p>{{ planificacionData.nivel }}</p>
+
+<button class="remove-button" *ngIf="planificacionActive === true" (click)="removePlanificacion(planificacionId)">Remove</button>
+<button class="join-button" *ngIf="planificacionActive === false" (click)="joinPlanificacion(planificacionId)">Join</button>
+
+<app-navbar-responsive></app-navbar-responsive>
+
+<app-class-card></app-class-card>

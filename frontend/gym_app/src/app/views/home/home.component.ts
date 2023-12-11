@@ -16,21 +16,24 @@ export class HomeComponent {
       title: 'Clase 1',
       description: 'Fuerza',
       buttonText: 'Ver Clase',
-      id_clase: 1
+      id_clase: 1,
+      link: '/views/class/1'
     },
     {
       image: 'assets/clases/clase2.jpg',
       title: 'Clase 2',
       description: 'Fuerza',
       buttonText: 'Ver Clase',
-      id_clase: 2
+      id_clase: 2,
+      link: '/views/class/2'
     },
     {
       image: 'assets/clases/clase3.jpg',
       title: 'Clase 3',
       description: 'Fuerza',
       buttonText: 'Ver Clase',
-      id_clase: 3
+      id_clase: 3,
+      link: '/views/class/3'
     },
   ];
 }

@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Admin', 'Profesor'] } },
   { path: 'views/class', component: ClasesComponent },
   { path: 'views/class/:id', component: ClasesComponent },
+  { path: 'views/planificacion/:id', component: ClasesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

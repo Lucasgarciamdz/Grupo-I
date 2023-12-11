@@ -44,6 +44,7 @@ import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlanificacionesViewComponent } from './views/planificaciones-view/planificaciones-view.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         ProfesoresListComponent,
         ClasesComponent,
         ClassCardComponent,
+        PlanificacionesViewComponent,
     ],
     providers: [
         JWTService,

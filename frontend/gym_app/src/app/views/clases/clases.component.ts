@@ -14,33 +14,13 @@ export class ClasesComponent implements OnInit {
 
   constructor(private planificacionService: PlanificacionService,
     private claseService: ClasesService,
-    private route: ActivatedRoute,
-    private baseService: BaseService) {}
+    private route: ActivatedRoute,) {}
 
   claseId: any;
   claseTitle: string = '';
   claseDescription: string = '';
   claseImage: string = '';
-  items: { image: string, title: string, description: string, buttonText: string }[] = [
-    {
-      image: 'assets/clases/clase1.jpg',
-      title: 'Clase 1',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    },
-    {
-      image: 'assets/clases/clase2.jpg',
-      title: 'Clase 2',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    },
-    {
-      image: 'assets/clases/clase3.jpg',
-      title: 'Clase 3',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    }
-  ];
+
   get isToken() {
     return localStorage.getItem('token');
   }

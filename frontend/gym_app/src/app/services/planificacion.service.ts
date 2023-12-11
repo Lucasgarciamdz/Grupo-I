@@ -15,6 +15,10 @@ export class PlanificacionService extends BaseService {
     return this.get<any[]>('planificaciones');
   }
 
+  getPlanificacionById(id: number): Observable<any> {
+    return this.get<any>(`planificacion/${id}`);
+  }
+
   updatePlanificacion(id: number, planificacion: any): Observable<any> {
     return this.put<any>(`planificaciones/${id}`, planificacion);
   }
