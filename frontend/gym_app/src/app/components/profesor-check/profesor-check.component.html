@@ -1,26 +1,25 @@
 <div class="user-list">
-    <div class="table-wrapper">
-      <table class="user-table-1">
-        <thead>
-          <tr>
-            <th class="text-center">Profesor</th>
-            <th class="text-center">Aplica a</th>
-            <th class="text-center">Certificación</th>
-            <th class="text-center">Acción</th> <!-- Nueva columna para aceptar o rechazar -->
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Agrega filas de datos aquí si es necesario -->
-          <tr>
-            <td>Nombre del profesor</td>
-            <td>Nombre de la clase</td>
-            <td>Nombre de la certificación</td>
-            <td>
-              <button class="btn btn-primary">✔️</button>
-              <button class="btn btn-danger">❌</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrapper">
+    <table class="user-table-1">
+      <thead>
+        <tr>
+          <th class="text-center">Profesor</th>
+          <th class="text-center">Aplica a</th>
+          <th class="text-center">Certificación</th>
+          <th class="text-center">Acción</th> <!-- Nueva columna para aceptar o rechazar -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users">
+        <tr>
+          <td>{{ user.nombre }} {{ user.apellido }}</td>
+          <td>{{ user.nombre_clase }}</td>
+          <td>{{ user.nombre_certificacion }}</td>
+          <td>
+            <button class="btn btn-primary ms-5 text-center" (click)="acceptProf(user.id_usuario, user.id_clase)">Aceptar</button>
+            <button class="btn btn-danger ms-5 text-center" (click)="rejectProf(user.id_usuario)">Rechazar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>

@@ -1,4 +1,21 @@
-.table-wrapper {
+.clases-list-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .table-wrapper {
     max-height: 600px;
     overflow-y: hidden;
-}
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  

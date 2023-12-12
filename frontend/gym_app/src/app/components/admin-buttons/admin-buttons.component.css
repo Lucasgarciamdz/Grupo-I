@@ -1,9 +1,3 @@
-.welcome-header {
-  text-align: center;
-  padding: 20px;
-  background-color: #f0f0f0;
-}
-
 .button-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +8,6 @@
 .button-row {
   margin-bottom: 20px;
   text-align: center;
-  width: 100%; /* Use full width */
 }
 
 .button {
@@ -24,18 +17,25 @@
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #2196f3;
-  color: #fff;
   font-size: 16px;
-  transition: background-color 0.3s ease; /* Add transition effect */
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.btn-primary:hover {
   background-color: #1976d2;
-  cursor: pointer; /* Change cursor on hover */
 }
 
 .container {
-  max-width: 960px; /* Set max width for container */
-  margin: 0 auto; /* Center container horizontally */
+  max-width: 960px;
+  margin: 0 auto;
 }
+
