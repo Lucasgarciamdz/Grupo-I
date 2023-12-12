@@ -24,7 +24,7 @@ export class ClasesComponent implements OnInit {
   get isToken() {
     return localStorage.getItem('token');
   }
-
+  
   planificaciones: any[] = [];
 
   ngOnInit() {

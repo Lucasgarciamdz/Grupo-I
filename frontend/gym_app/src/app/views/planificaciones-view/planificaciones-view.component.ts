@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PlanificacionService } from 'src/app/services/planificacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { JWTService } from 'src/app/services/jwt.service';
   templateUrl: './planificaciones-view.component.html',
   styleUrls: ['./planificaciones-view.component.css']
 })
-export class PlanificacionesViewComponent {
+export class PlanificacionesViewComponent implements OnInit {
 
   constructor(private planificacionService: PlanificacionService,
     private route: ActivatedRoute,
@@ -19,15 +19,16 @@ export class PlanificacionesViewComponent {
     private jwtService: JWTService) {} 
     
   planificacionId: any;
-  planificacionData: any;
+  planificacionHoras: any;
+  planificacionNivel: any;
+  planificacionObjetivo: any;
   alumnoId: any = localStorage.getItem('id_alumno');
   planificacionActive: boolean = false;
   planificacionesAlumno: any[] = [];
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.planificacionId = params['id'];
-    });
+
+    this.planificacionId = this.route.snapshot.paramMap.get('id');
 
     this.alumnoId = this.jwtService.getIdAlumno();
 
@@ -37,7 +38,7 @@ export class PlanificacionesViewComponent {
     this.planificacionService.getPlanificacionesPorAlumno(this.alumnoId).subscribe({
       next: (data: any) => {
         this.planificacionesAlumno = data;
-        console.log("planificaciones alumno", this.planificacionesAlumno);
+        // console.log("planificaciones alumno", this.planificacionesAlumno);
         this.planificacionesAlumno.forEach((planificacion) => {
           if (planificacion.id_planificacion == this.planificacionId) {
             this.planificacionActive = true;
@@ -51,7 +52,9 @@ export class PlanificacionesViewComponent {
 
     this.planificacionService.getPlanificacionById(this.planificacionId).subscribe({
       next: (response: any) => {
-        this.planificacionData = response;
+        this.planificacionHoras = response.horas_semanales;
+        this.planificacionNivel = response.nivel;
+        this.planificacionObjetivo = response.objetivo;
         console.log(response);
       },
       error: (error) => {

@@ -43,10 +43,9 @@ export class StudWorkComponent {
           planificaciones: planificaciones.map(p => ({
             image: 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg',
             title: `Planificación ${p.id_planificacion}`,
-            // description: `Objetivo: ${p.objetivo}, Nivel: ${p.nivel}, Horas Semanales: ${p.horas_semanales}`,
             buttonText: 'Ver Planificación',
             id_planificacion: p.id_planificacion,
-            link: `/planificaciones/${p.id_planificacion}`
+            link: `views/planificacion/${p.id_planificacion}`
           }))
         });
       },

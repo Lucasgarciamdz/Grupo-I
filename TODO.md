@@ -31,13 +31,14 @@
 
 ### Planificaciones
 
-- [ ] Posibilidad de darse de baja.
-- [ ] Si ya esta inscripto, que no le salga el boton de join (o que se transforme en darse de baja).
-- [ ] Pulir stud-workout (home alumno).
+- [ ] Posibilidad de darse de baja. LISTO
+- [ ] Si ya esta inscripto, que no le salga el boton de join (o que se transforme en darse de baja). LISTO
+- [ ] Pulir stud-workout (home alumno). LISTO
+- [ ] Hacer andar y pulir views/planificacion. 
 
 ### Clases
 
-- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class). **Instalar ng add @angular/material**
+- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class). **Instalar ng add @angular/material**. LISTO
 
 ## Profesor
 
