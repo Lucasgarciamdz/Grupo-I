@@ -48,9 +48,9 @@
 
 ## HOME
 
-- [ ] Hay que mejorar los caruseles, hacer que funcionen random o posta.
-- [ ] Posibilidad de ver todas las clases.
-- [ ] Arreglar search bar para buscar clases. (segun tipo clase).
+- [ ] Hay que mejorar los caruseles, hacer que funcionen random o posta. LISTO
+- [ ] Posibilidad de ver todas las clases. EN PROCESO
+- [ ] Arreglar search bar para buscar clases. (segun tipo clase). EN PROCESO
   - [ ] Deberia mostrar una lista de clases que coincida con la busqueda (nueva view). Hacer un carrusel vertical que tambien sirva para ver todas las clases. Recibe una lista de clases.
 
 ## Admin

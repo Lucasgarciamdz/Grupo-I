@@ -6,6 +6,7 @@
       <div class="card-img-overlay">
         <div class="card-body text-white">
           <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.tipo }}</p>
           <p class="card-text">{{ item.description }}</p>
           <a [routerLink]="item.link" class="btn">{{ item.buttonText }}</a>
         </div>

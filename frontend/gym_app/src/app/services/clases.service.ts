@@ -35,4 +35,12 @@ export class ClasesService extends BaseService{
   getPlanificacionesPorClase(claseId: number): Observable<any[]> {
     return this.get<any[]>(`clase/${claseId}`, 'planificaciones=1');
   }
+
+  getClasesMasIntensas(): Observable<any[]> {
+    return this.get<any[]>('clases', 'intense=1');
+  }
+
+  getClasesMasPopulares(): Observable<any[]> {
+    return this.get<any[]>('clases', 'famous=1');
+  }
 }

@@ -1,10 +1,32 @@
 <app-navbar></app-navbar>
 <h1 style="text-align: center; width: 100%; padding-top: 40px;">Ready to workout?</h1>
 
+<!-- search-bar -->
+<div class="container">
+    <div class="row">
+      <div class="col-12 text-center mt-3 mb-3">
+        <div class="form">
+            <input
+                type="text"
+                class="form-control form-input"
+                placeholder="Search anything..."
+                [(ngModel)]="searchText"
+            />
+            <span class="left-pan" *ngIf="!filterApplied" (click)="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <div class="button-container">
+                <button class="btn btn-clear" [style.visibility]="filterApplied ? 'visible' : 'hidden'" (click)="clearFilter()">Clear</button>
+                <button class="btn btn-clear" [style.visibility]="!filterApplied ? 'visible' : 'hidden'" (click)="getAllClasses()">Show all</button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
 
-<app-search-bar></app-search-bar>
-<app-responsive-workouts-cards [title]="'Most popular'" [items]="workoutItems"></app-responsive-workouts-cards>
-<app-responsive-workouts-cards [title]="'Most intense'" [items]="workoutItems"></app-responsive-workouts-cards>
+<div class="container">
+    <app-responsive-workouts-cards *ngIf="!filterApplied" [title]="'Most popular'" [items]="workoutItemsPopulares"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="!filterApplied" [title]="'Most intense'" [items]="workoutItemsIntensas"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="filterApplied" [title]="'All'" [items]="workoutItems"></app-responsive-workouts-cards>
+</div>
 
 <div *ngIf="isToken">
     <app-navbar-responsive></app-navbar-responsive>

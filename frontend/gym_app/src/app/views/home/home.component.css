@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 170px;
+  left: 10px;
+  padding-right: 20px;
+}
+
+.form-input {
+  border-radius: 30px;
+  padding-left: 40px;
+  flex-grow: 1; /* Añade esta línea */
+}
+
+.form-input:focus {
+  box-shadow: none;
+}
+
+.form .left-pan {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form .left-pan:hover {
+  color: #007bff;
+}
+
+.container {
+  position: relative;
+  top: 50px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-clear {
+  position: relative;
+  right: 10px;
+  top: 0;
+}
