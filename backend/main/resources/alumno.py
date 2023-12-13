@@ -63,7 +63,6 @@ class Alumno(Resource):
         if request.args.get('full'):
             return alumno.to_json_complete()
 
-
         return alumno.to_json()
 
     @role_required('admin')

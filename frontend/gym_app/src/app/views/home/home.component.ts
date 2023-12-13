@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   searchText = '';
   filterApplied = false;
+  getAll = false;
 
   clasesMasPopulares: any[] = [];
   clasesMasIntensas: any[] = [];
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
   workoutItemsPopulares: any[] = [];
   workoutItemsIntensas: any[] = [];
   workoutItems: any[] = [];
-
+  workoutItemsFiltered: any[] = [];
 
   constructor(private clasesService: ClasesService) { }
 
@@ -36,10 +37,11 @@ export class HomeComponent implements OnInit {
     .set('page', this.pageNumber.toString())
     .set('perpage', this.perPage.toString());
 
-    this.clasesService.getClases().subscribe({
-      next: (response: any) => {
-        console.log('response: ', response.clase);
-        this.clases = response.clase.map((clase: any) => ({
+    this.clasesService.getClasesAll().subscribe({
+      next: (response: any[]) => {;
+        // console.log('response 1: ', response);
+        this.clases = response;
+        this.workoutItems = this.clases.map(clase => ({
           image: clase.imagen,
           title: 'Clase ' + clase.id,
           description: clase.descripcion,
@@ -51,17 +53,12 @@ export class HomeComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
-      },
-      complete: () => {
-        console.log('Finalizó');
       }
     });
 
-    console.log('clases: ', this.clases);
-
     this.clasesService.getClasesMasPopulares().subscribe({
       next: (response: any[]) => {
-        console.log('response 2: ', response);
+        // console.log('response 2: ', response);
         this.clasesMasPopulares = response;
         this.workoutItemsPopulares = this.clasesMasPopulares.map(clase => ({
           image: clase.imagen,
@@ -104,15 +101,26 @@ export class HomeComponent implements OnInit {
 
   filterClasses() {
     this.filteredClases = this.clases.filter(clase => clase.tipo.includes(this.searchText));
+    console.log('filteredClases: ', this.filteredClases);
+    this.workoutItemsFiltered = this.filteredClases.map(clase => ({
+      image: clase.imagen,
+      title: 'Clase ' + clase.id,
+      description: clase.descripcion,
+      buttonText: 'Ver Clase',
+      id_clase: clase.id,
+      link: '/views/class/' + clase.id,
+      tipo: clase.tipo
+    }));
   }
 
   clearFilter() {
     this.searchText = '';
     this.filterApplied = false;
+    this.getAll = false
     this.filterClasses();
   }
 
   getAllClasses() {
-    this.filterApplied = true;
+    this.getAll = true;
   }
 }

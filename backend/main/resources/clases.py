@@ -70,6 +70,11 @@ class Clases(Resource):
         
             return clases_json
         
+        #  Todas las clases
+        if request.args.get('all'):
+            clases = clases.all()
+            return [clase.to_json() for clase in clases]
+        
         if request.args.get('alumno_id_clase'):
 
             alumno_id = request.args.get('alumno_id_clase')

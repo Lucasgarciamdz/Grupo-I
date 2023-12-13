@@ -43,4 +43,8 @@ export class ClasesService extends BaseService{
   getClasesMasPopulares(): Observable<any[]> {
     return this.get<any[]>('clases', 'famous=1');
   }
+
+  getClasesAll(): Observable<any[]> {
+    return this.get<any[]>('clases', 'all=1');
+  }
 }

@@ -12,10 +12,10 @@
                 placeholder="Search anything..."
                 [(ngModel)]="searchText"
             />
-            <span class="left-pan" *ngIf="!filterApplied" (click)="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <span class="left-pan" *ngIf="!filterApplied && !getAll" (click)="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></span>
             <div class="button-container">
-                <button class="btn btn-clear" [style.visibility]="filterApplied ? 'visible' : 'hidden'" (click)="clearFilter()">Clear</button>
-                <button class="btn btn-clear" [style.visibility]="!filterApplied ? 'visible' : 'hidden'" (click)="getAllClasses()">Show all</button>
+                <button class="btn btn-clear" [style.visibility]="(filterApplied || getAll) ? 'visible' : 'hidden'" (click)="clearFilter()">Clear</button>
+                <button class="btn btn-clear" [style.visibility]="(!getAll && !filterApplied) ? 'visible' : 'hidden'" (click)="getAllClasses()">Show all</button>
             </div>
         </div>
       </div>
@@ -23,9 +23,10 @@
 </div>
 
 <div class="container">
-    <app-responsive-workouts-cards *ngIf="!filterApplied" [title]="'Most popular'" [items]="workoutItemsPopulares"></app-responsive-workouts-cards>
-    <app-responsive-workouts-cards *ngIf="!filterApplied" [title]="'Most intense'" [items]="workoutItemsIntensas"></app-responsive-workouts-cards>
-    <app-responsive-workouts-cards *ngIf="filterApplied" [title]="'All'" [items]="workoutItems"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="!getAll && !filterApplied" [title]="'Most popular'" [items]="workoutItemsPopulares"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="!getAll && !filterApplied" [title]="'Most intense'" [items]="workoutItemsIntensas"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="getAll" [title]="'All'" [items]="workoutItems"></app-responsive-workouts-cards>
+    <app-responsive-workouts-cards *ngIf="filterApplied" [title]="'Search results'" [items]="workoutItemsFiltered"></app-responsive-workouts-cards>
 </div>
 
 <div *ngIf="isToken">

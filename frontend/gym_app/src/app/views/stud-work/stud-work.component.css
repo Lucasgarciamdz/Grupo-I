@@ -1,4 +1,9 @@
+.cards {
+    margin-bottom: 20px;
+}
+
 .scrollable-div {
     max-height: calc(100vh - 250px);
     overflow-y: auto;
+    padding: 13px;
 }

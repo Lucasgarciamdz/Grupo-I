@@ -41,7 +41,8 @@ export class StudWorkComponent {
         this.classItems.push({
           title: clase.tipo,
           planificaciones: planificaciones.map(p => ({
-            image: 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg',
+            // image: 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg',
+            image: p.imagen + '.jpg',
             title: `Planificación ${p.id_planificacion}`,
             buttonText: 'Ver Planificación',
             id_planificacion: p.id_planificacion,
