@@ -7,7 +7,6 @@ profesores_clases = db.Table("profesores_clases",
 
 
 class Profesor(db.Model):
-
     __tablename__ = "profesor"
 
     id_profesor = db.Column(db.Integer, primary_key=True)
@@ -17,9 +16,12 @@ class Profesor(db.Model):
     fecha_inicio_actividad = db.Column(db.String(45), nullable=False)
     sueldo = db.Column(db.Float, nullable=False)
     estado = db.Column(db.String(45), nullable=False)
+    aprobacion_pendiente = db.Column(db.Boolean, nullable=False, default=True)
 
-    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan", single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'), lazy='dynamic', overlaps="clases,profesores_p")
+    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan",
+                              single_parent=True)
+    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'),
+                             lazy='dynamic', overlaps="clases,profesores_p")
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
@@ -31,6 +33,7 @@ class Profesor(db.Model):
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
+            'aprobacion_pendiente': self.aprobacion_pendiente,
         }
         return profesor_json
 
@@ -38,11 +41,15 @@ class Profesor(db.Model):
         profesor_json = {
             'id_profesor': str(self.id_profesor),
             'id_usuario': self.id_usuario,
+            'nombre': self.usuario.nombre,
+            'apellido': self.usuario.apellido,
+            'edad': self.usuario.edad,
             'certificacion': self.certificacion,
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
             "clases": [clase.to_json() for clase in self.clases],
+            'aprobacion_pendiente': self.aprobacion_pendiente,
         }
         return profesor_json
 
@@ -54,10 +61,12 @@ class Profesor(db.Model):
         fecha_inicio_actividad = profesor_json.get('fecha_inicio_actividad')
         sueldo = profesor_json.get('sueldo')
         estado = profesor_json.get('estado')
+        aprobacion_pendiente = profesor_json.get('aprobacion_pendiente')
         return Profesor(id_profesor=id_profesor,
                         id_usuario=id_usuario,
                         certificacion=certificacion,
                         fecha_inicio_actividad=fecha_inicio_actividad,
                         sueldo=sueldo,
                         estado=estado,
+                        aprobacion_pendiente=aprobacion_pendiente
                         )

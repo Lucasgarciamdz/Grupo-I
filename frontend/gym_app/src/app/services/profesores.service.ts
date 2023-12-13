@@ -15,6 +15,13 @@ export class ProfesoresService extends BaseService {
     return this.get<any[]>('profesores');
   }
 
+  getProfesor(id: number): Observable<any> {
+    return this.get<any>(`profesor/${id}`);
+  }
+  getProfesorFull(id: number): Observable<any> {
+    return this.get<any>(`profesor/${id}?full=1`);
+  }
+
   updateProfesor(id: number, prof: any): Observable<any> {
     return this.put<any>(`profesor/${id}`, prof);
   }

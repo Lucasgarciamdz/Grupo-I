@@ -1,11 +1,11 @@
-from flask_restful import Resource
 from flask import request, jsonify
-from .. import db
-from main.models import ProfesorModel, ClasesModel
-from sqlalchemy import desc, func
 from flask_jwt_extended import jwt_required
+from flask_restful import Resource
+from sqlalchemy import desc, func
+
 from main.auth.decoradores import role_required
-import pdb
+from main.models import ProfesorModel, ClasesModel
+from .. import db
 
 
 class Profesores(Resource):
@@ -99,9 +99,11 @@ class Profesor(Resource):
 
     @jwt_required(optional=True)
     def get(self, id):
+        profesor = db.session.query(ProfesorModel).get_or_404(id)
+        if request.args.get('full'):
+            return profesor.to_json_complete()
 
         if request.args.get('alumnosyclases'):
-
             profesor = db.session.query(ProfesorModel).get(id)
             print(f"PROFESOR: {profesor}")
 
@@ -129,10 +131,8 @@ class Profesor(Resource):
                 return int(alumno_id) in [alumno.id_alumno for alumno in alumnos]
             except Exception:
                 return False
-        profesor = db.session.query(ProfesorModel).get_or_404(id)
+        
         return profesor.to_json()
-
-    
 
     @role_required(roles="admin")
     def put(self, id):
@@ -150,3 +150,5 @@ class Profesor(Resource):
         db.session.delete(profesor)
         db.session.commit()
         return '', 204
+
+

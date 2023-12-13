@@ -1,18 +1,17 @@
 from flask import request, Blueprint
-from .. import db
-from main.models import UsuarioModel
 from flask_jwt_extended import create_access_token
+
 from main.mail.functions import sendMail
+from main.models import UsuarioModel
 from main.models.clase_model import Clase  # Importa el modelo clase_model.py
 from main.models.planificacion_model import Planificacion  # Importa el modelo planificacion_model.py
-import os
+from .. import db
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @auth.route('/login', methods=['POST'])
 def login():
-
     data = request.get_json()
     if not data:
         return 'Invalid request data', 400
@@ -42,7 +41,7 @@ def login():
             'usuario': usuario.to_json()
         }
         access_token = create_access_token(identity=usuario, additional_claims=data)
-        
+
         data['access_token'] = access_token
 
         return data, 200
@@ -81,10 +80,10 @@ def obtener_planificaciones_de_clase(id_clase):
             return 'Clase no encontrada', 404
 
         planificaciones = Planificacion.query.filter_by(id_clase=id_clase).all()
-        
+
         # Convierte las planificaciones en una lista de diccionarios
         planificaciones_data = [planificacion.to_json() for planificacion in planificaciones]
-        
+
         return jsonify(planificaciones_data), 200
 
     except Exception as e:
