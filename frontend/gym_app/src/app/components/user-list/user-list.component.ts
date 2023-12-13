@@ -61,7 +61,6 @@ export class UserListComponent implements OnInit {
 
   reloadPage() {
     this.location;
-    console.log("re piola se recargo la pagina")
   }  
 
   editUser(id: number): void {

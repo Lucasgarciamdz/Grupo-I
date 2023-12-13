@@ -82,6 +82,9 @@ import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.
         ProfesoresListComponent,
         ClasesComponent,
         ClassCardComponent,
+        PlanificacionesViewComponent,
+        ProfesorCheckComponent,
+        ProfCheckViewComponent,
     ],
     providers: [
         JWTService,
