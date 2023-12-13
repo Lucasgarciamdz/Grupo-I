@@ -47,4 +47,16 @@ export class ClasesService extends BaseService{
   getClasesAll(): Observable<any[]> {
     return this.get<any[]>('clases', 'all=1');
   }
+
+  joinProfesorClase(profesorId: number, claseId: number): Observable<any> {
+    return this.put<any>(`clase/${claseId}?profesor_id_join=${profesorId}`, {});
+  }
+  
+  removeProfesorClase(profesorId: number, claseId: number): Observable<any> {
+    return this.put<any>(`clase/${claseId}?profesor_id_remove=${profesorId}`, {});
+  }
+
+  getProfesoresPorClase(claseId: number): Observable<any[]> {
+    return this.get<any[]>(`clase/${claseId}`, 'profesores=1');
+  }
 }

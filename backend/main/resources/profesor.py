@@ -121,6 +121,7 @@ class Profesor(Resource):
                 "clases": [clase.to_json() for clase in clases],
                 "alumnos": [alumno.to_json_complete() for alumno in alumnos]
             })
+            
         if request.args.get('myAlumno'):
             profesor = db.session.query(ProfesorModel).get(id)
             clases = profesor.clases

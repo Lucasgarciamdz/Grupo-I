@@ -141,17 +141,29 @@ class Clase(Resource):
                     ],
                 }
             )
+        
+        if request.args.get("profesores"):
+            clase = db.session.query(ClasesModel).get_or_404(id)
+            profesores = clase.profesores
+            return jsonify(
+                {
+                    "clase": clase.to_json(),
+                    "profesores": [
+                        profesor.to_json() for profesor in profesores
+                    ],
+                }
+            )
 
         clase = db.session.query(ClasesModel).get_or_404(id)
         return clase.to_json()
 
-    @role_required(roles=["Admin", "Profesor"])
+    # @role_required(roles=["Admin", "Profesor"])
     def put(self, id):
         try:
             clase = db.session.query(ClasesModel).get_or_404(id)
-            profesor_id = request.args.get("profesor_id")
 
-            if profesor_id:
+            if request.args.get('profesor_id_join'):
+                profesor_id = request.args.get('profesor_id_join')
                 profesor = db.session.query(ProfesorModel).get_or_404(profesor_id)
                 if profesor.certificacion != clase.tipo:
                     return "El profesor no tiene la certificación necesaria para dar esta clase", 400
@@ -162,6 +174,12 @@ class Clase(Resource):
                     send_new_profesor_notification_to_admins(profesor, clase)
                 except Exception as e:
                     print(e)
+                    
+            if request.args.get('profesor_id_remove'):
+                profesor_id = request.args.get('profesor_id_remove')
+                profesor = db.session.query(ProfesorModel).get_or_404(profesor_id)
+                clase.profesores.remove(profesor)
+                return profesor.to_json(), 201
             else:
                 data = request.get_json().items()
                 for key, value in data:

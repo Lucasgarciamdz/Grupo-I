@@ -20,7 +20,7 @@ class Clase(db.Model):
         "Profesor",
         secondary=profesores_clases,
         backref=db.backref("clases_p", lazy="dynamic"),
-        overlaps="clases,profesores_p",
+        overlaps="profesores_c,clases",
     )
 
     def __repr__(self):

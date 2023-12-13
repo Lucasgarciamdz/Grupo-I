@@ -16,8 +16,11 @@ export class ClassCardComponent implements OnInit {
   @Input() items!: { image: string, title: string, description: string, buttonText: string }[];
   planificacionesClase: any[] = [];
   planificacionesAlumno: any[] = [];
+  profesoresClase: any[] = [];
   claseId: any;
   alumnoId: any;
+  profesorId: any;
+  rol: any;
 
   constructor(private planificacionService: PlanificacionService,
     private claseService: ClasesService,
@@ -31,10 +34,16 @@ export class ClassCardComponent implements OnInit {
         this.claseId = params['id'];
       });
 
+      let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+      this.rol = usuario.rol;
+      console.log("Rol:", this.rol);
+
       this.alumnoId = this.jwtService.getIdAlumno();
+      this.profesorId = this.jwtService.getIdProfesor();
 
       console.log("clase id:", this.claseId);
       console.log("alumno id:", this.alumnoId);
+      console.log("profesor id:", this.profesorId);
 
       this.claseService.getPlanificacionesPorClase(this.claseId).subscribe({
         next: (response: any) => {
@@ -56,6 +65,16 @@ export class ClassCardComponent implements OnInit {
           console.error('Error al obtener planificaciones por alumno', err);
         }
       });
+
+      this.claseService.getProfesoresPorClase(this.claseId).subscribe({
+        next: (response: any) => {
+          this.profesoresClase = response.profesores;
+          console.log("Profesores clase", this.profesoresClase);
+        },
+        error: (err: any) => {
+          console.error('Error al obtener profesores por clase', err);
+        }
+      });
   }
 
   isPlanificacionComun(planificacionId: number) {
@@ -64,7 +83,11 @@ export class ClassCardComponent implements OnInit {
     } else {
       return false;
     }
-  } 
+  }
+
+  isProfesorClase(profesorId: number) {
+    return this.profesoresClase.some(profesor => profesor.id === profesorId);
+}
 
   joinPlanificacion(planificacionId: number) {
   this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
@@ -87,4 +110,26 @@ removePlanificacion(planificacionId: number) {
       });
     });
   }
+
+  joinProfesorClase(profesorId: number) {
+    this.claseService.joinProfesorClase(profesorId, this.claseId).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['/views/class', this.claseId]).then(() => {
+        this.snackBar.open('Te has unido a la clase correctamente', 'Cerrar', {
+          duration: 3000,
+          });
+        });
+      });
+    }
+
+  removeProfesorClase(profesorId: number) {
+    this.claseService.removeProfesorClase(profesorId, this.claseId).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['/views/class', this.claseId]).then(() => {
+        this.snackBar.open('Has abandonado la clase correctamente', 'Cerrar', {
+          duration: 3000,
+          });
+        });
+      });
+    }
 }

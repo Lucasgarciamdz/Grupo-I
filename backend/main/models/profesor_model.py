@@ -1,9 +1,10 @@
 from .. import db
 
 profesores_clases = db.Table("profesores_clases",
-                             db.Column("id_profesor_clase", db.Integer, primary_key=True),
-                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase")),
-                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor")))
+                             db.Column("id_clase", db.Integer, db.ForeignKey("clase.id_clase"),
+                                             primary_key=True),
+                             db.Column("id_profesor", db.Integer, db.ForeignKey("profesor.id_profesor"),
+                                             primary_key=True))
 
 
 class Profesor(db.Model):
@@ -18,10 +19,14 @@ class Profesor(db.Model):
     estado = db.Column(db.String(45), nullable=False)
     aprobacion_pendiente = db.Column(db.Boolean, nullable=False, default=True)
 
-    usuario = db.relationship('Usuario', back_populates='profesor', uselist=False, cascade="all, delete-orphan",
+    usuario = db.relationship('Usuario', back_populates='profesor',
+                              uselist=False, 
+                              cascade="all, delete-orphan",
                               single_parent=True)
-    clases = db.relationship('Clase', secondary=profesores_clases, backref=db.backref('profesores_p', lazy='dynamic'),
-                             lazy='dynamic', overlaps="clases,profesores_p")
+    
+    clases = db.relationship('Clase', secondary=profesores_clases,
+                             backref=db.backref('profesores_p', lazy='dynamic'),
+                             overlaps="profesores_p,clases")
 
     def __repr__(self):
         return '<profesor: %r >' % (self.id_profesor)
@@ -48,8 +53,8 @@ class Profesor(db.Model):
             'fecha_inicio_actividad': self.fecha_inicio_actividad,
             'sueldo': str(self.sueldo),
             'estado': self.estado,
-            "clases": [clase.to_json() for clase in self.clases],
             'aprobacion_pendiente': self.aprobacion_pendiente,
+            "clases": [clase.to_json() for clase in self.clases],
         }
         return profesor_json
 

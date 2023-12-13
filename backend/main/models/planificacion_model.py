@@ -15,6 +15,7 @@ class Planificacion(db.Model):
     alumnos = db.relationship('Alumno', secondary=alumnos_planificaciones,
                               backref=db.backref('planificaciones_a', lazy='dynamic'),
                               overlaps="alumnos_p,planificaciones")
+    
     clase = db.relationship('Clase',
                             back_populates='planificacion',
                             single_parent=True,
