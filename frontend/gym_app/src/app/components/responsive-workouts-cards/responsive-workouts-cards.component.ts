@@ -11,8 +11,7 @@ export class ResponsiveWorkoutsCardsComponent {
   @Input()
   title!: string;
   @Input() 
-  // items!: {title: string | number, description: string, buttonText: string }[];
-  items!: { image: string, title: string | number, description: string, buttonText: string, id_clase: number }[];
-
+  items!: { image: string, title: string | number, description: string, buttonText: string, 
+    id_clase: number , link: string, tipo: string}[];
 }
 

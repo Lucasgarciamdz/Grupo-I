@@ -31,4 +31,20 @@ export class ClasesService extends BaseService{
   getClasesByAlumnoId(alumnoId: number): Observable<any[]> {
     return this.get<any[]>('clases', `alumno_id_clase=${alumnoId}`);
   }
+
+  getPlanificacionesPorClase(claseId: number): Observable<any[]> {
+    return this.get<any[]>(`clase/${claseId}`, 'planificaciones=1');
+  }
+
+  getClasesMasIntensas(): Observable<any[]> {
+    return this.get<any[]>('clases', 'intense=1');
+  }
+
+  getClasesMasPopulares(): Observable<any[]> {
+    return this.get<any[]>('clases', 'famous=1');
+  }
+
+  getClasesAll(): Observable<any[]> {
+    return this.get<any[]>('clases', 'all=1');
+  }
 }

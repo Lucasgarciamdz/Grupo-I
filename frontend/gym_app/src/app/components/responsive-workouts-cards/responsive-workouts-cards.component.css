@@ -44,18 +44,22 @@
     padding: 0.5rem 1rem;
   }
 
-  .btn
-  {
+  .btn {
     background-color: #3A6A87;
-    color: #fff
+    color: #fff;
+    position: absolute;
+    bottom: 20px;
   }
+
   .card-title{
     color: #3A6A87;
 
   }
+
   .card-title::first-letter{
     text-transform: uppercase;
   }
+
   .card-text{
     color: #3A6A87;
   }

@@ -12,6 +12,7 @@ import { AuthsessionGuard } from './guards/authsession.guard';
 import { HomeAdminComponent } from './views/home-admin/home-admin.component';
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { ClassListViewComponent } from './views/class-list-view/class-list-view.component';
+import { PlanificacionesViewComponent } from './views/planificaciones-view/planificaciones-view.component';
 
 import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 import { ClasesComponent } from './views/clases/clases.component';
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: 'admin-buttons', component: ProfButtonsComponent, canActivate: [AuthsessionGuard], data: { roles: ['Admin', 'Profesor'] } },
   { path: 'views/class', component: ClasesComponent },
   { path: 'views/class/:id', component: ClasesComponent },
+  { path: 'views/planificacion', component: PlanificacionesViewComponent },
+  { path: 'views/planificacion/:id', component: PlanificacionesViewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

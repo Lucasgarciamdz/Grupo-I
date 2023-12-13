@@ -84,9 +84,9 @@ class Planificacion(Resource):
     @role_required(roles=["Admin", "Alumno"])
     def put(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
-        alumno_id = request.args.get('alumno_id')
-        
-        if alumno_id:
+
+        if request.args.get('alumno_id_join'):
+            alumno_id = request.args.get('alumno_id_join')
             alumno = db.session.query(AlumnoModel).get_or_404(alumno_id)
             planificacion.alumnos.append(alumno)
         else:
@@ -94,6 +94,15 @@ class Planificacion(Resource):
             for key, value in data:
                 setattr(planificacion, key, value)
         
+        if request.args.get('alumno_id_remove'):
+            alumno_id = request.args.get('alumno_id_remove')
+            alumno = db.session.query(AlumnoModel).get_or_404(alumno_id)
+            planificacion.alumnos.remove(alumno)
+        else:
+            data = request.get_json().items()
+            for key, value in data:
+                setattr(planificacion, key, value)
+
         db.session.add(planificacion)
         db.session.commit()
         return planificacion.to_json(), 201

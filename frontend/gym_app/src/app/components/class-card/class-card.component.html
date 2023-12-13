@@ -3,19 +3,25 @@
     <table>
       <thead>
         <tr>
-          <th>Planification ID</th>
-          <th>Objective</th>
-          <th>Join</th>
+          <th class="col1">Planification ID</th>
+          <th class="col4">Objective</th>
+          <th class="col3"></th>
         </tr>
       </thead>
-      <tbody *ngFor="let planificacion of planificaciones">
-        <tr>
-          <td>{{ planificacion.id_planificacion }}</td>
-          <td>{{ planificacion.objetivo }}</td>
-          <td>  <button (click)="joinPlanificacion(planificacion.id_planificacion)">Join</button>
-          </td>
-        </tr>
-      </tbody>
     </table>
+    <div class="scrollable-tbody">
+      <table>
+        <tbody class="card-rows" *ngFor="let planificacion of planificacionesClase">
+          <tr>
+            <td class="col1">{{ planificacion.id_planificacion }}</td>
+            <td class="col2">{{ planificacion.objetivo }}</td>
+            <td class="col3">
+              <button class="remove-button" *ngIf="isPlanificacionComun(planificacion.id_planificacion) === true" (click)="removePlanificacion(planificacion.id_planificacion)">Remove</button>
+              <button class="join-button" *ngIf="isPlanificacionComun(planificacion.id_planificacion) === false" (click)="joinPlanificacion(planificacion.id_planificacion)">Join</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

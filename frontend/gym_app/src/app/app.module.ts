@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 
 
@@ -42,6 +43,8 @@ import { PerfilParticularGuard } from './guards/perfil-particular.guard';
 
 import { ClasesComponent } from './views/clases/clases.component';
 import { ClassCardComponent } from './components/class-card/class-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlanificacionesViewComponent } from './views/planificaciones-view/planificaciones-view.component';
 import { ProfesorCheckComponent } from './components/profesor-check/profesor-check.component';
 import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.component';
 
@@ -79,8 +82,6 @@ import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.
         ProfesoresListComponent,
         ClasesComponent,
         ClassCardComponent,
-        ProfesorCheckComponent,
-        ProfCheckViewComponent,
     ],
     providers: [
         JWTService,
@@ -92,7 +93,9 @@ import { ProfCheckViewComponent } from './views/prof-check-view/prof-check-view.
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        UserListModule
+        UserListModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule
     ]
 })
 export class AppModule { }

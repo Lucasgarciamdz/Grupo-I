@@ -31,13 +31,14 @@
 
 ### Planificaciones
 
-- [ ] Posibilidad de darse de baja.
-- [ ] Si ya esta inscripto, que no le salga el boton de join (o que se transforme en darse de baja).
-- [ ] Pulir stud-workout (home alumno).
+- [ ] Posibilidad de darse de baja. LISTO
+- [ ] Si ya esta inscripto, que no le salga el boton de join (o que se transforme en darse de baja). LISTO
+- [ ] Pulir stud-workout (home alumno). LISTO
+- [ ] Hacer andar y pulir views/planificacion. 
 
 ### Clases
 
-- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class)
+- [ ] Mejorar la vista de clases para el alumno. Que se vea mas bonito. (views/class). **Instalar ng add @angular/material**. LISTO
 
 ## Profesor
 
@@ -47,10 +48,10 @@
 
 ## HOME
 
-- [ ] Hay que mejorar los caruseles, hacer que funcionen random o posta.
-- [ ] Posibilidad de ver todas las clases.
-- [ ] Arreglar search bar para buscar clases. (segun tipo clase).
-  - [ ] Deberia mostrar una lista de clases que coincida con la busqueda (nueva view). Hacer un carrusel vertical que tambien sirva para ver todas las clases. Recibe una lista de clases.
+- [ ] Hay que mejorar los caruseles, hacer que funcionen random o posta. LISTO
+- [ ] Posibilidad de ver todas las clases. LISTO
+- [ ] Arreglar search bar para buscar clases. (segun tipo clase). LISTO
+  - [ ] Deberia mostrar una lista de clases que coincida con la busqueda (nueva view). Hacer un carrusel vertical que tambien sirva para ver todas las clases. Recibe una lista de clases. NO HICE NUEVA VIEW PERO ANDA
 
 ## Admin
 

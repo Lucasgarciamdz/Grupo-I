@@ -14,59 +14,32 @@ export class ClasesComponent implements OnInit {
 
   constructor(private planificacionService: PlanificacionService,
     private claseService: ClasesService,
-    private route: ActivatedRoute,
-    private baseService: BaseService) {}
+    private route: ActivatedRoute,) {}
 
   claseId: any;
   claseTitle: string = '';
   claseDescription: string = '';
-  items: { image: string, title: string, description: string, buttonText: string }[] = [
-    {
-      image: 'assets/clases/clase1.jpg',
-      title: 'Clase 1',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    },
-    {
-      image: 'assets/clases/clase2.jpg',
-      title: 'Clase 2',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    },
-    {
-      image: 'assets/clases/clase3.jpg',
-      title: 'Clase 3',
-      description: 'Fuerza',
-      buttonText: 'Ver Clase'
-    }
-  ];
+  claseImage: string = '';
+
   get isToken() {
     return localStorage.getItem('token');
   }
-
-
+  
   planificaciones: any[] = [];
 
   ngOnInit() {
-    // this.planificacionService.getPlanificaciones().subscribe({
-    //   next: (data: any) => {
-    //     this.planificaciones = data;
-    //   },
-    //   error: (err: any) => {
-    //     console.error('Error al obtener planificaciones', err);
-    //   }
-    // });
     this.route.params.subscribe(params => {
       this.claseId = params['id'];
-      
     });
 
     // http://127.0.0.1:5000/clase/18
     this.claseService.getClassById(this.claseId).subscribe({
       next: (response: any) => {
-        console.log(response);
+        // console.log(response);
         this.claseTitle = response.tipo;
         this.claseDescription = response.descripcion;
+        // this.claseImage = response.imagen;
+        this.claseImage = 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg'
       },
       error: (error) => {
         console.error(error);

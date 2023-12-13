@@ -9,38 +9,20 @@ import { PlanificacionService } from 'src/app/services/planificacion.service';
 })
 export class StudWorkComponent {
 
-  // workoutItems = [
-  //   {
-  //     image: 'assets/clases/clase1.jpg',
-  //     title: 'Clase 1',
-  //     description: 'Fuerza',
-  //     buttonText: 'Ver Clase'
-  //   },
-  //   {
-  //     image: 'assets/clases/clase2.jpg',
-  //     title: 'Clase 2',
-  //     description: 'Fuerza',
-  //     buttonText: 'Ver Clase'
-  //   },
-  //   {
-  //     image: 'assets/clases/clase3.jpg',
-  //     title: 'Clase 3',
-  //     description: 'Fuerza',
-  //     buttonText: 'Ver Clase'
-  //   },
-  // ];
-
   classItems: any[] = [];
   planItems: any[] = [];
 
-  constructor(private clasesService: ClasesService, private planificacionService: PlanificacionService) {}
+  constructor(private clasesService: ClasesService, 
+    private planificacionService: PlanificacionService) {}
 
   ngOnInit(): void {
     const alumnoId = localStorage.getItem('id_alumno') ?? '';
     const alumnoIdNumber = parseInt(alumnoId, 10);
+    console.log('alumnoId:', alumnoIdNumber);
 
     this.planificacionService.getPlanificacionesPorAlumno(alumnoIdNumber).subscribe({
       next: (planificaciones) => {
+        console.log('planificaciones:', planificaciones);
         const uniqueClaseIds = [...new Set(planificaciones.map(item => item.id_clase))];
         for (const id of uniqueClaseIds) {
           this.getClaseName(id, planificaciones.filter(p => p.id_clase === id));
@@ -59,10 +41,12 @@ export class StudWorkComponent {
         this.classItems.push({
           title: clase.tipo,
           planificaciones: planificaciones.map(p => ({
+            // image: 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg',
+            image: p.imagen + '.jpg',
             title: `Planificación ${p.id_planificacion}`,
-            description: `Objetivo: ${p.objetivo}, Nivel: ${p.nivel}, Horas Semanales: ${p.horas_semanales}`,
             buttonText: 'Ver Planificación',
-            id_planificacion: p.id_planificacion
+            id_planificacion: p.id_planificacion,
+            link: `views/planificacion/${p.id_planificacion}`
           }))
         });
       },

@@ -3,7 +3,7 @@
 <h1 style="text-align: center; width: 100%; padding-top: 40px;">Welcome back Student!</h1>
 
 <div class="scrollable-div">
-    <div *ngFor="let classItem of classItems">
+    <div class="cards" *ngFor="let classItem of classItems">
         <app-responsive-workouts-cards [title]="classItem.title" [items]="classItem.planificaciones"></app-responsive-workouts-cards>
     </div>
 </div>
