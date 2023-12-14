@@ -165,8 +165,8 @@ class Clase(Resource):
             if request.args.get('profesor_id_join'):
                 profesor_id = request.args.get('profesor_id_join')
                 profesor = db.session.query(ProfesorModel).get_or_404(profesor_id)
-                if profesor.certificacion != clase.tipo:
-                    return "El profesor no tiene la certificación necesaria para dar esta clase", 400
+                # if profesor.certificacion != clase.tipo:
+                #     return "El profesor no tiene la certificación necesaria para dar esta clase", 400
                 profesor.aprobacion_pendiente = True
                 db.session.add(profesor)
                 clase.profesores.append(profesor)

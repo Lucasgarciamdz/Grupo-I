@@ -28,7 +28,7 @@
                         <input type="text" [(ngModel)]="user.sexo" name="sexo" class="form-control" placeholder="Sexo" aria-label="Sexo">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" [(ngModel)]="user.mail" name="mail" class="form-control" placeholder="Mail" aria-label="Mail">
+                        <input type="text" [(ngModel)]="user.email" name="mail" class="form-control" placeholder="Mail" aria-label="Mail">
                     </div>
                     <div class="input-group mb-3">
                         <input [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="user.contrasena" name="contrasena" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
@@ -43,10 +43,10 @@
                         </button>
                     </div>
                     <div class="mb-3 text-center">
-                        <input type="submit" class="btn btn-primary" value="Registrarse">
+                        <input type="submit" class="btn btn-primary" routerLink="/signin" value="Registrarse">
                     </div>
                     <div class="text-center">
-                        Ya tengo una cuenta <a href="../views/signin/signin.component.html">Iniciar sesión</a>
+                        Ya tengo una cuenta <a routerLink="/signin">Iniciar sesión</a>
                     </div>
                 </form>
             </div>

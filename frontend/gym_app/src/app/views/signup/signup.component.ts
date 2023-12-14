@@ -21,7 +21,7 @@ export class SignupComponent {
     dni: null,
     rol: '',
     sexo: '',
-    mail: '',
+    email: '',
     contrasena: ''
   };
 

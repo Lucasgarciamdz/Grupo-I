@@ -29,6 +29,6 @@
 <div class="card-container" *ngIf="rol === 'Profesor'">
   <div class="card-body">
     <button class="request-class-button" *ngIf="!isProfesorClase(profesorId)" (click)="joinProfesorClase(profesorId)">Solicitar clase</button>
-    <button class="unsubscribe-button" *ngIf="isProfesorClase(profesorId)" (click)="removeProfesorClase(profesorId)">Darme de baja</button>
+    <button class="unsubscribe-button"  (click)="removeProfesorClase(profesorId)">Darme de baja</button>
   </div>
 </div>

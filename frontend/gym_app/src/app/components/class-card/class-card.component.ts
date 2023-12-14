@@ -86,8 +86,8 @@ export class ClassCardComponent implements OnInit {
   }
 
   isProfesorClase(profesorId: number) {
-    return this.profesoresClase.some(profesor => profesor.id === profesorId);
-}
+    return this.profesoresClase.some(profesor => profesor.id_profesor === profesorId);
+  }
 
   joinPlanificacion(planificacionId: number) {
   this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
@@ -115,6 +115,7 @@ removePlanificacion(planificacionId: number) {
     this.claseService.joinProfesorClase(profesorId, this.claseId).subscribe(response => {
       console.log(response);
       this.router.navigate(['/views/class', this.claseId]).then(() => {
+        window.location.reload();
         this.snackBar.open('Te has unido a la clase correctamente', 'Cerrar', {
           duration: 3000,
           });
@@ -126,6 +127,7 @@ removePlanificacion(planificacionId: number) {
     this.claseService.removeProfesorClase(profesorId, this.claseId).subscribe(response => {
       console.log(response);
       this.router.navigate(['/views/class', this.claseId]).then(() => {
+        window.location.reload();
         this.snackBar.open('Has abandonado la clase correctamente', 'Cerrar', {
           duration: 3000,
           });

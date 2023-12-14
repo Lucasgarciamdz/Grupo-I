@@ -42,9 +42,8 @@ export class UsuariosService extends BaseService {
   }
 
   createUser(user: any): Observable<any> {
-    const headers = { 'content-type': 'application/json' }  
     const body = JSON.stringify(user);
-    return this.http.post<any>('http://localhost:5000/usuario', body, {'headers':headers});
+    return this.post<any>('/usuarios', body);
   }
   
   deleteUser(id: number): Observable<any> {
