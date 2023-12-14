@@ -17,7 +17,6 @@ from .. import db
 
 
 class Clases(Resource):
-    # @jwt_required()
     def get(self):
         clases = db.session.query(ClasesModel)
 
@@ -115,7 +114,7 @@ class Clases(Resource):
             }
         )
 
-    # @jwt_required()
+    @jwt_required()
     def post(self):
         try:
             clase = ClasesModel.from_json(request.get_json())
@@ -157,7 +156,7 @@ class Clase(Resource):
         clase = db.session.query(ClasesModel).get_or_404(id)
         return clase.to_json()
 
-    # @role_required(roles=["Admin", "Profesor"])
+    @role_required(roles=["Admin", "Profesor"])
     def put(self, id):
         try:
             clase = db.session.query(ClasesModel).get_or_404(id)
@@ -170,16 +169,15 @@ class Clase(Resource):
                 profesor.aprobacion_pendiente = True
                 db.session.add(profesor)
                 clase.profesores.append(profesor)
-                try:
-                    send_new_profesor_notification_to_admins(profesor, clase)
-                except Exception as e:
-                    print(e)
+                # try:
+                #     send_new_profesor_notification_to_admins(profesor, clase)
+                # except Exception as e:
+                #     print(e)
                     
-            if request.args.get('profesor_id_remove'):
+            elif request.args.get('profesor_id_remove'):
                 profesor_id = request.args.get('profesor_id_remove')
                 profesor = db.session.query(ProfesorModel).get_or_404(profesor_id)
                 clase.profesores.remove(profesor)
-                return profesor.to_json(), 201
             else:
                 data = request.get_json().items()
                 for key, value in data:

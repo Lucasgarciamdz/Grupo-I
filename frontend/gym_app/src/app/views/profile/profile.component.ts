@@ -16,6 +16,7 @@ export class ProfileComponent {
   age: string = '';
   profileId: any;
   role: string = '';
+  rol: string = '';
   certificacion: string = '';
   fecha_inicio_actividad: string = '';
   currentUser: string = '';
@@ -31,6 +32,7 @@ export class ProfileComponent {
     this.currentUser = this.jwtService.getId() ?? '';
     console.log('usuario actual', this.currentUser)
     this.role = this.jwtService.getRol() ?? '';
+    this.rol = this.jwtService.getRol() ?? '';
     console.log('rol', this.role)
 
     this.route.params.subscribe(params => {
@@ -49,10 +51,11 @@ export class ProfileComponent {
           break;
         case 'Profesor':
           if (this.profileId) {
-            this.role = 'Alumno';
             this.getAlumnoProfile(this.profileId);
+            this.role = 'Alumno';
           }
           else {
+            this.rol = 'Alumno'
             this.getProfesorProfile();
           }
           break;

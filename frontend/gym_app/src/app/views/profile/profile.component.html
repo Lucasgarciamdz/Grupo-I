@@ -3,7 +3,7 @@
     <div class="d-flex flex-column align-items-center mb-2">
         <app-profile-picture [image]="'../../assets/default-profile-picture.jpeg'" [name]="profileName"></app-profile-picture>
         <!-- <app-edit-profile-btn *ngIf="currentUser == profileId"></app-edit-profile-btn> -->
-        <app-edit-profile-btn></app-edit-profile-btn>
+        <app-edit-profile-btn *ngIf='rol == "Alumno"'></app-edit-profile-btn>
 
     </div>
     <div *ngIf="role == 'Alumno'">

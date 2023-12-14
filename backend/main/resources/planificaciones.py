@@ -83,6 +83,7 @@ class Planificacion(Resource):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         return planificacion.to_json()
 
+    @jwt_required()
     @role_required(roles=["Admin", "Alumno"])
     def put(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
@@ -109,7 +110,8 @@ class Planificacion(Resource):
         db.session.commit()
         return planificacion.to_json(), 201
 
-    @role_required(roles="admin")
+    @jwt_required()
+    @role_required(roles="Admin")
     def delete(self, id):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         db.session.delete(planificacion)

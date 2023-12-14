@@ -112,3 +112,7 @@ button:hover {
 .unsubscribe-button:hover {
   background-color: darkred;
 }
+.card-body {
+  display: flex;
+  justify-content: center;
+}

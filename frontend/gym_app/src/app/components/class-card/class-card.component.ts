@@ -21,6 +21,7 @@ export class ClassCardComponent implements OnInit {
   alumnoId: any;
   profesorId: any;
   rol: any;
+  profesorInClass: boolean = false;
 
   constructor(private planificacionService: PlanificacionService,
     private claseService: ClasesService,
@@ -70,6 +71,7 @@ export class ClassCardComponent implements OnInit {
         next: (response: any) => {
           this.profesoresClase = response.profesores;
           console.log("Profesores clase", this.profesoresClase);
+          this.profesorInClass = this.isProfesorClase(this.profesorId);
         },
         error: (err: any) => {
           console.error('Error al obtener profesores por clase', err);
@@ -86,7 +88,11 @@ export class ClassCardComponent implements OnInit {
   }
 
   isProfesorClase(profesorId: number) {
-    return this.profesoresClase.some(profesor => profesor.id_profesor === profesorId);
+      if (this.profesoresClase.some(profesor => Number(profesor.id_profesor) === Number(profesorId))){
+        return true;
+      } else {
+        return false;
+      }
   }
 
   joinPlanificacion(planificacionId: number) {

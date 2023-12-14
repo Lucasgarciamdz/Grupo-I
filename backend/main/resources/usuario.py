@@ -8,7 +8,7 @@ from main.models import UsuarioModel
 
 
 class Usuarios(Resource):
-    # @jwt_required(optional=True)
+    @jwt_required(optional=True)
     def get(self):
         usuarios = db.session.query(UsuarioModel)
 
@@ -56,7 +56,8 @@ class Usuarios(Resource):
                         "total": usuarios.total
                         })
 
-    # @jwt_required()
+    @jwt_required()
+    @role_required(roles="Admin")
     def post(self):
         try:
             usuario = UsuarioModel.from_json(request.get_json())
@@ -74,7 +75,7 @@ class Usuario(Resource):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         return usuario.to_json()
 
-    # @role_required(roles="admin")
+    @jwt_required()
     def put(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         data = request.get_json().items()
@@ -84,7 +85,8 @@ class Usuario(Resource):
         db.session.commit()
         return usuario.to_json(), 201
 
-    @role_required(roles="admin")
+    @role_required(roles="Admin")
+    @jwt_required()
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
         db.session.delete(usuario)

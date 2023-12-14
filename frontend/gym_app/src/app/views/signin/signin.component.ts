@@ -29,7 +29,7 @@ export class SigninComponent implements OnInit {
     console.log('Comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
       next: (rta:any) => {
-        alert('Login exitoso');
+        // alert('Login exitoso');
         console.log('Respuesta login: ',rta.access_token);
         console.log('Respuesta login: ',rta);
         localStorage.setItem('token', rta.access_token);

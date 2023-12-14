@@ -10,7 +10,7 @@ from .. import db
 
 class Profesores(Resource):
 
-    # @jwt_required()
+    @jwt_required(optional=True)
     def get(self):
         profesores = db.session.query(ProfesorModel)
         page = 1
@@ -80,7 +80,8 @@ class Profesores(Resource):
                         "total": profesores.total
                         })
 
-    # @jwt_required()
+    @jwt_required()
+    @role_required(roles="Admin")
     def post(self):
         try:
             data = request.get_json()
@@ -135,7 +136,8 @@ class Profesor(Resource):
         
         return profesor.to_json()
 
-    @role_required(roles="admin")
+    @role_required(roles="Admin")
+    @jwt_required()
     def put(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         data = request.get_json().items()
@@ -145,7 +147,8 @@ class Profesor(Resource):
         db.session.commit()
         return profesor.to_json(), 201
 
-    # @role_required(roles="admin")
+    @jwt_required()
+    @role_required(roles="Admin")
     def delete(self, id):
         profesor = db.session.query(ProfesorModel).get_or_404(id)
         db.session.delete(profesor)
