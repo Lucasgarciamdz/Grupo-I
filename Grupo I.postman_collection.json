@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "9a4ee1ec-4e9c-4df8-8d60-9c682c087f32",
+		"_postman_id": "50606926-3080-4b1a-ae93-cd708d9fe9bb",
 		"name": "Grupo I",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26654719"
+		"_exporter_id": "26813192",
+		"_collection_link": "https://lively-comet-721567.postman.co/workspace/Proyecto-Programacion-1~5dacde86-ddaf-49d1-8989-eb396d51aebc/collection/26813192-50606926-3080-4b1a-ae93-cd708d9fe9bb?action=share&source=collection_link&creator=26813192"
 	},
 	"item": [
 		{
@@ -79,7 +80,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"estado\": \"inactivo\",\n    \"planilla_medica\": false,\n    \"id_usuario\": 2\n  }",
+							"raw": "{\n    \"estado\": \"activo\",\n    \"altura\": 175,\n    \"peso\": 69,\n    \"id_usuario\": 18,\n    \"planilla_medica\": \"activa\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -116,7 +117,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/alumno/id",
+							"raw": "http://127.0.0.1:5000/alumno/?id=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -127,7 +128,13 @@
 							"port": "5000",
 							"path": [
 								"alumno",
-								"id"
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -185,7 +192,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/alumno/id",
+							"raw": "http://127.0.0.1:5000/alumno/?id=22",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -196,7 +203,13 @@
 							"port": "5000",
 							"path": [
 								"alumno",
-								"id"
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "22"
+								}
 							]
 						}
 					},
@@ -220,7 +233,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/clases",
+							"raw": "http://127.0.0.1:5000/clases?all=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -235,13 +248,37 @@
 							"query": [
 								{
 									"key": "page",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": null,
+									"value": "",
 									"disabled": true
+								},
+								{
+									"key": "alumno_id_clase",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "planificaciones",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "intense",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "famous",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "all",
+									"value": "1"
 								}
 							]
 						}
@@ -261,7 +298,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/clase/id",
+							"raw": "http://127.0.0.1:5000/clase/2?planificaciones=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -272,7 +309,13 @@
 							"port": "5000",
 							"path": [
 								"clase",
-								"id"
+								"2"
+							],
+							"query": [
+								{
+									"key": "planificaciones",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -311,6 +354,30 @@
 							"port": "5000",
 							"path": [
 								"clases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clase id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/clase/id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"clase",
+								"id",
+								""
 							]
 						}
 					},
@@ -395,7 +462,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuario/?id",
+							"raw": "http://127.0.0.1:5000/usuario/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -407,12 +474,6 @@
 							"path": [
 								"usuario",
 								""
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": null
-								}
 							]
 						}
 					},
@@ -432,7 +493,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"nombre\": \"Franco\",\n      \"apellido\": \"Bertoldo\",\n      \"direccion\": \"Guardiavieja 1050\",\n      \"edad\": 20,\n      \"telefono\": 2613467481,\n      \"dni\": 44436587,\n      \"rol\": \"Profesor\",\n      \"sexo\": \"M\",\n      \"email\": \"f.bertoldi@alumno.um.edu.ar\",\n      \"contrasena\": \"yeahBuddy\"\n    }",
+							"raw": "    {\n      \"id_usuario\": 42,\n      \"nombre\": \"Martin\",\n      \"apellido\": \"Lopez\",\n      \"direccion\": \"Saenz Peña\",\n      \"edad\": 40,\n      \"telefono\": 2613467481,\n      \"dni\": 3454575647,\n      \"rol\": \"admin\",\n      \"sexo\": \"M\",\n      \"email\": \"admin@gmail.com.ar\",\n      \"contrasena\": \"123\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -506,7 +567,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"John\",\n    \"apellido\": \"Doe\",\n    \"direccion\": \"123 Main St\",\n    \"edad\": 30,\n    \"telefono\": 1234567890,\n    \"dni\": 12345678,\n    \"rol\": \"estudiante\",\n    \"id_login\": 1,\n    \"sexo\": \"M\"\n}",
+							"raw": "{\n    \"id_usuario\": 100,\n    \"nombre\": \"Franco\",\n    \"apellido\": \"Bertoldi\",\n    \"direccion\": \"Calle\",\n    \"edad\": 20,\n    \"telefono\": 2613467481,\n    \"dni\": 44436587,\n    \"rol\": \"alumno\",\n    \"sexo\": \"M\",\n    \"email\": \"alumno2222@gmail.com.ar\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -514,7 +575,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuario/id",
+							"raw": "http://127.0.0.1:5000/usuario/?id=100",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -525,7 +586,13 @@
 							"port": "5000",
 							"path": [
 								"usuario",
-								"id"
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -680,7 +747,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"profesor\": {\n    \"certificacion\": \"power garcia\",\n    \"fecha_inicio_actividad\": \"2020-02-04\",\n    \"sueldo\": 900000000.00,\n    \"estado\": \"activo\",\n    \"id_usuario\": 1\n},\n\"clase\":{\n    \"tipo\": \"powerlifting\"\n}\n}",
+							"raw": "{\n    \"certificacion\": \"power garcia\",\n    \"fecha_inicio_actividad\": \"2020-02-04\",\n    \"sueldo\": 80000.00,\n    \"estado\": \"activo\",\n    \"id_usuario\": 41\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -699,6 +766,35 @@
 							"port": "5000",
 							"path": [
 								"profesores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profesor delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/profesor/?id=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"profesor",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -722,7 +818,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/planificacion/id",
+							"raw": "http://127.0.0.1:5000/planificacion/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -733,7 +829,7 @@
 							"port": "5000",
 							"path": [
 								"planificacion",
-								"id"
+								"1"
 							]
 						}
 					},
@@ -767,17 +863,27 @@
 							"query": [
 								{
 									"key": "objetivo",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": null,
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "alumno_id_plani",
+									"value": "196",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -904,7 +1010,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"usuario\": {\n        \"nombre\": \"John\",\n        \"apellido\": \"Doe\",\n        \"direccion\": \"123 Main St\",\n        \"edad\": 30,\n        \"telefono\": 5551234,\n        \"dni\": 12345678,\n        \"rol\": \"profesor\",\n        \"sexo\": \"M\",\n        \"email\": \"jhonson12345@example.com\",\n        \"contrasena\": \"password123\"\n    },\n    \"profesor\": {\n        \"certificacion\": \"Certified Trainer\",\n        \"fecha_inicio_actividad\": \"2022-01-01\",\n        \"sueldo\": \"1000.0\",\n        \"estado\": \"Activo\"\n    },\n    \"clase\": {\n        \"nombre\": \"stretching\"\n    }\n}",
+							"raw": "{\n    \"usuario\": {\n        \"nombre\": \"Franco\",\n        \"apellido\": \"Bertoldi\",\n        \"direccion\": \"123 Main St\",\n        \"edad\": 21,\n        \"telefono\": 5551234,\n        \"dni\": 12345678,\n        \"rol\": \"alumno\",\n        \"sexo\": \"M\",\n        \"email\": \"alumno@gmail.com.ar\",\n        \"contrasena\": \"123\"\n    },\n    \"alumno\": {\n    \"estado\": \"activo\",\n    \"altura\": 175,\n    \"peso\": 69,\n    \"id_usuario\": 100\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
