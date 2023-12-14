@@ -22,15 +22,19 @@ export class PlanificacionesViewComponent implements OnInit {
   planificacionHoras: any;
   planificacionNivel: any;
   planificacionObjetivo: any;
-  alumnoId: any = localStorage.getItem('id_alumno');
+  alumnoId: any = localStorage.getItem('id_alumno') || null;
   planificacionActive: boolean = false;
   planificacionesAlumno: any[] = [];
 
   ngOnInit() {
 
-    this.planificacionId = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.planificacionId = params['id'];
+    });
 
-    this.alumnoId = this.jwtService.getIdAlumno();
+    if (this.alumnoId == null) {
+      this.alumnoId = this.jwtService.getIdAlumno();
+    }
 
     console.log("planificacion id:", this.planificacionId);
     console.log("alumno id:", this.alumnoId);

@@ -41,14 +41,14 @@ export class StudWorkComponent {
         this.classItems.push({
           title: clase.tipo,
           planificaciones: planificaciones.map(p => ({
-            // image: 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg',
-            image: p.imagen + '.jpg',
+            image: p.imagen ? p.imagen + '.jpg' : 'default.jpg', // provide a default image URL if p.imagen is undefined
             title: `Planificación ${p.id_planificacion}`,
             buttonText: 'Ver Planificación',
             id_planificacion: p.id_planificacion,
             link: `views/planificacion/${p.id_planificacion}`
           }))
-        });
+        })
+        console.log('classItems:', this.classItems);
       },
       error: (error) => {
         console.error('Error al obtener la clase:', error);
