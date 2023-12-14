@@ -71,21 +71,23 @@ export class PlanificacionesViewComponent implements OnInit {
     this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
       console.log(response);
       this.router.navigate(['/views/planificacion', this.planificacionId]).then(() => {
+        window.location.reload();
         this.snackBar.open('Te has unido a la planificación correctamente', 'Cerrar', {
           duration: 3000,
-          });
         });
       });
-    }
-  
+    });
+  }
+
   removePlanificacion(planificacionId: number) {
     this.planificacionService.removePlanificacion(this.alumnoId, planificacionId).subscribe(response => {
       console.log(response);
       this.router.navigate(['/views/planificacion', this.planificacionId]).then(() => {
+        window.location.reload();
         this.snackBar.open('Has abandonado la planificación correctamente', 'Cerrar', {
           duration: 3000,
-          });
         });
       });
-    }
+    });
+  }
 }
