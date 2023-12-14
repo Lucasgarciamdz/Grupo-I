@@ -31,15 +31,13 @@ export class ClasesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.claseId = params['id'];
     });
-
-    // http://127.0.0.1:5000/clase/18
+    
     this.claseService.getClassById(this.claseId).subscribe({
       next: (response: any) => {
         // console.log(response);
         this.claseTitle = response.tipo;
         this.claseDescription = response.descripcion;
-        // this.claseImage = response.imagen;
-        this.claseImage = 'https://i.blogs.es/410bab/danielle-cerullo-cqfnt66ttzm-unsplash/1366_2000.jpeg'
+        this.claseImage = response.imagen;
       },
       error: (error) => {
         console.error(error);

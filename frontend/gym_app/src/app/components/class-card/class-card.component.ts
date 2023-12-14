@@ -98,6 +98,7 @@ export class ClassCardComponent implements OnInit {
   joinPlanificacion(planificacionId: number) {
   this.planificacionService.joinPlanificacion(this.alumnoId, planificacionId).subscribe(response => {
     console.log(response);
+    window.location.reload();
     this.router.navigate(['/views/class', this.claseId]).then(() => {
       this.snackBar.open('Te has unido a la planificación correctamente', 'Cerrar', {
         duration: 3000,
@@ -109,6 +110,7 @@ export class ClassCardComponent implements OnInit {
 removePlanificacion(planificacionId: number) {
   this.planificacionService.removePlanificacion(this.alumnoId, planificacionId).subscribe(response => {
     console.log(response);
+    window.location.reload();
     this.router.navigate(['/views/class', this.claseId]).then(() => {
       this.snackBar.open('Has abandonado la planificación correctamente', 'Cerrar', {
         duration: 3000,
