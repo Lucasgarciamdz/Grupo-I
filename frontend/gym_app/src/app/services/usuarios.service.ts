@@ -7,8 +7,12 @@ import { BaseService } from "./base.service";
   providedIn: 'root'
 })
 export class UsuariosService extends BaseService {
+
+  private http: HttpClient;
+  
   constructor(httpClient: HttpClient) {
     super(httpClient);
+    this.http = httpClient;
   }
 
   getUsers(): Observable<any[]> {
@@ -37,6 +41,12 @@ export class UsuariosService extends BaseService {
     return this.put<any>(`usuario/${id}`, user);
   }
 
+  createUser(user: any): Observable<any> {
+    const headers = { 'content-type': 'application/json' }  
+    const body = JSON.stringify(user);
+    return this.http.post<any>('http://localhost:5000/usuario', body, {'headers':headers});
+  }
+  
   deleteUser(id: number): Observable<any> {
     return this.delete<any>(`usuario/${id}`);
   }

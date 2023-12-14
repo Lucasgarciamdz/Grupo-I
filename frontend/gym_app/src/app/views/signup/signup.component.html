@@ -5,22 +5,40 @@
         <div class="col-md-6">
             <div class="formulario mt-5">
                 <h2 class="text-center">Registro</h2>
-                <form method="post">
+                <form (ngSubmit)="onSubmit()">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre">
+                        <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" placeholder="Nombre" aria-label="Nombre">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Apellido" aria-label="Apellido">
+                        <input type="text" [(ngModel)]="user.apellido" name="apellido" class="form-control" placeholder="Apellido" aria-label="Apellido">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                        <input type="text" [(ngModel)]="user.direccion" name="direccion" class="form-control" placeholder="Dirección" aria-label="Dirección">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" [(ngModel)]="user.edad" name="edad" class="form-control" placeholder="Edad" aria-label="Edad">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" [(ngModel)]="user.telefono" name="telefono" class="form-control" placeholder="Teléfono" aria-label="Teléfono">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" [(ngModel)]="user.dni" name="dni" class="form-control" placeholder="DNI" aria-label="DNI">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" [(ngModel)]="user.sexo" name="sexo" class="form-control" placeholder="Sexo" aria-label="Sexo">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" [(ngModel)]="user.mail" name="mail" class="form-control" placeholder="Mail" aria-label="Mail">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="user.contrasena" name="contrasena" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="togglePasswordVisibility()">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Confirmar contraseña" aria-label="Confirmar contraseña" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                        <input [type]="hideConfirmPassword ? 'password' : 'text'" [(ngModel)]="confirmarContrasena" name="confirmar-contrasena" class="form-control" placeholder="Confirmar contraseña" aria-label="Confirmar contraseña" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="toggleConfirmPasswordVisibility()">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                     </div>
@@ -35,19 +53,3 @@
         </div>
     </div>
 </div>
-
-<!-- Add Bootstrap JS and jQuery for password toggle functionality -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script>
-    // Password toggle functionality
-    $("#togglePassword").click(function () {
-        const passwordInput = $("#contrasena");
-        passwordInput.attr("type", passwordInput.attr("type") === "password" ? "text" : "password");
-    });
-
-    $("#toggleConfirmPassword").click(function () {
-        const confirmPasswordInput = $("#confirmar-contrasena");
-        confirmPasswordInput.attr("type", confirmPasswordInput.attr("type") === "password" ? "text" : "password");
-    });
-</script>
