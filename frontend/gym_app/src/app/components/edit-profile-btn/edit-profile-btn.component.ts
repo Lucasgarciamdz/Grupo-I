@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
       color: #3A6A87;
       height: 24px;
       width: 24px;
-      padding-bottom: 24px;
+      padding-bottom: 48px;
 }
 
     `

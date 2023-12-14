@@ -29,14 +29,17 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     this.currentUser = this.jwtService.getId() ?? '';
+    console.log('usuario actual', this.currentUser)
     this.role = this.jwtService.getRol() ?? '';
+    console.log('rol', this.role)
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
-      console.log(this.profileId)
+      console.log('params', params)
+      console.log('profile ID', this.profileId)
       switch (this.role) {
         case 'Alumno':
-          if (this.profileId){
+          if (this.profileId) {
             this.role = 'Profesor';
             this.getProfesorProfile(this.profileId);
           }
@@ -45,7 +48,7 @@ export class ProfileComponent {
           }
           break;
         case 'Profesor':
-          if (this.profileId){
+          if (this.profileId) {
             this.role = 'Alumno';
             this.getAlumnoProfile(this.profileId);
           }
@@ -66,6 +69,7 @@ export class ProfileComponent {
       this.age = edad;
       this.alumnoService.getAlumno(parseInt(alumno_id)).subscribe({
         next: (response) => {
+          // console.log(response)
           this.profileName = response.usuario.nombre + ' ' + response.usuario.apellido;
           this.height = response.altura;
           this.weight = response.peso;
@@ -74,7 +78,6 @@ export class ProfileComponent {
         error: console.error,
       });
     } else {
-      // Handle the case when alumno_id is null
       console.error('alumno_id is null');
     }
   }
@@ -92,7 +95,6 @@ export class ProfileComponent {
         error: console.error,
       });
     } else {
-      // Handle the case when profesor_id is null
       console.error('profesor_id is null');
     }
   }

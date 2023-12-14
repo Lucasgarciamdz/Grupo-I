@@ -80,35 +80,3 @@ export class EditProfileFormComponent {
     }
 
   }
-
-  // ngOnInit() {
-  //   const userId = parseInt(this.jwtService.getId() || '', 10);
-  //   if (userId) {
-  //     this.usuariosService.getUserById<any>(userId).subscribe({
-  //       next: (data) => {
-  //         this.form.patchValue({
-  //           name: data.nombre,
-  //           lastname: data.apellido,
-  //           email: data.email,
-  //           phone: data.telefono,
-  //           gender: data.sexo,
-  //           address: data.direccion,
-  //         });
-
-  //         // Almacena los datos del formulario en el servicio UserDataService
-  //         this.userDataService.setUserData(this.form.value);
-
-  //         this.userData.id_usuario = data.id_usuario;
-  //         this.userData.edad = data.edad;
-  //         this.userData.dni = data.dni;
-  //         this.userData.rol = data.rol;
-
-
-  //       },
-  //       error: (error) => {
-  //         console.error(error);
-  //       },
-  //     });
-  //   }
-  // }
-
